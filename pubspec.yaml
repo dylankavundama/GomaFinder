@@ -24,10 +24,11 @@ dependencies:
   firebase_core: 
   firebase_messaging: 
   flutter_speed_dial:
-  flutter_native_splash:
+  flutter_native_splash: ^2.2.4
 
 dev_dependencies:
-  http:
+ flutter_native_splash: ^2.2.4
+
 
 flutter:
   uses-material-design: true
@@ -41,3 +42,8 @@ flutter:
         - asset: assets/fonts/Mulish-Light.ttf
         - asset: assets/fonts/Mulish-SemiBold.ttf
 
+flutter_native_splash:
+  color: "#42a5f5"
+  image: assets/images/logo.png
+  android: true
+  ios: true
