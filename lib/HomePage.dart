@@ -8,6 +8,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  
+    Color CouleurPrincipale = Colors.green;
 
   @override
   void initState() {
@@ -32,10 +34,12 @@ class _HomePageState extends State<HomePage>
               'Goma',
               style: TextStyle(color: Colors.black),
             ),
-            Padding(padding: EdgeInsets.only(right: 3),),
+            Padding(
+              padding: EdgeInsets.only(right: 3),
+            ),
             Text(
               'Finder',
-              style: TextStyle(color: Colors.green),
+              style: TextStyle(color:CouleurPrincipale),
             ),
             Icon(
               Icons.location_on_outlined,
@@ -44,10 +48,12 @@ class _HomePageState extends State<HomePage>
           ],
         ),
         bottom: TabBar(
+
+          indicatorColor:CouleurPrincipale,
           labelColor: Colors.black,
           controller: _tabController,
           tabs: [
-            Tab(text: 'Tab 1'),
+            Tab(text: 'Acceuil'),
             Tab(text: 'Tab 2'),
             Tab(text: 'Tab 3'),
           ],
@@ -79,3 +85,4 @@ class _MyWidget1State extends State<MyWidget1> {
     return const Placeholder();
   }
 }
+
