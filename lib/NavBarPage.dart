@@ -37,9 +37,9 @@ class _NavBarPageState extends State<NavBarPage> {
               label: 'Acceuil',
             ),
             NavigationDestination(
-              icon: Icon(Icons.restaurant),
-              selectedIcon: Icon(Icons.restaurant_menu),
-              label: 'Restaurant',
+              icon: Icon(Icons.search),
+              selectedIcon: Icon(Icons.find_in_page),
+              label: 'Recherche',
             ),
             // NavigationDestination(
             //   icon: Icon(Icons.fastfood),

@@ -24,6 +24,7 @@ dependencies:
   firebase_core: 
   firebase_messaging: 
   flutter_speed_dial:
+  flutter_native_splash:
 
 dev_dependencies:
   http:
