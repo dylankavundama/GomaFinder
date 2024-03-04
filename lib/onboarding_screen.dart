@@ -1,3 +1,4 @@
+import 'package:firebase_auth_example/NavBarPage.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -114,7 +115,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ? Padding(
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                  Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => NavBarPage()));
+                            },
                             child: const Text("START"),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
