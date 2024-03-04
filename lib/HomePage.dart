@@ -26,8 +26,25 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Goma Finder'),
+        title: Row(
+          children: [
+            Text(
+              'Goma',
+              style: TextStyle(color: Colors.black),
+            ),
+            Padding(padding: EdgeInsets.only(right: 3),),
+            Text(
+              'Finder',
+              style: TextStyle(color: Colors.green),
+            ),
+            Icon(
+              Icons.location_on_outlined,
+              color: Colors.blue,
+            )
+          ],
+        ),
         bottom: TabBar(
+          labelColor: Colors.black,
           controller: _tabController,
           tabs: [
             Tab(text: 'Tab 1'),
