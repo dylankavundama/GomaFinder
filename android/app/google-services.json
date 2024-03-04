@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "100681275497",
+    "project_id": "gayux-f5c9e",
+    "storage_bucket": "gayux-f5c9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100681275497:android:2574c9fc4c7858abfb2af8",
+        "android_client_info": {
+          "package_name": "com.gayux"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100681275497-2qjnd4rckn8e3ncnq1cmtcnq9tncio1d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gayux",
+            "certificate_hash": "e061ef5a25008732b284447a8cb1fdc7b8f06637"
+          }
+        },
+        {
+          "client_id": "100681275497-jup1e832en0sam7in9pturjj8pglnug2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5heGH0Rni-DuGuyjvMSinZ7IKIy_Jcns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100681275497-jup1e832en0sam7in9pturjj8pglnug2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
