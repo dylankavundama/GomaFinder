@@ -1,7 +1,4 @@
-
-import 'package:firebase_auth_example/size_config.dart';
 import 'package:flutter/material.dart';
-
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
