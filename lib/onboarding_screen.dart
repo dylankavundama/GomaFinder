@@ -18,9 +18,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   int _currentPage = 0;
   List colors = const [
+    Color(0xffDCF6E6),
     Color(0xffDAD3C8),
     Color(0xffFFE5DE),
-    Color(0xffDCF6E6),
   ];
 
   AnimatedContainer _buildDots({
@@ -188,7 +188,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
-
 class OnboardingContents {
   final String title;
   final String image;
@@ -204,7 +203,7 @@ class OnboardingContents {
 List<OnboardingContents> contents = [
   OnboardingContents(
     title: "Track Your work and get the result",
-    image: "assets/images/image1.png",
+    image: "assets/images/logo.png",
     desc: "Remember to keep track of your professional accomplishments.",
   ),
   OnboardingContents(
@@ -220,8 +219,6 @@ List<OnboardingContents> contents = [
         "Take control of notifications, collaborate live or on your own time.",
   ),
 ];
-
-
 
 class SizeConfig {
   static MediaQueryData? _mediaQueryData;
