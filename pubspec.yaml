@@ -25,6 +25,9 @@ dependencies:
   firebase_messaging: 
   flutter_speed_dial:
   flutter_native_splash: ^2.2.4
+  google_mobile_ads: ^3.1.0
+  google_fonts: ^4.0.4
+  shimmer: ^3.0.0
 
 dev_dependencies:
  flutter_native_splash: ^2.2.4

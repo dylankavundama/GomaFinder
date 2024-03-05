@@ -1,4 +1,9 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,12 +20,76 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
+    super.initState();
+
+    super.initState();
+    _startNewGame();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
+    _interstitialAd?.dispose();
     super.dispose();
+    super.dispose();
+  }
+
+  InterstitialAd? _interstitialAd;
+  final _gameLength = 5;
+  late var _counter = _gameLength;
+//intertial rj
+  final String _adUnitIdd = Platform.isAndroid
+      ? 'ca-app-pub-7329797350611067/7003775471'
+      : 'ca-app-pub-7329797350611067/7003775471';
+  @override
+  void _startNewGame() {
+    setState(() => _counter = _gameLength);
+
+    _loadAdd();
+    _starTimer();
+  }
+
+  void _loadAdd() {
+    InterstitialAd.load(
+        adUnitId: _adUnitIdd,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                onAdShowedFullScreenContent: (ad) {},
+                onAdImpression: (ad) {},
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                onAdClicked: (ad) {});
+
+            _interstitialAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void _starTimer() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() => _counter--);
+
+      if (_counter == 0) {
+        _interstitialAd?.show();
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
+  void go() {
+    setState(() {
+      _interstitialAd?.show();
+    });
   }
 
   @override
@@ -93,10 +162,63 @@ class _HomePageState extends State<HomePage>
           Center(child: Text('Content of Tab 3')),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: CouleurPrincipale,
-          child: Icon(Icons.menu),
-          onPressed: () {}),
+      floatingActionButton: SpeedDial(
+        // both default to 16
+        // marginRight: 18,
+        // marginBottom: 20,
+        animatedIcon: AnimatedIcons.menu_close,
+        animatedIconTheme: IconThemeData(size: 22.0),
+        // this is ignored if animatedIcon is non null
+        // child: Icon(Icons.add),
+        // If true user is forced to close dial manually
+        // by tapping main button and overlay is not rendered.
+        closeManually: false,
+        curve: Curves.bounceIn,
+        overlayColor: Colors.black,
+        overlayOpacity: 0.5,
+        onOpen: () => print('OPENING DIAL'),
+        onClose: () => print('DIAL CLOSED'),
+        tooltip: 'Speed Dial',
+        heroTag: 'speed-dial-hero-tag',
+        backgroundColor:CouleurPrincipale,
+        foregroundColor: Colors.white,
+        elevation: 8.0,
+        shape: CircleBorder(),
+        children: [
+          SpeedDialChild(
+            child: Icon(Icons.accessibility),
+            backgroundColor: Colors.red,
+            label: 'First',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('FIRST CHILD'),
+            onLongPress: () => print('FIRST CHILD LONG PRESS'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.brush),
+            backgroundColor: Colors.blue,
+            label: 'Second',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('SECOND CHILD'),
+            onLongPress: () => print('SECOND CHILD LONG PRESS'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.brush),
+            backgroundColor: Colors.amberAccent,
+            label: 'Second',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('SECOND CHILD'),
+            onLongPress: () => print('SECOND CHILD LONG PRESS'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.keyboard_voice),
+            backgroundColor: Colors.green,
+            label: 'Third',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () {},
+            onLongPress: () => print('THIRD CHILD LONG PRESS'),
+          ),
+        ],
+      ),
     );
   }
 }
