@@ -8,7 +8,7 @@ Color CouleurPrincipale = Colors.green;
 
 TextStyle TitreStyle = GoogleFonts.abel(
     // textStyle: Theme.of(context).textTheme.displayLarge,
-    fontSize: 22,
+    fontSize: 24,
     color: Colors.black
     // fontWeight: FontWeight.w700,
     // fontStyle: FontStyle.italic,
@@ -22,12 +22,11 @@ TextStyle SousTStyle = GoogleFonts.actor(
     // fontStyle: FontStyle.italic,
     );
 
-TextStyle DescStyle = GoogleFonts.actor(
+TextStyle DescStyle = GoogleFonts.abel(
     // textStyle: Theme.of(context).textTheme.displayLarge,
     fontSize: 18,
     color: Colors.black
-    // fontWeight: FontWeight.w700,
-    // fontStyle: FontStyle.italic,
+
     );
 
 

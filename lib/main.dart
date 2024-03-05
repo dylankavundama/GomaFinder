@@ -1,3 +1,4 @@
+import 'package:firebase_auth_example/Detail_UI.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       
         useMaterial3: false),
       debugShowCheckedModeBanner: false,
-      home: OnboardingScreen(),
+      home: Detail_UI(),
     );
   }
 }
