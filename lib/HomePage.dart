@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage>
         onClose: () => print('DIAL CLOSED'),
         tooltip: 'Speed Dial',
         heroTag: 'speed-dial-hero-tag',
-        backgroundColor:CouleurPrincipale,
+        backgroundColor: CouleurPrincipale,
         foregroundColor: Colors.white,
         elevation: 8.0,
         shape: CircleBorder(),
@@ -233,6 +233,34 @@ class MyWidget1 extends StatefulWidget {
 class _MyWidget1State extends State<MyWidget1> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Image.asset(
+                //height: 190,
+                 'assets/test.webp'),
+              ButtonBar(
+                children: <Widget>[
+                  // ElevatedButton(
+                  //   child: Text('Button 1'),
+                  //   onPressed: () {},
+                  // ),
+                  // ElevatedButton(
+                  //   child: Text('Button 2'),
+                  //   onPressed: () {},
+                  // ),
+
+
+                  Text("Airtrade Company Aviation")
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
