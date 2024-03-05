@@ -1,5 +1,6 @@
 import 'package:firebase_auth_example/NavBarPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -44,6 +45,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      // Définir la couleur de la barre d'état
+   // Changer la luminosité du texte de la barre d'état
+    ));
     SizeConfig().init(context);
     double width = SizeConfig.screenW!;
     double height = SizeConfig.screenH!;

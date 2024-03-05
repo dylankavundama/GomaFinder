@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_auth_example/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -37,10 +38,10 @@ class _HomePageState extends State<HomePage>
   InterstitialAd? _interstitialAd;
   final _gameLength = 5;
   late var _counter = _gameLength;
-//intertial rj
+//intertial cd
   final String _adUnitIdd = Platform.isAndroid
-      ? 'ca-app-pub-7329797350611067/7003775471'
-      : 'ca-app-pub-7329797350611067/7003775471';
+      ? 'ca-app-pub-7329797350611067/7025361747'
+      : 'ca-app-pub-7329797350611067/7025361747';
   @override
   void _startNewGame() {
     setState(() => _counter = _gameLength);
@@ -233,6 +234,7 @@ class MyWidget1 extends StatefulWidget {
 class _MyWidget1State extends State<MyWidget1> {
   @override
   Widget build(BuildContext context) {
+       SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return Scaffold(
       body: Container(
       //  height: MediaQuery.of(context).size.width,

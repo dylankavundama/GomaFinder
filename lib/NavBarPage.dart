@@ -1,5 +1,7 @@
 import 'package:firebase_auth_example/HomePage.dart';
+import 'package:firebase_auth_example/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class NavBarPage extends StatefulWidget {
   const NavBarPage({super.key});
@@ -12,25 +14,28 @@ class _NavBarPageState extends State<NavBarPage> {
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
   List<Widget> screen = [
-    
-    HomePage(), HomePage(),
-       HomePage(), HomePage(),
-    
-    ];
+    HomePage(),
+    HomePage(),
+    HomePage(),
+    HomePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor:     Color(0xffDCF6E6), // Définir la couleur de la barre d'état
+      statusBarBrightness:
+          Brightness.dark, // Changer la luminosité du texte de la barre d'état
+    ));
     return SafeArea(
       child: Scaffold(
-
         bottomSheet: screen[currentindex],
         bottomNavigationBar: NavigationBar(
-
-          backgroundColor: Colors.white,
+          backgroundColor:     Color(0xffDCF6E6),
           //  backgroundColor: Colors.grey.shade100,
           labelBehavior: labelBehavior,
           selectedIndex: currentindex,
-
 
           onDestinationSelected: (int index) {
             setState(() {
