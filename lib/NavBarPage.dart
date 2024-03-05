@@ -1,5 +1,5 @@
+import 'package:firebase_auth_example/ExplorePage.dart';
 import 'package:firebase_auth_example/HomePage.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +17,7 @@ class _NavBarPageState extends State<NavBarPage> {
   List<Widget> screen = [
     HomePage(),
     HomePage(),
-    HomePage(),
+    Explorepage(),
     HomePage(),
   ];
 

@@ -68,9 +68,9 @@ class Widget_UI extends StatelessWidget {
                         style: SousTStyle,
                       ),
                     ),
-                    Text(
-                      'Call',
-                    )
+                    // Text(
+                    //   'Call',
+                    // )
                   ],
                 ),
                 // ElevatedButton(

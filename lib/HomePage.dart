@@ -103,6 +103,71 @@ class _HomePageState extends State<HomePage>
           DrawerHeader(
             child: Image.asset('assets/images/logo.png'),
           ),
+
+           Card(
+            child: ListTile(
+              title: Text(
+                'Actualité',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
+                    Card(
+            child: ListTile(
+              title: Text(
+                'Evénement',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text(
+                'Visite Goma',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
+ 
+          Card(
+            child: ListTile(
+              title: Text(
+                'Artiste & Influenceur',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text(
+                'Football Club',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text(
+                'Live Tv',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
+          Card(
+            child: ListTile(
+              title: Text(
+                'Live Radio',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
         ]),
         width: 250,
       ),
@@ -172,7 +237,7 @@ class _HomePageState extends State<HomePage>
         // both default to 16
         // marginRight: 18,
         // marginBottom: 20,
-        animatedIcon: AnimatedIcons.menu_close,
+        animatedIcon: AnimatedIcons.view_list,
         animatedIconTheme: IconThemeData(size: 22.0),
         // this is ignored if animatedIcon is non null
         // child: Icon(Icons.add),
