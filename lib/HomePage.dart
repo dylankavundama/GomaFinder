@@ -150,6 +150,16 @@ class _HomePageState extends State<HomePage>
               trailing: Icon(Icons.arrow_circle_right),
             ),
           ),
+
+                    Card(
+            child: ListTile(
+              title: Text(
+                'Podcast',
+                style: TitreStyle,
+              ),
+              trailing: Icon(Icons.arrow_circle_right),
+            ),
+          ),
           Card(
             child: ListTile(
               title: Text(
