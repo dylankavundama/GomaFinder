@@ -1,3 +1,4 @@
+import 'package:firebase_auth_example/HomePage.dart';
 import 'package:firebase_auth_example/googlemaps.dart';
 import 'package:firebase_auth_example/style.dart';
 import 'package:flutter/material.dart';
@@ -40,105 +41,186 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Image.network(
-                    'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                  Image.network(
-                    'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                ],
+      body: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Image.network(
+                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: MediaQuery.of(context).size.height,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          child: Image.network(
+                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
-                  child: Row(
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Serena Hotel", style: TitreStyle),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    thickness: 1,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Serena Hotel",
-                              style: TitreStyle
-                            ),
-                            // SizedBox(
-                            //   height: 4,
-                            // ),
-                       
-                          ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("Description",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18)),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                        style: TextStyle(fontWeight: FontWeight.w300),
+                        textAlign: TextAlign.start,
+                      ),
+                      Divider(
+                        thickness: 1,
+                      ),
+                      CustomListTile(
+                        leadingIcon: Icons.location_on_outlined,
+                        titleText: 'sssdjhdhd',
+                        trailingText: 'follow',
+                        onTap: () {
+                          // Code à exécuter lorsque le ListTile est tapé
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                      ),
+                      CustomListTile(
+                        leadingIcon: Icons.call,
+                        titleText: 'sssdjhdhd',
+                        trailingText: 'follow',
+                        onTap: () {
+                          // Code à exécuter lorsque le ListTile est tapé
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                      ),
+                      ListTile(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                        leading: Icon(Icons.call),
+                        title: Text('www.easykivu.com',style: DescStyle,),
+                        trailing: Text('follow'),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text("Localisation",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18)),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Tooltip(
+                        message: 'clic',
+                        preferBelow: false,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GoogleMaps(),
+                                ));
+                          },
+                          child: Container(
+                            height: 200,
+                            width: MediaQuery.of(context).size.width - 60,
+                            decoration: BoxDecoration(color: Colors.green),
+                            child: Image(
+                                image: AssetImage("assets/newark.png"),
+                                fit: BoxFit.cover),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("Description",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18)),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-                      style: TextStyle(fontWeight: FontWeight.w300),
-                      textAlign: TextAlign.start,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text("Localisation",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18)),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Tooltip(
-                      message: 'clic',
-                      preferBelow: false,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => GoogleMaps(),
-                              ));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width - 60,
-                          decoration: BoxDecoration(color: Colors.green),
-                          child: Image(
-                              image: AssetImage("assets/newark.png"),
-                              fit: BoxFit.cover),
-                        ),
-                      ),
-                    ),
-            
-                  ],
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SizedBox(
@@ -163,9 +245,7 @@ class _DetailPageState extends State<DetailPage> {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey,
-                        offset: Offset(0.0, 1.0), 
-                        
-                      
+                        offset: Offset(0.0, 1.0),
                         blurRadius: 6.0,
                       ),
                     ],
@@ -183,6 +263,30 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CustomListTile extends StatelessWidget {
+  final IconData leadingIcon;
+  final String titleText;
+  final String trailingText;
+  final VoidCallback onTap;
+
+  CustomListTile({
+    required this.leadingIcon,
+    required this.titleText,
+    required this.trailingText,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: onTap,
+      leading: Icon(leadingIcon),
+      title: Text(titleText,style: DescStyle,),
+      trailing: Text(trailingText),
     );
   }
 }
