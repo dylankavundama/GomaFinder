@@ -70,17 +70,13 @@ class _DetailPageState extends State<DetailPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "owner.address,",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 16),
+                              "Serena Hotel",
+                              style: TitreStyle
                             ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "The owner",
-                              style: TextStyle(color: Color(0xffFB6161)),
-                            ),
+                            // SizedBox(
+                            //   height: 4,
+                            // ),
+                       
                           ],
                         ),
                       ),
@@ -94,7 +90,7 @@ class _DetailPageState extends State<DetailPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SizedBox(
-                      height: 12,
+                      height: 10,
                     ),
                     Text("Description",
                         style: TextStyle(
@@ -108,7 +104,7 @@ class _DetailPageState extends State<DetailPage> {
                       textAlign: TextAlign.start,
                     ),
                     SizedBox(
-                      height: 16,
+                      height: 10,
                     ),
                     Text("Localisation",
                         style: TextStyle(
@@ -137,9 +133,7 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: 80,
-                    )
+            
                   ],
                 ),
               ],
