@@ -24,7 +24,7 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor:     Color(0xffDCF6E6), // Définir la couleur de la barre d'état
+      statusBarColor: Colors.white, // Définir la couleur de la barre d'état
       statusBarBrightness:
           Brightness.dark, // Changer la luminosité du texte de la barre d'état
     ));
@@ -32,7 +32,7 @@ class _NavBarPageState extends State<NavBarPage> {
       child: Scaffold(
         bottomSheet: screen[currentindex],
         bottomNavigationBar: NavigationBar(
-          backgroundColor:     Color(0xffDCF6E6),
+          backgroundColor: Color(0xffDCF6E6),
           //  backgroundColor: Colors.grey.shade100,
           labelBehavior: labelBehavior,
           selectedIndex: currentindex,
