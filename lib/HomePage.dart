@@ -165,6 +165,9 @@ class _HomePageState extends State<HomePage>
           Center(child: Text('Content of Tab 3')),
         ],
       ),
+
+      // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SpeedDial(
         // both default to 16
         // marginRight: 18,
@@ -189,36 +192,45 @@ class _HomePageState extends State<HomePage>
         shape: CircleBorder(),
         children: [
           SpeedDialChild(
-            child: Icon(Icons.accessibility),
-            backgroundColor: Colors.red,
-            label: 'First',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('FIRST CHILD'),
-            onLongPress: () => print('FIRST CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.brush),
-            backgroundColor: Colors.blue,
-            label: 'Second',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
-            onLongPress: () => print('SECOND CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.brush),
-            backgroundColor: Colors.amberAccent,
-            label: 'Second',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
-            onLongPress: () => print('SECOND CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
             child: Icon(Icons.keyboard_voice),
-            backgroundColor: Colors.green,
-            label: 'Third',
+            backgroundColor: Colors.lightBlueAccent,
+            label: 'MC',
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: () {},
             onLongPress: () => print('THIRD CHILD LONG PRESS'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.work),
+            backgroundColor: Colors.blue,
+            label: 'Djema',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('SECOND CHILD'),
+            onLongPress: () => print('SECOND CHILD LONG PRESS'),
+          ),
+  
+          SpeedDialChild(
+            child: Icon(Icons.hail_outlined),
+            backgroundColor: Colors.brown,
+            label: "Decorateur",
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () {},
+            onLongPress: () => print('THIRD CHILD LONG PRESS'),
+          ),
+                  SpeedDialChild(
+            child: Icon(Icons.handyman),
+            backgroundColor: Colors.amber,
+            label: "Main d'oeuvre",
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () {},
+            onLongPress: () => print('THIRD CHILD LONG PRESS'),
+          ),
+          SpeedDialChild(
+            child: Icon(Icons.camera),
+            backgroundColor: Colors.teal,
+            label: 'Photographe',
+            labelStyle: TextStyle(fontSize: 18.0),
+            onTap: () => print('SECOND CHILD'),
+            onLongPress: () => print('SECOND CHILD LONG PRESS'),
           ),
         ],
       ),
@@ -239,11 +251,9 @@ class _MyWidget1State extends State<MyWidget1> {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return Scaffold(
       body: Container(
-        //  height: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
           child: Column(
             children: [
-
               Widget_UI(
                 image:
                     'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
@@ -268,7 +278,7 @@ class _MyWidget1State extends State<MyWidget1> {
                 image:
                     'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
               ),
-                            Widget_UI(
+              Widget_UI(
                 image:
                     'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
               ),
@@ -280,7 +290,7 @@ class _MyWidget1State extends State<MyWidget1> {
                 image:
                     'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
               ),
-                            Widget_UI(
+              Widget_UI(
                 image:
                     'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
               ),

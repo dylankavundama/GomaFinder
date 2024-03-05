@@ -45,10 +45,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      // Définir la couleur de la barre d'état
-   // Changer la luminosité du texte de la barre d'état
-    ));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        // Définir la couleur de la barre d'état
+        // Changer la luminosité du texte de la barre d'état
+        ));
     SizeConfig().init(context);
     double width = SizeConfig.screenW!;
     double height = SizeConfig.screenH!;
@@ -121,10 +121,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
-                  Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => NavBarPage()));
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => NavBarPage()));
                             },
-                            child: const Text("START",style: TextStyle(color: Colors.white),),
+                            child: const Text(
+                              "START",
+                              style: TextStyle(color: Colors.white),
+                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               shape: RoundedRectangleBorder(
@@ -168,7 +173,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     curve: Curves.easeIn,
                                   );
                                 },
-                                child: const Text("NEXT",style: TextStyle(color: Colors.white),),
+                                child: const Text(
+                                  "NEXT",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
                                   shape: RoundedRectangleBorder(

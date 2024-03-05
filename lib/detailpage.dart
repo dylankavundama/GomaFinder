@@ -164,7 +164,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       CustomListTile(
                         leadingIcon: Icons.call,
-                        titleText: 'sssdjhdhd',
+                        titleText: '09876548765',
                         trailingText: 'follow',
                         onTap: () {
                           // Code à exécuter lorsque le ListTile est tapé
@@ -181,8 +181,11 @@ class _DetailPageState extends State<DetailPage> {
                             MaterialPageRoute(builder: (context) => HomePage()),
                           );
                         },
-                        leading: Icon(Icons.call),
-                        title: Text('www.easykivu.com',style: DescStyle,),
+                        leading: Icon(Icons.web),
+                        title: Text(
+                          'www.easykivu.com',
+                          style: DescStyle,
+                        ),
                         trailing: Text('follow'),
                       ),
                       SizedBox(
@@ -285,7 +288,10 @@ class CustomListTile extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       leading: Icon(leadingIcon),
-      title: Text(titleText,style: DescStyle,),
+      title: Text(
+        titleText,
+        style: DescStyle,
+      ),
       trailing: Text(trailingText),
     );
   }
