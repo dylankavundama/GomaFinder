@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:firebase_auth_example/UI.dart';
 import 'package:firebase_auth_example/style.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -244,6 +243,67 @@ class _MyWidget1State extends State<MyWidget1> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+
+              Widget_UI(
+                image:
+                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+              ),
+              Widget_UI(
+                image:
+                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+              ),
+              Widget_UI(
+                image:
+                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+              ),
+              Widget_UI(
+                image:
+                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+              ),
+              Widget_UI(
+                image:
+                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+              ),
+              Widget_UI(
+                image:
+                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+              ),
+                            Widget_UI(
+                image:
+                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+              ),
+              Widget_UI(
+                image:
+                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+              ),
+              Widget_UI(
+                image:
+                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+              ),
+                            Widget_UI(
+                image:
+                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+              ),
+              Widget_UI(
+                image:
+                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+              ),
+              Widget_UI(
+                image:
+                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+              ),
+              Widget_UI(
+                image:
+                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+              ),
+              Widget_UI(
+                image:
+                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+              ),
+              Widget_UI(
+                image:
+                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+              ),
               Widget_UI(
                 image:
                     'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',

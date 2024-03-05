@@ -30,6 +30,7 @@ dependencies:
   shimmer: ^3.0.0
   carousel_slider:
   url_launcher:
+  google_maps_flutter:
 
 dev_dependencies:
  flutter_native_splash: ^2.2.4
@@ -41,6 +42,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - lib/assets/images/
+    - lib/assets/animations/splashscreen.json
 
   fonts:
     - family: Mulish
