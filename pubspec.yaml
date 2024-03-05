@@ -28,6 +28,8 @@ dependencies:
   google_mobile_ads: ^3.1.0
   google_fonts: ^4.0.4
   shimmer: ^3.0.0
+  carousel_slider:
+  url_launcher:
 
 dev_dependencies:
  flutter_native_splash: ^2.2.4

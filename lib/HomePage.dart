@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_auth_example/UI.dart';
 import 'package:firebase_auth_example/style.dart';
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -40,8 +42,9 @@ class _HomePageState extends State<HomePage>
   late var _counter = _gameLength;
 //intertial cd
   final String _adUnitIdd = Platform.isAndroid
-      ? 'ca-app-pub-7329797350611067/7025361747'
+      ? 'ca-app-pub-7329797350611067/7003775471'
       : 'ca-app-pub-7329797350611067/7025361747';
+  //ca-app-pub-7329797350611067/6013028323
   @override
   void _startNewGame() {
     setState(() => _counter = _gameLength);
@@ -234,10 +237,10 @@ class MyWidget1 extends StatefulWidget {
 class _MyWidget1State extends State<MyWidget1> {
   @override
   Widget build(BuildContext context) {
-       SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return Scaffold(
       body: Container(
-      //  height: MediaQuery.of(context).size.width,
+        //  height: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -256,90 +259,6 @@ class _MyWidget1State extends State<MyWidget1> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Detail_UI extends StatelessWidget {
-  const Detail_UI({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class Widget_UI extends StatelessWidget {
-  const Widget_UI({
-    required this.image,
-    super.key,
-  });
-
-  final String image;
-  @override
-  Widget build(BuildContext context) {
-    final ww = MediaQuery.of(context).size.width;
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(
-          color: Colors.white10, // Specify your desired border color here.
-          width: 2.0,
-        ),
-      ),
-      child: Column(
-        //mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            // Prend toute la taille de l'écran
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.23,
-            // Enfant : Image
-            child: Image.network(
-              image, // URL de l'image
-              fit: BoxFit
-                  .cover, // Ajustement de l'image pour couvrir tout le container
-            ),
-          ),
-          ButtonBar(
-            children: <Widget>[
-              SizedBox(
-                height: 30,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 200),
-                  child: Text(
-                    "Airtrade Company Aviation",
-                    style: TitreStyle,
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    color: CouleurPrincipale,
-                    size: 18,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 110),
-                    child: Text(
-                      "Chez mode pret du rond pont ",
-                      style: SousTStyle,
-                    ),
-                  ),
-                  Text(
-                    'Call',
-                  )
-                ],
-              ),
-              // ElevatedButton(
-              //   child: Text('Button 2'),
-              //   onPressed: () {},
-              // ),
-            ],
-          ),
-        ],
       ),
     );
   }
