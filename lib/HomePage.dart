@@ -61,6 +61,7 @@ class _HomePageState extends State<HomePage>
           indicatorColor: CouleurPrincipale,
           labelColor: Colors.black,
           controller: _tabController,
+          isScrollable: true,
           tabs: [
             Tab(text: 'Bureau'),
             Tab(text: 'Tech'),
