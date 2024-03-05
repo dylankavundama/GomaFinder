@@ -119,7 +119,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => NavBarPage()));
                             },
-                            child: const Text("START"),
+                            child: const Text("START",style: TextStyle(color: Colors.white),),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               shape: RoundedRectangleBorder(
@@ -163,7 +163,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     curve: Curves.easeIn,
                                   );
                                 },
-                                child: const Text("NEXT"),
+                                child: const Text("NEXT",style: TextStyle(color: Colors.white),),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
                                   shape: RoundedRectangleBorder(

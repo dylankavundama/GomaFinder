@@ -12,19 +12,26 @@ class _NavBarPageState extends State<NavBarPage> {
   NavigationDestinationLabelBehavior labelBehavior =
       NavigationDestinationLabelBehavior.alwaysShow;
   List<Widget> screen = [
-    HomePage(),
-  ];
+    
+    HomePage(), HomePage(),
+       HomePage(), HomePage(),
+    
+    ];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
         bottomSheet: screen[currentindex],
         bottomNavigationBar: NavigationBar(
+
           backgroundColor: Colors.white,
           //  backgroundColor: Colors.grey.shade100,
           labelBehavior: labelBehavior,
           selectedIndex: currentindex,
+
+
           onDestinationSelected: (int index) {
             setState(() {
               currentindex = index;
@@ -32,22 +39,23 @@ class _NavBarPageState extends State<NavBarPage> {
           },
           destinations: const <Widget>[
             NavigationDestination(
-              icon: Icon(Icons.home_max),
+              tooltip: 'home',
+              icon: Icon(Icons.house),
               selectedIcon: Icon(Icons.home),
               label: 'Acceuil',
             ),
             NavigationDestination(
               icon: Icon(Icons.search),
-              selectedIcon: Icon(Icons.find_in_page),
+              selectedIcon: Icon(Icons.youtube_searched_for_rounded),
               label: 'Recherche',
             ),
-            // NavigationDestination(
-            //   icon: Icon(Icons.fastfood),
-            //   selectedIcon: Icon(Icons.receipt),
-            //   label: 'Reservation',
-            // ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.account_box),
+              icon: Icon(Icons.design_services),
+              selectedIcon: Icon(Icons.explore),
+              label: 'Explore',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.person_3),
               icon: Icon(Icons.person),
               label: 'Compte',
             ),

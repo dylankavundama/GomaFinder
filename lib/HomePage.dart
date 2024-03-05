@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -26,24 +26,34 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(children: [
+          DrawerHeader(
+            child: Image.asset('assets/images/logo.png'),
+          ),
+        ]),
+        width: 250,
+      ),
       appBar: AppBar(
+        iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
         title: Row(
           children: [
             Text(
-              'Goma',
-              style: TextStyle(color: Colors.black),
+              'U',
+              style: TextStyle(color: CouleurPrincipale),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 3),
+              padding: EdgeInsets.only(right: 0),
             ),
             Text(
-              'Finder',
-              style: TextStyle(color: CouleurPrincipale),
+              'PATO',
+              style: TextStyle(color: Colors.black),
             ),
             Icon(
               Icons.location_on_outlined,
-              color: Colors.blue,
+              color: Colors.black,
+              size: 18,
             )
           ],
         ),
@@ -52,10 +62,23 @@ class _HomePageState extends State<HomePage>
           labelColor: Colors.black,
           controller: _tabController,
           tabs: [
-            Tab(text: 'Acceuil'),
-            Tab(text: 'Tab 2'),
-            Tab(text: 'Tab 3'),
-                        Tab(text: 'Tab 3'),
+            Tab(text: 'Bureau'),
+            Tab(text: 'Tech'),
+            Tab(text: 'Restaurant'),
+            Tab(text: 'Commerce'), //
+            Tab(text: 'Hotel'), //
+            Tab(text: 'Loisir'), //
+            Tab(text: 'Eglise'), //
+            Tab(text: 'ONG'), //
+            Tab(text: 'Media'), //
+            Tab(text: 'Fashion Habillement'), //
+            Tab(text: 'Super marcher'), //
+            Tab(text: 'Voyage'), // transport
+            Tab(text: 'Banque'), //finance
+            Tab(text: 'Communication'),
+            Tab(text: 'Santer'), //hopital clinic
+            Tab(text: 'Saloon'), //beaute
+            Tab(text: 'Ecole'),
           ],
         ),
       ),
@@ -66,9 +89,13 @@ class _HomePageState extends State<HomePage>
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
           Center(child: Text('Content of Tab 3')),
-               Center(child: Text('Content of Tab 3')),
+          Center(child: Text('Content of Tab 3')),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: CouleurPrincipale,
+          child: Icon(Icons.menu),
+          onPressed: () {}),
     );
   }
 }
@@ -83,6 +110,6 @@ class MyWidget1 extends StatefulWidget {
 class _MyWidget1State extends State<MyWidget1> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold();
   }
 }
