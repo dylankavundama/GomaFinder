@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 18, vsync: this);
     super.initState();
 
     super.initState();
@@ -103,8 +103,7 @@ class _HomePageState extends State<HomePage>
           DrawerHeader(
             child: Image.asset('assets/images/logo.png'),
           ),
-
-           Card(
+          Card(
             child: ListTile(
               title: Text(
                 'Actualité',
@@ -113,7 +112,7 @@ class _HomePageState extends State<HomePage>
               trailing: Icon(Icons.arrow_circle_right),
             ),
           ),
-                    Card(
+          Card(
             child: ListTile(
               title: Text(
                 'Evénement',
@@ -131,7 +130,6 @@ class _HomePageState extends State<HomePage>
               trailing: Icon(Icons.arrow_circle_right),
             ),
           ),
- 
           Card(
             child: ListTile(
               title: Text(
@@ -150,8 +148,7 @@ class _HomePageState extends State<HomePage>
               trailing: Icon(Icons.arrow_circle_right),
             ),
           ),
-
-                    Card(
+          Card(
             child: ListTile(
               title: Text(
                 'Podcast',
@@ -225,7 +222,8 @@ class _HomePageState extends State<HomePage>
             Tab(text: 'Banque'), //finance
             Tab(text: 'Communication'),
             Tab(text: 'Santer'), //hopital clinic
-            Tab(text: 'Saloon'), //beaute
+
+            Tab(text: 'Ecole'), Tab(text: 'Saloon'), //beaute
             Tab(text: 'Ecole'),
           ],
         ),
@@ -236,6 +234,19 @@ class _HomePageState extends State<HomePage>
           MyWidget1(),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
+          Center(child: Text('Content of Tab 3')),
+          Center(child: Text('Content of Tab 3')),
+          Center(child: Text('Content of Tab 1')),
+          Center(child: Text('Content of Tab 2')),
+          Center(child: Text('Content of Tab 3')),
+          Center(child: Text('Content of Tab 3')),
+          Center(child: Text('Content of Tab 1')),
+          Center(child: Text('Content of Tab 2')),
+          Center(child: Text('Content of Tab 3')),
+          Center(child: Text('Content of Tab 3')),
+          Center(child: Text('Content of Tab 1')),
+          Center(child: Text('Content of Tab 2')),
+          Center(child: Text('Content of Tab 3')),
           Center(child: Text('Content of Tab 3')),
           Center(child: Text('Content of Tab 3')),
         ],
@@ -282,7 +293,6 @@ class _HomePageState extends State<HomePage>
             onTap: () => print('SECOND CHILD'),
             onLongPress: () => print('SECOND CHILD LONG PRESS'),
           ),
-  
           SpeedDialChild(
             child: Icon(Icons.hail_outlined),
             backgroundColor: Colors.brown,
@@ -291,7 +301,7 @@ class _HomePageState extends State<HomePage>
             onTap: () {},
             onLongPress: () => print('THIRD CHILD LONG PRESS'),
           ),
-                  SpeedDialChild(
+          SpeedDialChild(
             child: Icon(Icons.handyman),
             backgroundColor: Colors.amber,
             label: "Main d'oeuvre",
