@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:firebase_auth_example/UI.dart';
 import 'package:firebase_auth_example/style.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -88,7 +86,6 @@ class _HomePageState extends State<HomePage>
     });
   }
 
-  @override
   void go() {
     setState(() {
       _interstitialAd?.show();
@@ -98,6 +95,8 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerEdgeDragWidth: 600.0,
+
       drawer: Drawer(
         child: ListView(children: [
           DrawerHeader(

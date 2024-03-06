@@ -1,8 +1,8 @@
-
 import 'package:firebase_auth_example/Detail_UI.dart';
 import 'package:firebase_auth_example/detailpage.dart';
 import 'package:firebase_auth_example/style.dart';
 import 'package:flutter/material.dart';
+
 class Widget_UI extends StatelessWidget {
   const Widget_UI({
     required this.image,
@@ -17,7 +17,7 @@ class Widget_UI extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  DetailPage()),
+          MaterialPageRoute(builder: (context) => DetailPage()),
         );
       },
       child: Card(
