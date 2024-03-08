@@ -1,4 +1,4 @@
-package com.gayux
+package com.upato
 
 import io.flutter.embedding.android.FlutterActivity
 

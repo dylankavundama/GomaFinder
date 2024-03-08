@@ -1,6 +1,6 @@
-import 'package:firebase_auth_example/Detail_UI.dart';
-import 'package:firebase_auth_example/detailpage.dart';
-import 'package:firebase_auth_example/style.dart';
+import 'package:upato/Detail_UI.dart';
+import 'package:upato/detailpage.dart';
+import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 
 class Widget_UI extends StatelessWidget {

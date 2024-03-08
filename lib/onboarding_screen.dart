@@ -1,4 +1,4 @@
-import 'package:firebase_auth_example/NavBarPage.dart';
+import 'package:upato/NavBarPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

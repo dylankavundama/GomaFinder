@@ -1,5 +1,5 @@
-import 'package:firebase_auth_example/ExplorePage.dart';
-import 'package:firebase_auth_example/HomePage.dart';
+import 'package:upato/ExplorePage.dart';
+import 'package:upato/HomePage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

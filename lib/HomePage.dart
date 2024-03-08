@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:firebase_auth_example/UI.dart';
-import 'package:firebase_auth_example/style.dart';
+import 'package:upato/UI.dart';
+import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -95,8 +95,6 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawerEdgeDragWidth: 600.0,
-
       drawer: Drawer(
         child: ListView(children: [
           DrawerHeader(
@@ -108,7 +106,8 @@ class _HomePageState extends State<HomePage>
                 'Actualité',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
           Card(
@@ -117,7 +116,8 @@ class _HomePageState extends State<HomePage>
                 'Evénement',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
           Card(
@@ -126,7 +126,8 @@ class _HomePageState extends State<HomePage>
                 'Visite Goma',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
           Card(
@@ -135,7 +136,8 @@ class _HomePageState extends State<HomePage>
                 'Artiste & Influenceur',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
           Card(
@@ -144,7 +146,8 @@ class _HomePageState extends State<HomePage>
                 'Football Club',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
           Card(
@@ -153,7 +156,8 @@ class _HomePageState extends State<HomePage>
                 'Podcast',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
           Card(
@@ -162,7 +166,8 @@ class _HomePageState extends State<HomePage>
                 'Live Tv',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
           Card(
@@ -171,7 +176,8 @@ class _HomePageState extends State<HomePage>
                 'Live Radio',
                 style: TitreStyle,
               ),
-              trailing: Icon(Icons.arrow_circle_right),
+              trailing:
+                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
             ),
           ),
         ]),
@@ -207,23 +213,19 @@ class _HomePageState extends State<HomePage>
           isScrollable: true,
           tabs: [
             Tab(text: 'Bureau'),
-            Tab(text: 'Tech'),
             Tab(text: 'Restaurant'),
-            Tab(text: 'Commerce'), //
             Tab(text: 'Hotel'), //
-            Tab(text: 'Loisir'), //
-            Tab(text: 'Eglise'), //
-            Tab(text: 'ONG'), //
-            Tab(text: 'Media'), //
-            Tab(text: 'Fashion Habillement'), //
-            Tab(text: 'Super marcher'), //
-            Tab(text: 'Voyage'), // transport
-            Tab(text: 'Banque'), //finance
-            Tab(text: 'Communication'),
-            Tab(text: 'Santer'), //hopital clinic
-
-            Tab(text: 'Ecole'), Tab(text: 'Saloon'), //beaute
             Tab(text: 'Ecole'),
+            Tab(text: 'Commerce'), //
+            Tab(text: 'Hopital (Sante)'), //hopital clinic
+            Tab(text: 'Banque'), //finance
+            Tab(text: 'Mode & Bien etre'), // fasghion maquillage
+            Tab(text: 'Voyage & Transport'), // transport
+            Tab(text: 'Tech'),
+            Tab(text: 'ONG'), //
+            Tab(text: 'Communication(Media)'),
+            Tab(text: 'Eglise'), //
+            Tab(text: 'Super marcher'), //
           ],
         ),
       ),
@@ -334,83 +336,86 @@ class _MyWidget1State extends State<MyWidget1> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return Scaffold(
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Widget_UI(
-                image:
-                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-              ),
-              Widget_UI(
-                image:
-                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-              ),
-              Widget_UI(
-                image:
-                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-              ),
-              Widget_UI(
-                image:
-                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-              ),
-              Widget_UI(
-                image:
-                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-              ),
-              Widget_UI(
-                image:
-                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-              ),
-              Widget_UI(
-                image:
-                    'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-              ),
-              Widget_UI(
-                image:
-                    'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-              ),
-            ],
+      body: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Widget_UI(
+                  image:
+                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+                ),
+                Widget_UI(
+                  image:
+                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+                ),
+                Widget_UI(
+                  image:
+                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+                ),
+                Widget_UI(
+                  image:
+                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+                ),
+                Widget_UI(
+                  image:
+                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+                ),
+                Widget_UI(
+                  image:
+                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
+                ),
+                Widget_UI(
+                  image:
+                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
+                ),
+                Widget_UI(
+                  image:
+                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+                ),
+              ],
+            ),
           ),
         ),
       ),

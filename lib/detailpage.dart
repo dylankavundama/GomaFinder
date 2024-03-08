@@ -1,6 +1,6 @@
-import 'package:firebase_auth_example/HomePage.dart';
-import 'package:firebase_auth_example/googlemaps.dart';
-import 'package:firebase_auth_example/style.dart';
+import 'package:upato/HomePage.dart';
+import 'package:upato/googlemaps.dart';
+import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
