@@ -2,6 +2,7 @@ import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:upato/style.dart';
 import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -22,7 +23,10 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top]);
     return MaterialApp(
-      theme: ThemeData(useMaterial3: false),
+      theme: ThemeData(
+          primaryColor: Colors.green, // Primary color for the app
+          accentColor: CouleurPrincipale, // Accent color for the app
+          useMaterial3: false),
       debugShowCheckedModeBanner: false,
       home: OnboardingScreen(),
     );

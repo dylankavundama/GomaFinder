@@ -32,7 +32,7 @@ class _Update_recordsState extends State<Update_records> {
       var res = await http.post(Uri.parse(url), body: {
         "nom": txtnom.text,
         "desc": pass.text,
-        "image2": role.text,
+        "image1": role.text,
         "id": widget.id
       });
       debugPrint(widget.id);

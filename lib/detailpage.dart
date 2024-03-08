@@ -4,9 +4,16 @@ import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
-  DetailPage({
-    Key? key,
-  }) : super(key: key);
+  DetailPage(
+      {required this.desc,
+      required this.image1,
+      required this.image2,
+      required this.titre,
+      super.key});
+  String image1;
+  String image2;
+  String desc;
+  String titre;
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -42,7 +49,7 @@ class _DetailPageState extends State<DetailPage> {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: EdgeInsets.all(4.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -64,7 +71,8 @@ class _DetailPageState extends State<DetailPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg'),
+                                          widget.image1,
+                                        ),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -73,9 +81,12 @@ class _DetailPageState extends State<DetailPage> {
                               },
                             );
                           },
-                          child: Image.network(
-                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg',
-                            fit: BoxFit.cover,
+                          child: Container(
+                            height: 300,
+                            child: Image.network(
+                              widget.image1,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         InkWell(
@@ -90,7 +101,7 @@ class _DetailPageState extends State<DetailPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg'),
+                                           widget.image2),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -99,9 +110,12 @@ class _DetailPageState extends State<DetailPage> {
                               },
                             );
                           },
-                          child: Image.network(
-                            'https://media-cdn.tripadvisor.com/media/photo-s/0b/75/c3/c6/hotl-ole-caribe.jpg',
-                            fit: BoxFit.cover,
+                          child: Container(
+                                    height: 300,
+                            child: Image.network(
+                              widget.image2,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ],
@@ -120,7 +134,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Serena Hotel", style: TitreStyle),
+                              Text(widget.titre, style: TitreStyle),
                             ],
                           ),
                         ),
@@ -143,7 +157,7 @@ class _DetailPageState extends State<DetailPage> {
                         height: 4,
                       ),
                       Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+                        widget.desc,
                         style: TextStyle(fontWeight: FontWeight.w300),
                         textAlign: TextAlign.start,
                       ),

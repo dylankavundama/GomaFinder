@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
+import 'package:upato/Detail_UI.dart';
 import 'package:upato/UI.dart';
+import 'package:upato/detailpage.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -332,93 +336,104 @@ class MyWidget1 extends StatefulWidget {
 }
 
 class _MyWidget1State extends State<MyWidget1> {
+  List<dynamic> story = [];
+  List<dynamic> post = [];
+  bool _isLoading = false;
+
+  fetchPosts() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    const url = 'https://royalrisingplus.com/upato/bureau/read.php';
+    final uri = Uri.parse(url);
+    final reponse = await http.get(uri);
+    final List resultat = jsonDecode(reponse.body);
+    post = resultat;
+    resultat.sort(
+      (a, b) => b["id"].compareTo(a["id"]),
+    );
+    debugPrint(resultat.toString());
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    fetchPosts();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Container(
-          child: SingleChildScrollView(
-            child: Column(
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(
+              color: CouleurPrincipale,
+            ))
+          :
+          //  Padding(
+          //   padding: const EdgeInsets.all(5.0),
+          //   child: Container(
+          //     child: SingleChildScrollView(
+          //       child: Column(
+          //         children: [
+
+          //           Widget_UI(
+          //             image:
+          //                 'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
+          Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Widget_UI(
-                  image:
-                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-                ),
-                Widget_UI(
-                  image:
-                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-                ),
-                Widget_UI(
-                  image:
-                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-                ),
-                Widget_UI(
-                  image:
-                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-                ),
-                Widget_UI(
-                  image:
-                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-                ),
-                Widget_UI(
-                  image:
-                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg',
-                ),
-                Widget_UI(
-                  image:
-                      'https://robbreport.com/wp-content/uploads/2023/02/10644BellagioRoad193_2-1.jpg?w=1000',
-                ),
-                Widget_UI(
-                  image:
-                      'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
+                // SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(
+                      post.length,
+                      (index) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return DetailPage(
+                              titre: post[index]['nom'],
+                              desc: post[index]['desc'],
+                              image1: post[index]['image1'],
+                              image2: post[index]['image2'],
+                              // postedBy: post[index]['postedBy'],
+                            );
+                          }));
+                        },
+                        child: Widget_UI(
+                          desc: post[index]['desc'],
+
+                          // description: post[index]['PostDetails'],
+                          // date: post[index]['PostingDate'],
+                          // index: index + 1,
+                          titre: post[index]['nom'],
+                          image: post[index]['image1'],
+                          // par: post[index]['postedBy'],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:upato/HomePage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:upato/add/Viewdata.dart';
 
 class NavBarPage extends StatefulWidget {
   const NavBarPage({super.key});
@@ -18,7 +19,7 @@ class _NavBarPageState extends State<NavBarPage> {
     HomePage(),
     HomePage(),
     Explorepage(),
-    HomePage(),
+    Viewdata(),
   ];
 
   @override

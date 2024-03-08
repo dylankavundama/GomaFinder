@@ -6,20 +6,24 @@ import 'package:flutter/material.dart';
 class Widget_UI extends StatelessWidget {
   const Widget_UI({
     required this.image,
+    required this.titre,
+    required this.desc,
     super.key,
   });
 
   final String image;
+  final String titre;
+  final String desc;
   @override
   Widget build(BuildContext context) {
     final ww = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DetailPage()),
-        );
-      },
+      // onTap: () {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => DetailPage()),
+      //   );
+      // },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -29,7 +33,6 @@ class Widget_UI extends StatelessWidget {
           ),
         ),
         child: Column(
-          //mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
               // Prend toute la taille de l'écran
@@ -47,9 +50,9 @@ class Widget_UI extends StatelessWidget {
                 SizedBox(
                   height: 30,
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 200),
+                    padding: EdgeInsets.only(right: 300),
                     child: Text(
-                      "Airtrade Company Aviation",
+                      titre,
                       style: TitreStyle,
                     ),
                   ),
@@ -62,10 +65,11 @@ class Widget_UI extends StatelessWidget {
                       size: 18,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 110),
+                      padding: EdgeInsets.only(right: 110),
                       child: Text(
-                        "Chez mode pret du rond pont ",
+                        desc,
                         style: SousTStyle,
+                        maxLines: 1,
                       ),
                     ),
                     // Text(
