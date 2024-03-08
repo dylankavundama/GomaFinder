@@ -256,19 +256,10 @@ class _HomePageState extends State<HomePage>
           Center(child: Text('Content of Tab 3')),
         ],
       ),
-
-      // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: SpeedDial(
-        // both default to 16
-        // marginRight: 18,
-        // marginBottom: 20,
         animatedIcon: AnimatedIcons.view_list,
         animatedIconTheme: IconThemeData(size: 22.0),
-        // this is ignored if animatedIcon is non null
-        // child: Icon(Icons.add),
-        // If true user is forced to close dial manually
-        // by tapping main button and overlay is not rendered.
         closeManually: false,
         curve: Curves.bounceIn,
         overlayColor: Colors.black,
@@ -336,7 +327,6 @@ class MyWidget1 extends StatefulWidget {
 }
 
 class _MyWidget1State extends State<MyWidget1> {
-  List<dynamic> story = [];
   List<dynamic> post = [];
   bool _isLoading = false;
 
@@ -344,7 +334,6 @@ class _MyWidget1State extends State<MyWidget1> {
     setState(() {
       _isLoading = true;
     });
-
     const url = 'https://royalrisingplus.com/upato/bureau/read.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
@@ -362,7 +351,6 @@ class _MyWidget1State extends State<MyWidget1> {
   @override
   void initState() {
     super.initState();
-
     fetchPosts();
   }
 
@@ -373,31 +361,13 @@ class _MyWidget1State extends State<MyWidget1> {
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(
-              color: CouleurPrincipale,
-            ))
-          :
-          //  Padding(
-          //   padding: const EdgeInsets.all(5.0),
-          //   child: Container(
-          //     child: SingleChildScrollView(
-          //       child: Column(
-          //         children: [
-
-          //           Widget_UI(
-          //             image:
-          //                 'https://www.nesto.ca/wp-content/uploads/2022/05/type-of-houses-in-ca.jpg',
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
-          Column(
+                color: CouleurPrincipale,
+              ),
+            )
+          : Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // SizedBox(height: MediaQuery.of(context).size.height * 0.04),
                 SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Column(
@@ -416,19 +386,13 @@ class _MyWidget1State extends State<MyWidget1> {
                               desc: post[index]['desc'],
                               image1: post[index]['image1'],
                               image2: post[index]['image2'],
-                              // postedBy: post[index]['postedBy'],
                             );
                           }));
                         },
                         child: Widget_UI(
                           desc: post[index]['desc'],
-
-                          // description: post[index]['PostDetails'],
-                          // date: post[index]['PostingDate'],
-                          // index: index + 1,
                           titre: post[index]['nom'],
                           image: post[index]['image1'],
-                        
                         ),
                       ),
                     ),
