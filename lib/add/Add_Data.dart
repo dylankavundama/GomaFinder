@@ -5,14 +5,14 @@ import 'dart:core';
 
 import 'package:records/read_records.dart';
 
-class Personne extends StatefulWidget {
-  const Personne({super.key});
+class Add_Data extends StatefulWidget {
+  const Add_Data({super.key});
 
   @override
-  State<Personne> createState() => _PersonneState();
+  State<Add_Data> createState() => _Add_DataState();
 }
 
-class _PersonneState extends State<Personne> {
+class _Add_DataState extends State<Add_Data> {
   TextEditingController nom = TextEditingController();
   TextEditingController desc = TextEditingController();
   TextEditingController image1 = TextEditingController();
