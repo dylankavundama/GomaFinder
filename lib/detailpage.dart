@@ -171,18 +171,6 @@ class _DetailPageState extends State<DetailPage> {
                       Divider(
                         thickness: 1,
                       ),
-                      // CustomListTile(
-                      //   leadingIcon: Icons.location_on_outlined,
-                      //   titleText: 'sssdjhdhd',
-                      //   trailingText: 'follow',
-                      //   onTap: () {
-                      //     // Code à exécuter lorsque le ListTile est tapé
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(builder: (context) => HomePage()),
-                      //     );
-                      //   },
-                      // ),
                       CustomListTile(
                         leadingIcon: Icons.call,
                         titleText: widget.tel,
@@ -216,12 +204,11 @@ class _DetailPageState extends State<DetailPage> {
                         preferBelow: false,
                         child: InkWell(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => GoogleMaps(),
-                              ),
-                            );
+                            String lat = widget.lat;
+                            String long = widget.long;
+                            String url =
+                                'http://www.google.com/maps/search/?api=1&query=$lat,$long';
+                            launch(url);
                           },
                           child: Container(
                             height: 200,
@@ -271,11 +258,9 @@ class _DetailPageState extends State<DetailPage> {
                   child: GestureDetector(
                     onTap: () {
                       String lat = widget.lat;
-
                       String long = widget.long;
                       String url =
                           'http://www.google.com/maps/search/?api=1&query=$lat,$long';
-
                       launch(url);
                     },
                     child: Text(

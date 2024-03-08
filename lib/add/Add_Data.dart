@@ -266,33 +266,11 @@ class _Add_DataState extends State<Add_Data> {
                 style: TitreStyle,
               ),
             ),
-            // TextField(
-            //   controller: log,
-            //   decoration: const InputDecoration(
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.all(
-            //           Radius.circular(4),
-            //         ),
-            //       ),
-            //       hintText: "longitude",
-            //       labelText: "longitude"),
-            // ),
+
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
-            // TextField(
-            //   controller: latt,
-            //   decoration: InputDecoration(
-            //       focusColor: CouleurPrincipale,
-            //       fillColor: CouleurPrincipale,
-            //       hoverColor: CouleurPrincipale,
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.all(
-            //           Radius.circular(4),
-            //         ),
-            //       ),
-            //       hintText: "latitude",
-            //       labelText: "latitude"),
+
             // ),
             Padding(
               padding: EdgeInsets.only(top: 10),
