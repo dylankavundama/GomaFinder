@@ -193,23 +193,22 @@ class _Add_DataState extends State<Add_Data> {
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
-            Container(
-              color: CouleurPrincipale,
-              child: ElevatedButton(
-                onPressed: () {
-                  savadatas();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Viewdata()));
-                  // Navigator.pushAndRemoveUntil(
-                  //   context,
-                  //   CupertinoPageRoute(builder: (context) => const Viewdata()),
-                  //   (Route<dynamic> route) => false,
-                  // );
-                },
-                child: Text(
-                  "Ajouter",
-                  style: TitreStyle,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: CouleurPrincipale, // Change background color here
+                onPrimary: Colors.white, // Change text color here
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4), // Change shape here
                 ),
+              ),
+              onPressed: () {
+                savadatas();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Viewdata()));
+              },
+              child: Text(
+                "Ajouter",
+                style: TitreStyle,
               ),
             ),
           ],
