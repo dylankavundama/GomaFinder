@@ -55,7 +55,6 @@ class _Add_DataState extends State<Add_Data> {
       "lat": lat.text,
     });
 
-    // Navigate to the view data page after saving data
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Viewdata()));
   }
@@ -217,14 +216,13 @@ class _Add_DataState extends State<Add_Data> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: CouleurPrincipale, // Change background color here
-                onPrimary: Colors.white, // Change text color here
+                primary: CouleurPrincipale,
+                onPrimary: Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4), // Change shape here
+                  borderRadius: BorderRadius.circular(4),
                 ),
               ),
-              onPressed:
-                  saveData, // Call saveData function when button is pressed
+              onPressed: saveData,
               child: Text(
                 "Ajouter",
                 style: TitreStyle,
