@@ -55,6 +55,30 @@ class _ViewdataState extends State<Viewdata> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: CouleurPrincipale),
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            Text(
+              'U',
+              style: TextStyle(color: CouleurPrincipale),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'PATO',
+              style: TextStyle(color: Colors.black),
+            ),
+            Icon(
+              Icons.location_on_outlined,
+              color: Colors.black,
+              size: 18,
+            )
+          ],
+        ),
+      ),
       body: _isLoading
           ? Center(child: CircularProgressIndicator(color: CouleurPrincipale))
           : ListView.builder(

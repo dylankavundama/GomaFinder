@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
         overlays: [SystemUiOverlay.top]);
     return MaterialApp(
       theme: ThemeData(
-          primaryColor: Colors.green, // Primary color for the app
+          primaryColor: Colors.green,
+        
+          buttonColor: CouleurPrincipale,
+           // Primary color for the app
           accentColor: CouleurPrincipale, // Accent color for the app
           useMaterial3: false),
       debugShowCheckedModeBanner: false,

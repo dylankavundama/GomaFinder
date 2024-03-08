@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
 import 'package:upato/add/Viewdata.dart';
+
+import '../style.dart';
 
 class Add_Data extends StatefulWidget {
   const Add_Data({super.key});
@@ -41,65 +42,178 @@ class _Add_DataState extends State<Add_Data> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bureau"),
-        backgroundColor: Colors.transparent,
+        iconTheme: IconThemeData(color: CouleurPrincipale),
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            Text(
+              'U',
+              style: TextStyle(color: CouleurPrincipale),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'PATO',
+              style: TextStyle(color: Colors.black),
+            ),
+            Icon(
+              Icons.location_on_outlined,
+              color: Colors.black,
+              size: 18,
+            )
+          ],
+        ),
       ),
-      body: ListView(
-        children: [
-          TextField(
-            controller: nom,
-            decoration:
-                const InputDecoration(hintText: "Nom", labelText: "Nom"),
-          ),
-          TextField(
-            controller: desc,
-            decoration: const InputDecoration(
-                hintText: "Desc", labelText: "detail"),
-          ),
-          TextField(
-            controller: image1,
-            decoration: const InputDecoration(
-                hintText: "image1", labelText: "image1"),
-          ),
-          TextField(
-            controller: image2,
-            decoration: const InputDecoration(
-                hintText: "image2", labelText: "image2"),
-          ),
-          TextField(
-            controller: tel,
-            decoration: const InputDecoration(
-                hintText: "tel", labelText: "tel"),
-          ),
-          TextField(
-            controller: site,
-            decoration: const InputDecoration(
-                hintText: "site", labelText: "site"),
-          ),
-          TextField(
-            controller: log,
-            decoration: const InputDecoration(
-                hintText: "longitude", labelText: "longitude"),
-          ),
-          TextField(
-            controller: lat,
-            decoration: const InputDecoration(
-                hintText: "latitude", labelText: "latitude"),
-          ),
-
-          ElevatedButton(
-            onPressed: () {
-              savadatas();
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=>Viewdata()));
-              Navigator.pushAndRemoveUntil(
-                context,
-                CupertinoPageRoute(builder: (context) => const Viewdata()),
-                (Route<dynamic> route) => false,
-              );
-            },
-            child: const Text("Ajouter"),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: ListView(
+          children: [
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Ajouter une entreprise",
+                  style: TitreStyle,
+                ),
+              ),
+            ),
+            TextField(
+              controller: nom,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "Nom de l'entreprise",
+                  labelText: "Nom"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            TextField(
+              controller: desc,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "description & l'adresse de l'entreprise",
+                  labelText: "Description"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            TextField(
+              controller: image1,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "url de l'image 1",
+                  labelText: "Image1"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            TextField(
+              controller: image2,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "url de l'image 2",
+                  labelText: "Image2"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            TextField(
+              controller: tel,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "numéro de téléphone",
+                  labelText: "Tel"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            TextField(
+              controller: site,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "url du site internet/page web",
+                  labelText: "Site internet"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            TextField(
+              controller: log,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "longitude",
+                  labelText: "longitude"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            TextField(
+              controller: lat,
+              decoration: InputDecoration(
+                  focusColor: CouleurPrincipale,
+                  fillColor: CouleurPrincipale,
+                  hoverColor: CouleurPrincipale,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+                  hintText: "latitude",
+                  labelText: "latitude"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+            Container(
+              color: CouleurPrincipale,
+              child: ElevatedButton(
+                onPressed: () {
+                  savadatas();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Viewdata()));
+                  // Navigator.pushAndRemoveUntil(
+                  //   context,
+                  //   CupertinoPageRoute(builder: (context) => const Viewdata()),
+                  //   (Route<dynamic> route) => false,
+                  // );
+                },
+                child: Text(
+                  "Ajouter",
+                  style: TitreStyle,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

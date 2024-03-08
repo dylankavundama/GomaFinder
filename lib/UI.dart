@@ -1,5 +1,4 @@
-import 'package:upato/Detail_UI.dart';
-import 'package:upato/detailpage.dart';
+
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 
@@ -8,22 +7,20 @@ class Widget_UI extends StatelessWidget {
     required this.image,
     required this.titre,
     required this.desc,
+    this.maxLength = 55,
     super.key,
   });
 
   final String image;
   final String titre;
   final String desc;
+  final int maxLength;
   @override
   Widget build(BuildContext context) {
     final ww = MediaQuery.of(context).size.width;
+String displayedText = desc.length <= maxLength ? desc : desc.substring(0, maxLength) + '...';
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(builder: (context) => DetailPage()),
-      //   );
-      // },
+
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -64,13 +61,11 @@ class Widget_UI extends StatelessWidget {
                       color: CouleurPrincipale,
                       size: 18,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 110),
-                      child: Text(
-                        desc,
-                        style: SousTStyle,
-                        maxLines: 1,
-                      ),
+                    Text(
+                       displayedText,
+                      
+                      style: SousTStyle,
+                      maxLines: 3,
                     ),
                     // Text(
                     //   'Call',

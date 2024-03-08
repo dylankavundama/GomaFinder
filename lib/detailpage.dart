@@ -72,7 +72,7 @@ class _DetailPageState extends State<DetailPage> {
                                 return Dialog(
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height,
+                                    height: 300,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
@@ -102,7 +102,7 @@ class _DetailPageState extends State<DetailPage> {
                                 return Dialog(
                                   child: Container(
                                     width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height,
+                                    height: 300,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(widget.image2),
