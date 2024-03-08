@@ -185,14 +185,11 @@ class _DetailPageState extends State<DetailPage> {
                         titleText: widget.tel,
                         trailingText: 'follow',
                         onTap: () {
-                          // ignore: deprecated_member_use
                           launch('tel:${widget.tel}');
                         },
                       ),
                       ListTile(
                         onTap: () {
-                          // String url =
-
                           launch('https://${widget.site}');
                         },
                         leading: Icon(Icons.web),
@@ -217,10 +214,11 @@ class _DetailPageState extends State<DetailPage> {
                         child: InkWell(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GoogleMaps(),
-                                ));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GoogleMaps(),
+                              ),
+                            );
                           },
                           child: Container(
                             height: 200,

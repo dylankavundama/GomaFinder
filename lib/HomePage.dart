@@ -428,7 +428,7 @@ class _MyWidget1State extends State<MyWidget1> {
                           // index: index + 1,
                           titre: post[index]['nom'],
                           image: post[index]['image1'],
-                          // par: post[index]['postedBy'],
+                        
                         ),
                       ),
                     ),
