@@ -6,7 +6,7 @@ import 'package:upato/add/Viewdata.dart';
 import '../style.dart';
 
 class Add_Data extends StatefulWidget {
-  const Add_Data({super.key});
+  const Add_Data({Key? key}) : super(key: key);
 
   @override
   State<Add_Data> createState() => _Add_DataState();
@@ -22,7 +22,25 @@ class _Add_DataState extends State<Add_Data> {
   TextEditingController log = TextEditingController();
   TextEditingController lat = TextEditingController();
 
-  Future<void> savadatas() async {
+  Future<void> saveData() async {
+    if (nom.text.isEmpty ||
+        desc.text.isEmpty ||
+        image1.text.isEmpty ||
+        image2.text.isEmpty ||
+        tel.text.isEmpty ||
+        site.text.isEmpty ||
+        log.text.isEmpty ||
+        lat.text.isEmpty) {
+      // Show a snackbar with an error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Vous avez un champs vide'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
     var url = "https://royalrisingplus.com/upato/bureau/create.php";
     Uri ulr = Uri.parse(url);
 
@@ -36,6 +54,10 @@ class _Add_DataState extends State<Add_Data> {
       "log": log.text,
       "lat": lat.text,
     });
+
+    // Navigate to the view data page after saving data
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Viewdata()));
   }
 
   @override
@@ -201,11 +223,8 @@ class _Add_DataState extends State<Add_Data> {
                   borderRadius: BorderRadius.circular(4), // Change shape here
                 ),
               ),
-              onPressed: () {
-                savadatas();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Viewdata()));
-              },
+              onPressed:
+                  saveData, // Call saveData function when button is pressed
               child: Text(
                 "Ajouter",
                 style: TitreStyle,
