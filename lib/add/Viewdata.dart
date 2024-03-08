@@ -1,11 +1,9 @@
 import 'dart:convert';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:records/Add.dart';
-import 'package:records/update_records.dart';
+import 'package:upato/add/Update_records.dart';
+import 'Add_Data.dart';
 
 class Viewdata extends StatefulWidget {
   const Viewdata({super.key});
@@ -66,7 +64,6 @@ class _ViewdataState extends State<Viewdata> {
               leading: CircleAvatar(
                 radius: 25,
                 backgroundImage: NetworkImage(userdata[index]["image2"]),
-             
               ),
               onTap: () {
                 Navigator.push(
@@ -96,7 +93,7 @@ class _ViewdataState extends State<Viewdata> {
           getrecord();
           Navigator.pushAndRemoveUntil(
             context,
-            CupertinoPageRoute(builder: (context) => const Personne()),
+            CupertinoPageRoute(builder: (context) => const Add_Data()),
             (Route<dynamic> route) => false,
           );
         },

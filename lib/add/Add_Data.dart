@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
-
-import 'package:records/read_records.dart';
+import 'package:upato/add/Viewdata.dart';
 
 class Add_Data extends StatefulWidget {
   const Add_Data({super.key});

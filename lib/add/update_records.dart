@@ -2,10 +2,9 @@
 
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:records/Add.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:records/read_records.dart';
+import 'package:upato/add/Viewdata.dart';
 
 // ignore: must_be_immutable
 class Update_records extends StatefulWidget {
