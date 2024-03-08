@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:core';
 import 'package:upato/add/Viewdata.dart';
-
+import 'dart:math';
+import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'dart:async';
+import 'dart:io' show Platform;
+import 'package:url_launcher/url_launcher.dart';
 import '../style.dart';
 
 class Add_Data extends StatefulWidget {
@@ -20,7 +25,7 @@ class _Add_DataState extends State<Add_Data> {
   TextEditingController tel = TextEditingController();
   TextEditingController site = TextEditingController();
   TextEditingController log = TextEditingController();
-  TextEditingController lat = TextEditingController();
+  TextEditingController latt = TextEditingController();
 
   Future<void> saveData() async {
     if (nom.text.isEmpty ||
@@ -29,8 +34,10 @@ class _Add_DataState extends State<Add_Data> {
         image2.text.isEmpty ||
         tel.text.isEmpty ||
         site.text.isEmpty ||
-        log.text.isEmpty ||
-        lat.text.isEmpty) {
+        log.text.isNotEmpty ||
+        latt.text.isNotEmpty
+        
+        ) {
       // Show a snackbar with an error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -51,12 +58,60 @@ class _Add_DataState extends State<Add_Data> {
       "image2": image2.text,
       "tel": tel.text,
       "site": site.text,
-      "log": log.text,
-      "lat": lat.text,
+      "log": log.text = long,
+      "lat": latt.text = lat,
     });
 
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Viewdata()));
+  }
+
+  //location
+
+  late String lat;
+  late String long;
+
+  String locationMessage = 'Resulatat';
+  Future<Position> _getCurrentLocation() async {
+    bool serviceEnamblev = await Geolocator.isLocationServiceEnabled();
+
+    if (!serviceEnamblev) {
+      return Future.error('are disabel ');
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('erro permissio');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('erro permission denied fprever');
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
+  void _liveLocation() {
+    LocationSettings locationSettings = const LocationSettings(
+        accuracy: LocationAccuracy.high, distanceFilter: 100);
+
+    Geolocator.getPositionStream(locationSettings: locationSettings)
+        .listen((Position positon) {
+      lat = positon.latitude.toString();
+      long = positon.longitude.toString();
+
+      setState(() {
+        locationMessage = "latitude:$lat longitude:$long";
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -183,34 +238,62 @@ class _Add_DataState extends State<Add_Data> {
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
-            TextField(
-              controller: log,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
-                  hintText: "longitude",
-                  labelText: "longitude"),
+            Text(locationMessage),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: CouleurPrincipale,
+                onPrimary: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              onPressed: () {
+                _getCurrentLocation().then(
+                  (value) {
+                    lat = '${value.latitude}';
+                    long = '${value.longitude}';
+
+                    setState(() {
+                      locationMessage = 'latitude:$lat longitude:$long';
+                    });
+                  },
+                );
+
+                _liveLocation();
+              },
+              child: Text(
+                "Recuperer le position de l'entreprise",
+                style: TitreStyle,
+              ),
             ),
+            // TextField(
+            //   controller: log,
+            //   decoration: const InputDecoration(
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.all(
+            //           Radius.circular(4),
+            //         ),
+            //       ),
+            //       hintText: "longitude",
+            //       labelText: "longitude"),
+            // ),
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
-            TextField(
-              controller: lat,
-              decoration: InputDecoration(
-                  focusColor: CouleurPrincipale,
-                  fillColor: CouleurPrincipale,
-                  hoverColor: CouleurPrincipale,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
-                  hintText: "latitude",
-                  labelText: "latitude"),
-            ),
+            // TextField(
+            //   controller: latt,
+            //   decoration: InputDecoration(
+            //       focusColor: CouleurPrincipale,
+            //       fillColor: CouleurPrincipale,
+            //       hoverColor: CouleurPrincipale,
+            //       border: OutlineInputBorder(
+            //         borderRadius: BorderRadius.all(
+            //           Radius.circular(4),
+            //         ),
+            //       ),
+            //       hintText: "latitude",
+            //       labelText: "latitude"),
+            // ),
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),

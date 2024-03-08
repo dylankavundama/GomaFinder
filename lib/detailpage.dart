@@ -11,13 +11,16 @@ class DetailPage extends StatefulWidget {
       required this.titre,
       required this.tel,
       required this.site,
+      required this.lat,
+      required this.long,
       super.key});
   String image1;
   String image2;
   String desc;
   String titre;
   String tel;
-
+  String lat;
+  String long;
   String site;
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -265,12 +268,23 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ],
                   ),
-                  child: Text(
-                    "GPS",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
+                  child: GestureDetector(
+                    onTap: () {
+                      String lat = widget.lat;
+
+                      String long = widget.long;
+                      String url =
+                          'http://www.google.com/maps/search/?api=1&query=$lat,$long';
+
+                      launch(url);
+                    },
+                    child: Text(
+                      "GPS",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
                   ),
                 ),
               ),

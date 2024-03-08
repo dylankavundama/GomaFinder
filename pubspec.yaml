@@ -9,6 +9,7 @@ version: 1.0.0+4
 
 environment:
   sdk: '>=2.19.6 <3.0.0'
+  
 
 
 dependencies:
@@ -30,6 +31,7 @@ dependencies:
   shimmer: ^3.0.0
   carousel_slider:
   url_launcher:
+  geolocator: ^8.2.1
   google_maps_flutter:
 
 dev_dependencies:

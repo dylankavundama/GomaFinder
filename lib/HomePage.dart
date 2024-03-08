@@ -354,49 +354,65 @@ class _MyWidget1State extends State<MyWidget1> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-    return Scaffold(
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: CouleurPrincipale,
-              ),
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      post.length,
-                      (index) => GestureDetector(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return DetailPage(
-                              titre: post[index]['nom'],
-                              site: post[index]['site'],
-                              tel: post[index]['tel'],
-                              desc: post[index]['desc'],
-                              image1: post[index]['image1'],
-                              image2: post[index]['image2'],
-                            );
-                          }));
-                        },
-                        child: Widget_UI(
-                          desc: post[index]['desc'],
-                          titre: post[index]['nom'],
-                          image: post[index]['image1'],
-                        ),
-                      ),
-                    ),
-                  ),
+    // return SingleChildScrollView(
+    //   child: Scaffold(
+    //     body: _isLoading
+    //         ? Center(
+    //             child: CircularProgressIndicator(
+    //               color: CouleurPrincipale,
+    //             ),
+    //           )
+    //         : Column(
+    //             mainAxisAlignment: MainAxisAlignment.start,
+    //             crossAxisAlignment: CrossAxisAlignment.start,
+    //             children: [
+
+    //             ],
+    //           ),
+    //   ),
+    // );
+
+    return  
+    
+    _isLoading
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: CouleurPrincipale,
                 ),
-              ],
+              )
+            :
+    SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: List.generate(
+          post.length,
+          (index) => GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return DetailPage(
+                    lat: post[index]['lat'],
+                    long: post[index]['log'],
+                    titre: post[index]['nom'],
+                    site: post[index]['site'],
+                    tel: post[index]['tel'],
+                    desc: post[index]['desc'],
+                    image1: post[index]['image1'],
+                    image2: post[index]['image2'],
+                  );
+                }),
+              );
+            },
+            child: Widget_UI(
+              desc: post[index]['desc'],
+              titre: post[index]['nom'],
+              image: post[index]['image1'],
             ),
+          ),
+        ),
+      ),
     );
   }
 }
