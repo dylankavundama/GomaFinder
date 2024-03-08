@@ -45,10 +45,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        // Définir la couleur de la barre d'état
-        // Changer la luminosité du texte de la barre d'état
-        ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(),
+    );
     SizeConfig().init(context);
     double width = SizeConfig.screenW!;
     double height = SizeConfig.screenH!;
@@ -95,7 +94,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             fontSize: (width <= 550) ? 17 : 25,
                           ),
                           textAlign: TextAlign.center,
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -194,7 +193,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ],
                           ),
-                        )
+                        ),
                 ],
               ),
             ),

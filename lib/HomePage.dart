@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:upato/Detail_UI.dart';
 import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
 import 'package:upato/style.dart';
@@ -22,7 +21,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    super.initState();
     _tabController = TabController(length: 18, vsync: this);
     super.initState();
 
@@ -34,7 +32,7 @@ class _HomePageState extends State<HomePage>
   void dispose() {
     _tabController.dispose();
     _interstitialAd?.dispose();
-    super.dispose();
+
     super.dispose();
   }
 
@@ -46,7 +44,6 @@ class _HomePageState extends State<HomePage>
       ? 'ca-app-pub-7329797350611067/7003775471'
       : 'ca-app-pub-7329797350611067/7025361747';
   //ca-app-pub-7329797350611067/6013028323
-  @override
   void _startNewGame() {
     setState(() => _counter = _gameLength);
 
