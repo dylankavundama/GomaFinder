@@ -411,6 +411,8 @@ class _MyWidget1State extends State<MyWidget1> {
                               MaterialPageRoute(builder: (context) {
                             return DetailPage(
                               titre: post[index]['nom'],
+                              site: post[index]['site'],
+                              tel: post[index]['tel'],
                               desc: post[index]['desc'],
                               image1: post[index]['image1'],
                               image2: post[index]['image2'],

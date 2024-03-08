@@ -1,7 +1,7 @@
-import 'package:upato/HomePage.dart';
 import 'package:upato/googlemaps.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
   DetailPage(
@@ -9,11 +9,16 @@ class DetailPage extends StatefulWidget {
       required this.image1,
       required this.image2,
       required this.titre,
+      required this.tel,
+      required this.site,
       super.key});
   String image1;
   String image2;
   String desc;
   String titre;
+  String tel;
+
+  String site;
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -100,8 +105,7 @@ class _DetailPageState extends State<DetailPage> {
                                     height: MediaQuery.of(context).size.height,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        image: NetworkImage(
-                                           widget.image2),
+                                        image: NetworkImage(widget.image2),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -111,7 +115,7 @@ class _DetailPageState extends State<DetailPage> {
                             );
                           },
                           child: Container(
-                                    height: 300,
+                            height: 300,
                             child: Image.network(
                               widget.image2,
                               fit: BoxFit.cover,
@@ -164,40 +168,36 @@ class _DetailPageState extends State<DetailPage> {
                       Divider(
                         thickness: 1,
                       ),
-                      CustomListTile(
-                        leadingIcon: Icons.location_on_outlined,
-                        titleText: 'sssdjhdhd',
-                        trailingText: 'follow',
-                        onTap: () {
-                          // Code à exécuter lorsque le ListTile est tapé
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
-                        },
-                      ),
+                      // CustomListTile(
+                      //   leadingIcon: Icons.location_on_outlined,
+                      //   titleText: 'sssdjhdhd',
+                      //   trailingText: 'follow',
+                      //   onTap: () {
+                      //     // Code à exécuter lorsque le ListTile est tapé
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(builder: (context) => HomePage()),
+                      //     );
+                      //   },
+                      // ),
                       CustomListTile(
                         leadingIcon: Icons.call,
-                        titleText: '09876548765',
+                        titleText: widget.tel,
                         trailingText: 'follow',
                         onTap: () {
-                          // Code à exécuter lorsque le ListTile est tapé
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
+                          // ignore: deprecated_member_use
+                          launch('tel:${widget.tel}');
                         },
                       ),
                       ListTile(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
+                          // String url =
+
+                          launch('https://${widget.site}');
                         },
                         leading: Icon(Icons.web),
                         title: Text(
-                          'www.easykivu.com',
+                          widget.site,
                           style: DescStyle,
                         ),
                         trailing: Text('follow'),
