@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage>
           onAdFailedToLoad: (LoadAdError error) {
             print('InterstitialAd failed to load: $error');
           },
-        ));
+        ),);
   }
 
   void _starTimer() {
