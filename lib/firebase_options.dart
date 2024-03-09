@@ -71,6 +71,9 @@ class DefaultFirebaseOptions {
     iosBundleId: 'io.flutter.plugins.firebase.auth.example',
   );
 
+
+
+
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyC5heGH0Rni-DuGuyjvMSinZ7IKIy_Jcns',
     appId: '1:100681275497:android:2574c9fc4c7858abfb2af8',
