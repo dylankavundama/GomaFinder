@@ -89,6 +89,9 @@ class _DetailPageState extends State<DetailPage> {
                               },
                             );
                           },
+
+
+                          
                           child: Container(
                             height: 300,
                             child: Image.network(

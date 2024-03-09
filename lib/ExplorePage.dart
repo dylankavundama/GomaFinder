@@ -1,6 +1,5 @@
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
-
 class Explorepage extends StatefulWidget {
   const Explorepage({Key? key}) : super(key: key);
 
