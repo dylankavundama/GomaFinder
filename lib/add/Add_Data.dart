@@ -244,8 +244,7 @@ class _Add_DataState extends State<Add_Data> {
             Text(locationMessage),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: CouleurPrincipale,
-                onPrimary: Colors.white,
+                foregroundColor: Colors.white, primary: CouleurPrincipale,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ),
@@ -280,8 +279,7 @@ class _Add_DataState extends State<Add_Data> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: CouleurPrincipale,
-                onPrimary: Colors.white,
+                foregroundColor: Colors.white, primary: CouleurPrincipale,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ),
