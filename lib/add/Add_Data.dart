@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:upato/NavBarPage.dart';
 import 'dart:core';
-import 'package:upato/add/Viewdata.dart';
-import 'dart:math';
+// import 'package:upato/add/Viewdata.dart';
+// import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
@@ -140,7 +140,7 @@ class _Add_DataState extends State<Add_Data> {
               Icons.location_on_outlined,
               color: Colors.black,
               size: 18,
-            )
+            ),
           ],
         ),
       ),
