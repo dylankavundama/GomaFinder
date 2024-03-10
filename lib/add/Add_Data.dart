@@ -4,11 +4,11 @@ import 'package:upato/NavBarPage.dart';
 import 'dart:core';
 // import 'package:upato/add/Viewdata.dart';
 // import 'dart:math';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'dart:async';
-import 'dart:io' show Platform;
-import 'package:url_launcher/url_launcher.dart';
+// import 'dart:async';
+// import 'dart:io' show Platform;
+// import 'package:url_launcher/url_launcher.dart';
 import '../style.dart';
 
 class Add_Data extends StatefulWidget {
