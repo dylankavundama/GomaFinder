@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:upato/NavBarPage.dart';
 import 'dart:core';
 import 'package:upato/add/Viewdata.dart';
 import 'dart:math';
@@ -35,9 +36,7 @@ class _Add_DataState extends State<Add_Data> {
         tel.text.isEmpty ||
         site.text.isEmpty ||
         log.text.isNotEmpty ||
-        latt.text.isNotEmpty
-        
-        ) {
+        latt.text.isNotEmpty) {
       // Show a snackbar with an error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -63,7 +62,11 @@ class _Add_DataState extends State<Add_Data> {
     });
 
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Viewdata()));
+      context,
+      MaterialPageRoute(
+        builder: (context) => NavBarPage(),
+      ),
+    );
   }
 
   //location
@@ -258,9 +261,6 @@ class _Add_DataState extends State<Add_Data> {
                     });
                   },
                 );
-
-
-
 
                 _liveLocation();
               },

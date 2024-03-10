@@ -27,7 +27,7 @@ class _NavBarPageState extends State<NavBarPage> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.white,
       statusBarBrightness: Brightness.dark,
-    ));
+    ),);
     return SafeArea(
       child: Scaffold(
         bottomSheet: screen[currentindex],
