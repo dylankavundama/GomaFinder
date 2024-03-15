@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:upato/model/ecole.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -148,7 +149,7 @@ class _HomePageState extends State<HomePage>
           Mode_Home_Page(),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
-          Center(child: Text('Content of Tab 3')),
+EcolePage(),
           Center(child: Text('Content of Tab 3')),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
