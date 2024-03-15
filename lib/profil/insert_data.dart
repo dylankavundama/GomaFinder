@@ -160,39 +160,25 @@ class _AddSalaireState extends State<AddSalaire> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          //  const Icon(Icons.attach_money_sharp, color: Colors.blue, size: 80),
-            // DropdownButton(
-            //   hint: const Text("Selectionner"),
-            //   items: dataens.map((list) {
-            //     return DropdownMenuItem(
-            //       value: list["id"],
-            //       child: Text(list["nom"]),
-            //     );
-            //   }).toList(),
-            //   value: selectens,
-            //   onChanged: (value) {
-            //     selectens = value;
-            //     idenseu = selectens;
-            //     print("la vealuur: " + selectens);
-            //     setState(() {});
-            //   },
-            // ),
-            // textField(
-            //     textHint: "nom",
-            //     controller: nom,
-            //     icon: LineIcons.archive,
-            //     suffixIcon: LineIcons.dollarSign,
-            //     isNumber: true),
+
             Stack(
               children: [
                 TextField(
                   decoration: InputDecoration(
-                    hintText: 'Select an =',
-                    suffixIcon: Icon(Icons.arrow_drop_down),
+
+                       prefixIcon: Icon(Icons.category_outlined),
+
+                             border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4),
+                    ),
+                  ),
+        
+                  //  suffixIcon: Icon(Icons.arrow_drop_down),
                   ),
                   readOnly: true,
                   controller: TextEditingController(
-                    text: 'Selectionner' ?? '',
+                  //  text: 'Selectionner la categorie ' ?? '',
                   ),
                   // onTap: () {
                   //   _showDropdown(context);
@@ -219,7 +205,7 @@ class _AddSalaireState extends State<AddSalaire> {
                   // ),
 
                   child: DropdownButton(
-                    hint: const Text("Selectionner"),
+                    hint: const Text("Selection la categorie de votre entreprise"),
                     items: dataens.map((list) {
                       return DropdownMenuItem(
                         value: list["id"],
@@ -237,6 +223,10 @@ class _AddSalaireState extends State<AddSalaire> {
                 ),
               ],
             ),
+                  Padding(
+              padding: EdgeInsets.only(top: 10),
+            ),
+
             TextField(
               keyboardType: TextInputType.text,
               controller: nom,
