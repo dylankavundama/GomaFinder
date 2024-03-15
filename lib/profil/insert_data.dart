@@ -23,6 +23,10 @@ class _Inset_DataState extends State<Inset_Data> {
   TextEditingController site = TextEditingController();
   TextEditingController log = TextEditingController();
   TextEditingController latt = TextEditingController();
+
+  TextEditingController image1 = TextEditingController();
+  TextEditingController image2 = TextEditingController();
+
   @override
   void initState() {
     getrecord();
@@ -68,6 +72,8 @@ class _Inset_DataState extends State<Inset_Data> {
         tel.text.isEmpty ||
         site.text.isEmpty ||
         log.text.isNotEmpty ||
+        image1.text.isEmpty ||
+        image2.text.isNotEmpty ||
         latt.text.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -86,6 +92,8 @@ class _Inset_DataState extends State<Inset_Data> {
         "cat": idenseu,
         "site": site.text,
         "det": detail.text,
+        "image2": image2.text,
+        "image1": image1.text,
         "tel": tel.text,
         "log": log.text = long,
         "lat": latt.text = lat,
@@ -164,7 +172,7 @@ class _Inset_DataState extends State<Inset_Data> {
                   child: Image.asset("assets/en.png"),
                 ),
               ),
-    
+
               Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Center(
@@ -173,7 +181,7 @@ class _Inset_DataState extends State<Inset_Data> {
                   style: TitreStyle,
                 )),
               ),
-    
+
               Padding(
                 padding: const EdgeInsets.only(top: 6),
                 child: Stack(
@@ -217,7 +225,7 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-    
+
               TextField(
                 keyboardType: TextInputType.text,
                 controller: nom,
@@ -234,7 +242,7 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-    
+
               TextField(
                 keyboardType: TextInputType.text,
                 controller: detail,
@@ -251,7 +259,7 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-    
+
               TextField(
                 keyboardType: TextInputType.number,
                 controller: tel,
@@ -268,7 +276,7 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-    
+
               TextField(
                 keyboardType: TextInputType.text,
                 controller: site,
@@ -282,11 +290,11 @@ class _Inset_DataState extends State<Inset_Data> {
                     hintText: "Site Web",
                     labelText: "Site Internet"),
               ),
-    
+
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-    
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -300,14 +308,14 @@ class _Inset_DataState extends State<Inset_Data> {
                     (value) {
                       lat = '${value.latitude}';
                       long = '${value.longitude}';
-    
+
                       setState(() {
                         locationMessage =
                             "Postion GPS de l'entreprise:\nlatitude :$lat\nlongitude:$long";
                       });
                     },
                   );
-    
+
                   _liveLocation();
                 },
                 child: Text(
@@ -316,7 +324,8 @@ class _Inset_DataState extends State<Inset_Data> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(4)),
                 child: Text(locationMessage),
               ),
               Padding(
@@ -331,7 +340,7 @@ class _Inset_DataState extends State<Inset_Data> {
               // const SizedBox(
               //   height: 15,
               // ),
-    
+
               MaterialButton(
                 minWidth: double.maxFinite,
                 shape: RoundedRectangleBorder(
@@ -357,8 +366,8 @@ class _Inset_DataState extends State<Inset_Data> {
                       lat: lat,
                       log: long,
                     )).then((value) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => List_Data()));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => List_Data()));
                     }).whenComplete(() {
                       setState(() {
                         _isLoading = false;
@@ -468,7 +477,19 @@ class Salaire {
   String? lat;
   String? log;
 
-  Salaire({this.code, this.nom, this.detail, this.site, this.lat, this.log});
+  String? image2;
+
+  String? image1;
+
+  Salaire(
+      {this.image1,
+      this.image2,
+      this.code,
+      this.nom,
+      this.detail,
+      this.site,
+      this.lat,
+      this.log});
 
   factory Salaire.fromJson(Map<String, dynamic> json) =>
       _$SalaireFromJson(json);
@@ -482,6 +503,8 @@ Salaire _$SalaireFromJson(Map<String, dynamic> json) {
       site: json['site'] as String,
       lat: json['lat'] as String,
       log: json['log'] as String,
+      image2: json['image2'] as String,
+      image1: json['image1'] as String,
       detail: json['detail'] as String);
 }
 
@@ -490,5 +513,7 @@ Map<String, dynamic> _$SalaireToJson(Salaire instance) => <String, dynamic>{
       'detail': instance.detail,
       'site': instance.site,
       'lat': instance.lat,
-      'log': instance.log
+      'log': instance.log,
+      'image2': instance.image2,
+      'image1': instance.image1
     };
