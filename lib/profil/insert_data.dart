@@ -69,9 +69,9 @@ class _Inset_DataState extends State<Inset_Data> {
         detail.text.isEmpty ||
         tel.text.isEmpty ||
         site.text.isEmpty ||
-        log.text.isEmpty ||
-        latt.text.isEmpty ||
-        image.text.isEmpty) {
+        log.text.isNotEmpty ||
+        latt.text.isNotEmpty ||
+        image.text.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Vous avez un champs vide'),
@@ -291,6 +291,8 @@ class _Inset_DataState extends State<Inset_Data> {
                 padding: EdgeInsets.only(top: 10),
               ),
 
+
+              
               TextField(
                 keyboardType: TextInputType.text,
                 controller: image,
@@ -362,13 +364,14 @@ class _Inset_DataState extends State<Inset_Data> {
                 color: CouleurPrincipale,
                 onPressed: () {
                   if (idenseu.isEmpty) {
-                    showToast(msg: "veiller selectionner une categorie");
-                  } else if (nom.text.isEmpty) {
-                    showToast(msg: "la case nom est vide");
-                  } else if (detail.text.isEmpty) {
-                    showToast(msg: "veiller ajouter une description");
-                  } else if (tel.text.isEmpty) {
-                    showToast(msg: "veiller ajouter un numero de telephone");
+                    showToast(msg: "y'a une case vide");
+                  } else if (site.text.isEmpty) {
+                    showToast(msg: "Y'a une case vide");
+                  } else if (detail.text.isEmpty &&
+                      idenseu.isEmpty &&
+                      site.text.isEmpty) {
+                    showToast(msg: "Y'a une case vide");
+                  } else {
                     setState(() {
                       _isLoading = true;
                     });
@@ -376,9 +379,10 @@ class _Inset_DataState extends State<Inset_Data> {
                       nom: idenseu.trim(),
                       detail: detail.text.trim(),
                       site: site.text.trim(),
-                      image: image.text.trim(),
+                          image: image.text.trim(),
                       lat: lat,
                       log: long,
+                  
                     )).then((value) {
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => List_Data()));
@@ -423,6 +427,63 @@ class _Inset_DataState extends State<Inset_Data> {
       });
     }
   }
+}
+
+Widget textField(
+    {String? textHint,
+    onTap,
+    TextEditingController? controller,
+    bool? enabled,
+    bool? isNumber,
+    IconData? icon,
+    bool? readOnly,
+    VoidCallback? func,
+    bool? isName,
+    IconData? suffixIcon,
+    VoidCallback? onPressed,
+    VoidCallback? KboardType,
+    VoidCallback? onChange}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      Padding(
+        padding: const EdgeInsets.only(top: 5.0),
+        child: Text("$textHint"),
+      ),
+      Container(
+        height: 50.0,
+        margin: const EdgeInsets.only(top: 5.0),
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+        decoration: BoxDecoration(
+          color: Colors.grey[100],
+          border: Border.all(color: Colors.grey, width: 1),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: Center(
+          child: TextFormField(
+            readOnly: readOnly != true ? false : true,
+            onTap: func,
+            keyboardType: isNumber == null
+                ? TextInputType.text
+                : const TextInputType.numberWithOptions(),
+            enabled: enabled ?? true,
+            controller: controller,
+            decoration: InputDecoration(
+              hintText: textHint,
+              border: InputBorder.none,
+              prefixIcon: Icon(icon),
+              suffixIcon: isName != null
+                  ? IconButton(
+                      icon: Icon(suffixIcon),
+                      onPressed: onPressed,
+                    )
+                  : null,
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
 }
 
 class Salaire {
