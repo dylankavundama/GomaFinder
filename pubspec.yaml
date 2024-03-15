@@ -23,6 +23,8 @@ dependencies:
   barcode_widget: 
   firebase_auth: 
   firebase_core: 
+  fluttertoast:
+  line_icons:
   firebase_messaging: 
   flutter_speed_dial:
   flutter_native_splash: ^2.2.4
