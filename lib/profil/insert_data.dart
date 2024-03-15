@@ -165,19 +165,13 @@ class _AddSalaireState extends State<AddSalaire> {
                 TextField(
                   decoration: InputDecoration(
                     prefixIcon: Icon(Icons.category_outlined),
-
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(4),
                       ),
                     ),
-
-                    //  suffixIcon: Icon(Icons.arrow_drop_down),
                   ),
                   readOnly: true,
-                  controller: TextEditingController(
-                      //  text: 'Selectionner la categorie ' ?? '',
-                      ),
                 ),
                 Positioned(
                   right: 0,
