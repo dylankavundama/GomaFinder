@@ -34,9 +34,9 @@ class MyApp extends StatelessWidget {
           accentColor: CouleurPrincipale, // Accent color for the app
           useMaterial3: false),
       debugShowCheckedModeBanner: false,
-   home: OnboardingScreen(),
+  // home: OnboardingScreen(),
 
-    // home:     AddSalaire(),
+  home:     Inset_Data(),
     );
   }
 }

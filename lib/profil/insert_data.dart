@@ -23,9 +23,7 @@ class _Inset_DataState extends State<Inset_Data> {
   TextEditingController site = TextEditingController();
   TextEditingController log = TextEditingController();
   TextEditingController latt = TextEditingController();
-
-  TextEditingController image1 = TextEditingController();
-  TextEditingController image2 = TextEditingController();
+  TextEditingController image = TextEditingController();
 
   @override
   void initState() {
@@ -71,10 +69,9 @@ class _Inset_DataState extends State<Inset_Data> {
         detail.text.isEmpty ||
         tel.text.isEmpty ||
         site.text.isEmpty ||
-        log.text.isNotEmpty ||
-        image1.text.isEmpty ||
-        image2.text.isNotEmpty ||
-        latt.text.isNotEmpty) {
+        log.text.isEmpty ||
+        latt.text.isEmpty ||
+        image.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Vous avez un champs vide'),
@@ -92,11 +89,10 @@ class _Inset_DataState extends State<Inset_Data> {
         "cat": idenseu,
         "site": site.text,
         "det": detail.text,
-        "image2": image2.text,
-        "image1": image1.text,
         "tel": tel.text,
         "log": log.text = long,
         "lat": latt.text = lat,
+        "image": image.text,
       });
       if (reponse.statusCode == 200) {
         showToast(msg: "Succes!");
@@ -295,6 +291,24 @@ class _Inset_DataState extends State<Inset_Data> {
                 padding: EdgeInsets.only(top: 10),
               ),
 
+              TextField(
+                keyboardType: TextInputType.text,
+                controller: image,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.web),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                    ),
+                    hintText: "Image",
+                    labelText: "Image"),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -348,14 +362,9 @@ class _Inset_DataState extends State<Inset_Data> {
                 color: CouleurPrincipale,
                 onPressed: () {
                   if (idenseu.isEmpty) {
+                    showToast(msg: "Veiller selectionner une categorie");
+                  } else if (nom.text.isEmpty) {
                     showToast(msg: "y'a une case vide");
-                  } else if (site.text.isEmpty) {
-                    showToast(msg: "Y'a une case vide");
-                  } else if (detail.text.isEmpty &&
-                      idenseu.isEmpty &&
-                      site.text.isEmpty) {
-                    showToast(msg: "Y'a une case vide");
-                  } else {
                     setState(() {
                       _isLoading = true;
                     });
@@ -363,6 +372,7 @@ class _Inset_DataState extends State<Inset_Data> {
                       nom: idenseu.trim(),
                       detail: detail.text.trim(),
                       site: site.text.trim(),
+                      image: image.text.trim(),
                       lat: lat,
                       log: long,
                     )).then((value) {
@@ -411,63 +421,6 @@ class _Inset_DataState extends State<Inset_Data> {
   }
 }
 
-Widget textField(
-    {String? textHint,
-    onTap,
-    TextEditingController? controller,
-    bool? enabled,
-    bool? isNumber,
-    IconData? icon,
-    bool? readOnly,
-    VoidCallback? func,
-    bool? isName,
-    IconData? suffixIcon,
-    VoidCallback? onPressed,
-    VoidCallback? KboardType,
-    VoidCallback? onChange}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.only(top: 5.0),
-        child: Text("$textHint"),
-      ),
-      Container(
-        height: 50.0,
-        margin: const EdgeInsets.only(top: 5.0),
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: Center(
-          child: TextFormField(
-            readOnly: readOnly != true ? false : true,
-            onTap: func,
-            keyboardType: isNumber == null
-                ? TextInputType.text
-                : const TextInputType.numberWithOptions(),
-            enabled: enabled ?? true,
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: textHint,
-              border: InputBorder.none,
-              prefixIcon: Icon(icon),
-              suffixIcon: isName != null
-                  ? IconButton(
-                      icon: Icon(suffixIcon),
-                      onPressed: onPressed,
-                    )
-                  : null,
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
 class Salaire {
   int? code;
   String? nom;
@@ -476,20 +429,16 @@ class Salaire {
 
   String? lat;
   String? log;
-
-  String? image2;
-
-  String? image1;
+  String? image;
 
   Salaire(
-      {this.image1,
-      this.image2,
-      this.code,
+      {this.code,
       this.nom,
       this.detail,
       this.site,
       this.lat,
-      this.log});
+      this.log,
+      this.image});
 
   factory Salaire.fromJson(Map<String, dynamic> json) =>
       _$SalaireFromJson(json);
@@ -503,9 +452,8 @@ Salaire _$SalaireFromJson(Map<String, dynamic> json) {
       site: json['site'] as String,
       lat: json['lat'] as String,
       log: json['log'] as String,
-      image2: json['image2'] as String,
-      image1: json['image1'] as String,
-      detail: json['detail'] as String);
+      detail: json['detail'] as String,
+      image: json['image'] as String);
 }
 
 Map<String, dynamic> _$SalaireToJson(Salaire instance) => <String, dynamic>{
@@ -514,6 +462,5 @@ Map<String, dynamic> _$SalaireToJson(Salaire instance) => <String, dynamic>{
       'site': instance.site,
       'lat': instance.lat,
       'log': instance.log,
-      'image2': instance.image2,
-      'image1': instance.image1
+      'image': instance.image
     };
