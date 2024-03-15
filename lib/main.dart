@@ -28,13 +28,15 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.green,
         
           buttonColor: CouleurPrincipale,
+
+          fixTextFieldOutlineLabel: true,
            // Primary color for the app
           accentColor: CouleurPrincipale, // Accent color for the app
           useMaterial3: false),
       debugShowCheckedModeBanner: false,
-    //  home: OnboardingScreen(),
+   home: OnboardingScreen(),
 
-    home:     AddSalaire(),
+    // home:     AddSalaire(),
     );
   }
 }

@@ -289,7 +289,7 @@ class _AddSalaireState extends State<AddSalaire> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                primary: CouleurPrincipale,
+                primary: Colors.black45,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ),
@@ -301,7 +301,8 @@ class _AddSalaireState extends State<AddSalaire> {
                     long = '${value.longitude}';
 
                     setState(() {
-                      locationMessage = "Postion GPS de l'entreprise:\nlatitude:$lat\nlongitude:$long";
+                      locationMessage =
+                          "Postion GPS de l'entreprise:\nlatitude :$lat\nlongitude:$long";
                     });
                   },
                 );
@@ -314,9 +315,9 @@ class _AddSalaireState extends State<AddSalaire> {
               ),
             ),
             Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                child: Text(locationMessage)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+              child: Text(locationMessage),
+            ),
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
