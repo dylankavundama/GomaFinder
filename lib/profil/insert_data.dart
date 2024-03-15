@@ -66,9 +66,7 @@ class _AddSalaireState extends State<AddSalaire> {
   }
 
   Future<void> savadatas(Salaire Salaire) async {
-
-
-        if (nom.text.isEmpty ||
+    if (nom.text.isEmpty ||
         detail.text.isEmpty ||
         // image1.text.isEmpty ||
         // image2.text.isEmpty ||
@@ -304,7 +302,7 @@ class _AddSalaireState extends State<AddSalaire> {
               minWidth: double.maxFinite,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0)),
-              color: Colors.blue[800],
+              color: CouleurPrincipale,
               onPressed: () {
                 if (idenseu.isEmpty) {
                   showToast(msg: "y'a une case vide");
