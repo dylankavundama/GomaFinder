@@ -362,9 +362,13 @@ class _Inset_DataState extends State<Inset_Data> {
                 color: CouleurPrincipale,
                 onPressed: () {
                   if (idenseu.isEmpty) {
-                    showToast(msg: "Veiller selectionner une categorie");
+                    showToast(msg: "veiller selectionner une categorie");
                   } else if (nom.text.isEmpty) {
-                    showToast(msg: "y'a une case vide");
+                    showToast(msg: "la case nom est vide");
+                  } else if (detail.text.isEmpty) {
+                    showToast(msg: "veiller ajouter une description");
+                  } else if (tel.text.isEmpty) {
+                    showToast(msg: "veiller ajouter un numero de telephone");
                     setState(() {
                       _isLoading = true;
                     });
