@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 Color CouleurPrincipale = Colors.green;
@@ -10,6 +9,14 @@ TextStyle TitreStyle = GoogleFonts.abel(
     // textStyle: Theme.of(context).textTheme.displayLarge,
     fontSize: 24,
     color: Colors.black
+    // fontWeight: FontWeight.w700,
+    // fontStyle: FontStyle.italic,
+    );
+
+    TextStyle TitreStyleWhite = GoogleFonts.abel(
+    // textStyle: Theme.of(context).textTheme.displayLarge,
+    fontSize: 24,
+    color: Colors.white
     // fontWeight: FontWeight.w700,
     // fontStyle: FontStyle.italic,
     );

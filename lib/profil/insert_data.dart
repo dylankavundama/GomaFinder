@@ -10,8 +10,6 @@ import 'dart:core';
 import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 
-// import 'package:payment_teacher/salaire/ListSalaire.dart';
-
 class AddSalaire extends StatefulWidget {
   const AddSalaire({super.key});
   @override
@@ -19,7 +17,6 @@ class AddSalaire extends StatefulWidget {
 }
 
 class _AddSalaireState extends State<AddSalaire> {
-
   TextEditingController nom = TextEditingController();
   TextEditingController tel = TextEditingController();
   TextEditingController detail = TextEditingController();
@@ -72,7 +69,6 @@ class _AddSalaireState extends State<AddSalaire> {
         site.text.isEmpty ||
         log.text.isNotEmpty ||
         latt.text.isNotEmpty) {
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Vous avez un champs vide'),
@@ -111,7 +107,7 @@ class _AddSalaireState extends State<AddSalaire> {
   late String lat;
   late String long;
 
-  String locationMessage = 'Resulatat';
+  String locationMessage = '';
   Future<Position> _getCurrentLocation() async {
     bool serviceEnamblev = await Geolocator.isLocationServiceEnabled();
 
@@ -158,44 +154,64 @@ class _AddSalaireState extends State<AddSalaire> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Stack(
-              children: [
-                TextField(
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.category_outlined),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Center(
+                child: Image.asset("assets/en.png"),
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Center(
+                  child: Text(
+                "Inscription d'une entreprise",
+                style: TitreStyle,
+              )),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Stack(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(LineIcons.list),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
                       ),
                     ),
+                    readOnly: true,
                   ),
-                  readOnly: true,
-                ),
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  child: DropdownButton(
-                    hint: const Text(
-                        "Selection la categorie de votre entreprise"),
-                    items: dataens.map((list) {
-                      return DropdownMenuItem(
-                        value: list["id"],
-                        child: Text(list["nom"]),
-                      );
-                    }).toList(),
-                    value: selectens,
-                    onChanged: (value) {
-                      selectens = value;
-                      idenseu = selectens;
-                      print("la vealuur: " + selectens);
-                      setState(() {});
-                    },
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    child: DropdownButton(
+                      hint: const Text(
+                          "Sélectionner la catégorie de votre entreprise"),
+                      items: dataens.map((list) {
+                        return DropdownMenuItem(
+                          value: list["id"],
+                          child: Text(list["nom"]),
+                        );
+                      }).toList(),
+                      value: selectens,
+                      onChanged: (value) {
+                        selectens = value;
+                        idenseu = selectens;
+                        print("Valeur: " + selectens);
+                        setState(() {});
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),
@@ -212,7 +228,7 @@ class _AddSalaireState extends State<AddSalaire> {
                     ),
                   ),
                   hintText: "Nom de l'entreprise",
-                  labelText: "Nom"),
+                  labelText: "Nom de l'entreprise"),
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),
@@ -229,14 +245,14 @@ class _AddSalaireState extends State<AddSalaire> {
                     ),
                   ),
                   hintText: "Description (adress)",
-                  labelText: "Desc"),
+                  labelText: "Description"),
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
 
             TextField(
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.number,
               controller: tel,
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.call),
@@ -245,8 +261,8 @@ class _AddSalaireState extends State<AddSalaire> {
                       Radius.circular(4),
                     ),
                   ),
-                  hintText: "Numero telephone",
-                  labelText: "Tel"),
+                  hintText: "Numero Téléphone",
+                  labelText: "Téléphone"),
             ),
             Padding(
               padding: EdgeInsets.only(top: 10),
@@ -262,16 +278,14 @@ class _AddSalaireState extends State<AddSalaire> {
                       Radius.circular(4),
                     ),
                   ),
-                  hintText: "Site Internet",
-                  labelText: "Site"),
+                  hintText: "Site Web",
+                  labelText: "Site Internet"),
             ),
+
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            Text(locationMessage),
+
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -287,7 +301,7 @@ class _AddSalaireState extends State<AddSalaire> {
                     long = '${value.longitude}';
 
                     setState(() {
-                      locationMessage = 'latitude:$lat longitude:$long';
+                      locationMessage = "Postion GPS de l'entreprise:\nlatitude:$lat\nlongitude:$long";
                     });
                   },
                 );
@@ -295,11 +309,14 @@ class _AddSalaireState extends State<AddSalaire> {
                 _liveLocation();
               },
               child: Text(
-                "Recuperer le position de l'entreprise",
-                style: TitreStyle,
+                "Récupérer le position de l'entreprise",
+                style: TitreStyleWhite,
               ),
             ),
-
+            Container(
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(4)),
+                child: Text(locationMessage)),
             Padding(
               padding: EdgeInsets.only(top: 10),
             ),
