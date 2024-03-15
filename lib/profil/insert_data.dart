@@ -180,9 +180,7 @@ class _AddSalaireState extends State<AddSalaire> {
                   controller: TextEditingController(
                   //  text: 'Selectionner la categorie ' ?? '',
                   ),
-                  // onTap: () {
-                  //   _showDropdown(context);
-                  // },
+          
                 ),
                 Positioned(
                   right: 0,
