@@ -19,7 +19,7 @@ class AddSalaire extends StatefulWidget {
 }
 
 class _AddSalaireState extends State<AddSalaire> {
-  // TextEditingController nom = TextEditingController();
+
   TextEditingController nom = TextEditingController();
   TextEditingController tel = TextEditingController();
   TextEditingController detail = TextEditingController();
@@ -72,7 +72,7 @@ class _AddSalaireState extends State<AddSalaire> {
         site.text.isEmpty ||
         log.text.isNotEmpty ||
         latt.text.isNotEmpty) {
-      // Show a snackbar with an error message
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Vous avez un champs vide'),
