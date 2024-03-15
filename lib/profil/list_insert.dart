@@ -9,14 +9,14 @@ import 'package:flutter/services.dart' show Uint8List, rootBundle;
 import 'package:upato/profil/insert_data.dart';
 
 // ignore: camel_case_types
-class List_Salaire extends StatefulWidget {
-  const List_Salaire({super.key});
+class List_Data extends StatefulWidget {
+  const List_Data({super.key});
   @override
-  State<List_Salaire> createState() => _List_SalaireState();
+  State<List_Data> createState() => _List_DataState();
 }
 
 // ignore: camel_case_types
-class _List_SalaireState extends State<List_Salaire> {
+class _List_DataState extends State<List_Data> {
   //rapport
 
   List userdata = [];
@@ -186,7 +186,7 @@ class _List_SalaireState extends State<List_Salaire> {
               context: context,
               builder: (context) {
                 return const Center(
-                  child: AddSalaire(),
+                  child: Inset_Data(),
                 );
               }).then((value) {});
         },

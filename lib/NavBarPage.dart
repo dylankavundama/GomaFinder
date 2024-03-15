@@ -20,7 +20,7 @@ class _NavBarPageState extends State<NavBarPage> {
     HomePage(),
     Explorepage(),
     // Viewdata(),
-    AddSalaire(),
+    Inset_Data(),
   ];
 
   @override

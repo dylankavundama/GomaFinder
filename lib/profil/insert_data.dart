@@ -10,13 +10,13 @@ import 'dart:core';
 import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 
-class AddSalaire extends StatefulWidget {
-  const AddSalaire({super.key});
+class Inset_Data extends StatefulWidget {
+  const Inset_Data({super.key});
   @override
-  State<AddSalaire> createState() => _AddSalaireState();
+  State<Inset_Data> createState() => _Inset_DataState();
 }
 
-class _AddSalaireState extends State<AddSalaire> {
+class _Inset_DataState extends State<Inset_Data> {
   TextEditingController nom = TextEditingController();
   TextEditingController tel = TextEditingController();
   TextEditingController detail = TextEditingController();
@@ -147,239 +147,241 @@ class _AddSalaireState extends State<AddSalaire> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      clipBehavior: Clip.antiAlias,
-      elevation: 2.0,
-      borderRadius: BorderRadius.circular(4.0),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Center(
-                child: Image.asset("assets/en.png"),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Center(
-                  child: Text(
-                "Inscription d'une entreprise",
-                style: TitreStyle,
-              )),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: Stack(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(LineIcons.list),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                      ),
-                    ),
-                    readOnly: true,
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    child: DropdownButton(
-                      hint: const Text(
-                          "Sélectionner la catégorie de votre entreprise"),
-                      items: dataens.map((list) {
-                        return DropdownMenuItem(
-                          value: list["id"],
-                          child: Text(list["nom"]),
-                        );
-                      }).toList(),
-                      value: selectens,
-                      onChanged: (value) {
-                        selectens = value;
-                        idenseu = selectens;
-                        print("Valeur: " + selectens);
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: nom,
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.home_filled),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
-                  hintText: "Nom de l'entreprise",
-                  labelText: "Nom de l'entreprise"),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: detail,
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.description),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
-                  hintText: "Description (adress)",
-                  labelText: "Description"),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-
-            TextField(
-              keyboardType: TextInputType.number,
-              controller: tel,
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.call),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
-                  hintText: "Numero Téléphone",
-                  labelText: "Téléphone"),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: site,
-              decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.web),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4),
-                    ),
-                  ),
-                  hintText: "Site Web",
-                  labelText: "Site Internet"),
-            ),
-
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                primary: Colors.black45,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
+    return SingleChildScrollView(
+      child: Material(
+        clipBehavior: Clip.antiAlias,
+        elevation: 2.0,
+        borderRadius: BorderRadius.circular(4.0),
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Center(
+                  child: Image.asset("assets/en.png"),
                 ),
               ),
-              onPressed: () {
-                _getCurrentLocation().then(
-                  (value) {
-                    lat = '${value.latitude}';
-                    long = '${value.longitude}';
-
-                    setState(() {
-                      locationMessage =
-                          "Postion GPS de l'entreprise:\nlatitude :$lat\nlongitude:$long";
-                    });
-                  },
-                );
-
-                _liveLocation();
-              },
-              child: Text(
-                "Récupérer le position de l'entreprise",
-                style: TitreStyleWhite,
+    
+              Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Center(
+                    child: Text(
+                  "Inscription d'une entreprise",
+                  style: TitreStyle,
+                )),
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-              child: Text(locationMessage),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            // textField(
-            //     textHint: "detail",
-            //     controller: detail,
-            //     icon: LineIcons.archive,
-            //     suffixIcon: LineIcons.dollarSign,
-            //     isNumber: false),
-            // const SizedBox(
-            //   height: 15,
-            // ),
-
-            MaterialButton(
-              minWidth: double.maxFinite,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-              color: CouleurPrincipale,
-              onPressed: () {
-                if (idenseu.isEmpty) {
-                  showToast(msg: "y'a une case vide");
-                } else if (site.text.isEmpty) {
-                  showToast(msg: "Y'a une case vide");
-                } else if (detail.text.isEmpty &&
-                    idenseu.isEmpty &&
-                    site.text.isEmpty) {
-                  showToast(msg: "Y'a une case vide");
-                } else {
-                  setState(() {
-                    _isLoading = true;
-                  });
-                  savadatas(Salaire(
-                    nom: idenseu.trim(),
-                    detail: detail.text.trim(),
-                    site: site.text.trim(),
-                    lat: lat,
-                    log: long,
-                  )).then((value) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => List_Salaire()));
-                  }).whenComplete(() {
-                    setState(() {
-                      _isLoading = false;
-                    });
-                  });
-                }
-              },
-              child: _isLoading
-                  ? const CircularProgressIndicator(
-                      color: Colors.white,
-                    )
-                  : const Text(
-                      "Enregistrer",
-                      style: TextStyle(
-                        color: Colors.white,
+    
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Stack(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(LineIcons.list),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                        ),
+                      ),
+                      readOnly: true,
+                    ),
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                      child: DropdownButton(
+                        hint: const Text(
+                            "Sélectionner la catégorie de votre entreprise"),
+                        items: dataens.map((list) {
+                          return DropdownMenuItem(
+                            value: list["id"],
+                            child: Text(list["nom"]),
+                          );
+                        }).toList(),
+                        value: selectens,
+                        onChanged: (value) {
+                          selectens = value;
+                          idenseu = selectens;
+                          print("Valeur: " + selectens);
+                          setState(() {});
+                        },
                       ),
                     ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-          ],
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+    
+              TextField(
+                keyboardType: TextInputType.text,
+                controller: nom,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.home_filled),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                    ),
+                    hintText: "Nom de l'entreprise",
+                    labelText: "Nom de l'entreprise"),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+    
+              TextField(
+                keyboardType: TextInputType.text,
+                controller: detail,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.description),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                    ),
+                    hintText: "Description (adress)",
+                    labelText: "Description"),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+    
+              TextField(
+                keyboardType: TextInputType.number,
+                controller: tel,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.call),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                    ),
+                    hintText: "Numero Téléphone",
+                    labelText: "Téléphone"),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+    
+              TextField(
+                keyboardType: TextInputType.text,
+                controller: site,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.web),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4),
+                      ),
+                    ),
+                    hintText: "Site Web",
+                    labelText: "Site Internet"),
+              ),
+    
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+    
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  primary: Colors.black45,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                onPressed: () {
+                  _getCurrentLocation().then(
+                    (value) {
+                      lat = '${value.latitude}';
+                      long = '${value.longitude}';
+    
+                      setState(() {
+                        locationMessage =
+                            "Postion GPS de l'entreprise:\nlatitude :$lat\nlongitude:$long";
+                      });
+                    },
+                  );
+    
+                  _liveLocation();
+                },
+                child: Text(
+                  "Récupérer le position de l'entreprise",
+                  style: TitreStyleWhite,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+                child: Text(locationMessage),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+              // textField(
+              //     textHint: "detail",
+              //     controller: detail,
+              //     icon: LineIcons.archive,
+              //     suffixIcon: LineIcons.dollarSign,
+              //     isNumber: false),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+    
+              MaterialButton(
+                minWidth: double.maxFinite,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: CouleurPrincipale,
+                onPressed: () {
+                  if (idenseu.isEmpty) {
+                    showToast(msg: "y'a une case vide");
+                  } else if (site.text.isEmpty) {
+                    showToast(msg: "Y'a une case vide");
+                  } else if (detail.text.isEmpty &&
+                      idenseu.isEmpty &&
+                      site.text.isEmpty) {
+                    showToast(msg: "Y'a une case vide");
+                  } else {
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    savadatas(Salaire(
+                      nom: idenseu.trim(),
+                      detail: detail.text.trim(),
+                      site: site.text.trim(),
+                      lat: lat,
+                      log: long,
+                    )).then((value) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => List_Data()));
+                    }).whenComplete(() {
+                      setState(() {
+                        _isLoading = false;
+                      });
+                    });
+                  }
+                },
+                child: _isLoading
+                    ? const CircularProgressIndicator(
+                        color: Colors.white,
+                      )
+                    : const Text(
+                        "Enregistrer",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );

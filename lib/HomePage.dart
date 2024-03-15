@@ -1,14 +1,12 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'package:upato/UI.dart';
-import 'package:upato/detailpage.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:upato/util/drawers.dart';
+
+import 'model/model_home_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -53,27 +51,28 @@ class _HomePageState extends State<HomePage>
 
   void _loadAdd() {
     InterstitialAd.load(
-        adUnitId: _adUnitIdd,
-        request: const AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            ad.fullScreenContentCallback = FullScreenContentCallback(
-                onAdShowedFullScreenContent: (ad) {},
-                onAdImpression: (ad) {},
-                onAdFailedToShowFullScreenContent: (ad, err) {
-                  ad.dispose();
-                },
-                onAdDismissedFullScreenContent: (ad) {
-                  ad.dispose();
-                },
-                onAdClicked: (ad) {});
+      adUnitId: _adUnitIdd,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+              onAdShowedFullScreenContent: (ad) {},
+              onAdImpression: (ad) {},
+              onAdFailedToShowFullScreenContent: (ad, err) {
+                ad.dispose();
+              },
+              onAdDismissedFullScreenContent: (ad) {
+                ad.dispose();
+              },
+              onAdClicked: (ad) {});
 
-            _interstitialAd = ad;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error');
-          },
-        ),);
+          _interstitialAd = ad;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          print('InterstitialAd failed to load: $error');
+        },
+      ),
+    );
   }
 
   void _starTimer() {
@@ -96,94 +95,7 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(children: [
-          DrawerHeader(
-            child: Image.asset('assets/images/logo.png'),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Actualité',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Evénement',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Visite Goma',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Artiste & Influenceur',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Football Club',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Podcast',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Live Tv',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Live Radio',
-                style: TitreStyle,
-              ),
-              trailing:
-                  Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-            ),
-          ),
-        ]),
-        width: 250,
-      ),
+      drawer: Drawers(),
       appBar: AppBar(
         iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
@@ -233,7 +145,7 @@ class _HomePageState extends State<HomePage>
       body: TabBarView(
         controller: _tabController,
         children: [
-          MyWidget1(),
+          Mode_Home_Page(),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
           Center(child: Text('Content of Tab 3')),
@@ -254,145 +166,80 @@ class _HomePageState extends State<HomePage>
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: SpeedDial(
-        animatedIcon: AnimatedIcons.view_list,
-        animatedIconTheme: IconThemeData(size: 22.0),
-        closeManually: false,
-        curve: Curves.bounceIn,
-        overlayColor: Colors.black,
-        overlayOpacity: 0.5,
-        onOpen: () => print('OPENING DIAL'),
-        onClose: () => print('DIAL CLOSED'),
-        tooltip: 'Speed Dial',
-        heroTag: 'speed-dial-hero-tag',
-        backgroundColor: CouleurPrincipale,
-        foregroundColor: Colors.white,
-        elevation: 8.0,
-        shape: CircleBorder(),
-        children: [
-          SpeedDialChild(
-            child: Icon(Icons.keyboard_voice),
-            backgroundColor: Colors.lightBlueAccent,
-            label: 'MC',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () {},
-            onLongPress: () => print('THIRD CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.work),
-            backgroundColor: Colors.blue,
-            label: 'Djema',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
-            onLongPress: () => print('SECOND CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.hail_outlined),
-            backgroundColor: Colors.brown,
-            label: "Decorateur",
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () {},
-            onLongPress: () => print('THIRD CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.handyman),
-            backgroundColor: Colors.amber,
-            label: "Main d'oeuvre",
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () {},
-            onLongPress: () => print('THIRD CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: Icon(Icons.camera),
-            backgroundColor: Colors.teal,
-            label: 'Photographe',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => print('SECOND CHILD'),
-            onLongPress: () => print('SECOND CHILD LONG PRESS'),
-          ),
-        ],
-      ),
+      floatingActionButton: Floating_Widget(),
     );
   }
 }
 
-class MyWidget1 extends StatefulWidget {
-  const MyWidget1({super.key});
+class Floating_Widget extends StatefulWidget {
+  const Floating_Widget({
+    super.key,
+  });
 
   @override
-  State<MyWidget1> createState() => _MyWidget1State();
+  State<Floating_Widget> createState() => _Floating_WidgetState();
 }
 
-class _MyWidget1State extends State<MyWidget1> {
-  List<dynamic> post = [];
-  bool _isLoading = false;
-
-  fetchPosts() async {
-    setState(() {
-      _isLoading = true;
-    });
-    const url = 'https://royalrisingplus.com/upato/bureau/read.php';
-    final uri = Uri.parse(url);
-    final reponse = await http.get(uri);
-    final List resultat = jsonDecode(reponse.body);
-    post = resultat;
-    resultat.sort(
-      (a, b) => b["id"].compareTo(a["id"]),
-    );
-    debugPrint(resultat.toString());
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchPosts();
-  }
-
+class _Floating_WidgetState extends State<Floating_Widget> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-
-    return _isLoading
-        ? Center(
-            child: CircularProgressIndicator(
-              color: CouleurPrincipale,
-            ),
-          )
-        : SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(
-                post.length,
-                (index) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return DetailPage(
-                          lat: post[index]['lat'],
-                          long: post[index]['log'],
-                          titre: post[index]['nom'],
-                          site: post[index]['site'],
-                          tel: post[index]['tel'],
-                          desc: post[index]['desc'],
-                          image1: post[index]['image1'],
-                          image2: post[index]['image2'],
-                        );
-                      }),
-                    );
-                  },
-                  child: Widget_UI(
-                    desc: post[index]['desc'],
-                    titre: post[index]['nom'],
-                    image: post[index]['image1'],
-                  ),
-                ),
-              ),
-            ),
-          );
+    return SpeedDial(
+      animatedIcon: AnimatedIcons.view_list,
+      animatedIconTheme: IconThemeData(size: 22.0),
+      closeManually: false,
+      curve: Curves.bounceIn,
+      overlayColor: Colors.black,
+      overlayOpacity: 0.5,
+      onOpen: () => print('OPENING DIAL'),
+      onClose: () => print('DIAL CLOSED'),
+      tooltip: 'Speed Dial',
+      heroTag: 'speed-dial-hero-tag',
+      backgroundColor: CouleurPrincipale,
+      foregroundColor: Colors.white,
+      elevation: 8.0,
+      shape: CircleBorder(),
+      children: [
+        SpeedDialChild(
+          child: Icon(Icons.keyboard_voice),
+          backgroundColor: Colors.lightBlueAccent,
+          label: 'MC',
+          labelStyle: TextStyle(fontSize: 18.0),
+          onTap: () {},
+          onLongPress: () => print('THIRD CHILD LONG PRESS'),
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.work),
+          backgroundColor: Colors.blue,
+          label: 'Djema',
+          labelStyle: TextStyle(fontSize: 18.0),
+          onTap: () => print('SECOND CHILD'),
+          onLongPress: () => print('SECOND CHILD LONG PRESS'),
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.hail_outlined),
+          backgroundColor: Colors.brown,
+          label: "Decorateur",
+          labelStyle: TextStyle(fontSize: 18.0),
+          onTap: () {},
+          onLongPress: () => print('THIRD CHILD LONG PRESS'),
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.handyman),
+          backgroundColor: Colors.amber,
+          label: "Main d'oeuvre",
+          labelStyle: TextStyle(fontSize: 18.0),
+          onTap: () {},
+          onLongPress: () => print('THIRD CHILD LONG PRESS'),
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.camera),
+          backgroundColor: Colors.teal,
+          label: 'Photographe',
+          labelStyle: TextStyle(fontSize: 18.0),
+          onTap: () => print('SECOND CHILD'),
+          onLongPress: () => print('SECOND CHILD LONG PRESS'),
+        ),
+      ],
+    );
   }
 }
