@@ -68,8 +68,6 @@ class _AddSalaireState extends State<AddSalaire> {
   Future<void> savadatas(Salaire Salaire) async {
     if (nom.text.isEmpty ||
         detail.text.isEmpty ||
-        // image1.text.isEmpty ||
-        // image2.text.isEmpty ||
         tel.text.isEmpty ||
         site.text.isEmpty ||
         log.text.isNotEmpty ||
@@ -78,7 +76,7 @@ class _AddSalaireState extends State<AddSalaire> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Vous avez un champs vide'),
-          duration: Duration(seconds: 2),
+          duration: Duration(seconds: 3),
         ),
       );
       return;
@@ -162,30 +160,83 @@ class _AddSalaireState extends State<AddSalaire> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Icon(Icons.attach_money_sharp, color: Colors.blue, size: 80),
-            DropdownButton(
-              hint: const Text("Selectionner"),
-              items: dataens.map((list) {
-                return DropdownMenuItem(
-                  value: list["id"],
-                  child: Text(list["nom"]),
-                );
-              }).toList(),
-              value: selectens,
-              onChanged: (value) {
-                selectens = value;
-                idenseu = selectens;
-                print("la vealuur: " + selectens);
-                setState(() {});
-              },
-            ),
+          //  const Icon(Icons.attach_money_sharp, color: Colors.blue, size: 80),
+            // DropdownButton(
+            //   hint: const Text("Selectionner"),
+            //   items: dataens.map((list) {
+            //     return DropdownMenuItem(
+            //       value: list["id"],
+            //       child: Text(list["nom"]),
+            //     );
+            //   }).toList(),
+            //   value: selectens,
+            //   onChanged: (value) {
+            //     selectens = value;
+            //     idenseu = selectens;
+            //     print("la vealuur: " + selectens);
+            //     setState(() {});
+            //   },
+            // ),
             // textField(
             //     textHint: "nom",
             //     controller: nom,
             //     icon: LineIcons.archive,
             //     suffixIcon: LineIcons.dollarSign,
             //     isNumber: true),
+            Stack(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Select an =',
+                    suffixIcon: Icon(Icons.arrow_drop_down),
+                  ),
+                  readOnly: true,
+                  controller: TextEditingController(
+                    text: 'Selectionner' ?? '',
+                  ),
+                  // onTap: () {
+                  //   _showDropdown(context);
+                  // },
+                ),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  // child: DropdownButton<String>(
+                  //   hint: const Text("Selectionner"),
+                  //   items: dataens.map((list) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: list["id"],
+                  //       child: Text(list["nom"]),
+                  //     );
+                  //   }).toList(),
+                  //   value: _selectedItem,
+                  //   onChanged: (String? newValue) {
+                  //     setState(() {
+                  //       _selectedItem = newValue;
+                  //     });
+                  //   },
+                  // ),
 
+                  child: DropdownButton(
+                    hint: const Text("Selectionner"),
+                    items: dataens.map((list) {
+                      return DropdownMenuItem(
+                        value: list["id"],
+                        child: Text(list["nom"]),
+                      );
+                    }).toList(),
+                    value: selectens,
+                    onChanged: (value) {
+                      selectens = value;
+                      idenseu = selectens;
+                      print("la vealuur: " + selectens);
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ],
+            ),
             TextField(
               keyboardType: TextInputType.text,
               controller: nom,
