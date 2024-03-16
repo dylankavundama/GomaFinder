@@ -322,6 +322,11 @@ class _Inset_DataState extends State<Inset_Data> {
                 padding: EdgeInsets.only(top: 5),
               ),
               Container(
+                  width: sreenw,
+                height: 44,
+                decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5)
+                ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     //   foregroundColor: Colors.white,
@@ -407,7 +412,7 @@ class _Inset_DataState extends State<Inset_Data> {
                                 border: Border.all(
                                   color:
                                       Colors.black26, // Couleur de la bordure
-                                  width: 2.0, // Épaisseur de la bordure
+                                  width: 1.0, // Épaisseur de la bordure
                                 ),
                               ),
                               child: Center(
@@ -430,7 +435,7 @@ class _Inset_DataState extends State<Inset_Data> {
                                 border: Border.all(
                                   color:
                                       Colors.black26, // Couleur de la bordure
-                                  width: 2.0, // Épaisseur de la bordure
+                                  width: 1.0, // Épaisseur de la bordure
                                 ),
                               ),
                               child: Center(

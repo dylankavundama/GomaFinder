@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upato/actualiter.dart';
 import 'package:upato/style.dart';
 
 
@@ -16,6 +17,14 @@ class Drawers extends StatelessWidget {
         ),
         Card(
           child: ListTile(
+            onTap: (){
+
+                Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => Actu_Home()
+    ),
+  );
+            },
             title: Text(
               'Actualité',
               style: TitreStyle,
