@@ -1,8 +1,10 @@
+import 'package:upato/actualiter.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upato/profil/insert_data.dart';
+import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -26,17 +28,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
           primaryColor: Colors.green,
-        
           buttonColor: CouleurPrincipale,
-
           fixTextFieldOutlineLabel: true,
-           // Primary color for the app
+          // Primary color for the app
           accentColor: CouleurPrincipale, // Accent color for the app
           useMaterial3: false),
       debugShowCheckedModeBanner: false,
-  // home: OnboardingScreen(),
-
-  home:     Inset_Data(),
+     // home: Actualite_Page(),
+//home: OnboardingScreen(),
+     home:     List_Data(),
     );
   }
 }

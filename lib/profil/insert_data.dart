@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:core';
@@ -23,8 +24,6 @@ class _Inset_DataState extends State<Inset_Data> {
   TextEditingController site = TextEditingController();
   TextEditingController log = TextEditingController();
   TextEditingController latt = TextEditingController();
-  TextEditingController image = TextEditingController();
-
   @override
   void initState() {
     getrecord();
@@ -53,7 +52,7 @@ class _Inset_DataState extends State<Inset_Data> {
 
   List dataens = [];
   Future<void> getrecord() async {
-    var url = "http://192.168.1.76/payment_teacher/read-enseignant.php";
+    var url = "http://192.168.84.195/payment_teacher/read-enseignant.php";
     try {
       var response = await http.get(Uri.parse(url));
       setState(() {
@@ -70,8 +69,7 @@ class _Inset_DataState extends State<Inset_Data> {
         tel.text.isEmpty ||
         site.text.isEmpty ||
         log.text.isNotEmpty ||
-        latt.text.isNotEmpty ||
-        image.text.isNotEmpty) {
+        latt.text.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Vous avez un champs vide'),
@@ -81,19 +79,31 @@ class _Inset_DataState extends State<Inset_Data> {
       return;
     }
     try {
-      var url = "http://192.168.1.76/payment_teacher/salaire/add-salaire.php";
+      var url = "http://192.168.84.195/payment_teacher/salaire/add-salaire.php";
       Uri ulr = Uri.parse(url);
-
-      var reponse = await http.post(ulr, body: {
-        "nom": nom.text,
-        "cat": idenseu,
-        "site": site.text,
-        "det": detail.text,
-        "tel": tel.text,
-        "log": log.text = long,
-        "lat": latt.text = lat,
-        "image": image.text,
-      });
+      debugPrint("############################################");
+      var request = http.MultipartRequest('POST', ulr);
+      request.fields['nom'] = nom.text;
+      request.fields['cat'] = idenseu;
+      request.fields['site'] = site.text;
+      request.fields['det'] = detail.text;
+      request.fields['tel'] = tel.text;
+      request.fields['log'] = log.text = long;
+      request.fields['lat'] = latt.text = lat;
+      request.files.add(http.MultipartFile.fromBytes(
+          'image', File(_image!.path).readAsBytesSync(),
+          filename: _image!.path));
+      var res = await request.send();
+      var reponse = await http.Response.fromStream(res);
+      // await http.post(ulr, body: {
+      //   "nom": nom.text,
+      //   "cat": idenseu,
+      //   "site": site.text,
+      //   "det": detail.text,
+      //   "tel": tel.text,
+      //   "log": log.text = long,
+      //   "lat": latt.text = lat,
+      // });
       if (reponse.statusCode == 200) {
         showToast(msg: "Succes!");
       } else {
@@ -110,7 +120,6 @@ class _Inset_DataState extends State<Inset_Data> {
 
   late String lat;
   late String long;
-
   String locationMessage = '';
   Future<Position> _getCurrentLocation() async {
     bool serviceEnamblev = await Geolocator.isLocationServiceEnabled();
@@ -118,7 +127,6 @@ class _Inset_DataState extends State<Inset_Data> {
     if (!serviceEnamblev) {
       return Future.error('are disabel ');
     }
-
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -126,11 +134,9 @@ class _Inset_DataState extends State<Inset_Data> {
         return Future.error('erro permissio');
       }
     }
-
     if (permission == LocationPermission.deniedForever) {
       return Future.error('erro permission denied fprever');
     }
-
     return await Geolocator.getCurrentPosition();
   }
 
@@ -147,6 +153,22 @@ class _Inset_DataState extends State<Inset_Data> {
         locationMessage = "latitude:$lat longitude:$long";
       });
     });
+  }
+
+//insert picture
+  File? _image;
+
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final pickedFile = await ImagePicker().pickImage(source: source);
+      if (pickedFile != null) {
+        setState(() {
+          _image = File(pickedFile.path);
+        });
+      }
+    } catch (e) {
+      print('Erreur lors de la sélection de l\'image : $e');
+    }
   }
 
   @override
@@ -291,26 +313,6 @@ class _Inset_DataState extends State<Inset_Data> {
                 padding: EdgeInsets.only(top: 10),
               ),
 
-
-              
-              TextField(
-                keyboardType: TextInputType.text,
-                controller: image,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.web),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
-                      ),
-                    ),
-                    hintText: "Image",
-                    labelText: "Image"),
-              ),
-
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-              ),
-
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -379,10 +381,8 @@ class _Inset_DataState extends State<Inset_Data> {
                       nom: idenseu.trim(),
                       detail: detail.text.trim(),
                       site: site.text.trim(),
-                          image: image.text.trim(),
                       lat: lat,
                       log: long,
-                  
                     )).then((value) {
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => List_Data()));
@@ -406,6 +406,29 @@ class _Inset_DataState extends State<Inset_Data> {
               ),
               const SizedBox(
                 height: 10,
+              ),
+
+              Center(
+                child: _image == null
+                    ? Text('Aucune image sélectionnée')
+                    : Image.file(_image!),
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FloatingActionButton(
+                    onPressed: () => _pickImage(ImageSource.camera),
+                    tooltip: 'Prendre une photo',
+                    child: Icon(Icons.camera),
+                  ),
+                  SizedBox(width: 16),
+                  FloatingActionButton(
+                    onPressed: () => _pickImage(ImageSource.gallery),
+                    tooltip: 'Sélectionner depuis la galerie',
+                    child: Icon(Icons.image),
+                  ),
+                ],
               ),
             ],
           ),
@@ -494,16 +517,8 @@ class Salaire {
 
   String? lat;
   String? log;
-  String? image;
 
-  Salaire(
-      {this.code,
-      this.nom,
-      this.detail,
-      this.site,
-      this.lat,
-      this.log,
-      this.image});
+  Salaire({this.code, this.nom, this.detail, this.site, this.lat, this.log});
 
   factory Salaire.fromJson(Map<String, dynamic> json) =>
       _$SalaireFromJson(json);
@@ -517,8 +532,7 @@ Salaire _$SalaireFromJson(Map<String, dynamic> json) {
       site: json['site'] as String,
       lat: json['lat'] as String,
       log: json['log'] as String,
-      detail: json['detail'] as String,
-      image: json['image'] as String);
+      detail: json['detail'] as String);
 }
 
 Map<String, dynamic> _$SalaireToJson(Salaire instance) => <String, dynamic>{
@@ -526,6 +540,5 @@ Map<String, dynamic> _$SalaireToJson(Salaire instance) => <String, dynamic>{
       'detail': instance.detail,
       'site': instance.site,
       'lat': instance.lat,
-      'log': instance.log,
-      'image': instance.image
+      'log': instance.log
     };

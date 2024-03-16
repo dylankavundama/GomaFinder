@@ -22,7 +22,7 @@ class _List_DataState extends State<List_Data> {
   List userdata = [];
   Future<void> delrecord(String id) async {
     try {
-      var url = "http://192.168.1.76/goma/goma.php";
+      var url = "http://192.168.84.195/goma/goma.php";
       var result = await http.post(Uri.parse(url), body: {"id": id});
       var reponse = jsonDecode(result.body);
       if (reponse["Success"] == "True") {
@@ -38,7 +38,7 @@ class _List_DataState extends State<List_Data> {
   }
 
   Future<void> getrecord() async {
-    var url = "http://192.168.1.76/goma/goma.php";
+    var url = "http://192.168.84.195/goma/goma.php";
     try {
       var response = await http.get(Uri.parse(url));
       setState(() {
@@ -64,7 +64,7 @@ class _List_DataState extends State<List_Data> {
   List userdatas = [];
 
   Future<List<dynamic>> getrecordssss() async {
-    var url = "http://192.168.1.76/goma/goma.php";
+    var url = "http://192.168.84.195/goma/goma.php";
     try {
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -116,13 +116,15 @@ class _List_DataState extends State<List_Data> {
                         Row(
                           children: [
                             Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(color: Colors.grey)),
-                              child: const Icon(LineIcons.userCircle, size: 35),
-                            ),
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    border: Border.all(color: Colors.grey)),
+                                child: Image.network(
+                                  "http://192.168.84.195/payment_teacher/salaire/" +
+                                      userdata[index]["image"],
+                                )),
                             const SizedBox(
                               width: 15,
                             ),
