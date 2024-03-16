@@ -7,8 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:core';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 
@@ -82,7 +80,6 @@ class _Inset_DataState extends State<Inset_Data> {
     try {
       var url = "http://192.168.0.13/goma/entreprise/add-Entreprise.php";
       Uri ulr = Uri.parse(url);
-      debugPrint("############################################");
       var request = http.MultipartRequest('POST', ulr);
       request.fields['nom'] = nom.text;
       request.fields['cat'] = idenseu;
@@ -91,9 +88,31 @@ class _Inset_DataState extends State<Inset_Data> {
       request.fields['tel'] = tel.text;
       request.fields['log'] = log.text = long;
       request.fields['lat'] = latt.text = lat;
-      request.files.add(http.MultipartFile.fromBytes(
-          'image', File(_image!.path).readAsBytesSync(),
-          filename: _image!.path));
+      
+      
+// Traitement de la première image
+if (_image1 != null) {
+  request.files.add(
+    http.MultipartFile.fromBytes(
+      'image1', 
+      await File(_image1!.path).readAsBytes(),
+      filename: _image1!.path, 
+    ),
+  );
+}
+
+// Traitement de la deuxième image
+if (_image2 != null) {
+  request.files.add(
+    http.MultipartFile.fromBytes(
+      'image2', 
+      await File(_image2!.path).readAsBytes(),
+      filename: _image2!.path 
+    ),
+  );
+}
+
+
       var res = await request.send();
       var reponse = await http.Response.fromStream(res);
 
@@ -149,14 +168,17 @@ class _Inset_DataState extends State<Inset_Data> {
   }
 
 //insert picture
-  File? _image;
+  File? _image1;
+  File? _image2;
 
-  Future<void> _pickImage(ImageSource source) async {
+  List<File?> _images = [null, null];
+
+  Future<void> _pickImage(int index, ImageSource source) async {
     try {
       final pickedFile = await ImagePicker().pickImage(source: source);
       if (pickedFile != null) {
         setState(() {
-          _image = File(pickedFile.path);
+          _images[index] = File(pickedFile.path);
         });
       }
     } catch (e) {
@@ -168,7 +190,7 @@ class _Inset_DataState extends State<Inset_Data> {
   Widget build(BuildContext context) {
     final sreenh = MediaQuery.of(context).size.height;
 
-        final sreenw= MediaQuery.of(context).size.width;
+    final sreenw = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
       child: Material(
@@ -187,7 +209,6 @@ class _Inset_DataState extends State<Inset_Data> {
                   child: Image.asset("assets/en.png"),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Center(
@@ -196,7 +217,6 @@ class _Inset_DataState extends State<Inset_Data> {
                   style: TitreStyle,
                 )),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 6),
                 child: Stack(
@@ -240,7 +260,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.text,
                 controller: nom,
@@ -257,7 +276,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.text,
                 controller: detail,
@@ -274,7 +292,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.number,
                 controller: tel,
@@ -291,7 +308,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.text,
                 controller: site,
@@ -305,11 +321,9 @@ class _Inset_DataState extends State<Inset_Data> {
                     hintText: "Site Web",
                     labelText: "Site Internet"),
               ),
-
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -346,16 +360,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-              // textField(
-              //     textHint: "detail",
-              //     controller: detail,
-              //     icon: LineIcons.archive,
-              //     suffixIcon: LineIcons.dollarSign,
-              //     isNumber: false),
-              // const SizedBox(
-              //   height: 15,
-              // ),
-
               MaterialButton(
                 minWidth: double.maxFinite,
                 shape: RoundedRectangleBorder(
@@ -404,7 +408,30 @@ class _Inset_DataState extends State<Inset_Data> {
               const SizedBox(
                 height: 10,
               ),
-
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   children: [
+              //     Container(
+              //       height: sreenh * 0.2,
+              //       width: sreenw * 0.45,
+              //       child: Center(
+              //         child: _image1 == null
+              //             ? Text('Aucune image sélectionnée')
+              //             : Image.file(_image1!),
+              //       ),
+              //     ),
+              //     Container(
+              //       height: sreenh * 0.2,
+              //       width: sreenw * 0.45,
+              //       child: Center(
+              //         child: _image2 == null
+              //             ? Text('Aucune image sélectionnée')
+              //             : Image.file(_image2!),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -413,35 +440,48 @@ class _Inset_DataState extends State<Inset_Data> {
                     height: sreenh * 0.2,
                     width: sreenw * 0.45,
                     child: Center(
-                      child: _image == null
+                      child: _images[0] == null
                           ? Text('Aucune image sélectionnée')
-                          : Image.file(_image!),
+                          : Image.file(_images[0]!),
                     ),
                   ),
                   Container(
                     height: sreenh * 0.2,
                     width: sreenw * 0.45,
                     child: Center(
-                      child: _image == null
+                      child: _images[1] == null
                           ? Text('Aucune image sélectionnée')
-                          : Image.file(_image!),
+                          : Image.file(_images[1]!),
                     ),
                   ),
                 ],
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   FloatingActionButton(
-                    onPressed: () => _pickImage(ImageSource.camera),
-                    tooltip: 'Prendre une photo',
+                    onPressed: () => _pickImage(0, ImageSource.camera),
+                    tooltip: 'Prendre une photo pour la première image',
                     child: Icon(Icons.camera),
                   ),
                   SizedBox(width: 16),
                   FloatingActionButton(
-                    onPressed: () => _pickImage(ImageSource.gallery),
-                    tooltip: 'Sélectionner depuis la galerie',
+                    onPressed: () => _pickImage(0, ImageSource.gallery),
+                    tooltip:
+                        'Sélectionner depuis la galerie pour la première image',
+                    child: Icon(Icons.image),
+                  ),
+                  SizedBox(width: 16),
+                  FloatingActionButton(
+                    onPressed: () => _pickImage(1, ImageSource.camera),
+                    tooltip: 'Prendre une photo pour la deuxième image',
+                    child: Icon(Icons.camera),
+                  ),
+                  SizedBox(width: 16),
+                  FloatingActionButton(
+                    onPressed: () => _pickImage(1, ImageSource.gallery),
+                    tooltip:
+                        'Sélectionner depuis la galerie pour la deuxième image',
                     child: Icon(Icons.image),
                   ),
                 ],
@@ -466,63 +506,6 @@ class _Inset_DataState extends State<Inset_Data> {
       });
     }
   }
-}
-
-Widget textField(
-    {String? textHint,
-    onTap,
-    TextEditingController? controller,
-    bool? enabled,
-    bool? isNumber,
-    IconData? icon,
-    bool? readOnly,
-    VoidCallback? func,
-    bool? isName,
-    IconData? suffixIcon,
-    VoidCallback? onPressed,
-    VoidCallback? KboardType,
-    VoidCallback? onChange}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.only(top: 5.0),
-        child: Text("$textHint"),
-      ),
-      Container(
-        height: 50.0,
-        margin: const EdgeInsets.only(top: 5.0),
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: Center(
-          child: TextFormField(
-            readOnly: readOnly != true ? false : true,
-            onTap: func,
-            keyboardType: isNumber == null
-                ? TextInputType.text
-                : const TextInputType.numberWithOptions(),
-            enabled: enabled ?? true,
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: textHint,
-              border: InputBorder.none,
-              prefixIcon: Icon(icon),
-              suffixIcon: isName != null
-                  ? IconButton(
-                      icon: Icon(suffixIcon),
-                      onPressed: onPressed,
-                    )
-                  : null,
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
 }
 
 class Entreprise {
