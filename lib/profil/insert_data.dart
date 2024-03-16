@@ -205,7 +205,6 @@ class _Inset_DataState extends State<Inset_Data> {
                   child: Image.asset("assets/en.png"),
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Center(
@@ -214,7 +213,6 @@ class _Inset_DataState extends State<Inset_Data> {
                   style: TitreStyle,
                 )),
               ),
-
               Padding(
                 padding: const EdgeInsets.only(top: 6),
                 child: Stack(
@@ -258,7 +256,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.text,
                 controller: nom,
@@ -275,7 +272,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.text,
                 controller: detail,
@@ -292,7 +288,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.number,
                 controller: tel,
@@ -309,7 +304,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-
               TextField(
                 keyboardType: TextInputType.text,
                 controller: site,
@@ -323,15 +317,13 @@ class _Inset_DataState extends State<Inset_Data> {
                     hintText: "Site Web",
                     labelText: "Site Internet"),
               ),
-
               Padding(
-                padding: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.only(top: 5),
               ),
-
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.black45,
+                  //   foregroundColor: Colors.white,
+                  backgroundColor: Colors.green,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
@@ -344,7 +336,7 @@ class _Inset_DataState extends State<Inset_Data> {
 
                       setState(() {
                         locationMessage =
-                            "Postion GPS de l'entreprise:\nlatitude :$lat\nlongitude:$long";
+                            "Votre Postion: latitude :$lat longitude:$long";
                       });
                     },
                   );
@@ -361,10 +353,69 @@ class _Inset_DataState extends State<Inset_Data> {
                     BoxDecoration(borderRadius: BorderRadius.circular(4)),
                 child: Text(locationMessage),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // Définir la couleur du bouton
+                      // Autres propriétés de style du bouton peuvent être définies ici
+                    ),
+                    child: Text(
+                      "la photo1",
+                      style: TitreStyleWhite,
+                    ),
+                    onPressed: () => _pickImage(ImageSource.gallery),
+                  ),
+                  SizedBox(width: 50),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green, // Définir la couleur du bouton
+                      // Autres propriétés de style du bouton peuvent être définies ici
+                    ),
+                    child: Text(
+                      "la photo2",
+                      style: TitreStyleWhite,
+                    ),
+                    onPressed: () => _pickImage2(ImageSource.gallery),
+                  ),
+                ],
               ),
-
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: sreenh * 0.2,
+                    width: sreenw * 0.45,
+                    child: Center(
+                      child: _image == null
+                          ? Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.black26, // Couleur de la bordure
+                                width: 2.0, // Épaisseur de la bordure
+                              )),
+                              child: Center(child: Text('Aucune image sélectionnée')))
+                          : Image.file(_image!),
+                    ),
+                  ),
+                  Container(
+                    height: sreenh * 0.2,
+                    width: sreenw * 0.45,
+                    child: Center(
+                      child: _image2 == null
+                          ? Text('Aucune image sélectionnée')
+                          : Image.file(_image2!),
+                    ),
+                  ),
+                ],
+              ),
               MaterialButton(
                 minWidth: double.maxFinite,
                 shape: RoundedRectangleBorder(
@@ -409,70 +460,6 @@ class _Inset_DataState extends State<Inset_Data> {
                           color: Colors.white,
                         ),
                       ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    height: sreenh * 0.2,
-                    width: sreenw * 0.45,
-                    child: Center(
-                      child: _image2 == null
-                          ? Text('Aucune image sélectionnée')
-                          : Image.file(_image2!),
-                    ),
-                  ),
-                  Container(
-                    height: sreenh * 0.2,
-                    width: sreenw * 0.45,
-                    child: Center(
-                      child: _image == null
-                          ? Text('Aucune image sélectionnée')
-                          : Image.file(_image!),
-                    ),
-                  ),
-                ],
-              ),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () => _pickImage(ImageSource.camera),
-                    tooltip: 'Prendre une photo',
-                    child: Icon(Icons.camera),
-                  ),
-                  SizedBox(width: 16),
-                  FloatingActionButton(
-                    onPressed: () => _pickImage(ImageSource.gallery),
-                    tooltip: 'Sélectionner depuis la galerie',
-                    child: Icon(Icons.image),
-                  ),
-                ],
-              ),
-
-              //
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FloatingActionButton(
-                    onPressed: () => _pickImage2(ImageSource.camera),
-                    tooltip: 'Prendre une photo',
-                    child: Icon(Icons.camera),
-                  ),
-                  SizedBox(width: 16),
-                  FloatingActionButton(
-                    onPressed: () => _pickImage2(ImageSource.gallery),
-                    tooltip: 'Sélectionner depuis la galerie',
-                    child: Icon(Icons.image),
-                  ),
-                ],
               ),
             ],
           ),
