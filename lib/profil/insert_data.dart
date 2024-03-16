@@ -169,7 +169,7 @@ class _Inset_DataState extends State<Inset_Data> {
     }
   }
 
-    Future<void> _pickImage2(ImageSource source) async {
+  Future<void> _pickImage2(ImageSource source) async {
     try {
       final pickedFile = await ImagePicker().pickImage(source: source);
       if (pickedFile != null) {
@@ -331,7 +331,7 @@ class _Inset_DataState extends State<Inset_Data> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
-                  primary: Colors.black45,
+                  backgroundColor: Colors.black45,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
@@ -364,15 +364,6 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
-              // textField(
-              //     textHint: "detail",
-              //     controller: detail,
-              //     icon: LineIcons.archive,
-              //     suffixIcon: LineIcons.dollarSign,
-              //     isNumber: false),
-              // const SizedBox(
-              //   height: 15,
-              // ),
 
               MaterialButton(
                 minWidth: double.maxFinite,
@@ -503,63 +494,6 @@ class _Inset_DataState extends State<Inset_Data> {
       });
     }
   }
-}
-
-Widget textField(
-    {String? textHint,
-    onTap,
-    TextEditingController? controller,
-    bool? enabled,
-    bool? isNumber,
-    IconData? icon,
-    bool? readOnly,
-    VoidCallback? func,
-    bool? isName,
-    IconData? suffixIcon,
-    VoidCallback? onPressed,
-    VoidCallback? KboardType,
-    VoidCallback? onChange}) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.only(top: 5.0),
-        child: Text("$textHint"),
-      ),
-      Container(
-        height: 50.0,
-        margin: const EdgeInsets.only(top: 5.0),
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: Center(
-          child: TextFormField(
-            readOnly: readOnly != true ? false : true,
-            onTap: func,
-            keyboardType: isNumber == null
-                ? TextInputType.text
-                : const TextInputType.numberWithOptions(),
-            enabled: enabled ?? true,
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: textHint,
-              border: InputBorder.none,
-              prefixIcon: Icon(icon),
-              suffixIcon: isName != null
-                  ? IconButton(
-                      icon: Icon(suffixIcon),
-                      onPressed: onPressed,
-                    )
-                  : null,
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
 }
 
 class Entreprise {
