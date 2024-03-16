@@ -166,6 +166,10 @@ class _Inset_DataState extends State<Inset_Data> {
 
   @override
   Widget build(BuildContext context) {
+    final sreenh = MediaQuery.of(context).size.height;
+
+        final sreenw= MediaQuery.of(context).size.width;
+
     return SingleChildScrollView(
       child: Material(
         clipBehavior: Clip.antiAlias,
@@ -401,10 +405,29 @@ class _Inset_DataState extends State<Inset_Data> {
                 height: 10,
               ),
 
-              Center(
-                child: _image == null
-                    ? Text('Aucune image sélectionnée')
-                    : Image.file(_image!),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: sreenh * 0.2,
+                    width: sreenw * 0.45,
+                    child: Center(
+                      child: _image == null
+                          ? Text('Aucune image sélectionnée')
+                          : Image.file(_image!),
+                    ),
+                  ),
+                  Container(
+                    height: sreenh * 0.2,
+                    width: sreenw * 0.45,
+                    child: Center(
+                      child: _image == null
+                          ? Text('Aucune image sélectionnée')
+                          : Image.file(_image!),
+                    ),
+                  ),
+                ],
               ),
 
               Row(
