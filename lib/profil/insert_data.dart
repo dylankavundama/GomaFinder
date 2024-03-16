@@ -7,7 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:core';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 
@@ -52,7 +53,7 @@ class _Inset_DataState extends State<Inset_Data> {
 
   List dataens = [];
   Future<void> getrecord() async {
-    var url = "http://192.168.84.195/payment_teacher/read-enseignant.php";
+    var url = "http://192.168.0.13/goma/read-enseignant.php";
     try {
       var response = await http.get(Uri.parse(url));
       setState(() {
@@ -63,7 +64,7 @@ class _Inset_DataState extends State<Inset_Data> {
     }
   }
 
-  Future<void> savadatas(Salaire Salaire) async {
+  Future<void> savadatas(Entreprise Entreprise) async {
     if (nom.text.isEmpty ||
         detail.text.isEmpty ||
         tel.text.isEmpty ||
@@ -79,7 +80,7 @@ class _Inset_DataState extends State<Inset_Data> {
       return;
     }
     try {
-      var url = "http://192.168.84.195/payment_teacher/salaire/add-salaire.php";
+      var url = "http://192.168.0.13/goma/entreprise/add-Entreprise.php";
       Uri ulr = Uri.parse(url);
       debugPrint("############################################");
       var request = http.MultipartRequest('POST', ulr);
@@ -95,15 +96,7 @@ class _Inset_DataState extends State<Inset_Data> {
           filename: _image!.path));
       var res = await request.send();
       var reponse = await http.Response.fromStream(res);
-      // await http.post(ulr, body: {
-      //   "nom": nom.text,
-      //   "cat": idenseu,
-      //   "site": site.text,
-      //   "det": detail.text,
-      //   "tel": tel.text,
-      //   "log": log.text = long,
-      //   "lat": latt.text = lat,
-      // });
+
       if (reponse.statusCode == 200) {
         showToast(msg: "Succes!");
       } else {
@@ -377,7 +370,7 @@ class _Inset_DataState extends State<Inset_Data> {
                     setState(() {
                       _isLoading = true;
                     });
-                    savadatas(Salaire(
+                    savadatas(Entreprise(
                       nom: idenseu.trim(),
                       detail: detail.text.trim(),
                       site: site.text.trim(),
@@ -509,7 +502,7 @@ Widget textField(
   );
 }
 
-class Salaire {
+class Entreprise {
   int? code;
   String? nom;
   String? detail;
@@ -518,15 +511,15 @@ class Salaire {
   String? lat;
   String? log;
 
-  Salaire({this.code, this.nom, this.detail, this.site, this.lat, this.log});
+  Entreprise({this.code, this.nom, this.detail, this.site, this.lat, this.log});
 
-  factory Salaire.fromJson(Map<String, dynamic> json) =>
-      _$SalaireFromJson(json);
-  Map<String, dynamic> toJson() => _$SalaireToJson(this);
+  factory Entreprise.fromJson(Map<String, dynamic> json) =>
+      _$EntrepriseFromJson(json);
+  Map<String, dynamic> toJson() => _$EntrepriseToJson(this);
 }
 
-Salaire _$SalaireFromJson(Map<String, dynamic> json) {
-  return Salaire(
+Entreprise _$EntrepriseFromJson(Map<String, dynamic> json) {
+  return Entreprise(
       code: json['id'] as int,
       nom: json['nom'] as String,
       site: json['site'] as String,
@@ -535,7 +528,8 @@ Salaire _$SalaireFromJson(Map<String, dynamic> json) {
       detail: json['detail'] as String);
 }
 
-Map<String, dynamic> _$SalaireToJson(Salaire instance) => <String, dynamic>{
+Map<String, dynamic> _$EntrepriseToJson(Entreprise instance) =>
+    <String, dynamic>{
       'nom': instance.nom,
       'detail': instance.detail,
       'site': instance.site,

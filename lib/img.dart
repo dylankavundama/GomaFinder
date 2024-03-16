@@ -1,7 +1,9 @@
 // import 'dart:io';
-// import 'package:edusys_photo/util/app_theme.dart';
+
 // import 'package:flutter/material.dart';
 // import 'package:image_cropper/image_cropper.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:flutter/material.dart';
 // import 'package:image_picker/image_picker.dart';
 
 // Future<String> cropImage(XFile pickedFile) async {
@@ -19,7 +21,7 @@
 //     uiSettings: [
 //       AndroidUiSettings(
 //         toolbarTitle: 'Rogne',
-//         toolbarColor: AppTheme.colorMains,
+//         toolbarColor: Colors.red,
 //         toolbarWidgetColor: Colors.white,
 //         initAspectRatio: CropAspectRatioPreset.original,
 //         lockAspectRatio: false,
@@ -49,14 +51,6 @@
 //     // return file.path;
 //   }
 // }
-
-
-// import 'package:edusys_photo/app/bloc/users/users_bloc.dart';
-// import 'package:edusys_photo/util/app_theme.dart';
-// import 'package:edusys_photo/util/image_crop.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:image_picker/image_picker.dart';
 
 // class ModifImage extends StatefulWidget {
 //   const ModifImage({super.key, this.matricule});
@@ -112,7 +106,7 @@
 //                 title: "Galerie",
 //                 icon: const Icon(
 //                   Icons.open_in_browser,
-//                   color: AppTheme.colorMains,
+//                   color: Colors.amberAccent,
 //                   size: 25,
 //                 ),
 //                 onPresse: () {
@@ -130,7 +124,7 @@
 //                 title: "Prendre une photo",
 //                 icon: const Icon(
 //                   Icons.camera_enhance_outlined,
-//                   color: AppTheme.colorMains,
+//                   color: Colors.blue,
 //                   size: 25,
 //                 ),
 //               ),
@@ -155,7 +149,7 @@
 //               "${title}",
 //               style: TextStyle(
 //                 fontSize: 16,
-//                 color: AppTheme.colorMains,
+//                 color: Colors.green,
 //                 fontWeight: FontWeight.bold,
 //               ),
 //             ),

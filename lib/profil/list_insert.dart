@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:line_icons/line_icons.dart';
-// import 'package:payment_teacher/salaire/AjouterSalaire.dart';
-// import 'package:payment_teacher/salaire/UpdateSalaire.dart';
+// import 'package:entreprise/Entreprise/AjouterEntreprise.dart';
+// import 'package:entreprise/Entreprise/UpdateEntreprise.dart';
 
 import 'package:flutter/services.dart' show Uint8List, rootBundle;
 import 'package:upato/profil/insert_data.dart';
@@ -22,7 +22,7 @@ class _List_DataState extends State<List_Data> {
   List userdata = [];
   Future<void> delrecord(String id) async {
     try {
-      var url = "http://192.168.84.195/goma/goma.php";
+      var url = "http://192.168.0.13/goma/goma.php";
       var result = await http.post(Uri.parse(url), body: {"id": id});
       var reponse = jsonDecode(result.body);
       if (reponse["Success"] == "True") {
@@ -38,7 +38,7 @@ class _List_DataState extends State<List_Data> {
   }
 
   Future<void> getrecord() async {
-    var url = "http://192.168.84.195/goma/goma.php";
+    var url = "http://192.168.0.13/goma/goma.php";
     try {
       var response = await http.get(Uri.parse(url));
       setState(() {
@@ -55,7 +55,7 @@ class _List_DataState extends State<List_Data> {
   void initState() {
     // TODO: implement initState
     getrecord();
-    // getrecordssss();
+    getrecordssss();
     print(userdatas);
     //print(getrecord);
     super.initState();
@@ -64,7 +64,7 @@ class _List_DataState extends State<List_Data> {
   List userdatas = [];
 
   Future<List<dynamic>> getrecordssss() async {
-    var url = "http://192.168.84.195/goma/goma.php";
+    var url = "http://192.168.0.13/goma/goma.php";
     try {
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -87,7 +87,7 @@ class _List_DataState extends State<List_Data> {
     final ss = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Salaires"),
+        title: const Text("Entreprises"),
         centerTitle: true,
         backgroundColor: Color.fromARGB(199, 3, 204, 244),
       ),
@@ -122,7 +122,7 @@ class _List_DataState extends State<List_Data> {
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.all(color: Colors.grey)),
                                 child: Image.network(
-                                  "http://192.168.84.195/payment_teacher/salaire/" +
+                                  "http://192.168.0.13/goma/entreprise/" +
                                       userdata[index]["image"],
                                 )),
                             const SizedBox(
