@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:upato/model/ecole.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return Scaffold(
       drawer: Drawers(),
       appBar: AppBar(
@@ -149,7 +151,7 @@ class _HomePageState extends State<HomePage>
           Mode_Home_Page(),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
-EcolePage(),
+          EcolePage(),
           Center(child: Text('Content of Tab 3')),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),

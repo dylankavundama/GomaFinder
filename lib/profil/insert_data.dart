@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -187,7 +188,7 @@ class _Inset_DataState extends State<Inset_Data> {
     final sreenh = MediaQuery.of(context).size.height;
 
     final sreenw = MediaQuery.of(context).size.width;
-
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return SingleChildScrollView(
       child: Material(
         clipBehavior: Clip.antiAlias,
@@ -320,32 +321,34 @@ class _Inset_DataState extends State<Inset_Data> {
               Padding(
                 padding: EdgeInsets.only(top: 5),
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  //   foregroundColor: Colors.white,
-                  backgroundColor: Colors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
+              Container(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    //   foregroundColor: Colors.white,
+                    backgroundColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  _getCurrentLocation().then(
-                    (value) {
-                      lat = '${value.latitude}';
-                      long = '${value.longitude}';
+                  onPressed: () {
+                    _getCurrentLocation().then(
+                      (value) {
+                        lat = '${value.latitude}';
+                        long = '${value.longitude}';
 
-                      setState(() {
-                        locationMessage =
-                            "Votre Postion: latitude :$lat longitude:$long";
-                      });
-                    },
-                  );
+                        setState(() {
+                          locationMessage =
+                              "Votre Postion: latitude :$lat longitude:$long";
+                        });
+                      },
+                    );
 
-                  _liveLocation();
-                },
-                child: Text(
-                  "Récupérer le position de l'entreprise",
-                  style: TitreStyleWhite,
+                    _liveLocation();
+                  },
+                  child: Text(
+                    "Récupérer le position de l'entreprise",
+                    style: TitreStyleWhite,
+                  ),
                 ),
               ),
               Container(
@@ -356,6 +359,10 @@ class _Inset_DataState extends State<Inset_Data> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text(
+                    "sélectionnée :",
+                    style: TitreStyle,
+                  ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green, // Définir la couleur du bouton
@@ -367,7 +374,7 @@ class _Inset_DataState extends State<Inset_Data> {
                     ),
                     onPressed: () => _pickImage(ImageSource.gallery),
                   ),
-                  SizedBox(width: 50),
+                  SizedBox(width: 4),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green, // Définir la couleur du bouton
@@ -397,20 +404,39 @@ class _Inset_DataState extends State<Inset_Data> {
                               width: 200,
                               height: 200,
                               decoration: BoxDecoration(
-                                  border: Border.all(
-                                color: Colors.black26, // Couleur de la bordure
-                                width: 2.0, // Épaisseur de la bordure
-                              )),
-                              child: Center(child: Text('Aucune image sélectionnée')))
+                                border: Border.all(
+                                  color:
+                                      Colors.black26, // Couleur de la bordure
+                                  width: 2.0, // Épaisseur de la bordure
+                                ),
+                              ),
+                              child: Center(
+                                child: Text('Aucune image sélectionnée'),
+                              ),
+                            )
                           : Image.file(_image!),
                     ),
                   ),
+                  SizedBox(width: 3),
                   Container(
                     height: sreenh * 0.2,
                     width: sreenw * 0.45,
                     child: Center(
                       child: _image2 == null
-                          ? Text('Aucune image sélectionnée')
+                          ? Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color:
+                                      Colors.black26, // Couleur de la bordure
+                                  width: 2.0, // Épaisseur de la bordure
+                                ),
+                              ),
+                              child: Center(
+                                child: Text('Aucune image sélectionnée'),
+                              ),
+                            )
                           : Image.file(_image2!),
                     ),
                   ),
