@@ -35,8 +35,8 @@ dependencies:
   url_launcher:
   geolocator: ^8.2.1
   google_maps_flutter:
-  image_picker: ^0.8.4+4
-  image_cropper: ^1.4.0
+  image_picker :
+  image_cropper:
   
 
 dev_dependencies:
