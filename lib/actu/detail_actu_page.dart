@@ -9,7 +9,7 @@ import 'package:share/share.dart';
 class DetailPostPage extends StatefulWidget {
   const DetailPostPage(
       {
-        //required this.id,
+      //required this.id,
       required this.img,
       required this.titre,
       required this.description,
@@ -143,43 +143,67 @@ class _DetailPostPageState extends State<DetailPostPage> {
         elevation: 1,
       ),
       body: SingleChildScrollView(
-        child: Stack(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: screenHeight * 0.4,
-              width: screenWidth,
-              child: InteractiveViewer(
-                boundaryMargin: const EdgeInsets.all(20.0),
-                minScale: 0.1,
-                maxScale: 2.0,
-                child: Image.network(
-                  widget.img,
-                  fit: BoxFit.cover,
+            Stack(
+              children: [
+                SizedBox(
+                  height: screenHeight * 0.4,
                   width: screenWidth,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 8,
-              right: 8,
-              top: 30,
-              bottom: 16,
-              child: Column(
-                children: [
-                  Text(''),
-
-                  // add other
-                  const Padding(
-                    padding: EdgeInsets.only(top: 190),
-                  ),
-                  Container(
-                    color: Colors.black45,
-                    child: Text(
-                      widget.titre,
-                      style: GoogleFonts.abel(
-                          fontWeight: FontWeight.bold, color: Colors.white),
+                  child: InteractiveViewer(
+                    boundaryMargin: EdgeInsets.all(20.0),
+                    minScale: 0.1,
+                    maxScale: 2.0,
+                    child: Image.network(
+                      "http://192.168.0.13/goma/entreprise/"+widget.img,
+                      fit: BoxFit.cover,
+                      width: screenWidth,
                     ),
                   ),
+                ),
+                Positioned(
+                  left: 8,
+                  right: 8,
+                  top: 30,
+                  bottom: 19,
+                  child: Column(
+                    children: [
+                
+                      const Padding(
+                        padding: EdgeInsets.only(top: 222),
+                      ),
+                      Container(
+                          color: Colors.black45,
+                          child: Text(
+                            widget.titre,
+                            style: GoogleFonts.abel(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.description,
+                    textAlign: TextAlign.justify,
+                    style: GoogleFonts.abel(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                  ),
+                  Divider(
+                    color: Colors.black12,
+                  )
                 ],
               ),
             ),

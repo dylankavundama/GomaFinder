@@ -1,4 +1,4 @@
-import 'package:upato/actualiter.dart';
+import 'package:upato/actu/actualiter.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show Uint8List, rootBundle;
-import 'package:upato/detail_actu_page.dart';
+import 'package:upato/actu/detail_actu_page.dart';
 import 'package:upato/profil/insert_data.dart';
 import 'package:upato/style.dart';
 
