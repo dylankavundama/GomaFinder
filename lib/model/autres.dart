@@ -47,8 +47,13 @@ class _Autres_PageState extends State<Autres_Page> {
 
     return _isLoading
         ? Center(
-            child: CircularProgressIndicator(
-              color: CouleurPrincipale,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/gif.gif'),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           )
         : post.isEmpty

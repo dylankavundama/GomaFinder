@@ -60,7 +60,9 @@ class _Ecole_PageState extends State<Ecole_Page> {
 
     return _isLoading
         ? Center(
-            child: Image.asset('assets/gif.gif'),
+            child: CircularProgressIndicator(
+              color: CouleurPrincipale,
+            ),
           )
         : post.isEmpty
             ? Center(
