@@ -6,7 +6,7 @@ class Widget_UI extends StatelessWidget {
     required this.image,
     required this.titre,
     required this.desc,
-    this.maxLength = 55,
+    this.maxLength = 44,
     super.key,
   });
 
@@ -35,6 +35,7 @@ class Widget_UI extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.23,
             // Enfant : Image
             child: Image.network(
+              "http://192.168.0.13/goma/entreprise/"+
               image, // URL de l'image
               fit: BoxFit
                   .cover, // Ajustement de l'image pour couvrir tout le container

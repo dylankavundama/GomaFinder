@@ -1,5 +1,5 @@
 import 'package:upato/ExplorePage.dart';
-import 'package:upato/HomePage.dart';
+import 'package:upato/model/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upato/add/Viewdata.dart';
@@ -25,11 +25,11 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: Colors.white,
-    //   statusBarBrightness: Brightness.dark,
-    // ),);
+  //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      statusBarBrightness: Brightness.dark,
+    ),);
     return SafeArea(
       child: Scaffold(
         bottomSheet: screen[currentindex],

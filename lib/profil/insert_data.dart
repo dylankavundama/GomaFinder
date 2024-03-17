@@ -10,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'dart:core';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:upato/NavBarPage.dart';
 import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 
@@ -188,7 +189,7 @@ class _Inset_DataState extends State<Inset_Data> {
     final sreenh = MediaQuery.of(context).size.height;
 
     final sreenw = MediaQuery.of(context).size.width;
-    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return SingleChildScrollView(
       child: Material(
         clipBehavior: Clip.antiAlias,
@@ -472,8 +473,8 @@ class _Inset_DataState extends State<Inset_Data> {
                       lat: lat,
                       log: long,
                     )).then((value) {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => List_Data()));
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => NavBarPage()));
                     }).whenComplete(() {
                       setState(() {
                         _isLoading = false;

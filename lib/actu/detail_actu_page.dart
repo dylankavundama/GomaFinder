@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share/share.dart';
+import 'package:upato/style.dart';
 
 class DetailPostPage extends StatefulWidget {
   const DetailPostPage(
@@ -112,9 +113,9 @@ class _DetailPostPageState extends State<DetailPostPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.share),
+            appBar: AppBar(
+              actions: [            IconButton(
+          icon: const Icon(Icons.share,color: Colors.white,),
           onPressed: () async {
             final titre = widget.titre;
             final desc = widget.description;
@@ -124,24 +125,41 @@ class _DetailPostPageState extends State<DetailPostPage> {
             Share.share(
                 "Titre : $titre \n Artcile: $desc \n Article : Telechare l'Application $lien");
           },
-        ),
-        backgroundColor: Colors.white,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 60),
-          child: Row(children: const [
-            Text(
-              'CONGO',
-              style: TextStyle(color: Colors.orange),
-            ),
-            Text(
-              'CHECK',
-              style: TextStyle(color: Colors.lightBlue),
-            ),
-          ]),
-        ),
-        centerTitle: true,
-        elevation: 1,
-      ),
+        ),],
+          
+          title: Text("Detail"),
+          centerTitle: true,
+          backgroundColor: CouleurPrincipale),
+      // appBar: AppBar(
+        // leading: IconButton(
+        //   icon: const Icon(Icons.share),
+        //   onPressed: () async {
+        //     final titre = widget.titre;
+        //     final desc = widget.description;
+
+        //     const lien =
+        //         "https://play.google.com/store/apps/details?id=com.congocheckcd";
+        //     Share.share(
+        //         "Titre : $titre \n Artcile: $desc \n Article : Telechare l'Application $lien");
+        //   },
+        // ),
+      //   backgroundColor: Colors.white,
+      //   title: Padding(
+      //     padding: const EdgeInsets.only(left: 60),
+      //     child: Row(children: const [
+      //       Text(
+      //         'CONGO',
+      //         style: TextStyle(color: Colors.orange),
+      //       ),
+      //       Text(
+      //         'CHECK',
+      //         style: TextStyle(color: Colors.lightBlue),
+      //       ),
+      //     ]),
+      //   ),
+      //   centerTitle: true,
+      //   elevation: 1,
+      // ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

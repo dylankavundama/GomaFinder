@@ -1,3 +1,4 @@
+import 'package:upato/NavBarPage.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: false),
       debugShowCheckedModeBanner: false,
      // home: Actualite_Page(),
-home: OnboardingScreen(),
+home: NavBarPage(),
      //home:     List_Data(),
     );
   }

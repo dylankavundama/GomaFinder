@@ -6,14 +6,14 @@ import 'package:upato/detailpage.dart';
 import 'package:upato/style.dart';
 import 'package:http/http.dart' as http;
 
-class Mode_Home_Page extends StatefulWidget {
-  const Mode_Home_Page({super.key});
+class Hotel_Page extends StatefulWidget {
+  const Hotel_Page({super.key});
 
   @override
-  State<Mode_Home_Page> createState() => _Mode_Home_PageState();
+  State<Hotel_Page> createState() => _Hotel_PageState();
 }
 
-class _Mode_Home_PageState extends State<Mode_Home_Page> {
+class _Hotel_PageState extends State<Hotel_Page> {
   List<dynamic> post = [];
   bool _isLoading = false;
 
@@ -21,7 +21,7 @@ class _Mode_Home_PageState extends State<Mode_Home_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/goma.php';
+    const url = 'http://192.168.0.13/goma/commerce.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);

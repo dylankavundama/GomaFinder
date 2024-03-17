@@ -1,14 +1,21 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/services.dart';
-import 'package:upato/model/ecole.dart';
+import 'package:upato/model/banque.dart';
+import 'package:upato/model/bureau.dart';
+import 'package:upato/model/commerce.dart';
+import 'package:upato/model/hopital.dart';
+import 'package:upato/model/hotel.dart';
+import 'package:upato/model/mode.dart';
+import 'package:upato/model/resto.dart';
+import 'package:upato/model/tech.dart';
+import 'package:upato/model/voyage.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/util/drawers.dart';
 
-import 'model/model_home_page.dart';
+import 'model_home_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -128,16 +135,16 @@ class _HomePageState extends State<HomePage>
           controller: _tabController,
           isScrollable: true,
           tabs: [
+            Tab(text: 'Ecole'),
             Tab(text: 'Bureau'),
             Tab(text: 'Restaurant'),
             Tab(text: 'Hotel'), //
-            Tab(text: 'Ecole'),
             Tab(text: 'Commerce'), //
             Tab(text: 'Hopital (Sante)'), //hopital clinic
             Tab(text: 'Banque'), //finance
             Tab(text: 'Mode & Bien etre'), // fasghion maquillage
             Tab(text: 'Voyage & Transport'), // transport
-            Tab(text: 'Tech'),
+            Tab(text: 'Tech & Formation'),
             Tab(text: 'ONG'), //
             Tab(text: 'Communication(Media)'),
             Tab(text: 'Eglise'), //
@@ -149,9 +156,15 @@ class _HomePageState extends State<HomePage>
         controller: _tabController,
         children: [
           Mode_Home_Page(),
-          Center(child: Text('Content of Tab 1')),
-          Center(child: Text('Content of Tab 2')),
-          EcolePage(),
+          Bureau_Page(),
+          Resto_Page(),
+          Commerce_Page(),
+          Hotel_Page(),
+          Hopital_Page(),
+          Banque_Page(),
+          Mode_Page(),
+          Voyage_Page(),
+          Tech_Page(),
           Center(child: Text('Content of Tab 3')),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
