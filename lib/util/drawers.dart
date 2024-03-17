@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upato/actu/actualiter.dart';
+import 'package:upato/event/event.dart';
 import 'package:upato/style.dart';
-
 
 class Drawers extends StatelessWidget {
   const Drawers({
@@ -11,36 +11,37 @@ class Drawers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      
       child: ListView(children: [
         DrawerHeader(
           child: Image.asset('assets/images/logo.png'),
         ),
         Card(
           child: ListTile(
-            onTap: (){
-
-                Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => Actu_Home()
-    ),
-  );
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => Actu_Home()),
+              );
             },
             title: Text(
               'Actualité',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
         Card(
           child: ListTile(
+                    onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => Event_Home_Page()),
+              );
+            },
             title: Text(
               'Evénement',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
         Card(
@@ -49,8 +50,7 @@ class Drawers extends StatelessWidget {
               'Visite Goma',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
         Card(
@@ -59,8 +59,7 @@ class Drawers extends StatelessWidget {
               'Artiste & Influenceur',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
         Card(
@@ -69,8 +68,7 @@ class Drawers extends StatelessWidget {
               'Football Club',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
         Card(
@@ -79,8 +77,7 @@ class Drawers extends StatelessWidget {
               'Podcast',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
         Card(
@@ -89,8 +86,7 @@ class Drawers extends StatelessWidget {
               'Live Tv',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
         Card(
@@ -99,8 +95,7 @@ class Drawers extends StatelessWidget {
               'Live Radio',
               style: TitreStyle,
             ),
-            trailing:
-                Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
       ]),

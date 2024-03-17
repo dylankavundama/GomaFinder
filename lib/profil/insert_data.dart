@@ -344,7 +344,7 @@ class _Inset_DataState extends State<Inset_Data> {
 
                         setState(() {
                           locationMessage =
-                              "Votre Postion: latitude :$lat longitude:$long";
+                              "Localisation(MAP): latitude:$lat longitude:$long";
                         });
                       },
                     );
@@ -352,7 +352,7 @@ class _Inset_DataState extends State<Inset_Data> {
                     _liveLocation();
                   },
                   child: Text(
-                    "Récupérer le position de l'entreprise",
+                    "Récupérer votre position",
                     style: TitreStyleWhite,
                   ),
                 ),

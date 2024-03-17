@@ -56,7 +56,7 @@ class _Actu_HomeState extends State<Actu_Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Actu", style: TitreStyle),
+        title: Text("Actualité", style: TitreStyle),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),

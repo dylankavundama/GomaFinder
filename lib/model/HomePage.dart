@@ -1,5 +1,9 @@
 import 'dart:async';
 import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/model/autres.dart';
 import 'package:upato/model/banque.dart';
 import 'package:upato/model/bureau.dart';
@@ -16,19 +20,14 @@ import 'package:upato/model/resto.dart';
 import 'package:upato/model/tech.dart';
 import 'package:upato/model/voyage.dart';
 import 'package:upato/style.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/util/drawers.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -36,7 +35,6 @@ class _HomePageState extends State<HomePage>
     _tabController = TabController(length: 18, vsync: this);
     super.initState();
 
-    super.initState();
     _startNewGame();
   }
 
@@ -51,11 +49,11 @@ class _HomePageState extends State<HomePage>
   InterstitialAd? _interstitialAd;
   final _gameLength = 5;
   late var _counter = _gameLength;
-//intertial cd
+
   final String _adUnitIdd = Platform.isAndroid
       ? 'ca-app-pub-7329797350611067/7003775471'
       : 'ca-app-pub-7329797350611067/7003775471';
-  //ca-app-pub-7329797350611067/6013028323
+
   void _startNewGame() {
     setState(() => _counter = _gameLength);
 
@@ -70,15 +68,16 @@ class _HomePageState extends State<HomePage>
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
           ad.fullScreenContentCallback = FullScreenContentCallback(
-              onAdShowedFullScreenContent: (ad) {},
-              onAdImpression: (ad) {},
-              onAdFailedToShowFullScreenContent: (ad, err) {
-                ad.dispose();
-              },
-              onAdDismissedFullScreenContent: (ad) {
-                ad.dispose();
-              },
-              onAdClicked: (ad) {});
+            onAdShowedFullScreenContent: (ad) {},
+            onAdImpression: (ad) {},
+            onAdFailedToShowFullScreenContent: (ad, err) {
+              ad.dispose();
+            },
+            onAdDismissedFullScreenContent: (ad) {
+              ad.dispose();
+            },
+            onAdClicked: (ad) {},
+          );
 
           _interstitialAd = ad;
         },
@@ -108,76 +107,92 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return Scaffold(
-      drawer: Drawers(),
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: CouleurPrincipale),
-        backgroundColor: Colors.white,
-        title: Row(
-          children: [
-            Text(
-              'U',
-              style: TextStyle(color: CouleurPrincipale),
+      drawer: Container(
+          width: MediaQuery.of(context).size.width * 0.6,
+        child: Drawers()),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              iconTheme: IconThemeData(color: CouleurPrincipale),
+              backgroundColor: Colors.white,
+              title: Row(
+                children: [
+                  Text(
+                    'U',
+                    style: TextStyle(color: CouleurPrincipale),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 0),
+                  ),
+                  Text(
+                    'PATO',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.black,
+                    size: 18,
+                  )
+                ],
+              ),
+              bottom: TabBar(
+                indicatorColor: CouleurPrincipale,
+                labelColor: Colors.black,
+                controller: _tabController,
+                isScrollable: true,
+                tabs: [
+                  Tab(text: 'Tous'),
+                  Tab(text: 'Ecole'),
+                  Tab(text: 'Bureau'),
+                  Tab(text: 'Restaurant'),
+                  Tab(text: 'Hotel'), //
+                  Tab(text: 'Commerce'), //
+                  Tab(text: 'Hopital (Sante)'), //hopital clinic
+                  Tab(text: 'Banque'), //finance
+                  Tab(text: 'Mode & Bien etre'), // fasghion maquillage
+                  Tab(text: 'Voyage & Transport'), // transport
+                  Tab(text: 'Tech & Formation'),
+                  Tab(text: 'ONG'), //
+                  Tab(text: 'Communication(Media)'),
+                  Tab(text: 'Eglise'), //
+                  Tab(text: 'Autres'), //
+                ],
+              ),
+              floating: true,
+              pinned: true,
+              expandedHeight: 200.0,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Image.asset(
+                  'assets/en.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            Padding(
-              padding: EdgeInsets.only(right: 0),
-            ),
-            Text(
-              'PATO',
-              style: TextStyle(color: Colors.black),
-            ),
-            Icon(
-              Icons.location_on_outlined,
-              color: Colors.black,
-              size: 18,
-            )
-          ],
-        ),
-        bottom: TabBar(
-          indicatorColor: CouleurPrincipale,
-          labelColor: Colors.black,
+          ];
+        },
+        body: TabBarView(
           controller: _tabController,
-          isScrollable: true,
-          tabs: [
-            Tab(text: 'Tous'),
-            Tab(text: 'Ecole'),
-            Tab(text: 'Bureau'),
-            Tab(text: 'Restaurant'),
-            Tab(text: 'Hotel'), //
-            Tab(text: 'Commerce'), //
-            Tab(text: 'Hopital (Sante)'), //hopital clinic
-            Tab(text: 'Banque'), //finance
-            Tab(text: 'Mode & Bien etre'), // fasghion maquillage
-            Tab(text: 'Voyage & Transport'), // transport
-            Tab(text: 'Tech & Formation'),
-            Tab(text: 'ONG'), //
-            Tab(text: 'Communication(Media)'),
-            Tab(text: 'Eglise'), //
-            Tab(text: 'Autres'), //
+          children: [
+            Entreprise_Page(),
+            Ecole_Page(),
+            Bureau_Page(),
+            Resto_Page(),
+            Commerce_Page(),
+            Hotel_Page(),
+            Hopital_Page(),
+            Banque_Page(),
+            Mode_Page(),
+            Voyage_Page(),
+            Tech_Page(),
+            Ong_Page(),
+            Media_Page(),
+            Eglise_Page(),
+            Autres_Page(),
+            Center(child: Text('Content of Tab 1')),
           ],
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          Entreprise_Page(),
-          Ecole_Page(),
-          Bureau_Page(),
-          Resto_Page(),
-          Commerce_Page(),
-          Hotel_Page(),
-          Hopital_Page(),
-          Banque_Page(),
-          Mode_Page(),
-          Voyage_Page(),
-          Tech_Page(),
-          Ong_Page(),
-          Media_Page(),
-          Eglise_Page(),
-          Autres_Page(),
-          Center(child: Text('Content of Tab 1')),
-        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Floating_Widget(),
@@ -187,8 +202,8 @@ class _HomePageState extends State<HomePage>
 
 class Floating_Widget extends StatefulWidget {
   const Floating_Widget({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Floating_Widget> createState() => _Floating_WidgetState();

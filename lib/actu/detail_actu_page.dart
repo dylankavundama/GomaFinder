@@ -113,36 +113,40 @@ class _DetailPostPageState extends State<DetailPostPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-            appBar: AppBar(
-              actions: [            IconButton(
-          icon: const Icon(Icons.share,color: Colors.white,),
-          onPressed: () async {
-            final titre = widget.titre;
-            final desc = widget.description;
+      appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: Icon(Icons.share, color: CouleurPrincipale),
+              onPressed: () async {
+                final titre = widget.titre;
+                final desc = widget.description;
 
-            const lien =
-                "https://play.google.com/store/apps/details?id=com.congocheckcd";
-            Share.share(
-                "Titre : $titre \n Artcile: $desc \n Article : Telechare l'Application $lien");
-          },
-        ),],
-          
-          title: Text("Detail"),
+                const lien =
+                    "https://play.google.com/store/apps/details?id=com.congocheckcd";
+                Share.share(
+                    "Titre : $titre \n Artcile: $desc \n Article : Telechare l'Application $lien");
+              },
+            ),
+          ],
+          title: Text(
+            "Detail Page",
+            style: TitreStyle,
+          ),
           centerTitle: true,
-          backgroundColor: CouleurPrincipale),
+          backgroundColor: Colors.white),
       // appBar: AppBar(
-        // leading: IconButton(
-        //   icon: const Icon(Icons.share),
-        //   onPressed: () async {
-        //     final titre = widget.titre;
-        //     final desc = widget.description;
+      // leading: IconButton(
+      //   icon: const Icon(Icons.share),
+      //   onPressed: () async {
+      //     final titre = widget.titre;
+      //     final desc = widget.description;
 
-        //     const lien =
-        //         "https://play.google.com/store/apps/details?id=com.congocheckcd";
-        //     Share.share(
-        //         "Titre : $titre \n Artcile: $desc \n Article : Telechare l'Application $lien");
-        //   },
-        // ),
+      //     const lien =
+      //         "https://play.google.com/store/apps/details?id=com.congocheckcd";
+      //     Share.share(
+      //         "Titre : $titre \n Artcile: $desc \n Article : Telechare l'Application $lien");
+      //   },
+      // ),
       //   backgroundColor: Colors.white,
       //   title: Padding(
       //     padding: const EdgeInsets.only(left: 60),
@@ -175,7 +179,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
                     minScale: 0.1,
                     maxScale: 2.0,
                     child: Image.network(
-                      "http://192.168.0.13/goma/entreprise/"+widget.img,
+                      "http://192.168.0.13/goma/entreprise/" + widget.img,
                       fit: BoxFit.cover,
                       width: screenWidth,
                     ),
@@ -188,18 +192,17 @@ class _DetailPostPageState extends State<DetailPostPage> {
                   bottom: 19,
                   child: Column(
                     children: [
-                
                       const Padding(
                         padding: EdgeInsets.only(top: 222),
                       ),
                       Container(
-                          color: Colors.black45,
-                          child: Text(
-                            widget.titre,
-                            style: GoogleFonts.abel(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),),
+                        color: Colors.black45,
+                        child: Text(
+                          widget.titre,
+                          style: GoogleFonts.abel(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
                 ),
