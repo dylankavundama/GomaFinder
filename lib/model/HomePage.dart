@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:upato/model/autres.dart';
 import 'package:upato/model/banque.dart';
 import 'package:upato/model/bureau.dart';
 import 'package:upato/model/commerce.dart';
+import 'package:upato/model/ecole.dart';
 import 'package:upato/model/eglise.dart';
+import 'package:upato/model/entreprise.dart';
 import 'package:upato/model/hopital.dart';
 import 'package:upato/model/hotel.dart';
 import 'package:upato/model/media.dart';
@@ -138,6 +141,7 @@ class _HomePageState extends State<HomePage>
           controller: _tabController,
           isScrollable: true,
           tabs: [
+            Tab(text: 'Tous'),
             Tab(text: 'Ecole'),
             Tab(text: 'Bureau'),
             Tab(text: 'Restaurant'),
@@ -151,14 +155,15 @@ class _HomePageState extends State<HomePage>
             Tab(text: 'ONG'), //
             Tab(text: 'Communication(Media)'),
             Tab(text: 'Eglise'), //
-            Tab(text: 'Super marcher'), //
+            Tab(text: 'Autres'), //
           ],
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: [
-          Mode_Home_Page(),
+          Entreprise_Page(),
+          Ecole_Page(),
           Bureau_Page(),
           Resto_Page(),
           Commerce_Page(),
@@ -168,24 +173,11 @@ class _HomePageState extends State<HomePage>
           Mode_Page(),
           Voyage_Page(),
           Tech_Page(),
-
           Ong_Page(),
           Media_Page(),
-          Center(child: Text('Content of Tab 3')),
           Eglise_Page(),
+          Autres_Page(),
           Center(child: Text('Content of Tab 1')),
-          Center(child: Text('Content of Tab 2')),
-          Center(child: Text('Content of Tab 3')),
-          Center(child: Text('Content of Tab 3')),
-          Center(child: Text('Content of Tab 1')),
-          Center(child: Text('Content of Tab 2')),
-          Center(child: Text('Content of Tab 3')),
-          Center(child: Text('Content of Tab 3')),
-          Center(child: Text('Content of Tab 1')),
-          Center(child: Text('Content of Tab 2')),
-          Center(child: Text('Content of Tab 3')),
-          Center(child: Text('Content of Tab 3')),
-          Center(child: Text('Content of Tab 3')),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

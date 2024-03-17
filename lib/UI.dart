@@ -35,10 +35,16 @@ class Widget_UI extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.23,
             // Enfant : Image
             child: Image.network(
-              "http://192.168.0.13/goma/entreprise/"+
-              image, // URL de l'image
-              fit: BoxFit
-                  .cover, // Ajustement de l'image pour couvrir tout le container
+              "http://192.168.0.13/goma/entreprise/" + image,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Center(
+                  child: Text(
+                    'Erreur de chargement de l\'image',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                );
+              },
             ),
           ),
           ButtonBar(

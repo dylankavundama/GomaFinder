@@ -94,7 +94,7 @@ class _DetailPageState extends State<DetailPage> {
                             height: 300,
                             child: Image.network(
                               "http://192.168.0.13/goma/entreprise/"+
-                              widget.image2,
+                              widget.image1,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -110,7 +110,11 @@ class _DetailPageState extends State<DetailPage> {
                                     height: 300,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                        image: NetworkImage(widget.image2),
+                                        image: NetworkImage(
+                                          
+                                          
+                                               "http://192.168.0.13/goma/entreprise/"+
+                                          widget.image2),
                                         fit: BoxFit.cover,
                                       ),
                                     ),

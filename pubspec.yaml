@@ -38,8 +38,11 @@ dependencies:
   image_picker :
   image_cropper:
   share:
+  connectivity:
   flutter_svg:
-  
+  http: ^0.13.3
+  cached_network_image: ^3.1.0
+  shared_preferences: ^2.0.8
 
 dev_dependencies:
 #  flutter_native_splash: ^2.2.4

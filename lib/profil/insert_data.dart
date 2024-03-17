@@ -98,8 +98,8 @@ class _Inset_DataState extends State<Inset_Data> {
           filename: _image!.path));
 
       request.files.add(http.MultipartFile.fromBytes(
-          'image2', File(_image!.path).readAsBytesSync(),
-          filename: _image!.path));
+          'image2', File(_image2!.path).readAsBytesSync(),
+          filename: _image2!.path));
       var res = await request.send();
       var reponse = await http.Response.fromStream(res);
 

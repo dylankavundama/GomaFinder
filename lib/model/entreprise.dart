@@ -7,43 +7,46 @@ import 'package:upato/detailpage.dart';
 import 'package:upato/style.dart';
 import 'package:http/http.dart' as http;
 
-class Banque_Page extends StatefulWidget {
-  const Banque_Page({super.key});
+class Entreprise_Page extends StatefulWidget {
+  const Entreprise_Page({super.key});
 
   @override
-  State<Banque_Page> createState() => _Banque_PageState();
+  State<Entreprise_Page> createState() => _Entreprise_PageState();
 }
 
-class _Banque_PageState extends State<Banque_Page> {
+class _Entreprise_PageState extends State<Entreprise_Page> {
   List<dynamic> post = [];
   bool _isLoading = false;
-fetchPosts() async {
-  setState(() {
-    _isLoading = true;
-  });
-  const url = 'http://192.168.0.13/goma/banque.php';
-  final uri = Uri.parse(url);
-  final response = await http.get(uri);
-  
-  try {
-    final List resultat = jsonDecode(response.body);
-    resultat.sort((a, b) => b["id"].compareTo(a["id"]));
 
-    // Mettre en cache les données
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('banqueData', jsonEncode(resultat));
-
+  fetchPosts() async {
     setState(() {
-      post = resultat;
-      _isLoading = false;
+      _isLoading = true;
     });
-  } catch (e) {
-    print('Erreur lors de la récupération des données: $e');
-    setState(() {
-      _isLoading = false;
-    });
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('entreprise_data');
+    if (cachedData != null) {
+      setState(() {
+        post = jsonDecode(cachedData);
+        _isLoading = false;
+      });
+      return;
+    }
+    const url = 'http://192.168.0.13/goma/entreprise.php';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      final List resultat = jsonDecode(response.body);
+      resultat.sort((a, b) => b["id"].compareTo(a["id"]));
+      setState(() {
+        post = resultat;
+        _isLoading = false;
+      });
+      // Cache the data
+      prefs.setString('entreprise_data', response.body);
+    } else {
+      throw Exception('Failed to load data');
+    }
   }
-}
 
   @override
   void initState() {
