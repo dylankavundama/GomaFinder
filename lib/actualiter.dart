@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-// import 'package:entreprise/Entreprise/AjouterEntreprise.dart';
-// import 'package:entreprise/Entreprise/UpdateEntreprise.dart';
-
 import 'package:flutter/services.dart' show Uint8List, rootBundle;
+import 'package:upato/detail_actu_page.dart';
 import 'package:upato/profil/insert_data.dart';
+import 'package:upato/style.dart';
 
-// ignore: camel_case_types
 class Actu_Home extends StatefulWidget {
   const Actu_Home({super.key});
   @override
@@ -91,27 +88,40 @@ class _Actu_HomeState extends State<Actu_Home> {
     final screenh = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Entreprises"),
-        centerTitle: true,
-        backgroundColor: Color.fromARGB(199, 3, 204, 244),
-      ),
+          title: Text("Entreprises"),
+          centerTitle: true,
+          backgroundColor: CouleurPrincipale),
       body: ListView.builder(
         itemCount: userdata.length,
         itemBuilder: (context, index) {
-          return Container(
-            height: screenh * 0.14,
-            // height: screenH * 0.1,
-            width: screenW,
-            decoration: BoxDecoration(
-                border:
-                    Border.all(color: Colors.black12, style: BorderStyle.solid),
-                borderRadius: BorderRadius.circular(6.0)),
-            child: Padding(
-              padding: EdgeInsets.only(left: 3),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ClipRRect(
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return DetailPostPage(
+                    //id: userdata[index]['id'],
+                    titre: userdata[index]['nom'],
+                    img: userdata[index]['image1'],
+                    description: userdata[index]['detail'],
+                  );
+                }),
+              );
+            },
+            child: Container(
+              height: screenh * 0.14,
+              // height: screenH * 0.1,
+              width: screenW,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Colors.black12, style: BorderStyle.solid),
+                  borderRadius: BorderRadius.circular(6.0)),
+              child: Padding(
+                padding: EdgeInsets.only(left: 3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ClipRRect(
                       borderRadius: BorderRadius.circular(6.0),
 
                       // child: Image.asset(
@@ -129,39 +139,41 @@ class _Actu_HomeState extends State<Actu_Home> {
                         // errorBuilder: (context, error, stackTrace) {
                         //   return const erreurICON();
                         // },
-                      )),
-                  const Padding(padding: EdgeInsets.only(left: 11)),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 11),
-                    child: SizedBox(
-                      height: screenh * 0.18,
-                      width: screenW * 0.60,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            userdata[index]["nom"],
-                            maxLines: 1,
-                            textAlign: TextAlign.start,
-                            style: GoogleFonts.aBeeZee(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          ),
-                          Text(
-                            userdata[index]["detail"],
-                            style: GoogleFonts.abel(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                                color: Colors.black),
-                            maxLines: 5,
-                          ),
-                        ],
                       ),
                     ),
-                  ),
-                ],
+                    const Padding(padding: EdgeInsets.only(left: 11)),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 11),
+                      child: SizedBox(
+                        height: screenh * 0.18,
+                        width: screenW * 0.60,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userdata[index]["nom"],
+                              maxLines: 1,
+                              textAlign: TextAlign.start,
+                              style: GoogleFonts.aBeeZee(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            ),
+                            Text(
+                              userdata[index]["detail"],
+                              style: GoogleFonts.abel(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black),
+                              maxLines: 5,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -183,43 +195,3 @@ class _Actu_HomeState extends State<Actu_Home> {
     );
   }
 }
-
-// class Actualite_Page extends StatefulWidget {
-//   const Actualite_Page({super.key});
-
-//   @override
-//   State<Actualite_Page> createState() => _Actualite_PageState();
-// }
-
-// class _Actualite_PageState extends State<Actualite_Page> {
-//   @override
-//   Widget build(BuildContext context) {
-
-
-//     return Scaffold(
-//         appBar: AppBar(),
-//         body: SingleChildScrollView(
-//           child: Column(
-//             children: [
-//               Acti_UI(screenh: screenh, screenW: screenW),
-//             ],
-//           ),
-//         ));
-//   }
-// }
-
-// class Acti_UI extends StatelessWidget {
-//   const Acti_UI({
-//     super.key,
-//     required this.screenh,
-//     required this.screenW,
-//   });
-
-//   final double screenh;
-//   final double screenW;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return 
-//   }
-// }

@@ -37,6 +37,8 @@ dependencies:
   google_maps_flutter:
   image_picker :
   image_cropper:
+  share:
+  flutter_svg:
   
 
 dev_dependencies:
