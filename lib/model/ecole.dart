@@ -64,7 +64,15 @@ class _Ecole_PageState extends State<Ecole_Page> {
               color: CouleurPrincipale,
             ),
           )
-        : !_hasInternet
+        : post.isEmpty
+            ? Center(
+                child: Image.asset(
+                  'assets/error.png', // Chemin de votre image
+                  width: 200,
+                  height: 200,
+                ),
+              )
+            :!_hasInternet
             ? Center(
                 child: Image.asset(
                   'assets/no_internet_image.png', // Chemin de votre image

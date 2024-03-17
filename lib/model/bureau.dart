@@ -51,38 +51,54 @@ class _Bureau_PageState extends State<Bureau_Page> {
               color: CouleurPrincipale,
             ),
           )
-        : SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(
-                post.length,
-                (index) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return DetailPage(
-                          lat: post[index]['lat'],
-                          long: post[index]['log'],
-                          titre: post[index]['nom'],
-                          site: post[index]['site'],
-                          tel: post[index]['tel'],
-                          desc: post[index]['detail'],
-                          image1: post[index]['image1'],
-                          image2: post[index]['image2'],
-                        );
-                      }),
-                    );
-                  },
-                  child: Widget_UI(
-                    desc: post[index]['detail'],
-                    titre: post[index]['nom'],
-                    image: post[index]['image1'],
-                  ),
+        : post.isEmpty
+            ? Center(
+                child: Image.asset(
+                  'assets/error.png', // Chemin de votre image
+                  width: 200,
+                  height: 200,
                 ),
-              ),
-            ),
-          );
+              )
+            : post.isEmpty
+                ? Center(
+                    child: Image.asset(
+                      'assets/error.png', // Chemin de votre image
+                      width: 200,
+                      height: 200,
+                    ),
+                  )
+                : SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        post.length,
+                        (index) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return DetailPage(
+                                  lat: post[index]['lat'],
+                                  long: post[index]['log'],
+                                  titre: post[index]['nom'],
+                                  site: post[index]['site'],
+                                  tel: post[index]['tel'],
+                                  desc: post[index]['detail'],
+                                  image1: post[index]['image1'],
+                                  image2: post[index]['image2'],
+                                );
+                              }),
+                            );
+                          },
+                          child: Widget_UI(
+                            desc: post[index]['detail'],
+                            titre: post[index]['nom'],
+                            image: post[index]['image1'],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
   }
 }
