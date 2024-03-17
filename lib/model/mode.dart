@@ -51,7 +51,15 @@ class _Mode_PageState extends State<Mode_Page> {
               color: CouleurPrincipale,
             ),
           )
-        : SingleChildScrollView(
+        : post.isEmpty
+            ? Center(
+                child: Image.asset(
+                  'assets/error.png', // Chemin de votre image
+                  width: 200,
+                  height: 200,
+                ),
+              )
+            :SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
