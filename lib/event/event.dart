@@ -45,13 +45,11 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
       print(e);
     }
   }
-
   @override
   void initState() {
     super.initState();
     getrecord();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
