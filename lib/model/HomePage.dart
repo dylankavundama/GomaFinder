@@ -21,7 +21,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/util/drawers.dart';
 
-import 'model_home_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
