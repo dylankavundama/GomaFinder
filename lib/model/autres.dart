@@ -54,7 +54,7 @@ class _Autres_PageState extends State<Autres_Page> {
         : post.isEmpty
             ? Center(
                 child: Image.asset(
-                  'assets/error.jpg', // Chemin de votre image
+                  'assets/error.png', // Chemin de votre image
                   width: 200,
                   height: 200,
                 ),
