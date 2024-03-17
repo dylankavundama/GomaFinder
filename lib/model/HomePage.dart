@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:upato/model/banque.dart';
 import 'package:upato/model/bureau.dart';
 import 'package:upato/model/commerce.dart';
+import 'package:upato/model/eglise.dart';
 import 'package:upato/model/hopital.dart';
 import 'package:upato/model/hotel.dart';
+import 'package:upato/model/media.dart';
 import 'package:upato/model/mode.dart';
+import 'package:upato/model/ong.dart';
 import 'package:upato/model/resto.dart';
 import 'package:upato/model/tech.dart';
 import 'package:upato/model/voyage.dart';
@@ -165,7 +168,11 @@ class _HomePageState extends State<HomePage>
           Mode_Page(),
           Voyage_Page(),
           Tech_Page(),
+
+          Ong_Page(),
+          Media_Page(),
           Center(child: Text('Content of Tab 3')),
+          Eglise_Page(),
           Center(child: Text('Content of Tab 1')),
           Center(child: Text('Content of Tab 2')),
           Center(child: Text('Content of Tab 3')),
