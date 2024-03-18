@@ -3,6 +3,7 @@ import 'package:upato/model/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upato/add/Viewdata.dart';
+import 'package:upato/model/search.dart';
 import 'package:upato/profil/insert_data.dart';
 
 class NavBarPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _NavBarPageState extends State<NavBarPage> {
       NavigationDestinationLabelBehavior.alwaysShow;
   List<Widget> screen = [
     HomePage(),
-    HomePage(),
+    Search_Page(),
     Explorepage(),
     // Viewdata(),
     Inset_Data(),
@@ -25,11 +26,13 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-  //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarBrightness: Brightness.dark,
-    ),);
+    //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
     return SafeArea(
       child: Scaffold(
         bottomSheet: screen[currentindex],

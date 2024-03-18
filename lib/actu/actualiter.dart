@@ -39,6 +39,7 @@ class _Actu_HomeState extends State<Actu_Home> {
       var response = await http.get(Uri.parse(url));
       setState(() {
         userdata = jsonDecode(response.body);
+    _isLoading = false;
         print(userdata);
       });
     } catch (e) {
@@ -51,16 +52,27 @@ class _Actu_HomeState extends State<Actu_Home> {
     super.initState();
     getrecord();
   }
-
+  bool _isLoading = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+    
+ Scaffold(
       appBar: AppBar(
         title: Text("Actualité", style: TitreStyle),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: RefreshIndicator(
+      body: 
+      
+      _isLoading
+        ? Center(
+            child: CircularProgressIndicator(
+              color: CouleurPrincipale,
+            ),
+          )
+        :
+      RefreshIndicator(
         color: CouleurPrincipale,
         onRefresh: getrecord,
         child: ListView.builder(
