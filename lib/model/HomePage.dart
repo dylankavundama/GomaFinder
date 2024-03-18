@@ -27,7 +27,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -109,8 +110,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Container(
-          width: MediaQuery.of(context).size.width * 0.6,
-        child: Drawers()),
+          width: MediaQuery.of(context).size.width * 0.6, child: Drawers()),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
@@ -162,12 +162,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ),
               floating: true,
               pinned: true,
-              expandedHeight: 200.0,
+              expandedHeight: 111.0,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-                  'assets/en.png',
-                  fit: BoxFit.cover,
-                ),
+                //   background: Image.network(
+                //     "",
+                //  //  "https://images.pexels.com/photos/1670045/pexels-photo-1670045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                //     fit: BoxFit.cover,
+                //   ),
+
+                // background: Container(
+                //   child: Image.asset('assets/images/logo.png'),
+                // ),
               ),
             ),
           ];
