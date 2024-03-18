@@ -110,10 +110,12 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
 
-        SystemChrome.setSystemUIOverlayStyle(
+
+        // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarBrightness: Brightness.dark,
+        statusBarColor: Colors.green,
+        statusBarBrightness: Brightness.light,
       ),
     );
     return Scaffold(

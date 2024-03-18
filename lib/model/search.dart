@@ -87,14 +87,13 @@ class _Search_PageState extends State<Search_Page> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarBrightness: Brightness.dark,
+        statusBarColor: Colors.green,
+        statusBarBrightness: Brightness.light,
       ),
     );
 
@@ -109,6 +108,7 @@ class _Search_PageState extends State<Search_Page> {
               Padding(
                 padding: const EdgeInsets.all(6.0),
                 child: TextField(
+                  autofocus: true,
                   cursorColor: CouleurPrincipale,
                   controller: searchController,
                   onChanged: filterSearchResults,
@@ -121,6 +121,9 @@ class _Search_PageState extends State<Search_Page> {
                         Radius.circular(4.0),
                       ),
                     ),
+                    // Modification de la couleur du texte
+                    labelStyle: TextStyle(color: CouleurPrincipale),
+                    hintStyle: TextStyle(color: Colors.black),
                   ),
                 ),
               ),
@@ -156,10 +159,9 @@ class _Search_PageState extends State<Search_Page> {
                         },
                       ),
                     )
-                  : Container(height: 400,  width: 400, color: CouleurPrincipale,)
-
-
-                  
+                  : Container(
+                      child: Image.asset('assets/find.webp'),
+                    )
             ],
           );
   }

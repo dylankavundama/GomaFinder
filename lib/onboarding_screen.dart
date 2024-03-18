@@ -48,6 +48,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     // SystemChrome.setSystemUIOverlayStyle(
     //   SystemUiOverlayStyle(),
     // );
+
+        // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.green,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     SizeConfig().init(context);
     double width = SizeConfig.screenW!;
     double height = SizeConfig.screenH!;

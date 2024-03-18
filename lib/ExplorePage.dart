@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 class Explorepage extends StatefulWidget {
@@ -10,6 +11,14 @@ class Explorepage extends StatefulWidget {
 class _ExplorepageState extends State<Explorepage> {
   @override
   Widget build(BuildContext context) {
+
+        // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.green,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: CouleurPrincipale),
