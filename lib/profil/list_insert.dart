@@ -7,6 +7,7 @@ import 'package:line_icons/line_icons.dart';
 
 import 'package:flutter/services.dart' show Uint8List, rootBundle;
 import 'package:upato/profil/insert_data.dart';
+import 'package:upato/style.dart';
 
 // ignore: camel_case_types
 class List_Data extends StatefulWidget {
@@ -22,7 +23,7 @@ class _List_DataState extends State<List_Data> {
   List userdata = [];
   Future<void> delrecord(String id) async {
     try {
-      var url = "http://192.168.0.13/goma/goma.php";
+      var url = "http://$Adress_IP/goma/goma.php";
       var result = await http.post(Uri.parse(url), body: {"id": id});
       var reponse = jsonDecode(result.body);
       if (reponse["Success"] == "True") {
@@ -38,7 +39,7 @@ class _List_DataState extends State<List_Data> {
   }
 
   Future<void> getrecord() async {
-    var url = "http://192.168.0.13/goma/goma.php";
+    var url = "http://$Adress_IP/goma/goma.php";
     try {
       var response = await http.get(Uri.parse(url));
       setState(() {
@@ -64,7 +65,7 @@ class _List_DataState extends State<List_Data> {
   List userdatas = [];
 
   Future<List<dynamic>> getrecordssss() async {
-    var url = "http://192.168.0.13/goma/goma.php";
+    var url = "http://$Adress_IP/goma/goma.php";
     try {
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -122,7 +123,7 @@ class _List_DataState extends State<List_Data> {
                                     borderRadius: BorderRadius.circular(5),
                                     border: Border.all(color: Colors.grey)),
                                 child: Image.network(
-                                  "http://192.168.0.13/goma/entreprise/" +
+                                  "http://$Adress_IP/goma/entreprise/" +
                                       userdata[index]["image1"],
                                 )),
                             const SizedBox(

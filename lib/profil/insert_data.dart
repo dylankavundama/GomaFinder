@@ -55,7 +55,7 @@ class _Inset_DataState extends State<Inset_Data> {
 
   List dataens = [];
   Future<void> getrecord() async {
-    var url = "http://192.168.0.13/goma/read-enseignant.php";
+    var url = "http://$Adress_IP/goma/read-enseignant.php";
     try {
       var response = await http.get(Uri.parse(url));
       setState(() {
@@ -82,7 +82,7 @@ class _Inset_DataState extends State<Inset_Data> {
       return;
     }
     try {
-      var url = "http://192.168.0.13/goma/entreprise/add-Entreprise.php";
+      var url = "http://$Adress_IP/goma/entreprise/add-Entreprise.php";
       Uri ulr = Uri.parse(url);
       debugPrint("############################################");
       var request = http.MultipartRequest('POST', ulr);

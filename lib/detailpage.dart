@@ -1,4 +1,4 @@
-import 'package:upato/googlemaps.dart';
+
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -79,7 +79,7 @@ class _DetailPageState extends State<DetailPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                          "http://192.168.0.13/goma/entreprise/"+
+                                          "http://$Adress_IP/goma/entreprise/"+
                                           widget.image1,
                                         ),
                                         fit: BoxFit.cover,
@@ -93,7 +93,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: Container(
                             height: 300,
                             child: Image.network(
-                              "http://192.168.0.13/goma/entreprise/"+
+                              "http://$Adress_IP/goma/entreprise/"+
                               widget.image1,
                               fit: BoxFit.cover,
                             ),
@@ -113,7 +113,7 @@ class _DetailPageState extends State<DetailPage> {
                                         image: NetworkImage(
                                           
                                           
-                                               "http://192.168.0.13/goma/entreprise/"+
+                                               "http://$Adress_IP/goma/entreprise/"+
                                           widget.image2),
                                         fit: BoxFit.cover,
                                       ),
@@ -126,7 +126,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: Container(
                             height: 300,
                             child: Image.network(
-                              "http://192.168.0.13/goma/entreprise/"+
+                              "http://$Adress_IP/goma/entreprise/"+
                               widget.image2,
                               fit: BoxFit.cover,
                             ),
@@ -183,11 +183,13 @@ class _DetailPageState extends State<DetailPage> {
                         titleText: widget.tel,
                         trailingText: 'follow',
                         onTap: () {
+                          // ignore: deprecated_member_use
                           launch('tel:${widget.tel}');
                         },
                       ),
                       ListTile(
                         onTap: () {
+                          // ignore: deprecated_member_use
                           launch('https://${widget.site}');
                         },
                         leading: Icon(Icons.web),

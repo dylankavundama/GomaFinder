@@ -21,7 +21,7 @@ class _Tech_PageState extends State<Tech_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/tech.php';
+    var url = 'http://$Adress_IP/goma/tech.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);
