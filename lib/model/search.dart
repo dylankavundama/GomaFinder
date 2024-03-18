@@ -58,13 +58,14 @@ class _Search_PageState extends State<Search_Page> {
     }
   }
 
-  void filterSearchResults(String query) {
+  void filterSearchResults(String query) async {
     List<dynamic> dummySearchList = [];
     dummySearchList.addAll(post);
     if (query.isNotEmpty) {
       List<dynamic> dummyListData = [];
       dummySearchList.forEach((item) {
-        if (item['nom'].toLowerCase().contains(query.toLowerCase())) {
+        if (item['nom'].toLowerCase().contains(query.toLowerCase()) ||
+            item['detail'].toLowerCase().contains(query.toLowerCase())) {
           dummyListData.add(item);
         }
       });
@@ -72,18 +73,29 @@ class _Search_PageState extends State<Search_Page> {
         filteredPost.clear();
         filteredPost.addAll(dummyListData);
       });
-      return;
     } else {
       setState(() {
         filteredPost.clear();
         filteredPost.addAll(post);
       });
     }
+
+    // Vérifie si la liste filtrée est vide
+    if (filteredPost.isEmpty) {
+      // Si la liste filtrée est vide, recharge les données
+      await fetchPosts();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.dark,
+      ),
+    );
 
     return _isLoading
         ? Center(
@@ -91,65 +103,58 @@ class _Search_PageState extends State<Search_Page> {
               color: CouleurPrincipale,
             ),
           )
-        : post.isEmpty
-            ? Center(
-                child: Image.asset(
-                  'assets/error.png', // Chemin de votre image
-                  width: 200,
-                  height: 200,
-                ),
-              )
-            : Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: searchController,
-                      onChanged: filterSearchResults,
-                      decoration: InputDecoration(
-                        labelText: "Rechercher",
-                        hintText: "Rechercher",
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                        ),
+        : Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: TextField(
+                  cursorColor: CouleurPrincipale,
+                  controller: searchController,
+                  onChanged: filterSearchResults,
+                  decoration: InputDecoration(
+                    labelText: "Rechercher",
+                    hintText: "Rechercher",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4.0),
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: filteredPost.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) {
-                                return DetailPage(
-                                  lat: filteredPost[index]['lat'],
-                                  long: filteredPost[index]['log'],
-                                  titre: filteredPost[index]['nom'],
-                                  site: filteredPost[index]['site'],
-                                  tel: filteredPost[index]['tel'],
-                                  desc: filteredPost[index]['detail'],
-                                  image1: filteredPost[index]['image1'],
-                                  image2: filteredPost[index]['image2'],
-                                );
-                              }),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredPost.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return DetailPage(
+                              lat: filteredPost[index]['lat'],
+                              long: filteredPost[index]['log'],
+                              titre: filteredPost[index]['nom'],
+                              site: filteredPost[index]['site'],
+                              tel: filteredPost[index]['tel'],
+                              desc: filteredPost[index]['detail'],
+                              image1: filteredPost[index]['image1'],
+                              image2: filteredPost[index]['image2'],
                             );
-                          },
-                          child: Widget_UI(
-                            desc: filteredPost[index]['detail'],
-                            titre: filteredPost[index]['nom'],
-                            image: filteredPost[index]['image1'],
-                          ),
+                          }),
                         );
                       },
-                    ),
-                  ),
-                ],
-              );
+                      child: Widget_UI(
+                        desc: filteredPost[index]['detail'],
+                        titre: filteredPost[index]['nom'],
+                        image: filteredPost[index]['image1'],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
   }
 }
