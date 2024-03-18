@@ -21,7 +21,7 @@ class _Media_PageState extends State<Media_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/media.php';
+    var url = 'http://$Adress_IP/goma/media.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);

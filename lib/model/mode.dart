@@ -21,7 +21,7 @@ class _Mode_PageState extends State<Mode_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/mode.php';
+    var url = 'http://$Adress_IP/goma/mode.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);

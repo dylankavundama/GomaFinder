@@ -21,7 +21,7 @@ class _Hopital_PageState extends State<Hopital_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/hopital.php';
+    var url = 'http://$Adress_IP/goma/hopital.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);
