@@ -106,7 +106,7 @@ class _Search_PageState extends State<Search_Page> {
         : Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: const EdgeInsets.all(22.0),
                 child: TextField(
                   autofocus: true,
                   cursorColor: CouleurPrincipale,
