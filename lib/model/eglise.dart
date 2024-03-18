@@ -21,7 +21,7 @@ class _Eglise_PageState extends State<Eglise_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/eglise.php';
+    var url = 'http://$Adress_IP/goma/eglise.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);

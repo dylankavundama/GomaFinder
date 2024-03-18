@@ -40,7 +40,7 @@ class _Ecole_PageState extends State<Ecole_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/ecole.php';
+    var url = 'http://$Adress_IP/goma/ecole.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);
