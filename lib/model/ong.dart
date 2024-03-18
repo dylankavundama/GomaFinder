@@ -21,7 +21,7 @@ class _Ong_PageState extends State<Ong_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/ong.php';
+    var url = 'http://$Adress_IP/goma/ong.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);

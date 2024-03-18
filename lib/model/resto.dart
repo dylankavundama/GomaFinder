@@ -21,7 +21,7 @@ class _Resto_PageState extends State<Resto_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/resto.php';
+    var url = 'http://$Adress_IP/goma/resto.php';
     final uri = Uri.parse(url);
     final reponse = await http.get(uri);
     final List resultat = jsonDecode(reponse.body);
