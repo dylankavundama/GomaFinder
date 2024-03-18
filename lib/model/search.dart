@@ -87,6 +87,7 @@ class _Search_PageState extends State<Search_Page> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
@@ -123,37 +124,42 @@ class _Search_PageState extends State<Search_Page> {
                   ),
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: filteredPost.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return DetailPage(
-                              lat: filteredPost[index]['lat'],
-                              long: filteredPost[index]['log'],
-                              titre: filteredPost[index]['nom'],
-                              site: filteredPost[index]['site'],
-                              tel: filteredPost[index]['tel'],
+              searchController.text.isNotEmpty
+                  ? Expanded(
+                      child: ListView.builder(
+                        itemCount: filteredPost.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return DetailPage(
+                                    lat: filteredPost[index]['lat'],
+                                    long: filteredPost[index]['log'],
+                                    titre: filteredPost[index]['nom'],
+                                    site: filteredPost[index]['site'],
+                                    tel: filteredPost[index]['tel'],
+                                    desc: filteredPost[index]['detail'],
+                                    image1: filteredPost[index]['image1'],
+                                    image2: filteredPost[index]['image2'],
+                                  );
+                                }),
+                              );
+                            },
+                            child: Widget_UI(
                               desc: filteredPost[index]['detail'],
-                              image1: filteredPost[index]['image1'],
-                              image2: filteredPost[index]['image2'],
-                            );
-                          }),
-                        );
-                      },
-                      child: Widget_UI(
-                        desc: filteredPost[index]['detail'],
-                        titre: filteredPost[index]['nom'],
-                        image: filteredPost[index]['image1'],
+                              titre: filteredPost[index]['nom'],
+                              image: filteredPost[index]['image1'],
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
-              ),
+                    )
+                  : Container(height: 400,  width: 400, color: CouleurPrincipale,)
+
+
+                  
             ],
           );
   }
