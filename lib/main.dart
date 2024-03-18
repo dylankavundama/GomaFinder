@@ -37,8 +37,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: false),
       debugShowCheckedModeBanner: false,
      // home: Actualite_Page(),
-home: Event_Home_Page(),
+//home: Event_Home_Page(),
      //home:     List_Data(),
+     home: OnboardingScreen(),
     );
   }
 }

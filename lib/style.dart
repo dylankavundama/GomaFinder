@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +12,7 @@ TextStyle TitreStyle = GoogleFonts.abel(
     // fontStyle: FontStyle.italic,
     );
 
-    TextStyle TitreStyleWhite = GoogleFonts.abel(
+TextStyle TitreStyleWhite = GoogleFonts.abel(
     // textStyle: Theme.of(context).textTheme.displayLarge,
     fontSize: 24,
     color: Colors.white
@@ -32,11 +31,6 @@ TextStyle SousTStyle = GoogleFonts.actor(
 TextStyle DescStyle = GoogleFonts.abel(
     // textStyle: Theme.of(context).textTheme.displayLarge,
     fontSize: 18,
-    color: Colors.black
+    color: Colors.black);
 
-    );
-
-
-
-
-
+String Adress_IP = '192.168.0.11';

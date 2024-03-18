@@ -11,7 +11,6 @@ class Drawers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      
       child: ListView(children: [
         DrawerHeader(
           child: Image.asset('assets/images/logo.png'),
@@ -32,31 +31,13 @@ class Drawers extends StatelessWidget {
         ),
         Card(
           child: ListTile(
-                    onTap: () {
+            onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => Event_Home_Page()),
               );
             },
             title: Text(
               'Evénement',
-              style: TitreStyle,
-            ),
-            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            title: Text(
-              'Visite Goma',
-              style: TitreStyle,
-            ),
-            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            title: Text(
-              'Artiste & Influenceur',
               style: TitreStyle,
             ),
             trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
@@ -93,6 +74,24 @@ class Drawers extends StatelessWidget {
           child: ListTile(
             title: Text(
               'Live Radio',
+              style: TitreStyle,
+            ),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text(
+              'Visite Goma',
+              style: TitreStyle,
+            ),
+            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            title: Text(
+              'Artiste & Influenceur',
               style: TitreStyle,
             ),
             trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
