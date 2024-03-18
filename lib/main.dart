@@ -10,6 +10,7 @@ import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'dart:async';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

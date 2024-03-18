@@ -1,6 +1,8 @@
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:upato/NavBarPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     _controller = PageController();
+      initPlatformState();
     super.initState();
   }
 
@@ -42,7 +45,99 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       width: _currentPage == index ? 20 : 10,
     );
   }
+  // Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initPlatformState() async {
+    if (!mounted) return;
 
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+
+    OneSignal.Debug.setAlertLevel(OSLogLevel.none);
+    OneSignal.consentRequired(_requireConsent);
+
+    // NOTE: Replace with your own app ID from https://www.onesignal.com
+    OneSignal.initialize("0ba9731b-33bd-43f4-8b59-61172e27447d");
+
+    // AndroidOnly stat only
+    // OneSignal.Notifications.removeNotification(1);
+    // OneSignal.Notifications.removeGroupedNotifications("group5");
+
+    OneSignal.Notifications.clearAll();
+
+    OneSignal.User.pushSubscription.addObserver((state) {
+      print(OneSignal.User.pushSubscription.optedIn);
+      print(OneSignal.User.pushSubscription.id);
+      print(OneSignal.User.pushSubscription.token);
+      print(state.current.jsonRepresentation());
+    });
+
+    OneSignal.Notifications.addPermissionObserver((state) {
+      print("Has permission " + state.toString());
+    });
+
+    OneSignal.Notifications.addClickListener((event) {
+      print('NOTIFICATION CLICK LISTENER CALLED WITH EVENT: $event');
+      this.setState(() {
+        _debugLabelString =
+            "Clicked notification: \n${event.notification.jsonRepresentation().replaceAll("\\n", "\n")}";
+      });
+    });
+
+    OneSignal.Notifications.addForegroundWillDisplayListener((event) {
+      print(
+          'NOTIFICATION WILL DISPLAY LISTENER CALLED WITH: ${event.notification.jsonRepresentation()}');
+
+      /// Display Notification, preventDefault to not display
+      event.preventDefault();
+
+      /// Do async work
+
+      /// notification.display() to display after preventing default
+      event.notification.display();
+
+      this.setState(() {
+        _debugLabelString =
+            "Notification received in foreground notification: \n${event.notification.jsonRepresentation().replaceAll("\\n", "\n")}";
+      });
+    });
+
+    OneSignal.InAppMessages.addClickListener((event) {
+      this.setState(() {
+        _debugLabelString =
+            "In App Message Clicked: \n${event.result.jsonRepresentation().replaceAll("\\n", "\n")}";
+      });
+    });
+    OneSignal.InAppMessages.addWillDisplayListener((event) {
+      print("ON WILL DISPLAY IN APP MESSAGE ${event.message.messageId}");
+    });
+    OneSignal.InAppMessages.addDidDisplayListener((event) {
+      print("ON DID DISPLAY IN APP MESSAGE ${event.message.messageId}");
+    });
+    OneSignal.InAppMessages.addWillDismissListener((event) {
+      print("ON WILL DISMISS IN APP MESSAGE ${event.message.messageId}");
+    });
+    OneSignal.InAppMessages.addDidDismissListener((event) {
+      print("ON DID DISMISS IN APP MESSAGE ${event.message.messageId}");
+    });
+
+    this.setState(() {
+      _enableConsentButton = _requireConsent;
+    });
+
+
+
+    OneSignal.InAppMessages.paused(true);
+  }
+    String _debugLabelString = "";
+  String? _emailAddress;
+  String? _smsNumber;
+  String? _externalUserId;
+  String? _language;
+  bool _enableConsentButton = false;
+
+  // CHANGE THIS parameter to true if you want to test GDPR privacy consent
+  bool _requireConsent = false;
+
+  
   @override
   Widget build(BuildContext context) {
     // SystemChrome.setSystemUIOverlayStyle(

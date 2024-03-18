@@ -10,12 +10,14 @@ version: 1.0.0+4
 environment:
   sdk: '>=2.19.6 <3.0.0'
   
+  
 
 
 dependencies:
 
   flutter:
     sdk: flutter
+ 
   flutter_facebook_auth: 
   flutter_signin_button: 
   google_sign_in:
@@ -44,8 +46,10 @@ dependencies:
   cached_network_image: ^3.1.0
   shared_preferences: ^2.0.8
 
+  onesignal_flutter: ^5.1.2
+
 dev_dependencies:
-#  flutter_native_splash: ^2.2.4
+
 
 
 flutter:
