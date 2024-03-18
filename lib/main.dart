@@ -19,7 +19,9 @@ void main() async {
   await Future.delayed(Duration(seconds: 1));
   FlutterNativeSplash.remove();
 
-    OneSignal.shared.setAppId("de0bc37b-6998-4499-8cc1-b29cad6fa3e5");
+    OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
+
+    
   OneSignal.shared.setNotificationWillShowInForegroundHandler(
       (OSNotificationReceivedEvent event) {});
   OneSignal.shared
