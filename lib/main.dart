@@ -1,6 +1,7 @@
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:upato/NavBarPage.dart';
 import 'package:upato/Screen/actu/actualiter.dart';
+import 'package:upato/Screen/radio.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
      // home: Actualite_Page(),
 //home: Event_Home_Page(),
      //home:     List_Data(),
-     home: OnboardingScreen(),
+     home: MyAppRadio(),
     );
   }
 }

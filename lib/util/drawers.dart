@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upato/Screen/actu/actualiter.dart';
+import 'package:upato/Screen/radio.dart';
 import 'package:upato/event/event.dart';
 import 'package:upato/style.dart';
 
@@ -72,6 +73,12 @@ class Drawers extends StatelessWidget {
         ),
         Card(
           child: ListTile(
+                    onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MyAppRadio()),
+              );
+            },
+            
             title: Text(
               'Live Radio',
               style: TitreStyle,
