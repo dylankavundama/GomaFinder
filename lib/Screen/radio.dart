@@ -31,7 +31,7 @@ class _MyAppRadioState extends State<MyAppRadio> {
   void initRadioPlayer() {
     _radioPlayer.setChannel(
       title: 'Radio Player',
-      url: 'http://stream.zeno.fm/y9y2bhvzs4zuv',
+      url: 'https://kissfm.ice.infomaniak.ch/kissfm-128.mp3',
 
  
       imagePath: 'assets/cover.jpg',
