@@ -21,7 +21,7 @@ class _Autres_PageState extends State<Autres_Page> {
     setState(() {
       _isLoading = true;
     });
-    const url = 'http://192.168.0.13/goma/autres.php';
+    String url = 'http://$Adress_IP/goma/autres.php';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final List resultat = jsonDecode(response.body);

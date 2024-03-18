@@ -179,7 +179,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
                     minScale: 0.1,
                     maxScale: 2.0,
                     child: Image.network(
-                      "http://192.168.0.11/goma/entreprise/" + widget.img,
+                      "http://$Adress_IP/goma/entreprise/" + widget.img,
                       fit: BoxFit.cover,
                       width: screenWidth,
                     ),

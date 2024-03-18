@@ -35,7 +35,7 @@ class Widget_UI extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.23,
             // Enfant : Image
             child: Image.network(
-              "http://192.168.0.13/goma/entreprise/" + image,
+              "http://$Adress_IP/goma/entreprise/" + image,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Center(

@@ -18,7 +18,7 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
 
   Future<void> delrecord(String id) async {
     try {
-      var url = "http://192.168.0.5/goma/goma.php";
+      var url = "http://$Adress_IP/goma/goma.php";
       var result = await http.post(Uri.parse(url), body: {"id": id});
       var reponse = jsonDecode(result.body);
       if (reponse["Success"] == "True") {
@@ -34,7 +34,7 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
   }
 
   Future<void> getrecord() async {
-    var url = "http://192.168.0.5/goma/goma.php";
+    var url = "http://$Adress_IP/goma/goma.php";
     try {
       var response = await http.get(Uri.parse(url));
       setState(() {
@@ -116,7 +116,7 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(0.0),
                             child: Image.network(
-                              "http://192.168.0.5/goma/entreprise/" +
+                              "http://$Adress_IP/goma/entreprise/" +
                                   userdata[index]["image1"],
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.2,

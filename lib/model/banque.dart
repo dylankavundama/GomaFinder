@@ -21,7 +21,7 @@ fetchPosts() async {
   setState(() {
     _isLoading = true;
   });
-  const url = 'http://192.168.0.13/goma/banque.php';
+  var url = 'http://$Adress_IP/goma/banque.php';
   final uri = Uri.parse(url);
   final response = await http.get(uri);
   

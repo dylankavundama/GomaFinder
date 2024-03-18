@@ -31,7 +31,7 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
       });
       return;
     }
-    const url = 'http://192.168.0.13/goma/entreprise.php';
+    var url = "http://$Adress_IP/goma/entreprise.php";
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {
@@ -72,38 +72,38 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                   height: 200,
                 ),
               )
-            :SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(
-                post.length,
-                (index) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return DetailPage(
-                          lat: post[index]['lat'],
-                          long: post[index]['log'],
-                          titre: post[index]['nom'],
-                          site: post[index]['site'],
-                          tel: post[index]['tel'],
-                          desc: post[index]['detail'],
-                          image1: post[index]['image1'],
-                          image2: post[index]['image2'],
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    post.length,
+                    (index) => GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return DetailPage(
+                              lat: post[index]['lat'],
+                              long: post[index]['log'],
+                              titre: post[index]['nom'],
+                              site: post[index]['site'],
+                              tel: post[index]['tel'],
+                              desc: post[index]['detail'],
+                              image1: post[index]['image1'],
+                              image2: post[index]['image2'],
+                            );
+                          }),
                         );
-                      }),
-                    );
-                  },
-                  child: Widget_UI(
-                    desc: post[index]['detail'],
-                    titre: post[index]['nom'],
-                    image: post[index]['image1'],
+                      },
+                      child: Widget_UI(
+                        desc: post[index]['detail'],
+                        titre: post[index]['nom'],
+                        image: post[index]['image1'],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          );
+              );
   }
 }
