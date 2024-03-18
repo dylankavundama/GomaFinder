@@ -19,7 +19,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     _controller = PageController();
 
     super.initState();
-
   }
 
   int _currentPage = 0;
@@ -49,11 +48,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
 
-
   @override
   Widget build(BuildContext context) {
-
-   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
 
     SizeConfig().init(context);
     double width = SizeConfig.screenW!;

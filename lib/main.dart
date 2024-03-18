@@ -1,6 +1,6 @@
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:upato/NavBarPage.dart';
-import 'package:upato/actu/actualiter.dart';
+import 'package:upato/Screen/actu/actualiter.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upato/actu/actualiter.dart';
+import 'package:upato/Screen/actu/actualiter.dart';
 import 'package:upato/event/event.dart';
 import 'package:upato/style.dart';
 

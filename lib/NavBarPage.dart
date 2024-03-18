@@ -1,9 +1,9 @@
 import 'package:upato/ExplorePage.dart';
-import 'package:upato/model/HomePage.dart';
+import 'package:upato/Models/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upato/add/Viewdata.dart';
-import 'package:upato/model/search.dart';
+import 'package:upato/Models/search.dart';
 import 'package:upato/profil/insert_data.dart';
 
 class NavBarPage extends StatefulWidget {

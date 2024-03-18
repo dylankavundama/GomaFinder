@@ -46,6 +46,7 @@ dependencies:
   cached_network_image: ^3.1.0
   shared_preferences: ^2.0.8
   onesignal_flutter: ^3.0.0
+  audioplayers: ^0.20.1
 
 dev_dependencies:
 
