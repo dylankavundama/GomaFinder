@@ -45,8 +45,7 @@ dependencies:
   http: ^0.13.3
   cached_network_image: ^3.1.0
   shared_preferences: ^2.0.8
-
-  onesignal_flutter: ^5.1.2
+  onesignal_flutter: ^3.0.0
 
 dev_dependencies:
 

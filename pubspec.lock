@@ -844,10 +844,10 @@ packages:
     dependency: "direct main"
     description:
       name: onesignal_flutter
-      sha256: "175e75e9611893c395de07c40027f5db28966373f9b1ff276b77d7363aed1fb6"
+      sha256: "0ee42e3be276bddb2c264e68887a43fe59aca2a0f1a3c1bec3ba658dc025ea04"
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.2"
+    version: "3.5.2"
   package_config:
     dependency: transitive
     description:

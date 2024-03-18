@@ -1,3 +1,4 @@
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:upato/NavBarPage.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/detailpage.dart';
@@ -10,7 +11,6 @@ import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
 import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'dart:async';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +18,13 @@ void main() async {
   await Firebase.initializeApp();
   await Future.delayed(Duration(seconds: 1));
   FlutterNativeSplash.remove();
+
+    OneSignal.shared.setAppId("de0bc37b-6998-4499-8cc1-b29cad6fa3e5");
+  OneSignal.shared.setNotificationWillShowInForegroundHandler(
+      (OSNotificationReceivedEvent event) {});
+  OneSignal.shared
+      .promptUserForPushNotificationPermission()
+      .then((accepted) {});
   runApp(const MyApp());
 }
 
