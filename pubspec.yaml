@@ -17,7 +17,7 @@ dependencies:
 
   flutter:
     sdk: flutter
- 
+  supabase_flutter :
   flutter_facebook_auth: 
   flutter_signin_button: 
   google_sign_in:

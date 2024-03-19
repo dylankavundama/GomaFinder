@@ -2,6 +2,7 @@ import 'package:upato/ExplorePage.dart';
 import 'package:upato/Models/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:upato/Screen/podecast/Podcast_Page.dart';
 import 'package:upato/add/Viewdata.dart';
 import 'package:upato/Models/search.dart';
 import 'package:upato/profil/insert_data.dart';
@@ -19,7 +20,8 @@ class _NavBarPageState extends State<NavBarPage> {
   List<Widget> screen = [
     HomePage(),
     Search_Page(),
-    Explorepage(),
+    // Explorepage(),
+    Podcast(),
     // Viewdata(),
     Inset_Data(),
   ];
