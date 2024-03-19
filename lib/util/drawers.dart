@@ -44,24 +44,8 @@ class Drawers extends StatelessWidget {
             trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
-        Card(
-          child: ListTile(
-            title: Text(
-              'Football Club',
-              style: TitreStyle,
-            ),
-            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            title: Text(
-              'Podcast',
-              style: TitreStyle,
-            ),
-            trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
-          ),
-        ),
+
+
         Card(
           child: ListTile(
             title: Text(

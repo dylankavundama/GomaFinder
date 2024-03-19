@@ -14,6 +14,9 @@ class Event_Home_Page extends StatefulWidget {
 }
 
 class _Event_Home_PageState extends State<Event_Home_Page> {
+
+
+  bool    _isLoading = true;
   List userdata = [];
 
   Future<void> delrecord(String id) async {
@@ -40,6 +43,7 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
       setState(() {
         userdata = jsonDecode(response.body);
         print(userdata);
+           _isLoading = false;
       });
     } catch (e) {
       print(e);
@@ -50,6 +54,7 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
     super.initState();
     getrecord();
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +63,16 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: Padding(
+      body: 
+      
+       _isLoading
+        ? Center(
+            child: CircularProgressIndicator(
+              color: CouleurPrincipale,
+            ),
+          )
+        :
+      Padding(
         padding: const EdgeInsets.all(4.0),
         child: RefreshIndicator(
           color: CouleurPrincipale,

@@ -65,7 +65,9 @@ class _NavBarPageState extends State<NavBarPage> {
             NavigationDestination(
               selectedIcon: Icon(Icons.person_3),
               icon: Icon(Icons.person),
-              label: 'Compte',
+          //    label: 'Compte',
+
+          label: 'Moi',
             ),
           ],
         ),
