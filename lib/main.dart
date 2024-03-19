@@ -20,14 +20,14 @@ void main() async {
   await Future.delayed(Duration(seconds: 1));
   FlutterNativeSplash.remove();
 
-    OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
+  //   OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
 
     
-  OneSignal.shared.setNotificationWillShowInForegroundHandler(
-      (OSNotificationReceivedEvent event) {});
-  OneSignal.shared
-      .promptUserForPushNotificationPermission()
-      .then((accepted) {});
+  // OneSignal.shared.setNotificationWillShowInForegroundHandler(
+  //     (OSNotificationReceivedEvent event) {});
+  // OneSignal.shared
+  //     .promptUserForPushNotificationPermission()
+  //     .then((accepted) {});
   runApp(const MyApp());
 }
 
