@@ -1,16 +1,5 @@
-/*
- *  main.dart
- *
- *  Created by Ilya Chirkunov <xc@yar.net> on 28.12.2020.
- */
-
 import 'package:flutter/material.dart';
 import 'package:radio_player/radio_player.dart';
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyAppRadio());
-}
 
 class MyAppRadio extends StatefulWidget {
   @override
@@ -26,14 +15,14 @@ class _MyAppRadioState extends State<MyAppRadio> {
   void initState() {
     super.initState();
     initRadioPlayer();
+    // Lecture automatique dès que l'application démarre
+    _radioPlayer.play();
   }
 
   void initRadioPlayer() {
     _radioPlayer.setChannel(
       title: 'Radio Player',
       url: 'https://kissfm.ice.infomaniak.ch/kissfm-128.mp3',
-
- 
       imagePath: 'assets/cover.jpg',
     );
 

@@ -18,6 +18,7 @@ import 'package:upato/Models/media.dart';
 import 'package:upato/Models/mode.dart';
 import 'package:upato/Models/ong.dart';
 import 'package:upato/Models/resto.dart';
+import 'package:upato/Models/salle.dart';
 import 'package:upato/Models/tech.dart';
 import 'package:upato/Models/voyage.dart';
 import 'package:upato/style.dart';
@@ -109,9 +110,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-
-
-        // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.green,
@@ -156,6 +155,8 @@ class _HomePageState extends State<HomePage>
                   Tab(text: 'Tous'),
                   Tab(text: 'Ecole'),
                   Tab(text: 'Bureau'),
+                  Tab(text: 'Salle'),
+
                   Tab(text: 'Restaurant'),
                   Tab(text: 'Hotel'), //
                   Tab(text: 'Commerce'), //
@@ -174,16 +175,16 @@ class _HomePageState extends State<HomePage>
               pinned: true,
               expandedHeight: 111.0,
               flexibleSpace: FlexibleSpaceBar(
-                //   background: Image.network(
-                //     "",
-                //  //  "https://images.pexels.com/photos/1670045/pexels-photo-1670045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-                //     fit: BoxFit.cover,
-                //   ),
+                  //   background: Image.network(
+                  //     "",
+                  //  //  "https://images.pexels.com/photos/1670045/pexels-photo-1670045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                  //     fit: BoxFit.cover,
+                  //   ),
 
-                // background: Container(
-                //   child: Image.asset('assets/images/logo.png'),
-                // ),
-              ),
+                  // background: Container(
+                  //   child: Image.asset('assets/images/logo.png'),
+                  // ),
+                  ),
             ),
           ];
         },
@@ -193,6 +194,7 @@ class _HomePageState extends State<HomePage>
             Entreprise_Page(),
             Ecole_Page(),
             Bureau_Page(),
+              Salle_Page(),
             Resto_Page(),
             Commerce_Page(),
             Hotel_Page(),
