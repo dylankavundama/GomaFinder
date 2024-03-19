@@ -1,6 +1,6 @@
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:upato/NavBarPage.dart';
-import 'package:upato/Screen/actu/actualiter.dart';
 import 'package:upato/Screen/radio.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,15 +19,18 @@ void main() async {
   await Firebase.initializeApp();
   await Future.delayed(Duration(seconds: 1));
   FlutterNativeSplash.remove();
-
-  //   OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
+  await Supabase.initialize(
+      url: 'https://rggeeykubskxurwxclwl.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnZ2VleWt1YnNreHVyd3hjbHdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg4NzQ4NzIsImV4cCI6MjAxNDQ1MDg3Mn0.G9wWmL6bFPFFrO3tTvYtRjqwrNkr26RVWGskSxSAHx4');
+    OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
 
     
-  // OneSignal.shared.setNotificationWillShowInForegroundHandler(
-  //     (OSNotificationReceivedEvent event) {});
-  // OneSignal.shared
-  //     .promptUserForPushNotificationPermission()
-  //     .then((accepted) {});
+  OneSignal.shared.setNotificationWillShowInForegroundHandler(
+      (OSNotificationReceivedEvent event) {});
+  OneSignal.shared
+      .promptUserForPushNotificationPermission()
+      .then((accepted) {});
   runApp(const MyApp());
 }
 
@@ -50,9 +53,9 @@ class MyApp extends StatelessWidget {
      // home: Actualite_Page(),
 //home: Event_Home_Page(),
      //home:     List_Data(),
-     //home: OnboardingScreen(),
+    home: OnboardingScreen(),
 
-     home: MyAppRadio(),
+  
     );
   }
 }

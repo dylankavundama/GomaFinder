@@ -33,4 +33,4 @@ TextStyle DescStyle = GoogleFonts.abel(
     fontSize: 18,
     color: Colors.black);
 
-String Adress_IP = '192.168.1.76';
+String Adress_IP = '192.168.0.11';

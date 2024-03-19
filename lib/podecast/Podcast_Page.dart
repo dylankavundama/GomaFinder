@@ -28,12 +28,13 @@ class _PodcastState extends State<Podcast> {
   void initState() {
     super.initState();
     audioPlayer = AudioPlayer();
+      //audioPlayer.notificationService.setNotification;
     init();
   }
 
   @override
   void dispose() {
-    audioPlayer.stop(); // Arrêter la lecture lorsque le widget est supprimé
+   // audioPlayer.notificationService; // Arrêter la lecture lorsque le widget est supprimé
     super.dispose();
   }
 
@@ -114,9 +115,9 @@ class _PodcastState extends State<Podcast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Podcast'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Podcast'),
+      // ),
       body: SingleChildScrollView(
         child: Stack(
           children: [
