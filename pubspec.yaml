@@ -23,7 +23,7 @@ dependencies:
   flutter_signin_button: 
   google_sign_in:
   google_sign_in_dartio: 
-  barcode_widget: 
+  # barcode_widget: 
   firebase_auth: 
   firebase_core: 
   fluttertoast:
@@ -33,13 +33,13 @@ dependencies:
   flutter_native_splash: ^2.2.4
   google_mobile_ads: ^3.1.0
   google_fonts: ^4.0.4
-  shimmer: ^3.0.0
-  carousel_slider:
+  # shimmer: ^3.0.0
+  # carousel_slider:
   url_launcher:
   geolocator: ^8.2.1
   google_maps_flutter:
   image_picker :
-  image_cropper:
+  # image_cropper:
   share:
   connectivity:
   flutter_svg:
