@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:upato/style.dart';
 
 class Podcast extends StatefulWidget {
   const Podcast({Key? key}) : super(key: key);
@@ -28,13 +28,13 @@ class _PodcastState extends State<Podcast> {
   void initState() {
     super.initState();
     audioPlayer = AudioPlayer();
-      //audioPlayer.notificationService.setNotification;
+    //audioPlayer.notificationService.setNotification;
     init();
   }
 
   @override
   void dispose() {
-   // audioPlayer.notificationService; // Arrêter la lecture lorsque le widget est supprimé
+    // audioPlayer.notificationService; // Arrêter la lecture lorsque le widget est supprimé
     super.dispose();
   }
 
@@ -83,8 +83,10 @@ class _PodcastState extends State<Podcast> {
         .from('cktvPodcast')
         .select()
         .order('id', ascending: false)
+        // ignore: deprecated_member_use
         .execute()
         .then((response) => response.data as List)
+        // ignore: invalid_return_type_for_catch_error
         .catchError((error) => print('Error fetching songs: $error'));
 
     if (data.isNotEmpty) {
@@ -143,7 +145,11 @@ class _PodcastState extends State<Podcast> {
             ),
             Container(
               child: isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: CouleurPrincipale,
+                      ),
+                    )
                   : Padding(
                       padding: const EdgeInsets.only(top: 22),
                       child: Column(
