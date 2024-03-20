@@ -116,6 +116,12 @@ class _PodcastState extends State<Podcast> {
   @override
   @override
   Widget build(BuildContext context) {
+        SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.green,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
       // appBar: AppBar(
       //   title: Text('Podcast'),
