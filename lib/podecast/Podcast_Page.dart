@@ -117,17 +117,29 @@ class _PodcastState extends State<Podcast> {
   @override
   @override
   Widget build(BuildContext context) {
-        SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.green,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
+    //     SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(
+    //     statusBarColor: Colors.green,
+    //     statusBarBrightness: Brightness.light,
+    //   ),
+    // );
     return Scaffold(
+      
       // appBar: AppBar(
       //   title: Text('Podcast'),
       // ),
-      body: SingleChildScrollView(
+      body:
+      
+      isLoading
+                  ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: CircularProgressIndicator(
+                        color: CouleurPrincipale,
+                      ),
+                    ),
+                  ) :
+       SingleChildScrollView(
         child: Stack(
           children: [
             // Image de fond avec effet de flou
@@ -151,13 +163,8 @@ class _PodcastState extends State<Podcast> {
               ),
             ),
             Container(
-              child: isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(
-                        color: CouleurPrincipale,
-                      ),
-                    )
-                  : Padding(
+              child: 
+                  Padding(
                       padding: const EdgeInsets.only(top: 22),
                       child: Column(
                         children: [

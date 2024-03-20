@@ -43,7 +43,7 @@ class _Hopital_PageState extends State<Hopital_Page> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+ 
 
     return _isLoading
         ? Center(

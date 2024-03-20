@@ -13,12 +13,12 @@ class _ExplorepageState extends State<Explorepage> {
   Widget build(BuildContext context) {
 
         // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.green,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(
+    //     statusBarColor: Colors.green,
+    //     statusBarBrightness: Brightness.light,
+    //   ),
+    // );
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: CouleurPrincipale),

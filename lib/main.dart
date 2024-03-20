@@ -23,14 +23,25 @@ void main() async {
       url: 'https://rggeeykubskxurwxclwl.supabase.co',
       anonKey:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnZ2VleWt1YnNreHVyd3hjbHdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg4NzQ4NzIsImV4cCI6MjAxNDQ1MDg3Mn0.G9wWmL6bFPFFrO3tTvYtRjqwrNkr26RVWGskSxSAHx4');
-    OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
+  //   OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
 
     
-  OneSignal.shared.setNotificationWillShowInForegroundHandler(
-      (OSNotificationReceivedEvent event) {});
-  OneSignal.shared
-      .promptUserForPushNotificationPermission()
-      .then((accepted) {});
+  // OneSignal.shared.setNotificationWillShowInForegroundHandler(
+  //     (OSNotificationReceivedEvent event) {});
+  // OneSignal.shared
+  //     .promptUserForPushNotificationPermission()
+  //     .then((accepted) {});
+        //   SystemChrome.setEnabledSystemUIMode(
+  //   SystemUiMode.manual,
+  //   overlays: [],
+  // );
+
+    //       SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(
+    //     statusBarColor: Colors.green,
+    //     statusBarBrightness: Brightness.light,
+    //   ),
+    // );
   runApp(const MyApp());
 }
 

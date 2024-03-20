@@ -43,7 +43,7 @@ class _Tech_PageState extends State<Tech_Page> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+ 
 
     return _isLoading
         ? Center(

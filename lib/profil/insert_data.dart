@@ -190,12 +190,12 @@ class _Inset_DataState extends State<Inset_Data> {
 
     final sreenw = MediaQuery.of(context).size.width;
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.green,
-        statusBarBrightness: Brightness.light,
-      ),
-    );
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(
+    //     statusBarColor: Colors.green,
+    //     statusBarBrightness: Brightness.light,
+    //   ),
+    // );
     return SingleChildScrollView(
       child: Material(
         clipBehavior: Clip.antiAlias,

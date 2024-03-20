@@ -43,7 +43,7 @@ class _Bureau_PageState extends State<Bureau_Page> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+ 
 
     return _isLoading
         ? Center(

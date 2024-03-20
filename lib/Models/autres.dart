@@ -45,7 +45,7 @@ class _Autres_PageState extends State<Autres_Page> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
 
     return _isLoading
         ? Center(

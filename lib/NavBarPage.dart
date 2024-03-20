@@ -3,6 +3,7 @@ import 'package:upato/Models/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upato/Models/search.dart';
+import 'package:upato/login/main.dart';
 import 'package:upato/podecast/Podcast_Page.dart';
 import 'package:upato/profil/insert_data.dart';
 
@@ -22,19 +23,19 @@ class _NavBarPageState extends State<NavBarPage> {
     // Explorepage(),
     Podcast(),
     // Viewdata(),
-    
+    HomeLogin(),
     Inset_Data(),
   ];
 
   @override
   Widget build(BuildContext context) {
     //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarBrightness: Brightness.dark,
-      ),
-    );
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(
+    //     statusBarColor: Colors.white,
+    //     statusBarBrightness: Brightness.dark,
+    //   ),
+    // );
     return SafeArea(
       child: Scaffold(
         bottomSheet: screen[currentindex],

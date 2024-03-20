@@ -43,7 +43,7 @@ class _Hotel_PageState extends State<Hotel_Page> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+ 
 
     return _isLoading
         ? Center(
