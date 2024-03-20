@@ -50,6 +50,9 @@ dependencies:
   audioplayers: ^0.20.1
   flutter_radio_player:
   radio_player:
+  provider:
+  flutter_localization: ^0.1.14
+
 dev_dependencies:
 
 

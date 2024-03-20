@@ -1,4 +1,5 @@
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upato/NavBarPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,10 +16,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   late PageController _controller;
 
   @override
+
+
+  @override
   void initState() {
     _controller = PageController();
-
+    _controller = PageController();
     super.initState();
+    _checkIfOnboardingCompleted(); // Vérifiez si l'onboarding est déjà terminé
+  }
+
+  _checkIfOnboardingCompleted() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool onboardingCompleted = prefs.getBool('onboardingCompleted') ?? false;
+    if (onboardingCompleted) {
+      // Si l'onboarding est déjà terminé, naviguez vers la page suivante
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => NavBarPage()),
+      );
+    }
+  }
+
+  _markOnboardingAsCompleted() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(
+        'onboardingCompleted', true); // Marquez l'onboarding comme terminé
   }
 
   int _currentPage = 0;
@@ -124,10 +147,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
+                              _markOnboardingAsCompleted(); // Marquez l'onboarding comme terminé
                               Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => NavBarPage()));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NavBarPage()),
+                              );
                             },
                             child: const Text(
                               "START",

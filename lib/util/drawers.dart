@@ -4,10 +4,21 @@ import 'package:upato/event/event.dart';
 import 'package:upato/podecast/Podcast_Page.dart';
 import 'package:upato/style.dart';
 
-class Drawers extends StatelessWidget {
-  const Drawers({
-    super.key,
-  });
+class Drawers extends StatefulWidget {
+  const Drawers({Key? key}) : super(key: key);
+
+  @override
+  _DrawersState createState() => _DrawersState();
+}
+
+class _DrawersState extends State<Drawers> {
+  bool _isDarkMode = false;
+
+  void _toggleDarkMode() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +96,16 @@ class Drawers extends StatelessWidget {
               style: TitreStyle,
             ),
             trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
+          ),
+        ),
+        Card(
+          child: ListTile(
+            onTap: _toggleDarkMode,
+            title: Text(
+              _isDarkMode ? 'Mode Clair' : 'Mode Sombre',
+              style: TitreStyle,
+            ),
+            trailing: Icon(Icons.lightbulb, color: _isDarkMode ? Colors.white : Colors.black),
           ),
         ),
       ]),
