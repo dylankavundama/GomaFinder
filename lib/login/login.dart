@@ -26,7 +26,8 @@ class _LoginHomeState extends State<LoginHome> {
 
     if (isLoggedIn) {
       // Si l'utilisateur est déjà connecté, naviguez vers la page de profil
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Inset_Data()));
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Inset_Data()));
     } else {
       // Sinon, l'utilisateur doit se connecter
       setState(() {
@@ -52,10 +53,10 @@ class _LoginHomeState extends State<LoginHome> {
                 child: Text(
                   '',
                   style: Theme.of(context).textTheme.headline4?.copyWith(
-                    color: Colors.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
               ),
               const Padding(
@@ -81,20 +82,20 @@ class _LoginHomeState extends State<LoginHome> {
               _inLoginProcess
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton.icon(
-                onPressed: () => signIn(context),
-                icon: Image.asset(
-                  'assets/g.png', // Remplacez par votre propre icône de Google
-                  height: 24.0,
-                ),
-                label: const Text('Veuillez vous identifier'),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
-                  onPrimary: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ),
+                      onPressed: () => signIn(context),
+                      icon: Image.asset(
+                        'assets/g.png', // Remplacez par votre propre icône de Google
+                        height: 24.0,
+                      ),
+                      label: const Text('Veuillez vous identifier'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ),
             ],
           ),
         ),

@@ -34,6 +34,7 @@ class _Inset_DataState extends State<Inset_Data> {
     super.initState();
   }
 
+  void dispose() {}
   late String idenseu;
   var selectens;
 
@@ -222,33 +223,34 @@ class _Inset_DataState extends State<Inset_Data> {
                   style: TitreStyle,
                 )),
               ),
-
-                     Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-           CircleAvatar(
-              backgroundImage: user?.photoURL != null
-                  ? NetworkImage(user!.photoURL!) as ImageProvider<Object>?
-                  : AssetImage('assets/default_avatar.png') as ImageProvider<Object>?,
-              radius: 50,
-            ),
-                const SizedBox(height: 20),
-                Text(
-                  'Nom: ${user?.displayName ?? "Non défini"}',
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'E-mail: ${user?.email ?? "Non défini"}',
-                  style: TextStyle(fontSize: 20),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'Numéro de téléphone: ${user?.phoneNumber ?? "Non défini"}',
-                  style: TextStyle(fontSize: 20),
-                ),
-              ],
-            ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: user?.photoURL != null
+                        ? NetworkImage(user!.photoURL!)
+                            as ImageProvider<Object>?
+                        : AssetImage('assets/default_avatar.png')
+                            as ImageProvider<Object>?,
+                    radius: 50,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Nom: ${user?.displayName ?? "Non défini"}',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'E-mail: ${user?.email ?? "Non défini"}',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Numéro de téléphone: ${user?.phoneNumber ?? "Non défini"}',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 6),
                 child: Stack(
@@ -357,11 +359,10 @@ class _Inset_DataState extends State<Inset_Data> {
                 padding: EdgeInsets.only(top: 5),
               ),
               Container(
-                  width: sreenw,
+                width: sreenw,
                 height: 44,
-                decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5)
-                ),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(5)),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     //   foregroundColor: Colors.white,
@@ -507,8 +508,8 @@ class _Inset_DataState extends State<Inset_Data> {
                       lat: lat,
                       log: long,
                     )).then((value) {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => NavBarPage()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => NavBarPage()));
                     }).whenComplete(() {
                       setState(() {
                         _isLoading = false;
