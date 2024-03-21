@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:upato/actu/detail_actu_page.dart';
-import 'package:upato/profil/insert_data.dart';
 import 'package:upato/style.dart';
 
 class Event_Home_Page extends StatefulWidget {

@@ -36,6 +36,9 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+
+            <!-- actu cd -->
+
                                        <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7329797350611067~4995177000"/>

@@ -156,7 +156,6 @@ class _HomePageState extends State<HomePage>
                   Tab(text: 'Ecole'),
                   Tab(text: 'Bureau'),
                   Tab(text: 'Salle'),
-
                   Tab(text: 'Restaurant'),
                   Tab(text: 'Hotel'), //
                   Tab(text: 'Commerce'), //

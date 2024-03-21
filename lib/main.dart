@@ -36,12 +36,12 @@ void main() async {
   //   overlays: [],
   // );
 
-    //       SystemChrome.setSystemUIOverlayStyle(
-    //   SystemUiOverlayStyle(
-    //     statusBarColor: Colors.green,
-    //     statusBarBrightness: Brightness.light,
-    //   ),
-    // );
+  //       SystemChrome.setSystemUIOverlayStyle(
+  //   SystemUiOverlayStyle(
+  //     statusBarColor: Colors.green,
+  //     statusBarBrightness: Brightness.light,
+  //   ),
+  // );
   runApp(const MyApp());
 }
 
