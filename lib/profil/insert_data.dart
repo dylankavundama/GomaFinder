@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -187,7 +188,7 @@ class _Inset_DataState extends State<Inset_Data> {
   @override
   Widget build(BuildContext context) {
     final sreenh = MediaQuery.of(context).size.height;
-
+    User? user = FirebaseAuth.instance.currentUser;
     final sreenw = MediaQuery.of(context).size.width;
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     // SystemChrome.setSystemUIOverlayStyle(
@@ -221,6 +222,33 @@ class _Inset_DataState extends State<Inset_Data> {
                   style: TitreStyle,
                 )),
               ),
+
+                     Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+           CircleAvatar(
+              backgroundImage: user?.photoURL != null
+                  ? NetworkImage(user!.photoURL!) as ImageProvider<Object>?
+                  : AssetImage('assets/default_avatar.png') as ImageProvider<Object>?,
+              radius: 50,
+            ),
+                const SizedBox(height: 20),
+                Text(
+                  'Nom: ${user?.displayName ?? "Non défini"}',
+                  style: TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'E-mail: ${user?.email ?? "Non défini"}',
+                  style: TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Numéro de téléphone: ${user?.phoneNumber ?? "Non défini"}',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
               Padding(
                 padding: const EdgeInsets.only(top: 6),
                 child: Stack(

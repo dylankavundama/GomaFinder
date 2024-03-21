@@ -1,24 +1,39 @@
-// ignore_for_file: library_private_types_in_public_api
-
-import 'dart:async';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:upato/login/authServices.dart';
-
 import 'package:upato/profil/insert_data.dart';
 import 'package:upato/style.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class Login_Home extends StatefulWidget {
-  const Login_Home({Key? key}) : super(key: key);
+class LoginHome extends StatefulWidget {
+  const LoginHome({Key? key}) : super(key: key);
 
   @override
-  _Login_HomeState createState() => _Login_HomeState();
+  _LoginHomeState createState() => _LoginHomeState();
 }
 
-class _Login_HomeState extends State<Login_Home> {
-  bool inLogin_HomeProcess = false;
+class _LoginHomeState extends State<LoginHome> {
+  bool _isLoggedIn = false;
+  bool _inLoginProcess = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  Future<void> checkLoginStatus() async {
+    // Vérifier si l'utilisateur est déjà connecté (implémentation dépendante de votre système d'authentification)
+    bool isLoggedIn = await AuthService().isLoggedIn(); // Exemple hypothétique
+
+    if (isLoggedIn) {
+      // Si l'utilisateur est déjà connecté, naviguez vers la page de profil
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Inset_Data()));
+    } else {
+      // Sinon, l'utilisateur doit se connecter
+      setState(() {
+        _isLoggedIn = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +50,12 @@ class _Login_HomeState extends State<Login_Home> {
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Text(
-        '',
-                  //  textAlign: TextAlign.center,
+                  '',
                   style: Theme.of(context).textTheme.headline4?.copyWith(
-                        color: Colors.black
-                        ,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const Padding(
@@ -50,42 +63,38 @@ class _Login_HomeState extends State<Login_Home> {
               ),
               const Center(
                 child: Text(
-                "Veuillez vous identifier avant d'ajouter une entreprise",
-                  style: TextStyle(color: Colors.black),
+                  " ",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 55),
               ),
               Image.asset(
-                  height: 280.0,
-                  width: MediaQuery.of(context).size.width,
-                  'assets/images/image3.png'),
-              inLogin_HomeProcess
+                'assets/images/image3.png',
+                height: 280.0,
+                width: MediaQuery.of(context).size.width,
+              ),
+              _inLoginProcess
                   ? const Center(child: CircularProgressIndicator())
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: () => signIn(context),
-                          icon: Image.asset(
-                            'assets/g.png', // Remplacez par votre propre icône de Google
-                            height: 24.0,
-                          ),
-                          label: Text('Connectez-vous avec Google'),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.white,
-                            onPrimary: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
- 
-  
+                  : ElevatedButton.icon(
+                onPressed: () => signIn(context),
+                icon: Image.asset(
+                  'assets/g.png', // Remplacez par votre propre icône de Google
+                  height: 24.0,
+                ),
+                label: const Text('Veuillez vous identifier'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  onPrimary: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -93,40 +102,18 @@ class _Login_HomeState extends State<Login_Home> {
     );
   }
 
-  Future signIn(BuildContext context) async {
-    if (kIsWeb) {
-      setState(() {
-        inLogin_HomeProcess = true;
-        AuthService().signInWithGoogle();
-      });
-    } else {
-      try {
-        final result = await InternetAddress.lookup('google.com');
-        if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-          setState(() async {
-            inLogin_HomeProcess = true;
-            AuthService().signInWithGoogle().then(
-              (value) {
-                debugPrint("===============================================");
-                debugPrint("User : ${value.user!.email}");
-                if (value.user != null) {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Inset_Data()),
-                  );
-                }
-              },
-            );
-          });
-        }
-      } on SocketException catch (_) {
-        showNotification(context, 'Aucune connexion internet');
-      }
-    }
-  }
-}
+  Future<void> signIn(BuildContext context) async {
+    setState(() {
+      _inLoginProcess = true;
+    });
 
-void showNotification(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text(message)),
-  );
+    await AuthService().signInWithGoogle();
+
+    setState(() {
+      _inLoginProcess = false;
+    });
+
+    // Vérifier à nouveau l'état de connexion après la connexion
+    await checkLoginStatus();
+  }
 }

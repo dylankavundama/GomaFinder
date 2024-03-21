@@ -3,7 +3,15 @@
   import 'package:google_sign_in/google_sign_in.dart';
 
   class AuthService {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
+
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Méthode pour vérifier si l'utilisateur est déjà connecté
+  Future<bool> isLoggedIn() async {
+    final user = _auth.currentUser;
+    return user != null;
+  }
+  
     final GoogleSignIn _googleSignIn = GoogleSignIn();
     GoogleAuthProvider googleProvider = GoogleAuthProvider();
 
@@ -35,4 +43,6 @@
       _googleSignIn.signOut();
       return _auth.signOut();
     }
+
+
   }

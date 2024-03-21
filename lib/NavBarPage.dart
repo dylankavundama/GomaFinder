@@ -23,7 +23,7 @@ class _NavBarPageState extends State<NavBarPage> {
     // Explorepage(),
     Podcast(),
     // Viewdata(),
-    Login_Home(),
+    LoginHome(),
   ];
 
   @override
