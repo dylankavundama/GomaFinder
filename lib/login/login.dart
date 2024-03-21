@@ -35,7 +35,7 @@ class _Login_HomeState extends State<Login_Home> {
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Text(
-          "Veuillez vous identifier avant d'ajouter une entreprise",
+        '',
                   //  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headline4?.copyWith(
                         color: Colors.black
@@ -50,8 +50,8 @@ class _Login_HomeState extends State<Login_Home> {
               ),
               const Center(
                 child: Text(
-                  'V',
-                  style: TextStyle(color: Colors.white),
+                "Veuillez vous identifier avant d'ajouter une entreprise",
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
               const Padding(
@@ -84,31 +84,8 @@ class _Login_HomeState extends State<Login_Home> {
                         ),
                       ],
                     ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.09,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(30.0),
-                child: Text(
-                    //  "By registering,you agree to gayux Terms of use and privacy policy",
-                    "En vous inscrivant,vous acceptez\nLes conditions d'utilisation et la politique de confidentialité de Gayux",
-                    style: TextStyle(color: Colors.white54)),
-              ),
-              GestureDetector(
-                // onTap: () {
-                //   Navigator.of(context)
-                //       .push(MaterialPageRoute(builder: (context) => condition()));
-                // },
-                onTap: () {
-                  launch(
-                      'https://github.com/dylankavundama/policy-privacy/blob/main/privacy-policy.md');
-                },
-                child: Text(
-                  //    "Lire les conditions",
-                  "PRIVACY POLICY",
-                  style: TextStyle(color: CouleurPrincipale),
-                ),
-              )
+ 
+  
             ],
           ),
         ),
