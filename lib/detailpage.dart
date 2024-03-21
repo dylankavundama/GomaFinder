@@ -1,4 +1,6 @@
+import 'dart:io';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,6 +30,60 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   bool fav = false;
+
+  //banniere actu
+  BannerAd? _bannerAd;
+
+  bool _isLoaded = false;
+
+  final String _adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-7329797350611067/5003791578'
+      : 'ca-app-pub-7329797350611067/5003791578';
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _isLoaded = false;
+    _loadAd();
+  }
+
+  void _loadAd() async {
+    final size = await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+        MediaQuery.of(context).size.width.truncate());
+
+    if (size == null) {
+      return;
+    }
+
+    BannerAd(
+      adUnitId: _adUnitId,
+      request: const AdRequest(),
+      size: size,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+            _isLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          ad.dispose();
+        },
+        onAdOpened: (Ad ad) {},
+        onAdClosed: (Ad ad) {},
+        onAdImpression: (Ad ad) {},
+      ),
+    ).load();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,8 +135,8 @@ class _DetailPageState extends State<DetailPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                          "http://$Adress_IP/goma/entreprise/"+
-                                          widget.image1,
+                                          "http://$Adress_IP/goma/entreprise/" +
+                                              widget.image1,
                                         ),
                                         fit: BoxFit.cover,
                                       ),
@@ -93,8 +149,8 @@ class _DetailPageState extends State<DetailPage> {
                           child: Container(
                             height: 300,
                             child: Image.network(
-                              "http://$Adress_IP/goma/entreprise/"+
-                              widget.image1,
+                              "http://$Adress_IP/goma/entreprise/" +
+                                  widget.image1,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -111,10 +167,8 @@ class _DetailPageState extends State<DetailPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                          
-                                          
-                                               "http://$Adress_IP/goma/entreprise/"+
-                                          widget.image2),
+                                            "http://$Adress_IP/goma/entreprise/" +
+                                                widget.image2),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -126,8 +180,8 @@ class _DetailPageState extends State<DetailPage> {
                           child: Container(
                             height: 300,
                             child: Image.network(
-                              "http://$Adress_IP/goma/entreprise/"+
-                              widget.image2,
+                              "http://$Adress_IP/goma/entreprise/" +
+                                  widget.image2,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -201,6 +255,21 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       SizedBox(
                         height: 8,
+                      ),
+                      Stack(
+                        children: [
+                          if (_bannerAd != null && _isLoaded)
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: SafeArea(
+                                child: SizedBox(
+                                  width: _bannerAd!.size.width.toDouble(),
+                                  height: _bannerAd!.size.height.toDouble(),
+                                  child: AdWidget(ad: _bannerAd!),
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
                       Text("Localisation",
                           style: TextStyle(
