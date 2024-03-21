@@ -5,24 +5,25 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:upato/login/authServices.dart';
+
 import 'package:upato/profil/insert_data.dart';
 import 'package:upato/style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Login_Home extends StatefulWidget {
+  const Login_Home({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _Login_HomeState createState() => _Login_HomeState();
 }
 
-class _LoginState extends State<Login> {
-  bool inLoginProcess = false;
+class _Login_HomeState extends State<Login_Home> {
+  bool inLogin_HomeProcess = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -34,10 +35,11 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Text(
-                  'Films,Animations et Documentaires en Illimités',
+          "Veuillez vous identifier avant d'ajouter une entreprise",
                   //  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headline4?.copyWith(
-                        color: Colors.white,
+                        color: Colors.black
+                        ,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -48,7 +50,7 @@ class _LoginState extends State<Login> {
               ),
               const Center(
                 child: Text(
-                  'Laissez vous emporter',
+                  'V',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -58,8 +60,8 @@ class _LoginState extends State<Login> {
               Image.asset(
                   height: 280.0,
                   width: MediaQuery.of(context).size.width,
-                  'assets/brand.png'),
-              inLoginProcess
+                  'assets/images/image3.png'),
+              inLogin_HomeProcess
                   ? const Center(child: CircularProgressIndicator())
                   : Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,7 +119,7 @@ class _LoginState extends State<Login> {
   Future signIn(BuildContext context) async {
     if (kIsWeb) {
       setState(() {
-        inLoginProcess = true;
+        inLogin_HomeProcess = true;
         AuthService().signInWithGoogle();
       });
     } else {
@@ -125,15 +127,14 @@ class _LoginState extends State<Login> {
         final result = await InternetAddress.lookup('google.com');
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
           setState(() async {
-            inLoginProcess = true;
+            inLogin_HomeProcess = true;
             AuthService().signInWithGoogle().then(
               (value) {
                 debugPrint("===============================================");
                 debugPrint("User : ${value.user!.email}");
                 if (value.user != null) {
                   Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const Inset_Data()),
+                    MaterialPageRoute(builder: (context) => const Inset_Data()),
                   );
                 }
               },

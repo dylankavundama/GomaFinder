@@ -1,3 +1,4 @@
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:upato/NavBarPage.dart';
@@ -15,7 +16,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
   await Future.delayed(Duration(seconds: 1));
   FlutterNativeSplash.remove();
@@ -25,13 +25,12 @@ void main() async {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnZ2VleWt1YnNreHVyd3hjbHdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg4NzQ4NzIsImV4cCI6MjAxNDQ1MDg3Mn0.G9wWmL6bFPFFrO3tTvYtRjqwrNkr26RVWGskSxSAHx4');
   //   OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
 
-    
   // OneSignal.shared.setNotificationWillShowInForegroundHandler(
   //     (OSNotificationReceivedEvent event) {});
   // OneSignal.shared
   //     .promptUserForPushNotificationPermission()
   //     .then((accepted) {});
-        //   SystemChrome.setEnabledSystemUIMode(
+  //   SystemChrome.setEnabledSystemUIMode(
   //   SystemUiMode.manual,
   //   overlays: [],
   // );
@@ -61,12 +60,10 @@ class MyApp extends StatelessWidget {
           accentColor: CouleurPrincipale, // Accent color for the app
           useMaterial3: false),
       debugShowCheckedModeBanner: false,
-     // home: Actualite_Page(),
+      // home: Actualite_Page(),
 //home: Event_Home_Page(),
-     //home:     List_Data(),
-    home: OnboardingScreen(),
-
-  
+      //home:     List_Data(),
+      home: OnboardingScreen(),
     );
   }
 }
