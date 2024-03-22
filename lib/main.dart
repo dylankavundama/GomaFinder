@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -15,6 +16,12 @@ import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  AssetsAudioPlayer.setupNotificationsOpenAction((notification) {
+    return true;
+  });
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Future.delayed(Duration(seconds: 1));
