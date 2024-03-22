@@ -1,32 +1,36 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:upato/style.dart';
 
 class SongCard extends StatelessWidget {
   final Song song;
 
-  SongCard({required this.song});
+  const SongCard({required this.song});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.network(song.image),
+      onTap: () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlayerView(song: song),
+          ),
+        );
+      },
+      leading: CircleAvatar(
+          radius: 30,
+          backgroundColor: Colors.white,
+          child: Image.network(song.image)),
       title:
           Text(song.titre, style: TextStyle(color: Colors.black, fontSize: 15)),
       subtitle: Text(song.date,
           style: GoogleFonts.abel(color: Colors.black, fontSize: 13)),
-      trailing: IconButton(
-        icon: Icon(Icons.play_arrow, color: Colors.orange),
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PlayerView(song: song),
-            ),
-          );
-        },
-      ),
+      trailing: Icon(Icons.play_arrow, color: CouleurPrincipale),
     );
   }
 }
@@ -83,18 +87,124 @@ class _PlayerViewState extends State<PlayerView> {
         appBar: AppBar(
           title: Text(widget.song.titre),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        body: SingleChildScrollView(
+          child: Stack(
             children: [
-              // Display song details
-              Text(widget.song.titre, style: const TextStyle(fontSize: 20)),
-              Text(widget.song.date),
-
-              // Play/Pause button
-              IconButton(
-                icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-                onPressed: playOrPause,
+              // Image de fond avec effet de flou
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(widget.song
+                        .image), // Utilisez l'image de l'audio en cours de lecture
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                      sigmaX: 5, sigmaY: 5), // Paramètres de flou
+                  child: Container(
+                    color: Colors.black.withOpacity(
+                        0.5), // Opacité pour rendre le flou plus visible
+                  ),
+                ),
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 22),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 300),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.1,
+                          width: MediaQuery.of(context).size.width,
+                          child: Image.network(
+                              'https://media1.giphy.com/media/C8xhW9gBu5ToGl7vgs/200.gif?cid=6c09b952kwhbv9fgo8bo1yrbgpwblq5t8pkg555yze481458&ep=v1_internal_gif_by_id&rid=200.gif&ct=s'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 444, // Hauteur de votre image carrousel
+                          child: PageView.builder(
+                            itemCount: 1,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 300, // Nouvelle hauteur de l'image
+                                // decoration: BoxDecoration(
+                                //   border: Border.all(color: Colors.white, width: 2), // Bordure de l'image
+                                // ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Arrondi des coins
+                                  child: Image.network(
+                                    (widget.song.image),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 40, left: 40, bottom: 20, top: 30),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: const LinearProgressIndicator(
+                                value: 0.7,
+                                backgroundColor: Color(0xff22242A),
+                                color: Color(0xff3F51FC),
+                                semanticsLabel: 'Progress',
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Card(
+                              color: Colors.black12,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  // IconButton(
+                                  //   icon: const Icon(Icons.skip_previous),
+                                  //   onPressed: prevSong,
+                                  //   color: Colors.white60,
+                                  //   iconSize: 36,
+                                  // ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  IconButton(
+                                    icon: Icon(isPlaying
+                                        ? Icons.pause_circle_outline
+                                        : Icons.play_circle_outline),
+                                    onPressed: playOrPause,
+                                    color: Colors.white60,
+                                    iconSize: 60,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                   
+                                ],
+                              ),
+                            ),
+                            Text(
+                              " Vous écoutez ${widget.song.titre}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
@@ -212,78 +322,70 @@ class _PodcastState extends State<Podcast> {
         child: Padding(
           padding:
               const EdgeInsets.only(right: 40, left: 40, bottom: 20, top: 30),
-          child: Container(
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
-                  child: const LinearProgressIndicator(
-                    value: 0.7,
-                    backgroundColor: Color(0xff22242A),
-                    color: Color(0xff3F51FC),
-                    semanticsLabel: 'Progress',
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: const LinearProgressIndicator(
+                  value: 0.7,
+                  backgroundColor: Color(0xff22242A),
+                  color: Color(0xff3F51FC),
+                  semanticsLabel: 'Progress',
+                ),
+              ),
+              const SizedBox(
+                height: 1,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.skip_previous),
+                    onPressed: prevSong,
+                    color: Colors.black,
+                    iconSize: 36,
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons
-                          .skip_next), // Utiliser l'icône de skip_next pour le bouton Next
-                      onPressed:
-                          prevSong, // Appeler la fonction pour passer à la chanson suivante
-                      color: Colors.black,
-                      iconSize: 36,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    IconButton(
-                      icon: Icon(isPlaying
-                          ? Icons.pause_circle_outline
-                          : Icons.play_circle_outline),
-                      onPressed: playOrPause,
-                      color: Colors.black,
-                      iconSize: 60,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons
-                          .skip_next), // Utiliser l'icône de skip_next pour le bouton Next
-                      onPressed:
-                          playNextSong, // Appeler la fonction pour passer à la chanson suivante
-                      color: Colors.black,
-                      iconSize: 36,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Column(
-                  children: const [
-                    Text(
-                      "EKISDE",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    Text(
-                      "artista",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ],
-                ),
-      
-              ],
-            ),
+                  const SizedBox(width: 5),
+                  IconButton(
+                    icon: Icon(isPlaying
+                        ? Icons.pause_circle_outline
+                        : Icons.play_circle_outline),
+                    onPressed: playOrPause,
+                    color: Colors.black,
+                    iconSize: 60,
+                  ),
+                  const SizedBox(width: 5),
+                  IconButton(
+                    icon: const Icon(Icons.skip_next),
+                    onPressed: playNextSong,
+                    color: Colors.black,
+                    iconSize: 36,
+                  ),
+                  const SizedBox(
+                      width: 10), // Espacement entre les boutons et le titre
+                  // Text(
+                  //   widget.song.titre, // Afficher le titre du son en cours
+                  //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  // ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Text(
+                    "Music non-stop",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: songs.length,
               itemBuilder: (context, index) => SongCard(song: songs[index]),

@@ -63,7 +63,7 @@ class _DrawersState extends State<Drawers> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => const Podcast(),
+                  builder: (context) =>  Podcast(),
                 ),
               );
             },
