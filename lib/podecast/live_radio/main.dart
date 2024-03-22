@@ -20,17 +20,17 @@ import 'SongsSelector.dart';
 //         intensity: 0.0,
 //         lightSource: LightSource.topLeft,
 //       ),
-//       child: MyApp(),
+//       child: Home_Radio(),
 //     ),
 //   );
 // }
 
-class MyApp extends StatefulWidget {
+class Home_Radio extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _Home_RadioState createState() => _Home_RadioState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _Home_RadioState extends State<Home_Radio> {
   late AssetsAudioPlayer _assetsAudioPlayer;
   final List<StreamSubscription> _subscriptions = [];
   final audios = <Audio>[
