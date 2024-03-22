@@ -16,15 +16,15 @@ class _Home_RadioState extends State<Home_Radio> {
   late AssetsAudioPlayer _assetsAudioPlayer;
   final List<StreamSubscription> _subscriptions = [];
   final audios = <Audio>[
-    Audio(
-      'assets/audios/feat Button Rose - Ndeke Remix .m4a',
+    Audio.liveStream(
+    'https://icepool.silvacast.com/DEFJAY.mp3',
       metas: Metas(
         title: 'feat Button Rose - Ndeke Remix .m4a',
         image: MetasImage.asset('assets/d.jpg'),
       ),
     ),
-    Audio(
-      'assets/audios/Feat Pson ZubaBoy _ Kucha.m4a',
+    Audio.network(
+    'https://icecast4.play.cz/country128.mp3',
       metas: Metas(
         title: 'Feat Pson ZubaBoy _ Kucha ',
         image: MetasImage.asset('assets/c.jpg'),
@@ -44,69 +44,10 @@ class _Home_RadioState extends State<Home_Radio> {
         image: MetasImage.asset('assets/a.jpg'),
       ),
     ),
-    Audio(
-      'assets/audios/Hallelujah .mp3',
-      metas: Metas(
-        title: 'Hallelujah',
-        image: MetasImage.asset('assets/d.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/Kaloko_ Freestyle.m4a',
-      metas: Metas(
-        title: 'Kaloko_ Freestyle',
-        image: MetasImage.asset('assets/c.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/Love Story.m4a',
-      metas: Metas(
-        title: 'Love Story',
-        image: MetasImage.asset('assets/b.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/Mbongo Ya Mapa.mp3',
-      metas: Metas(
-        title: 'Mbongo Ya Mapa',
-        image: MetasImage.asset('assets/a.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/Mombasa.mp3',
-      metas: Metas(
-        title: 'Mombasa',
-        image: MetasImage.asset('assets/d.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/Mukeba.mp3',
-      metas: Metas(
-        title: 'Mukeba',
-        image: MetasImage.asset('assets/c.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/Ndeke.m4a',
-      metas: Metas(
-        title: 'Ndeke',
-        image: MetasImage.asset('assets/b.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/a.mp3',
-      metas: Metas(
-        title: 'Umama .mp3',
-        image: MetasImage.asset('assets/a.jpg'),
-      ),
-    ),
-    Audio(
-      'assets/audios/b.m4a',
-      metas: Metas(
-        title: 'TinaTine',
-        image: MetasImage.asset('assets/d.jpg'),
-      ),
-    ),
+
+    
+  
+  
   ];
 
   @override
