@@ -14,7 +14,7 @@ class SongCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => PlayerView(song: song),
@@ -40,6 +40,7 @@ class PlayerView extends StatefulWidget {
   PlayerView({required this.song});
 
   @override
+  // ignore: library_private_types_in_public_api
   _PlayerViewState createState() => _PlayerViewState();
 }
 
@@ -84,28 +85,28 @@ class _PlayerViewState extends State<PlayerView> {
         return false;
       },
       child: Scaffold(
-          appBar: AppBar(
-        centerTitle: true,
-        title: Row(children: [
-          Text(
-            'U',
-            style: TextStyle(color: CouleurPrincipale),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 0),
-          ),
-          const Text(
-            'PATO',
-            style: TextStyle(color: Colors.black),
-          ),
-          const Icon(
-            Icons.location_on_outlined,
-            color: Colors.black,
-            size: 18,
-          )
-        ]),
-        backgroundColor: Colors.white,
-      ),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Row(children: [
+            Text(
+              'U',
+              style: TextStyle(color: CouleurPrincipale),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            const Text(
+              'PATO',
+              style: TextStyle(color: Colors.black),
+            ),
+            const Icon(
+              Icons.location_on_outlined,
+              color: Colors.black,
+              size: 18,
+            )
+          ]),
+          backgroundColor: Colors.white,
+        ),
         body: SingleChildScrollView(
           child: Stack(
             children: [
@@ -328,7 +329,28 @@ class _PodcastState extends State<Podcast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   
+      appBar: AppBar(
+        centerTitle: true,
+        title: Row(children: [
+          Text(
+            'U',
+            style: TextStyle(color: CouleurPrincipale),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(right: 0),
+          ),
+          const Text(
+            'PATO',
+            style: TextStyle(color: Colors.black),
+          ),
+          const Icon(
+            Icons.location_on_outlined,
+            color: Colors.black,
+            size: 18,
+          )
+        ]),
+        backgroundColor: Colors.white,
+      ),
       backgroundColor: Colors.white,
       bottomNavigationBar: Container(
         height: 150,
@@ -339,10 +361,10 @@ class _PodcastState extends State<Podcast> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(4),
-                child: const LinearProgressIndicator(
+                child: LinearProgressIndicator(
                   value: 0.7,
                   backgroundColor: Color(0xff22242A),
-                  color: Color(0xff3F51FC),
+                  color: CouleurPrincipale,
                   semanticsLabel: 'Progress',
                 ),
               ),
