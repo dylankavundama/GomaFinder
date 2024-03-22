@@ -12,13 +12,7 @@ class Drawers extends StatefulWidget {
 }
 
 class _DrawersState extends State<Drawers> {
-  bool _isDarkMode = false;
 
-  void _toggleDarkMode() {
-    setState(() {
-      _isDarkMode = !_isDarkMode;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,17 +92,7 @@ class _DrawersState extends State<Drawers> {
             trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
-        Card(
-          child: ListTile(
-            onTap: _toggleDarkMode,
-            title: Text(
-              _isDarkMode ? 'Mode Clair' : 'Mode Sombre',
-              style: TitreStyle,
-            ),
-            trailing: Icon(Icons.lightbulb,
-                color: _isDarkMode ? Colors.white : Colors.black),
-          ),
-        ),
+
       ]),
       width: 250,
     );
