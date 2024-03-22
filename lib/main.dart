@@ -1,7 +1,6 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:upato/ExplorePage.dart';
 import 'package:upato/NavBarPage.dart';
 import 'package:upato/Screen/radio.dart';
 import 'package:upato/detailpage.dart';
@@ -64,7 +63,7 @@ class MyApp extends StatelessWidget {
       // home: Actualite_Page(),
 //home: Event_Home_Page(),
       //home:     List_Data(),
-      home: ExplorePage(),
+      home: MyAppRadio(),
     );
   }
 }

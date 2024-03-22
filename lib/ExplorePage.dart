@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:upato/actu/actualiter.dart';
+import 'package:upato/podecast/Podcast_Page.dart';
 
 class ExplorePage extends StatelessWidget {
   // Liste des éléments à afficher dans la GridView
@@ -17,14 +19,16 @@ class ExplorePage extends StatelessWidget {
       'image':
           'https://static-00.iconduck.com/assets.00/television-icon-2048x2048-q495yz4y.png'
     },
+    {
+      'title': 'Actu',
+      'image':
+          'https://as2.ftcdn.net/v2/jpg/02/58/28/13/1000_F_258281322_auDRI2dzo7xOwmJpSJhNsoTOoDqt7YpX.jpg'
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('GridView Example'),
-      ),
       body: GridView.builder(
         itemCount: items.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -38,7 +42,7 @@ class ExplorePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MusicPage(),
+                    builder: (context) => Podcast(),
                   ),
                 );
               } else if (items[index]['title'] == 'Stock') {
@@ -55,11 +59,11 @@ class ExplorePage extends StatelessWidget {
                     builder: (context) => StockPage(),
                   ),
                 );
-              } else if (items[index]['title'] == 'Stock') {
+              } else if (items[index]['title'] == 'Actu') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StockPage(),
+                    builder: (context) => Actu_Home(),
                   ),
                 );
               } else {
