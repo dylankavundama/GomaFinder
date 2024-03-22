@@ -127,7 +127,6 @@ class _HomeRadioState extends State<HomeRadio> {
                           if (playing.data != null) {
                             final myAudio = find(
                                 audios, playing.data!.audio.assetAudioPath);
-                            print(playing.data!.audio.assetAudioPath);
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
@@ -137,7 +136,8 @@ class _HomeRadioState extends State<HomeRadio> {
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     image: myAudio.metas.image?.path == null
-                                        ? const AssetImage('assets/default_image.jpg')
+                                        ? const AssetImage(
+                                            'assets/default_image.jpg')
                                         : myAudio.metas.image?.type ==
                                                 ImageType.network
                                             ? NetworkImage(
@@ -156,9 +156,7 @@ class _HomeRadioState extends State<HomeRadio> {
                       ),
                     ],
                   ),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
+
                   _assetsAudioPlayer.builderCurrent(
                     builder: (context, Playing? playing) {
                       return Column(
@@ -193,7 +191,7 @@ class _HomeRadioState extends State<HomeRadio> {
                               if (infos == null) {
                                 return const SizedBox();
                               }
-                        
+
                               return Column(
                                 children: [
                                   Stack(
@@ -224,7 +222,7 @@ class _HomeRadioState extends State<HomeRadio> {
                   const SizedBox(
                     height: 20,
                   ),
-                     _assetsAudioPlayer.builderCurrent(
+                  _assetsAudioPlayer.builderCurrent(
                       builder: (BuildContext context, Playing? playing) {
                     return SongsSelector(
                       audios: audios,
@@ -245,9 +243,10 @@ class _HomeRadioState extends State<HomeRadio> {
                             autoStart: true,
                             showNotification: true,
                             playInBackground: PlayInBackground.enabled,
-                            audioFocusStrategy: const AudioFocusStrategy.request(
-                                resumeAfterInterruption: true,
-                                resumeOthersPlayersAfterDone: true),
+                            audioFocusStrategy:
+                                const AudioFocusStrategy.request(
+                                    resumeAfterInterruption: true,
+                                    resumeOthersPlayersAfterDone: true),
                             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
                             notificationSettings: const NotificationSettings(),
                           );
