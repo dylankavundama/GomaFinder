@@ -37,21 +37,9 @@ class _Inset_DataState extends State<Inset_Data> {
   void dispose() {
     super.dispose();
   }
+
   late String idenseu;
   var selectens;
-
-  bool _isNumeric(String value) {
-    try {
-      double result = double.parse(value);
-      if (result > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      return false;
-    }
-  }
 
   showToast({required String msg}) {
     return Fluttertoast.showToast(msg: msg);
@@ -200,337 +188,339 @@ class _Inset_DataState extends State<Inset_Data> {
     //     statusBarBrightness: Brightness.light,
     //   ),
     // );
-    return SingleChildScrollView(
-      child: Material(
-        clipBehavior: Clip.antiAlias,
-        elevation: 2.0,
-        borderRadius: BorderRadius.circular(4.0),
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Center(
-                  child: Image.asset("assets/en.png"),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Material(
+          clipBehavior: Clip.antiAlias,
+          elevation: 2.0,
+          borderRadius: BorderRadius.circular(4.0),
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Image.asset("assets/en.png"),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Center(
-                    child: Text(
-                  "Inscription d'une entreprise",
-                  style: TitreStyle,
-                )),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: user?.photoURL != null
-                        ? NetworkImage(user!.photoURL!)
-                            as ImageProvider<Object>?
-                        : AssetImage('assets/default_avatar.png')
-                            as ImageProvider<Object>?,
-                    radius: 50,
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Nom: ${user?.displayName ?? "Non défini"}',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'E-mail: ${user?.email ?? "Non défini"}',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Numéro de téléphone: ${user?.phoneNumber ?? "Non défini"}',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Stack(
-                  children: [
-                    TextField(
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(LineIcons.list),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(4),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Center(
+                      child: Text(
+                    "Inscription d'une entreprise",
+                    style: TitreStyle,
+                  )),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      backgroundImage: user?.photoURL != null
+                          ? NetworkImage(user!.photoURL!)
+                              as ImageProvider<Object>?
+                          : AssetImage('assets/default_avatar.png')
+                              as ImageProvider<Object>?,
+                      radius: 50,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      'Nom: ${user?.displayName ?? "Non défini"}',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'E-mail: ${user?.email ?? "Non défini"}',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Numéro de téléphone: ${user?.phoneNumber ?? "Non défini"}',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Stack(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(LineIcons.list),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4),
+                            ),
                           ),
                         ),
+                        readOnly: true,
                       ),
-                      readOnly: true,
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        child: DropdownButton(
+                          hint: const Text(
+                              "Sélectionner la catégorie de votre entreprise"),
+                          items: dataens.map((list) {
+                            return DropdownMenuItem(
+                              value: list["id"],
+                              child: Text(list["nom"]),
+                            );
+                          }).toList(),
+                          value: selectens,
+                          onChanged: (value) {
+                            selectens = value;
+                            idenseu = selectens;
+                            print("Valeur: " + selectens);
+                            setState(() {});
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+                TextField(
+                  keyboardType: TextInputType.text,
+                  controller: nom,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.home_filled),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                      hintText: "Nom de l'entreprise",
+                      labelText: "Nom de l'entreprise"),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+                TextField(
+                  keyboardType: TextInputType.text,
+                  controller: detail,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.description),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                      hintText: "Description (adress)",
+                      labelText: "Description"),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  controller: tel,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.call),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                      hintText: "Numero Téléphone",
+                      labelText: "Téléphone"),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                ),
+                TextField(
+                  keyboardType: TextInputType.text,
+                  controller: site,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.web),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
+                        ),
+                      ),
+                      hintText: "Site Web",
+                      labelText: "Site Internet"),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5),
+                ),
+                Container(
+                  width: sreenw,
+                  height: 44,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      //   foregroundColor: Colors.white,
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
                     ),
-                    Positioned(
-                      right: 0,
-                      top: 0,
-                      bottom: 0,
-                      child: DropdownButton(
-                        hint: const Text(
-                            "Sélectionner la catégorie de votre entreprise"),
-                        items: dataens.map((list) {
-                          return DropdownMenuItem(
-                            value: list["id"],
-                            child: Text(list["nom"]),
-                          );
-                        }).toList(),
-                        value: selectens,
-                        onChanged: (value) {
-                          selectens = value;
-                          idenseu = selectens;
-                          print("Valeur: " + selectens);
-                          setState(() {});
+                    onPressed: () {
+                      _getCurrentLocation().then(
+                        (value) {
+                          lat = '${value.latitude}';
+                          long = '${value.longitude}';
+
+                          setState(() {
+                            locationMessage =
+                                "Localisation(MAP): latitude:$lat longitude:$long";
+                          });
                         },
+                      );
+
+                      _liveLocation();
+                    },
+                    child: Text(
+                      "Récupérer votre position",
+                      style: TitreStyleWhite,
+                    ),
+                  ),
+                ),
+                Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(4)),
+                  child: Text(locationMessage),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "sélectionnée :",
+                      style: TitreStyle,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green, // Définir la couleur du bouton
+                        // Autres propriétés de style du bouton peuvent être définies ici
+                      ),
+                      child: Text(
+                        "la photo1",
+                        style: TitreStyleWhite,
+                      ),
+                      onPressed: () => _pickImage(ImageSource.gallery),
+                    ),
+                    SizedBox(width: 4),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.green, // Définir la couleur du bouton
+                        // Autres propriétés de style du bouton peuvent être définies ici
+                      ),
+                      child: Text(
+                        "la photo2",
+                        style: TitreStyleWhite,
+                      ),
+                      onPressed: () => _pickImage2(ImageSource.gallery),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: sreenh * 0.2,
+                      width: sreenw * 0.45,
+                      child: Center(
+                        child: _image == null
+                            ? Container(
+                                width: 200,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        Colors.black26, // Couleur de la bordure
+                                    width: 1.0, // Épaisseur de la bordure
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text('Aucune image sélectionnée'),
+                                ),
+                              )
+                            : Image.file(_image!),
+                      ),
+                    ),
+                    SizedBox(width: 3),
+                    Container(
+                      height: sreenh * 0.2,
+                      width: sreenw * 0.45,
+                      child: Center(
+                        child: _image2 == null
+                            ? Container(
+                                width: 200,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color:
+                                        Colors.black26, // Couleur de la bordure
+                                    width: 1.0, // Épaisseur de la bordure
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text('Aucune image sélectionnée'),
+                                ),
+                              )
+                            : Image.file(_image2!),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-              ),
-              TextField(
-                keyboardType: TextInputType.text,
-                controller: nom,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.home_filled),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
-                      ),
-                    ),
-                    hintText: "Nom de l'entreprise",
-                    labelText: "Nom de l'entreprise"),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-              ),
-              TextField(
-                keyboardType: TextInputType.text,
-                controller: detail,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.description),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
-                      ),
-                    ),
-                    hintText: "Description (adress)",
-                    labelText: "Description"),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                controller: tel,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.call),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
-                      ),
-                    ),
-                    hintText: "Numero Téléphone",
-                    labelText: "Téléphone"),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-              ),
-              TextField(
-                keyboardType: TextInputType.text,
-                controller: site,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.web),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
-                      ),
-                    ),
-                    hintText: "Site Web",
-                    labelText: "Site Internet"),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 5),
-              ),
-              Container(
-                width: sreenw,
-                height: 44,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    //   foregroundColor: Colors.white,
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
+                MaterialButton(
+                  minWidth: double.maxFinite,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  color: CouleurPrincipale,
                   onPressed: () {
-                    _getCurrentLocation().then(
-                      (value) {
-                        lat = '${value.latitude}';
-                        long = '${value.longitude}';
-
-                        setState(() {
-                          locationMessage =
-                              "Localisation(MAP): latitude:$lat longitude:$long";
-                        });
-                      },
-                    );
-
-                    _liveLocation();
-                  },
-                  child: Text(
-                    "Récupérer votre position",
-                    style: TitreStyleWhite,
-                  ),
-                ),
-              ),
-              Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(4)),
-                child: Text(locationMessage),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "sélectionnée :",
-                    style: TitreStyle,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // Définir la couleur du bouton
-                      // Autres propriétés de style du bouton peuvent être définies ici
-                    ),
-                    child: Text(
-                      "la photo1",
-                      style: TitreStyleWhite,
-                    ),
-                    onPressed: () => _pickImage(ImageSource.gallery),
-                  ),
-                  SizedBox(width: 4),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.green, // Définir la couleur du bouton
-                      // Autres propriétés de style du bouton peuvent être définies ici
-                    ),
-                    child: Text(
-                      "la photo2",
-                      style: TitreStyleWhite,
-                    ),
-                    onPressed: () => _pickImage2(ImageSource.gallery),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    height: sreenh * 0.2,
-                    width: sreenw * 0.45,
-                    child: Center(
-                      child: _image == null
-                          ? Container(
-                              width: 200,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color:
-                                      Colors.black26, // Couleur de la bordure
-                                  width: 1.0, // Épaisseur de la bordure
-                                ),
-                              ),
-                              child: Center(
-                                child: Text('Aucune image sélectionnée'),
-                              ),
-                            )
-                          : Image.file(_image!),
-                    ),
-                  ),
-                  SizedBox(width: 3),
-                  Container(
-                    height: sreenh * 0.2,
-                    width: sreenw * 0.45,
-                    child: Center(
-                      child: _image2 == null
-                          ? Container(
-                              width: 200,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color:
-                                      Colors.black26, // Couleur de la bordure
-                                  width: 1.0, // Épaisseur de la bordure
-                                ),
-                              ),
-                              child: Center(
-                                child: Text('Aucune image sélectionnée'),
-                              ),
-                            )
-                          : Image.file(_image2!),
-                    ),
-                  ),
-                ],
-              ),
-              MaterialButton(
-                minWidth: double.maxFinite,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                color: CouleurPrincipale,
-                onPressed: () {
-                  if (idenseu.isEmpty) {
-                    showToast(msg: "y'a une case vide");
-                  } else if (site.text.isEmpty) {
-                    showToast(msg: "Y'a une case vide");
-                  } else if (detail.text.isEmpty &&
-                      idenseu.isEmpty &&
-                      site.text.isEmpty) {
-                    showToast(msg: "Y'a une case vide");
-                  } else {
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    savadatas(Entreprise(
-                      nom: idenseu.trim(),
-                      detail: detail.text.trim(),
-                      site: site.text.trim(),
-                      lat: lat,
-                      log: long,
-                    )).then((value) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => NavBarPage()));
-                    }).whenComplete(() {
+                    if (idenseu.isEmpty) {
+                      showToast(msg: "y'a une case vide");
+                    } else if (site.text.isEmpty) {
+                      showToast(msg: "Y'a une case vide");
+                    } else if (detail.text.isEmpty &&
+                        idenseu.isEmpty &&
+                        site.text.isEmpty) {
+                      showToast(msg: "Y'a une case vide");
+                    } else {
                       setState(() {
-                        _isLoading = false;
+                        _isLoading = true;
                       });
-                    });
-                  }
-                },
-                child: _isLoading
-                    ? const CircularProgressIndicator(
-                        color: Colors.white,
-                      )
-                    : const Text(
-                        "Enregistrer",
-                        style: TextStyle(
+                      savadatas(Entreprise(
+                        nom: idenseu.trim(),
+                        detail: detail.text.trim(),
+                        site: site.text.trim(),
+                        lat: lat,
+                        log: long,
+                      )).then((value) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => NavBarPage()));
+                      }).whenComplete(() {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      });
+                    }
+                  },
+                  child: _isLoading
+                      ? const CircularProgressIndicator(
                           color: Colors.white,
+                        )
+                      : const Text(
+                          "Enregistrer",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
