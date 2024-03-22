@@ -21,12 +21,15 @@ class SongsSelector extends StatelessWidget {
     }
 
     return item.metas.image?.type == ImageType.network
-        ? Image.network(
-            item.metas.image!.path,
-            height: 40,
-            width: 40,
-            fit: BoxFit.cover,
-          )
+        ? CircleAvatar(
+          radius: 30,
+          child: Image.network(
+              item.metas.image!.path,
+              height: 40,
+              width: 40,
+              fit: BoxFit.cover,
+            ),
+        )
         : Image.asset(
             item.metas.image!.path,
             height: 40,
@@ -52,9 +55,9 @@ class SongsSelector extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        // const SizedBox(
+        //   height: 10,
+        // ),
         Flexible(
           child: ListView.builder(
             shrinkWrap: true,
