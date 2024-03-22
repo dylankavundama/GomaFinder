@@ -374,7 +374,7 @@ class _PodcastState extends State<Podcast> {
         ),
       ),
       body: isLoading
-          ? const Center(child: CircularProgressIndicator())
+          ?  Center(child: CircularProgressIndicator(color: CouleurPrincipale,))
           : ListView.builder(
               itemCount: songs.length,
               itemBuilder: (context, index) => SongCard(song: songs[index]),
