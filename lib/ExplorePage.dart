@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
-
 class ExplorePage extends StatelessWidget {
   // Liste des éléments à afficher dans la GridView
-  final List<String> items = ['Client', 'Stock', 'Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10'];
+  final List<Map<String, dynamic>> items = [
+    {
+      'title': 'Music',
+      'image':
+          'https://static.vecteezy.com/system/resources/thumbnails/010/160/834/small/music-icon-sign-symbol-design-free-png.png'
+    },
+    {'title': 'Stock', 'image': 'assets/stock_icon.png'}
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +26,14 @@ class ExplorePage extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               // Rediriger l'utilisateur vers la page appropriée en fonction de l'élément sélectionné
-              if (items[index] == 'Client') {
+              if (items[index]['title'] == 'Music') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ClientPage(),
+                    builder: (context) => MusicPage(),
                   ),
                 );
-              } else if (items[index] == 'Stock') {
+              } else if (items[index]['title'] == 'Stock') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -38,14 +44,27 @@ class ExplorePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DetailsPage(item: items[index]),
+                    builder: (context) =>
+                        DetailsPage(item: items[index]['title']),
                   ),
                 );
               }
             },
             child: Card(
-              child: Center(
-                child: Text(items[index]),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    items[index]['image'],
+                    width: 50,
+                    height: 50,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    items[index]['title'],
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ],
               ),
             ),
           );
@@ -76,16 +95,16 @@ class DetailsPage extends StatelessWidget {
   }
 }
 
-class ClientPage extends StatelessWidget {
+class MusicPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Client Page'),
+        title: Text('Music Page'),
       ),
       body: Center(
         child: Text(
-          'Client Page',
+          'Music Page',
           style: TextStyle(fontSize: 24.0),
         ),
       ),

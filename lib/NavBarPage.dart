@@ -1,11 +1,9 @@
 import 'package:upato/ExplorePage.dart';
 import 'package:upato/Models/HomePage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:upato/Models/search.dart';
 import 'package:upato/login/login.dart';
 import 'package:upato/podecast/Podcast_Page.dart';
-import 'package:upato/profil/insert_data.dart';
 
 class NavBarPage extends StatefulWidget {
   const NavBarPage({super.key});
