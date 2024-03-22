@@ -189,6 +189,20 @@ class _Inset_DataState extends State<Inset_Data> {
     //   ),
     // );
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: CouleurPrincipale,
+          title: Text(
+            'Nom: ${user?.displayName ?? "Non défini"}',
+            style: TextStyle(fontSize: 20),
+          ),
+          actions: [
+            CircleAvatar(
+              backgroundImage: user?.photoURL != null
+                  ? NetworkImage(user!.photoURL!) as ImageProvider<Object>?
+                  : AssetImage('assets/default_avatar.png'),
+              radius: 50,
+            ),
+          ]),
       body: SingleChildScrollView(
         child: Material(
           clipBehavior: Clip.antiAlias,
@@ -217,29 +231,16 @@ class _Inset_DataState extends State<Inset_Data> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: user?.photoURL != null
-                          ? NetworkImage(user!.photoURL!)
-                              as ImageProvider<Object>?
-                          : AssetImage('assets/default_avatar.png')
-                              as ImageProvider<Object>?,
-                      radius: 50,
-                    ),
                     const SizedBox(height: 20),
                     Text(
                       'Nom: ${user?.displayName ?? "Non défini"}',
                       style: TextStyle(fontSize: 20),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      'E-mail: ${user?.email ?? "Non défini"}',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Numéro de téléphone: ${user?.phoneNumber ?? "Non défini"}',
-                      style: TextStyle(fontSize: 20),
-                    ),
+                    // Text(
+                    //   'E-mail: ${user?.email ?? "Non défini"}',
+                    //   style: TextStyle(fontSize: 20),
+                    // ),
                   ],
                 ),
                 Padding(
