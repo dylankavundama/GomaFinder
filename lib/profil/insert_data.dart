@@ -34,7 +34,9 @@ class _Inset_DataState extends State<Inset_Data> {
     super.initState();
   }
 
-  void dispose() {}
+  void dispose() {
+    super.dispose();
+  }
   late String idenseu;
   var selectens;
 
