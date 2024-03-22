@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'dart:core';
 
+import 'package:upato/bloc/block_state.dart';
+
 class PostBloc extends Bloc<BlocEvent, BlocState> {
   PostBloc() : super(BlocStateUninitialized()) {
     on<BlocEventStoriesFetch>(_onBlocEventFetchStories);
