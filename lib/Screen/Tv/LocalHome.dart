@@ -1,18 +1,20 @@
-import 'package:cktv/Inedit/LocalWidget.dart';
-import 'package:cktv/Inedit/PagedeLecture.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/bloc_event.dart';
-import '../bloc/block_state.dart';
+import 'package:upato/Screen/Tv/LocalWidget.dart';
+import 'package:upato/Screen/Tv/PagedeLecture.dart';
+import 'package:upato/bloc/bloc_event.dart';
+import 'package:upato/bloc/block_state.dart';
+
 import 'Local_bloc.dart';
 
-class LocalHome extends StatefulWidget {
-  const LocalHome({Key? key}) : super(key: key);
+class Tv_Home extends StatefulWidget {
+  const Tv_Home({Key? key}) : super(key: key);
   @override
-  State<LocalHome> createState() => _LocalHomeState();
+  State<Tv_Home> createState() => _Tv_HomeState();
 }
 
-class _LocalHomeState extends State<LocalHome> {
+class _Tv_HomeState extends State<Tv_Home> {
   @override
   void dispose() {
     super.dispose();

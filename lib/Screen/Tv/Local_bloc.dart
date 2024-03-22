@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:upato/bloc/block_state.dart';
 import 'dart:core';
 
-import '../bloc/bloc_event.dart';
-import '../bloc/block_state.dart';
+import '../../bloc/bloc_event.dart';
 
 class BlocSearchLocal extends BlocEvent {
   final String? search;
@@ -36,7 +36,9 @@ class LocalBloc extends Bloc<BlocEvent, BlocState> {
         emit(BlocStateLoaded(data: list));
       }
     } catch (e) {
-      emit(BlocStateError(error: e));
+      emit(
+        BlocStateError(error: e),
+      );
     }
   }
 }
