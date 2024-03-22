@@ -115,9 +115,9 @@ class _HomeRadioState extends State<HomeRadio> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
                   Stack(
                     fit: StackFit.passthrough,
                     children: <Widget>[
@@ -131,13 +131,13 @@ class _HomeRadioState extends State<HomeRadio> {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
-                                height: 150,
+                                height: 130,
                                 width: 150,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     image: myAudio.metas.image?.path == null
-                                        ? AssetImage('assets/default_image.jpg')
+                                        ? const AssetImage('assets/default_image.jpg')
                                         : myAudio.metas.image?.type ==
                                                 ImageType.network
                                             ? NetworkImage(
@@ -156,9 +156,9 @@ class _HomeRadioState extends State<HomeRadio> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
                   _assetsAudioPlayer.builderCurrent(
                     builder: (context, Playing? playing) {
                       return Column(
@@ -193,7 +193,7 @@ class _HomeRadioState extends State<HomeRadio> {
                               if (infos == null) {
                                 return const SizedBox();
                               }
-                              //print('infos: $infos');
+                        
                               return Column(
                                 children: [
                                   Stack(

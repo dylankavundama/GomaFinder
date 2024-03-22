@@ -17,7 +17,7 @@ class SongsSelector extends StatelessWidget {
 
   Widget _image(Audio item) {
     if (item.metas.image == null) {
-      return const SizedBox(height: 40, width: 40);
+      return const SizedBox(height: 50, width: 40);
     }
 
     return item.metas.image?.type == ImageType.network
