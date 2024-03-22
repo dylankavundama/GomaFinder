@@ -11,7 +11,12 @@ class ExplorePage extends StatelessWidget {
     {
       'title': 'Podcast',
       'image': 'https://cdn-icons-png.freepik.com/512/4029/4029013.png'
-    }
+    },
+    {
+      'title': 'Television',
+      'image':
+          'https://static-00.iconduck.com/assets.00/television-icon-2048x2048-q495yz4y.png'
+    },
   ];
 
   @override
@@ -43,6 +48,20 @@ class ExplorePage extends StatelessWidget {
                     builder: (context) => StockPage(),
                   ),
                 );
+              } else if (items[index]['title'] == 'Stock') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StockPage(),
+                  ),
+                );
+              } else if (items[index]['title'] == 'Stock') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StockPage(),
+                  ),
+                );
               } else {
                 Navigator.push(
                   context,
@@ -52,6 +71,8 @@ class ExplorePage extends StatelessWidget {
                   ),
                 );
               }
+
+              //
             },
             child: Card(
               child: Column(
