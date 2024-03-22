@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/podecast/Podcast_Page.dart';
-import 'package:upato/podecast/live_radio/main.dart';
+import 'package:upato/podecast/live_radio/Home_Radio.dart';
 
 class ExplorePage extends StatelessWidget {
   // Liste des éléments à afficher dans la GridView

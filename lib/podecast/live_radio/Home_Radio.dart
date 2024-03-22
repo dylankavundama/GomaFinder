@@ -170,7 +170,7 @@ class _Home_RadioState extends State<Home_Radio> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -221,13 +221,11 @@ class _Home_RadioState extends State<Home_Radio> {
                                 ),
                               );
                             }
-                            return SizedBox.shrink();
+                            return const SizedBox.shrink();
                           }),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+            
                   const SizedBox(
                     height: 20,
                   ),
@@ -244,12 +242,12 @@ class _Home_RadioState extends State<Home_Radio> {
                                     loopMode: loopMode,
                                     isPlaying: isPlaying,
                                     isPlaylist: true,
-                                    onStop: () {
-                                      _assetsAudioPlayer.stop();
-                                    },
-                                    toggleLoop: () {
-                                      _assetsAudioPlayer.toggleLoop();
-                                    },
+                                    // onStop: () {
+                                    //   _assetsAudioPlayer.stop();
+                                    // },
+                                    // toggleLoop: () {
+                                    //   _assetsAudioPlayer.toggleLoop();
+                                    // },
                                     onPlay: () {
                                       _assetsAudioPlayer.playOrPause();
                                     },
@@ -270,7 +268,7 @@ class _Home_RadioState extends State<Home_Radio> {
                         _assetsAudioPlayer.builderRealtimePlayingInfos(
                             builder: (context, RealtimePlayingInfos? infos) {
                           if (infos == null) {
-                            return SizedBox();
+                            return const SizedBox();
                           }
                           //print('infos: $infos');
                           return Column(
@@ -322,7 +320,7 @@ class _Home_RadioState extends State<Home_Radio> {
                             autoStart: true,
                             showNotification: true,
                             playInBackground: PlayInBackground.enabled,
-                            audioFocusStrategy: AudioFocusStrategy.request(
+                            audioFocusStrategy: const AudioFocusStrategy.request(
                                 resumeAfterInterruption: true,
                                 resumeOthersPlayersAfterDone: true),
                             headPhoneStrategy: HeadPhoneStrategy.pauseOnUnplug,
