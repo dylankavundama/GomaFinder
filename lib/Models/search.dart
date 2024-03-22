@@ -91,7 +91,7 @@ class _Search_PageState extends State<Search_Page> {
   Widget build(BuildContext context) {
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
+      const SystemUiOverlayStyle(
         statusBarColor: Colors.green,
         statusBarBrightness: Brightness.light,
       ),
@@ -115,15 +115,15 @@ class _Search_PageState extends State<Search_Page> {
                   decoration: InputDecoration(
                     labelText: "Rechercher",
                     hintText: "Rechercher",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
+                    prefixIcon: const Icon(Icons.search),
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(4.0),
                       ),
                     ),
                     // Modification de la couleur du texte
                     labelStyle: TextStyle(color: CouleurPrincipale),
-                    hintStyle: TextStyle(color: Colors.black),
+                    hintStyle: const TextStyle(color: Colors.black),
                   ),
                 ),
               ),

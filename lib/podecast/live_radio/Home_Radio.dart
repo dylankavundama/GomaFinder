@@ -26,21 +26,21 @@ class _HomeRadioState extends State<HomeRadio> {
       'https://icecast4.play.cz/country128.mp3',
       metas: Metas(
         title: 'Feat Pson ZubaBoy _ Kucha ',
-        image: MetasImage.asset('assets/c.jpg'),
+        image: const MetasImage.asset('assets/c.jpg'),
       ),
     ),
     Audio(
       'assets/audios/Feat Robinio Soldat.m4a',
       metas: Metas(
         title: 'Feat Robinio Soldat ',
-        image: MetasImage.asset('assets/b.jpg'),
+        image: const MetasImage.asset('assets/b.jpg'),
       ),
     ),
     Audio(
       'assets/audios/GoodVibe .m4a',
       metas: Metas(
         title: 'GoodVibe ',
-        image: MetasImage.asset('assets/a.jpg'),
+        image: const MetasImage.asset('assets/a.jpg'),
       ),
     ),
   ];

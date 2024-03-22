@@ -132,14 +132,14 @@ class _HomePageState extends State<HomePage>
                     'U',
                     style: TextStyle(color: CouleurPrincipale),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(right: 0),
                   ),
                   Text(
                     'PATO',
                     style: TextStyle(color: Colors.black),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.location_on_outlined,
                     color: Colors.black,
                     size: 18,

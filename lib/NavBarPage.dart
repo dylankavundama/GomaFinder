@@ -20,7 +20,7 @@ class _NavBarPageState extends State<NavBarPage> {
     HomePage(),
     Search_Page(),
    ExplorePage(),
-    Podcast(),
+    // Podcast(),
     // Viewdata(),
     LoginHome(),
   ];
