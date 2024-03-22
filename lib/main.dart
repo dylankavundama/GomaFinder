@@ -13,7 +13,7 @@ import 'package:upato/Screen/podecast/live_radio/Home_Radio.dart';
 import 'package:upato/profil/insert_data.dart';
 import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
-import 'Screen/Tv/LocalHome.dart';
+import 'Screen/Tv/Tv_Home.dart';
 import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: Actualite_Page(),
 //home: Event_Home_Page(),
-    home:     Tv_Home(),
+    home:     OnboardingScreen(),
     //  home: Home_Radio(),
     );
   }

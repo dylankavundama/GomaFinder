@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage>
                   const Padding(
                     padding: EdgeInsets.only(right: 0),
                   ),
-                  Text(
+                  const Text(
                     'PATO',
                     style: TextStyle(color: Colors.black),
                   ),

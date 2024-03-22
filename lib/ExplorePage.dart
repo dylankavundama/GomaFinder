@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upato/Screen/Podcast_Page.dart';
+import 'package:upato/Screen/Tv/Tv_Home.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/style.dart';
 
@@ -75,11 +76,11 @@ class ExplorePage extends StatelessWidget {
                     builder: (context) => StockPage(),
                   ),
                 );
-              } else if (items[index]['title'] == 'Stock') {
+              } else if (items[index]['title'] == 'Television') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => StockPage(),
+                    builder: (context) => Tv_Home(),
                   ),
                 );
               } else if (items[index]['title'] == 'Actu') {
@@ -170,7 +171,7 @@ class StockPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Stock Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Stock Page',
           style: TextStyle(fontSize: 24.0),
