@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:upato/podecast/live_radio/PlayingControls.dart';
-import 'package:upato/podecast/live_radio/SongsSelector.dart';
+import 'package:upato/Screen/podecast/live_radio/PlayingControls.dart';
+import 'package:upato/Screen/podecast/live_radio/SongsSelector.dart';
 
 class HomeRadio extends StatefulWidget {
   @override

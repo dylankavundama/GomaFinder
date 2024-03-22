@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/event/event.dart';
-import 'package:upato/podecast/Podcast_Page.dart';
+import 'package:upato/Screen/podecast/Podcast_Page.dart';
 import 'package:upato/style.dart';
 
 void main() {
