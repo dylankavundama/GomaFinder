@@ -210,7 +210,7 @@ class _Inset_DataState extends State<Inset_Data> {
           elevation: 2.0,
           borderRadius: BorderRadius.circular(4.0),
           child: Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -222,14 +222,14 @@ class _Inset_DataState extends State<Inset_Data> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 0),
                   child: Center(
-                      child: Text(
-                    "Inscription d'une entreprise",
-                    style: TitreStyle,
-                  )),
+                    child: Text(
+                      "Enregistrement d'une entreprise",
+                      style: TitreStyle,
+                    ),
+                  ),
                 ),
-      
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
                   child: Stack(

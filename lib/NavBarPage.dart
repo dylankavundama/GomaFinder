@@ -20,7 +20,7 @@ class _NavBarPageState extends State<NavBarPage> {
   List<Widget> screen = [
     HomePage(),
     Search_Page(),
-    // Explorepage(),
+   ExplorePage(),
     Podcast(),
     // Viewdata(),
     LoginHome(),
