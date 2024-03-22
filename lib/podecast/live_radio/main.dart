@@ -6,24 +6,24 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/podecast/live_radio/PlayingControls.dart';
 import 'SongsSelector.dart';
 
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   MobileAds.instance.initialize();
-//   AssetsAudioPlayer.setupNotificationsOpenAction((notification) {
-//     return true;
-//   });
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  AssetsAudioPlayer.setupNotificationsOpenAction((notification) {
+    return true;
+  });
 
-//   runApp(
-//     NeumorphicTheme(
-//       theme: const NeumorphicThemeData(
-//         baseColor: Colors.black87,
-//         intensity: 0.0,
-//         lightSource: LightSource.topLeft,
-//       ),
-//       child: Home_Radio(),
-//     ),
-//   );
-// }
+  runApp(
+    NeumorphicTheme(
+      theme: const NeumorphicThemeData(
+        baseColor: Colors.black87,
+        intensity: 0.0,
+        lightSource: LightSource.topLeft,
+      ),
+      child: Home_Radio(),
+    ),
+  );
+}
 
 class Home_Radio extends StatefulWidget {
   @override

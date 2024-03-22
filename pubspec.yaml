@@ -54,6 +54,14 @@ dependencies:
   flutter_neumorphic: ^3.2.0
   assets_audio_player:
 dev_dependencies:
+  build_web_compilers: ">=2.0.0 <3.0.0"
+  pedantic: ^1.11.0
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.0
 
 
 
@@ -62,16 +70,19 @@ flutter:
 
   assets:
     - assets/
+
     - assets/images/
     - lib/assets/images/
     - lib/assets/animations/splashscreen.json
-
+    - assets/audios/
   fonts:
     - family: Mulish
       fonts:
         - asset: assets/fonts/Mulish-Light.ttf
         - asset: assets/fonts/Mulish-SemiBold.ttf
-
+    - family: AssetAudioPlayer
+      fonts:
+        - asset: fonts/AssetAudioPlayer.ttf  
 flutter_native_splash:
   color: "#42a5f5"
   image: assets/images/logo.png
