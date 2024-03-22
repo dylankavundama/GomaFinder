@@ -14,7 +14,7 @@ class SongCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => PlayerView(song: song),
@@ -352,22 +352,13 @@ class _PodcastState extends State<Podcast> {
         backgroundColor: Colors.white,
       ),
       backgroundColor: Colors.white,
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SizedBox(
         height: 150,
         child: Padding(
           padding:
               const EdgeInsets.only(right: 40, left: 40, bottom: 20, top: 30),
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: 0.7,
-                  backgroundColor: Color(0xff22242A),
-                  color: CouleurPrincipale,
-                  semanticsLabel: 'Progress',
-                ),
-              ),
               const SizedBox(
                 height: 1,
               ),
