@@ -96,14 +96,14 @@ class _DetailPageState extends State<DetailPage> {
               'U',
               style: TextStyle(color: CouleurPrincipale),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(right: 0),
             ),
-            Text(
+            const Text(
               'PATO',
               style: TextStyle(color: Colors.black),
             ),
-            Icon(
+            const Icon(
               Icons.location_on_outlined,
               color: Colors.black,
               size: 18,
@@ -209,27 +209,27 @@ class _DetailPageState extends State<DetailPage> {
                       ],
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 1,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Text("Description",
+                      const Text("Description",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 18)),
-                      SizedBox(
+                      const SizedBox(
                         height: 4,
                       ),
                       Text(
                         widget.desc,
-                        style: TextStyle(fontWeight: FontWeight.w300),
+                        style: const TextStyle(fontWeight: FontWeight.w300),
                         textAlign: TextAlign.start,
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 1,
                       ),
                       CustomListTile(
@@ -253,7 +253,7 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         trailing: Text('follow'),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Stack(

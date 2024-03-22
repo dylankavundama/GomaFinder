@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:upato/Screen/podecast/Podcast_Page.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/event/event.dart';
-import 'package:upato/podecast/Podcast_Page.dart';
 import 'package:upato/style.dart';
 
 class Drawers extends StatefulWidget {
@@ -12,11 +12,10 @@ class Drawers extends StatefulWidget {
 }
 
 class _DrawersState extends State<Drawers> {
-
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: 250,
       child: ListView(children: [
         DrawerHeader(
           child: Image.asset('assets/images/logo.png'),
@@ -25,7 +24,7 @@ class _DrawersState extends State<Drawers> {
           child: ListTile(
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Actu_Home()),
+                MaterialPageRoute(builder: (context) => const Actu_Home()),
               );
             },
             title: Text(
@@ -39,7 +38,8 @@ class _DrawersState extends State<Drawers> {
           child: ListTile(
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Event_Home_Page()),
+                MaterialPageRoute(
+                    builder: (context) => const Event_Home_Page()),
               );
             },
             title: Text(
@@ -63,7 +63,7 @@ class _DrawersState extends State<Drawers> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => Podcast(),
+                  builder: (context) => const Podcast(),
                 ),
               );
             },
@@ -92,9 +92,7 @@ class _DrawersState extends State<Drawers> {
             trailing: Icon(Icons.arrow_circle_right, color: CouleurPrincipale),
           ),
         ),
-
       ]),
-      width: 250,
     );
   }
 }

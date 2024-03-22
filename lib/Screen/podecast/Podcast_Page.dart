@@ -13,9 +13,9 @@ class SongCard extends StatelessWidget {
     return ListTile(
       leading: Image.network(song.image),
       title:
-          Text(song.titre, style: TextStyle(color: Colors.white, fontSize: 15)),
+          Text(song.titre, style: TextStyle(color: Colors.black, fontSize: 15)),
       subtitle: Text(song.date,
-          style: GoogleFonts.abel(color: Colors.white, fontSize: 13)),
+          style: GoogleFonts.abel(color: Colors.black, fontSize: 13)),
       trailing: IconButton(
         icon: Icon(Icons.play_arrow, color: Colors.orange),
         onPressed: () {
@@ -206,7 +206,7 @@ class _PodcastState extends State<Podcast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff181A20),
+      backgroundColor: Colors.white,
       bottomNavigationBar: Container(
         height: 150,
         child: Padding(
@@ -234,7 +234,7 @@ class _PodcastState extends State<Podcast> {
                           .skip_next), // Utiliser l'icône de skip_next pour le bouton Next
                       onPressed:
                           prevSong, // Appeler la fonction pour passer à la chanson suivante
-                      color: Colors.white60,
+                      color: Colors.black,
                       iconSize: 36,
                     ),
                     const SizedBox(
@@ -245,18 +245,18 @@ class _PodcastState extends State<Podcast> {
                           ? Icons.pause_circle_outline
                           : Icons.play_circle_outline),
                       onPressed: playOrPause,
-                      color: Colors.white60,
+                      color: Colors.black,
                       iconSize: 60,
                     ),
                     const SizedBox(
                       width: 5,
                     ),
                     IconButton(
-                      icon: Icon(Icons
+                      icon: const Icon(Icons
                           .skip_next), // Utiliser l'icône de skip_next pour le bouton Next
                       onPressed:
                           playNextSong, // Appeler la fonction pour passer à la chanson suivante
-                      color: Colors.white60,
+                      color: Colors.black,
                       iconSize: 36,
                     ),
                   ],
@@ -265,22 +265,18 @@ class _PodcastState extends State<Podcast> {
                   height: 10,
                 ),
                 Column(
-                  children: [
+                  children: const [
                     Text(
                       "EKISDE",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                     ),
                     Text(
                       "artista",
-                      style: TextStyle(color: Colors.white30),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
-                Spacer(),
-                Text(
-                  "2:32",
-                  style: TextStyle(color: Colors.white70),
-                ),
+      
               ],
             ),
           ),
