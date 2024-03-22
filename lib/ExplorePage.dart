@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upato/actu/actualiter.dart';
-import 'package:upato/podecast/Podcast_Page.dart';
 import 'package:upato/podecast/live_radio/Home_Radio.dart';
-
 class ExplorePage extends StatelessWidget {
   // Liste des éléments à afficher dans la GridView
   final List<Map<String, dynamic>> items = [
@@ -43,7 +41,7 @@ class ExplorePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Home_Radio(),
+                    builder: (context) => HomeRadio(),
                   ),
                 );
               } else if (items[index]['title'] == 'Stock') {

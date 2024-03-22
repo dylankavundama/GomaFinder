@@ -1,30 +1,29 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/podecast/live_radio/PlayingControls.dart';
-import 'SongsSelector.dart';
+import 'package:upato/podecast/live_radio/SongsSelector.dart';
 
-
-class Home_Radio extends StatefulWidget {
+class HomeRadio extends StatefulWidget {
   @override
-  _Home_RadioState createState() => _Home_RadioState();
+  _HomeRadioState createState() => _HomeRadioState();
 }
 
-class _Home_RadioState extends State<Home_Radio> {
+class _HomeRadioState extends State<HomeRadio> {
   late AssetsAudioPlayer _assetsAudioPlayer;
   final List<StreamSubscription> _subscriptions = [];
   final audios = <Audio>[
-    Audio.liveStream(
-    'https://icepool.silvacast.com/DEFJAY.mp3',
+    Audio.network(
+      'https://icepool.silvacast.com/DEFJAY.mp3',
       metas: Metas(
         title: 'feat Button Rose - Ndeke Remix .m4a',
         image: MetasImage.asset('assets/d.jpg'),
       ),
     ),
     Audio.network(
-    'https://icecast4.play.cz/country128.mp3',
+      'https://icecast4.play.cz/country128.mp3',
       metas: Metas(
         title: 'Feat Pson ZubaBoy _ Kucha ',
         image: MetasImage.asset('assets/c.jpg'),
@@ -44,10 +43,6 @@ class _Home_RadioState extends State<Home_Radio> {
         image: MetasImage.asset('assets/a.jpg'),
       ),
     ),
-
-    
-  
-  
   ];
 
   @override
@@ -66,7 +61,6 @@ class _Home_RadioState extends State<Home_Radio> {
 
     _startNewGame();
   }
-  
 
   void openPlayer() async {
     await _assetsAudioPlayer.open(
@@ -106,6 +100,7 @@ class _Home_RadioState extends State<Home_Radio> {
   final String _adUnitIdd = Platform.isAndroid
       ? 'ca-app-pub-7329797350611067/5003791578'
       : 'ca-app-pub-7329797350611067/5003791578';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -127,120 +122,109 @@ class _Home_RadioState extends State<Home_Radio> {
                     fit: StackFit.passthrough,
                     children: <Widget>[
                       StreamBuilder<Playing?>(
-                          stream: _assetsAudioPlayer.current,
-                          builder: (context, playing) {
-                            if (playing.data != null) {
-                              final myAudio = find(
-                                  audios, playing.data!.audio.assetAudioPath);
-                              print(playing.data!.audio.assetAudioPath);
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Neumorphic(
-                                  style: const NeumorphicStyle(
-                                    //  color: Colors.black,
-                                    depth: 8,
-                                    surfaceIntensity: 1,
-                                    shape: NeumorphicShape.flat,
-                                    boxShape: NeumorphicBoxShape.circle(),
+                        stream: _assetsAudioPlayer.current,
+                        builder: (context, playing) {
+                          if (playing.data != null) {
+                            final myAudio = find(
+                                audios, playing.data!.audio.assetAudioPath);
+                            print(playing.data!.audio.assetAudioPath);
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 150,
+                                width: 150,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: myAudio.metas.image?.path == null
+                                        ? AssetImage('assets/default_image.jpg')
+                                        : myAudio.metas.image?.type ==
+                                                ImageType.network
+                                            ? NetworkImage(
+                                                myAudio.metas.image!.path,
+                                              )
+                                            : AssetImage(
+                                                myAudio.metas.image!.path,
+                                              ) as ImageProvider,
                                   ),
-                                  child: myAudio.metas.image?.path == null
-                                      ? const SizedBox()
-                                      : myAudio.metas.image?.type ==
-                                              ImageType.network
-                                          ? Image.network(
-                                              myAudio.metas.image!.path,
-                                              height: 150,
-                                              width: 150,
-                                              fit: BoxFit.contain,
-                                            )
-                                          : Image.asset(
-                                              myAudio.metas.image!.path,
-                                              height: 150,
-                                              width: 150,
-                                              fit: BoxFit.contain,
-                                            ),
                                 ),
-                              );
-                            }
-                            return const SizedBox.shrink();
-                          }),
+                              ),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
                     ],
                   ),
-            
                   const SizedBox(
                     height: 20,
                   ),
                   _assetsAudioPlayer.builderCurrent(
-                      builder: (context, Playing? playing) {
-                    return Column(
-                      children: <Widget>[
-                        _assetsAudioPlayer.builderLoopMode(
-                          builder: (context, loopMode) {
-                            return PlayerBuilder.isPlaying(
+                    builder: (context, Playing? playing) {
+                      return Column(
+                        children: <Widget>[
+                          _assetsAudioPlayer.builderLoopMode(
+                            builder: (context, loopMode) {
+                              return PlayerBuilder.isPlaying(
                                 player: _assetsAudioPlayer,
                                 builder: (context, isPlaying) {
                                   return PlayingControls(
                                     loopMode: loopMode,
                                     isPlaying: isPlaying,
                                     isPlaylist: true,
-                                    // onStop: () {
-                                    //   _assetsAudioPlayer.stop();
-                                    // },
-                                    // toggleLoop: () {
-                                    //   _assetsAudioPlayer.toggleLoop();
-                                    // },
                                     onPlay: () {
                                       _assetsAudioPlayer.playOrPause();
                                     },
                                     onNext: () {
-                                      //_assetsAudioPlayer.forward(Duration(seconds: 10));
                                       _assetsAudioPlayer.next(
-                                          keepLoopMode:
-                                              true /*keepLoopMode: false*/);
+                                        keepLoopMode: true,
+                                      );
                                     },
                                     onPrevious: () {
-                                      _assetsAudioPlayer.previous(
-                                          /*keepLoopMode: false*/);
+                                      _assetsAudioPlayer.previous();
                                     },
                                   );
-                                });
-                          },
-                        ),
-                        _assetsAudioPlayer.builderRealtimePlayingInfos(
+                                },
+                              );
+                            },
+                          ),
+                          _assetsAudioPlayer.builderRealtimePlayingInfos(
                             builder: (context, RealtimePlayingInfos? infos) {
-                          if (infos == null) {
-                            return const SizedBox();
-                          }
-                          //print('infos: $infos');
-                          return Column(
-                            children: [
-                              Stack(
+                              if (infos == null) {
+                                return const SizedBox();
+                              }
+                              //print('infos: $infos');
+                              return Column(
                                 children: [
-                                  if (_bannerAd != null)
-                                    Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: SafeArea(
-                                        child: SizedBox(
-                                          width:
-                                              _bannerAd!.size.width.toDouble(),
-                                          height:
-                                              _bannerAd!.size.height.toDouble(),
-                                          child: AdWidget(ad: _bannerAd!),
+                                  Stack(
+                                    children: [
+                                      if (_bannerAd != null)
+                                        Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: SafeArea(
+                                            child: SizedBox(
+                                              width: _bannerAd!.size.width
+                                                  .toDouble(),
+                                              height: _bannerAd!.size.height
+                                                  .toDouble(),
+                                              child: AdWidget(ad: _bannerAd!),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                    ],
+                                  ),
                                 ],
-                              ),
-                            ],
-                          );
-                        }),
-                      ],
-                    );
-                  }),
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
-                  _assetsAudioPlayer.builderCurrent(
+                     _assetsAudioPlayer.builderCurrent(
                       builder: (BuildContext context, Playing? playing) {
                     return SongsSelector(
                       audios: audios,
