@@ -1,16 +1,15 @@
+/*
+ *  main.dart
+ *
+ *  Created by Ilya Chirkunov <xc@yar.net> on 28.12.2020.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:radio_player/radio_player.dart';
 
-class RadioModel {
-  final String title;
-  final String url;
-  final String imagePath;
-
-  RadioModel({
-    required this.title,
-    required this.url,
-    required this.imagePath,
-  });
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyAppRadio());
 }
 
 class MyAppRadio extends StatefulWidget {
@@ -19,40 +18,34 @@ class MyAppRadio extends StatefulWidget {
 }
 
 class _MyAppRadioState extends State<MyAppRadio> {
-  late RadioPlayer _radioPlayer;
+  RadioPlayer _radioPlayer = RadioPlayer();
   bool isPlaying = false;
-  int selectedRadioIndex = 0;
-
-  List<RadioModel> radioList = [
-    RadioModel(
-      title: 'Radio Player 1',
-      url: 'https://rggeeykubskxurwxclwl.supabase.co/storage/v1/object/public/assets/Cktv/audio/e.mp3',
-      imagePath: 'assets/cover1.jpg',
-    ),
-    RadioModel(
-      title: 'Radio Player 2',
-      url: 'https://rggeeykubskxurwxclwl.supabase.co/storage/v1/object/public/assets/Cktv/audio/d.mp3M',
-      imagePath: 'assets/cover2.jpg',
-    ),
-  ];
+  List<String>? metadata;
 
   @override
   void initState() {
     super.initState();
-    _radioPlayer = RadioPlayer();
     initRadioPlayer();
   }
 
   void initRadioPlayer() {
     _radioPlayer.setChannel(
-      title: radioList[selectedRadioIndex].title,
-      url: radioList[selectedRadioIndex].url,
-      imagePath: radioList[selectedRadioIndex].imagePath,
+      title: 'Radio Player',
+      url: 'https://icepool.silvacast.com/DEFJAY.mp3',
+
+ 
+      imagePath: 'assets/cover.jpg',
     );
 
     _radioPlayer.stateStream.listen((value) {
       setState(() {
         isPlaying = value;
+      });
+    });
+
+    _radioPlayer.metadataStream.listen((value) {
+      setState(() {
+        metadata = value;
       });
     });
   }
@@ -77,7 +70,7 @@ class _MyAppRadioState extends State<MyAppRadio> {
                     artwork = snapshot.data;
                   } else {
                     artwork = Image.asset(
-                      radioList[selectedRadioIndex].imagePath,
+                      'assets/cover.jpg',
                       fit: BoxFit.cover,
                     );
                   }
@@ -93,34 +86,18 @@ class _MyAppRadioState extends State<MyAppRadio> {
               ),
               SizedBox(height: 20),
               Text(
-                radioList[selectedRadioIndex].title,
+                metadata?[0] ?? 'Metadata',
                 softWrap: false,
                 overflow: TextOverflow.fade,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
-              SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: radioList.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(radioList[index].title),
-                      onTap: () {
-                        setState(() {
-                          selectedRadioIndex = index;
-                          _radioPlayer.setChannel(
-                            title: radioList[selectedRadioIndex].title,
-                            url: radioList[selectedRadioIndex].url,
-                            imagePath: radioList[selectedRadioIndex].imagePath,
-                          );
-                          _radioPlayer
-                              .play(); // Démarrer la lecture automatiquement
-                        });
-                      },
-                    );
-                  },
-                ),
+              Text(
+                metadata?[1] ?? '',
+                softWrap: false,
+                overflow: TextOverflow.fade,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),
