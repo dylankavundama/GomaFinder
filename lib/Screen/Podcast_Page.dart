@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -34,6 +33,7 @@ class SongCard extends StatelessWidget {
     );
   }
 }
+
 class PlayerView extends StatefulWidget {
   final Song song;
 
@@ -84,9 +84,28 @@ class _PlayerViewState extends State<PlayerView> {
         return false;
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.song.titre),
-        ),
+          appBar: AppBar(
+        centerTitle: true,
+        title: Row(children: [
+          Text(
+            'U',
+            style: TextStyle(color: CouleurPrincipale),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(right: 0),
+          ),
+          const Text(
+            'PATO',
+            style: TextStyle(color: Colors.black),
+          ),
+          const Icon(
+            Icons.location_on_outlined,
+            color: Colors.black,
+            size: 18,
+          )
+        ]),
+        backgroundColor: Colors.white,
+      ),
         body: SingleChildScrollView(
           child: Stack(
             children: [
@@ -309,6 +328,7 @@ class _PodcastState extends State<Podcast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+   
       backgroundColor: Colors.white,
       bottomNavigationBar: Container(
         height: 150,
@@ -374,7 +394,10 @@ class _PodcastState extends State<Podcast> {
         ),
       ),
       body: isLoading
-          ?  Center(child: CircularProgressIndicator(color: CouleurPrincipale,))
+          ? Center(
+              child: CircularProgressIndicator(
+              color: CouleurPrincipale,
+            ))
           : ListView.builder(
               itemCount: songs.length,
               itemBuilder: (context, index) => SongCard(song: songs[index]),

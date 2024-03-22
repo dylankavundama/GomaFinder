@@ -4,6 +4,7 @@ import 'package:upato/Screen/podecast/live_radio/Home_Radio.dart';
 import 'package:upato/style.dart';
 
 import 'Screen/podecast/Podcast_Page.dart';
+
 class ExplorePage extends StatelessWidget {
   // Liste des éléments à afficher dans la GridView
   final List<Map<String, dynamic>> items = [
@@ -31,8 +32,7 @@ class ExplorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-          appBar: AppBar(
+      appBar: AppBar(
         centerTitle: true,
         title: Row(children: [
           Text(
@@ -56,7 +56,7 @@ class ExplorePage extends StatelessWidget {
       ),
       body: GridView.builder(
         itemCount: items.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Nombre de colonnes dans la grille
         ),
         itemBuilder: (context, index) {
