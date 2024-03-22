@@ -51,7 +51,8 @@ dependencies:
   radio_player:
   provider:
   flutter_localization: ^0.1.14
-
+  flutter_neumorphic: ^3.2.0
+  assets_audio_player:
 dev_dependencies:
 
 
