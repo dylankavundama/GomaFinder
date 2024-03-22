@@ -7,6 +7,7 @@ import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
 import 'package:upato/style.dart';
 
+// ignore: camel_case_types
 class Search_Page extends StatefulWidget {
   const Search_Page({Key? key}) : super(key: key);
 
@@ -14,6 +15,7 @@ class Search_Page extends StatefulWidget {
   State<Search_Page> createState() => _Search_PageState();
 }
 
+// ignore: camel_case_types
 class _Search_PageState extends State<Search_Page> {
   List<dynamic> post = [];
   List<dynamic> filteredPost = [];
@@ -97,72 +99,64 @@ class _Search_PageState extends State<Search_Page> {
       ),
     );
 
-    return _isLoading
-        ? Center(
-            child: CircularProgressIndicator(
-              color: CouleurPrincipale,
-            ),
-          )
-        : Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(22.0),
-                child: TextField(
-                  autofocus: true,
-                  cursorColor: CouleurPrincipale,
-                  controller: searchController,
-                  onChanged: filterSearchResults,
-                  decoration: InputDecoration(
-                    labelText: "Rechercher",
-                    hintText: "Rechercher",
-                    prefixIcon: const Icon(Icons.search),
-                    border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4.0),
-                      ),
-                    ),
-                    // Modification de la couleur du texte
-                    labelStyle: TextStyle(color: CouleurPrincipale),
-                    hintStyle: const TextStyle(color: Colors.black),
-                  ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(22.0),
+          child: TextField(
+            autofocus: true,
+            cursorColor: CouleurPrincipale,
+            controller: searchController,
+            onChanged: filterSearchResults,
+            decoration: InputDecoration(
+              labelText: "Rechercher",
+              hintText: "Rechercher",
+              prefixIcon: const Icon(Icons.search),
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(4.0),
                 ),
               ),
-              searchController.text.isNotEmpty
-                  ? Expanded(
-                      child: ListView.builder(
-                        itemCount: filteredPost.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return DetailPage(
-                                    lat: filteredPost[index]['lat'],
-                                    long: filteredPost[index]['log'],
-                                    titre: filteredPost[index]['nom'],
-                                    site: filteredPost[index]['site'],
-                                    tel: filteredPost[index]['tel'],
-                                    desc: filteredPost[index]['detail'],
-                                    image1: filteredPost[index]['image1'],
-                                    image2: filteredPost[index]['image2'],
-                                  );
-                                }),
-                              );
-                            },
-                            child: Widget_UI(
-                              desc: filteredPost[index]['detail'],
+              // Modification de la couleur du texte
+              labelStyle: TextStyle(color: CouleurPrincipale),
+              hintStyle: const TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+        searchController.text.isNotEmpty
+            ? Expanded(
+                child: ListView.builder(
+                  itemCount: filteredPost.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return DetailPage(
+                              lat: filteredPost[index]['lat'],
+                              long: filteredPost[index]['log'],
                               titre: filteredPost[index]['nom'],
-                              image: filteredPost[index]['image1'],
-                            ),
-                          );
-                        },
+                              site: filteredPost[index]['site'],
+                              tel: filteredPost[index]['tel'],
+                              desc: filteredPost[index]['detail'],
+                              image1: filteredPost[index]['image1'],
+                              image2: filteredPost[index]['image2'],
+                            );
+                          }),
+                        );
+                      },
+                      child: Widget_UI(
+                        desc: filteredPost[index]['detail'],
+                        titre: filteredPost[index]['nom'],
+                        image: filteredPost[index]['image1'],
                       ),
-                    )
-                  : Container(
-                      child: Image.asset('assets/find.webp'),
-                    )
-            ],
-          );
+                    );
+                  },
+                ),
+              )
+            : Image.asset('assets/find.webp')
+      ],
+    );
   }
 }
