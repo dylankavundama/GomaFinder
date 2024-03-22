@@ -190,17 +190,18 @@ class _Inset_DataState extends State<Inset_Data> {
     // );
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CouleurPrincipale,
+          centerTitle: true,
+          backgroundColor: CouleurPrincipale,
           title: Text(
-            'Nom: ${user?.displayName ?? "Non défini"}',
-            style: TextStyle(fontSize: 20),
+            ' ${user?.displayName ?? "Non défini"}',
+            style: TextStyle(fontSize: 15),
           ),
           actions: [
             CircleAvatar(
               backgroundImage: user?.photoURL != null
                   ? NetworkImage(user!.photoURL!) as ImageProvider<Object>?
                   : AssetImage('assets/default_avatar.png'),
-              radius: 50,
+              radius: 22,
             ),
           ]),
       body: SingleChildScrollView(
@@ -228,21 +229,7 @@ class _Inset_DataState extends State<Inset_Data> {
                     style: TitreStyle,
                   )),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(height: 20),
-                    Text(
-                      'Nom: ${user?.displayName ?? "Non défini"}',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    const SizedBox(height: 10),
-                    // Text(
-                    //   'E-mail: ${user?.email ?? "Non défini"}',
-                    //   style: TextStyle(fontSize: 20),
-                    // ),
-                  ],
-                ),
+      
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
                   child: Stack(
