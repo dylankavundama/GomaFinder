@@ -8,7 +8,10 @@ class ExplorePage extends StatelessWidget {
       'image':
           'https://static.vecteezy.com/system/resources/thumbnails/010/160/834/small/music-icon-sign-symbol-design-free-png.png'
     },
-    {'title': 'Stock', 'image': 'assets/stock_icon.png'}
+    {
+      'title': 'Podcast',
+      'image': 'https://cdn-icons-png.freepik.com/512/4029/4029013.png'
+    }
   ];
 
   @override
@@ -54,7 +57,7 @@ class ExplorePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
+                  Image.network(
                     items[index]['image'],
                     width: 50,
                     height: 50,
