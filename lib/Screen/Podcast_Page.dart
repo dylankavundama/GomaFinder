@@ -34,7 +34,6 @@ class SongCard extends StatelessWidget {
     );
   }
 }
-
 class PlayerView extends StatefulWidget {
   final Song song;
 
@@ -57,6 +56,7 @@ class _PlayerViewState extends State<PlayerView> {
         isPlaying = state == PlayerState.PLAYING;
       });
     });
+    playOrPause(); // Démarrer la lecture automatiquement
   }
 
   @override
@@ -80,7 +80,7 @@ class _PlayerViewState extends State<PlayerView> {
       onWillPop: () async {
         // Retourne true pour indiquer que vous avez géré le bouton de retour
         Navigator.pop(context);
-        // Retourne false pour empêcher la navigation arrière par défaut
+
         return false;
       },
       child: Scaffold(
@@ -171,12 +171,6 @@ class _PlayerViewState extends State<PlayerView> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // IconButton(
-                                  //   icon: const Icon(Icons.skip_previous),
-                                  //   onPressed: prevSong,
-                                  //   color: Colors.white60,
-                                  //   iconSize: 36,
-                                  // ),
                                   const SizedBox(
                                     width: 5,
                                   ),
@@ -191,7 +185,6 @@ class _PlayerViewState extends State<PlayerView> {
                                   const SizedBox(
                                     width: 5,
                                   ),
-                   
                                 ],
                               ),
                             ),
@@ -364,10 +357,6 @@ class _PodcastState extends State<Podcast> {
                   ),
                   const SizedBox(
                       width: 10), // Espacement entre les boutons et le titre
-                  // Text(
-                  //   widget.song.titre, // Afficher le titre du son en cours
-                  //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  // ),
                 ],
               ),
               Row(

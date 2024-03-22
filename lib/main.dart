@@ -3,7 +3,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:upato/NavBarPage.dart';
-import 'package:upato/Screen/radio.dart';
+import 'package:upato/Screen/podecast/live_radio/radio.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
