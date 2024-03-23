@@ -85,28 +85,21 @@ class _PlayerViewState extends State<PlayerView> {
         return false;
       },
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Row(children: [
-            Text(
-              'U',
-              style: TextStyle(color: CouleurPrincipale),
-            ),
+            appBar: AppBar(
+        iconTheme: IconThemeData(color: CouleurPrincipale),
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
             const Padding(
               padding: EdgeInsets.only(right: 0),
             ),
-            const Text(
-              'PATO',
-              style: TextStyle(color: Colors.black),
+            Text(
+              'Lecture',
+              style: DescStyle,
             ),
-            const Icon(
-              Icons.location_on_outlined,
-              color: Colors.black,
-              size: 18,
-            )
-          ]),
-          backgroundColor: Colors.white,
+          ],
         ),
+      ),
         body: SingleChildScrollView(
           child: Stack(
             children: [
@@ -329,27 +322,20 @@ class _PodcastState extends State<Podcast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Row(children: [
-          Text(
-            'U',
-            style: TextStyle(color: CouleurPrincipale),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 0),
-          ),
-          const Text(
-            'PATO',
-            style: TextStyle(color: Colors.black),
-          ),
-          const Icon(
-            Icons.location_on_outlined,
-            color: Colors.black,
-            size: 18,
-          )
-        ]),
+    appBar: AppBar(
+        iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'Music/Radio',
+              style: DescStyle,
+            ),
+          ],
+        ),
       ),
       backgroundColor: Colors.white,
       bottomNavigationBar: SizedBox(

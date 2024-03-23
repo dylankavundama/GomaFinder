@@ -31,27 +31,20 @@ class ExplorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Row(children: [
-          Text(
-            'U',
-            style: TextStyle(color: CouleurPrincipale),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 0),
-          ),
-          const Text(
-            'PATO',
-            style: TextStyle(color: Colors.black),
-          ),
-          const Icon(
-            Icons.location_on_outlined,
-            color: Colors.black,
-            size: 18,
-          )
-        ]),
+    appBar: AppBar(
+        iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'Explore',
+              style: DescStyle,
+            ),
+          ],
+        ),
       ),
       body: GridView.builder(
         itemCount: items.length,

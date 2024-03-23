@@ -57,10 +57,20 @@ class _Actu_HomeState extends State<Actu_Home> {
     return
     
  Scaffold(
-      appBar: AppBar(
-        title: Text("Actualité", style: TitreStyle),
-        centerTitle: true,
+    appBar: AppBar(
+        iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'Actu',
+              style: DescStyle,
+            ),
+          ],
+        ),
       ),
       body: 
       
@@ -142,7 +152,7 @@ class _Actu_HomeState extends State<Actu_Home> {
                                   fontWeight: FontWeight.normal,
                                   color: Colors.black,
                                 ),
-                                maxLines: 5,
+                                maxLines: 4,
                               ),
                             ],
                           ),

@@ -33,27 +33,20 @@ class _Tv_HomeState extends State<Tv_Home> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Row(children: [
-          Text(
-            'U',
-            style: TextStyle(color: CouleurPrincipale),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 0),
-          ),
-          const Text(
-            'PATO',
-            style: TextStyle(color: Colors.black),
-          ),
-          const Icon(
-            Icons.location_on_outlined,
-            color: Colors.black,
-            size: 18,
-          )
-        ]),
+    appBar: AppBar(
+        iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'Televison',
+              style: DescStyle,
+            ),
+          ],
+        ),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
