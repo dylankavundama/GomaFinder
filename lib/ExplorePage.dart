@@ -108,7 +108,7 @@ class ExplorePage extends StatelessWidget {
                   SizedBox(height: 10),
                   Text(
                     items[index]['title'],
-                    style: TextStyle(fontSize: 18),
+                    style: TitreStyle,
                   ),
                 ],
               ),
@@ -141,36 +141,6 @@ class DetailsPage extends StatelessWidget {
   }
 }
 
-class MusicPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Music Page'),
-      ),
-      body: Center(
-        child: Text(
-          'Music Page',
-          style: TextStyle(fontSize: 24.0),
-        ),
-      ),
-    );
-  }
-}
 
-class StockPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Stock Page'),
-      ),
-      body: const Center(
-        child: Text(
-          'Stock Page',
-          style: TextStyle(fontSize: 24.0),
-        ),
-      ),
-    );
-  }
-}
+
+

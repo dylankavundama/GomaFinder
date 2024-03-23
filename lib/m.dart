@@ -222,23 +222,15 @@ class _TaskListPageState extends State<TaskListPage> {
               itemBuilder: (context, index) {
                 final task = _tasks[index];
                 return ListTile(
-                  leading: IconButton(
+              
+                  title: Text(task.title),
+                //  subtitle: Text("Due: ${_formatDueDate(task.dueDate)}"), // Format the due date
+                  trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
                       _deleteTask(task.id);
                     },
-                  ),
-                  title: Text(task.title),
-                //  subtitle: Text("Due: ${_formatDueDate(task.dueDate)}"), // Format the due date
-                  trailing: Checkbox(
-                    value: task.completed,
-                    onChanged: (value) {
-                      setState(() {
-                        task.completed = value!;
-                        // Update the task completion status in the database
-                        _updateTask(task);
-                      });
-                    },
+                  
                   ),
                 );
               },
@@ -296,6 +288,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   ],
                 ),
                 ElevatedButton(
+                  style:ButtonStyle(backgroundColor: MaterialStatePropertyAll(CouleurPrincipale)),
                   onPressed: () {
                     if (_textEditingController.text.isNotEmpty) {
                       final dueDateTime = DateTime(
