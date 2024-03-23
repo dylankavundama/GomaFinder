@@ -60,7 +60,7 @@ class Channel extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => LocalLecture(
-                        titre: '',
+                        titre: videos[index].title,
                         video: videos[index].videoUrl,
                       ),
                     ),
@@ -74,63 +74,5 @@ class Channel extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class VideoPlayerScreen extends StatefulWidget {
-  final List<VideoItem> videoItems;
-  final int initialIndex;
-
-  const VideoPlayerScreen(
-      {super.key, required this.videoItems, required this.initialIndex});
-
-  @override
-  // ignore: library_private_types_in_public_api
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
-}
-
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _videoPlayerController;
-  late ChewieController _chewieController;
-  int _currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentIndex = widget.initialIndex;
-    // ignore: deprecated_member_use
-    _videoPlayerController = VideoPlayerController.network(
-        widget.videoItems[_currentIndex].videoUrl);
-    _chewieController = ChewieController(
-      videoPlayerController: _videoPlayerController,
-      autoPlay: true,
-      looping: true,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Lecture de la vidéo'),
-      ),
-      body: Column(
-        children: [
-          Chewie(controller: _chewieController),
-          const SizedBox(height: 20),
-          Text(
-            widget.videoItems[_currentIndex].title,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _videoPlayerController.dispose();
-    _chewieController.dispose();
   }
 }
