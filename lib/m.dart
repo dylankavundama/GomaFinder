@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sqflite/sqflite.dart';
@@ -34,7 +36,7 @@ class Task {
   final int id;
   final String title;
   late final bool completed;
-  final DateTime dueDate; // Ajout de la date prévue pour la tâche
+  final DateTime dueDate;
 
   Task({
     required this.id,
@@ -48,8 +50,7 @@ class Task {
       'id': id,
       'title': title,
       'completed': completed ? 1 : 0,
-      'dueDate': dueDate
-          .millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
+      'dueDate': dueDate.millisecondsSinceEpoch,
     };
   }
 
@@ -58,8 +59,7 @@ class Task {
       id: map['id'],
       title: map['title'],
       completed: map['completed'] == 1,
-      dueDate: DateTime.fromMillisecondsSinceEpoch(
-          map['dueDate']), // Récupération de la date à partir des millisecondes
+      dueDate: DateTime.fromMillisecondsSinceEpoch(map['dueDate']),
     );
   }
 }
@@ -75,19 +75,13 @@ class _TaskListPageState extends State<TaskListPage> {
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
   List<Task> _tasks = [];
-  Future<void> _deleteTask(int taskId) async {
-    final db = await _database;
-    await db.delete(
-      'tasks',
-      where: 'id = ?',
-      whereArgs: [taskId],
-    );
-    _refreshTasks(); // Rafraîchir la liste des tâches après la suppression
-  }
+  int _minutesRemaining = 0;
+
   @override
   void initState() {
     super.initState();
     _initDatabase();
+    _startTimer(); // Start the timer
   }
 
   Future<void> _initDatabase() async {
@@ -119,6 +113,7 @@ class _TaskListPageState extends State<TaskListPage> {
         },
       );
     });
+    _updateMinutesRemaining();
   }
 
   Future<void> _addTask(String title, DateTime dueDate) async {
@@ -128,8 +123,7 @@ class _TaskListPageState extends State<TaskListPage> {
       {
         'title': title,
         'completed': 0,
-        'dueDate': dueDate
-            .millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
+        'dueDate': dueDate.millisecondsSinceEpoch,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -147,19 +141,19 @@ class _TaskListPageState extends State<TaskListPage> {
     // Create a notification details
     final AndroidNotificationDetails androidPlatformChannelSpecifics =
         AndroidNotificationDetails(
-      'channel_id', // Change to your desired channel id
-      'Channel Name', // Change to your desired channel name
-      'Channel Description', // Change to your desired channel description
+      'channel_id',
+      'Channel Name',
+      'Channel Description',
     );
     final NotificationDetails platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
 
     // Schedule the notification
     await flutterLocalNotificationsPlugin.zonedSchedule(
-      0, // Change to a unique id for the notification
-      'Task Reminder', // Notification title
-      'Task "$title" is due!', // Notification body
-      tz.TZDateTime.from(dueDate, tz.local), // Scheduled date and time
+      0,
+      'Task Reminder',
+      'Task "$title" is due!',
+      tz.TZDateTime.from(dueDate, tz.local),
       platformChannelSpecifics,
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
@@ -168,6 +162,39 @@ class _TaskListPageState extends State<TaskListPage> {
     );
   }
 
+  void _updateMinutesRemaining() {
+    setState(() {
+      _minutesRemaining = 0;
+      final now = DateTime.now();
+      for (final task in _tasks) {
+        final difference = task.dueDate.difference(now);
+        final minutes = difference.inMinutes;
+        if (minutes > 0 && (_minutesRemaining == 0 || minutes < _minutesRemaining)) {
+          _minutesRemaining = minutes;
+        }
+      }
+    });
+  }
+
+  void _startTimer() {
+    const Duration updateInterval = Duration(minutes: 1);
+    Timer.periodic(updateInterval, (timer) {
+      if (_minutesRemaining > 0) {
+        setState(() {
+          _minutesRemaining--;
+        });
+      }
+    });
+  }
+  Future<void> _deleteTask(int taskId) async {
+    final db = await _database;
+    await db.delete(
+      'tasks',
+      where: 'id = ?',
+      whereArgs: [taskId],
+    );
+    _refreshTasks(); // Rafraîchir la liste des tâches après la suppression
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,10 +212,11 @@ class _TaskListPageState extends State<TaskListPage> {
                   leading: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-              _deleteTask(task.id);
-            },),
+                      _deleteTask(task.id);
+                    },
+                  ),
                   title: Text(task.title),
-                  subtitle: Text("Due: ${task.dueDate}"),
+                //  subtitle: Text("Due: ${_formatDueDate(task.dueDate)}"), // Format the due date
                   trailing: Checkbox(
                     value: task.completed,
                     onChanged: (value) {
