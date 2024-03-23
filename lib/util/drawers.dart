@@ -53,10 +53,10 @@ class _DrawersState extends State<Drawers> {
         ),
         Card(
           child: ListTile(
-                        onTap: () {
+            onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) =>  const Tv_Home(),
+                  builder: (context) => const Tv_Home(),
                 ),
               );
             },
@@ -72,7 +72,7 @@ class _DrawersState extends State<Drawers> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) =>   HomeRadio(),
+                  builder: (context) => HomeRadio(),
                 ),
               );
             },
