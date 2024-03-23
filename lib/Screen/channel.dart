@@ -1,6 +1,10 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/Screen/Tv/PagedeLecture.dart';
 import '../Util/style.dart';
 
@@ -14,13 +18,20 @@ class VideoItem {
   );
 }
 
-class Channel extends StatelessWidget {
+class Channel extends StatefulWidget {
+  Channel({super.key});
+
+  @override
+  State<Channel> createState() => _ChannelState();
+}
+
+class _ChannelState extends State<Channel> {
   final List<VideoItem> videos = [
-
-    VideoItem('','http://cdn.raino.xyz/hls/stream2.m3u8'),
-VideoItem('EDGEsport','https://edgesports-sportstribal.amagi.tv/playlist.m3u8'),
-
-    VideoItem('Nasa TV','https://ntv1.akamaized.net/hls/live/2014075/NASA-NTV1-HLS/master_2000.m3u8'),
+    VideoItem('', 'http://cdn.raino.xyz/hls/stream2.m3u8'),
+    VideoItem(
+        'EDGEsport', 'https://edgesports-sportstribal.amagi.tv/playlist.m3u8'),
+    VideoItem('Nasa TV',
+        'https://ntv1.akamaized.net/hls/live/2014075/NASA-NTV1-HLS/master_2000.m3u8'),
     VideoItem(
       'Afrobeats',
       'https://stream.ecable.tv/afrobeats/index.m3u8',
@@ -102,7 +113,75 @@ VideoItem('EDGEsport','https://edgesports-sportstribal.amagi.tv/playlist.m3u8'),
         'https://svs.itworkscdn.net/smc4sportslive/smc4.smil/playlist.m3u8')
   ];
 
-  Channel({super.key});
+  InterstitialAd? _interstitialAd;
+
+  final _gameLength = 5;
+
+  late var _counter = _gameLength;
+
+  final String _adUnitIdd = Platform.isAndroid
+      ? 'ca-app-pub-7329797350611067/7003775471'
+      : 'ca-app-pub-7329797350611067/7003775471';
+
+  void _startNewGame() {
+    setState(() => _counter = _gameLength);
+
+    _loadAdd();
+    _starTimer();
+  }
+
+  void _loadAdd() {
+    InterstitialAd.load(
+        adUnitId: _adUnitIdd,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+                onAdShowedFullScreenContent: (ad) {},
+                onAdImpression: (ad) {},
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  ad.dispose();
+                },
+                onAdDismissedFullScreenContent: (ad) {
+                  ad.dispose();
+                },
+                onAdClicked: (ad) {});
+
+            _interstitialAd = ad;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void _starTimer() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() => _counter--);
+
+      if (_counter == 0) {
+        _interstitialAd?.show();
+        timer.cancel();
+      }
+    });
+  }
+
+  void initT() {
+    _startNewGame();
+    initState();
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd?.dispose();
+    super.dispose();
+  }
+
+  void go() {
+    setState(() {
+      _interstitialAd?.show();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

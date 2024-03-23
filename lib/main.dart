@@ -21,11 +21,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
+
   AssetsAudioPlayer.setupNotificationsOpenAction((notification) {
     return true;
   });
-
-  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Future.delayed(Duration(seconds: 1));
   FlutterNativeSplash.remove();
@@ -51,7 +50,7 @@ void main() async {
   //     statusBarBrightness: Brightness.light,
   //   ),
   // );
-       SystemChrome.setEnabledSystemUIOverlays([]);
+  SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(const MyApp());
 }
 
@@ -63,7 +62,7 @@ class MyApp extends StatelessWidget {
     // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
     //     overlays: [SystemUiOverlay.top]);
 
-     SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return MaterialApp(
       theme: ThemeData(
           primaryColor: Colors.green,
@@ -75,8 +74,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: Actualite_Page(),
 //home: Event_Home_Page(),
-    //  home:  Channel(),
-        home: OnboardingScreen(),
+      //  home:  Channel(),
+      home: OnboardingScreen(),
     );
   }
 }
