@@ -51,17 +51,15 @@ class _LocalLectureState extends State<LocalLecture> {
   }
 
   void _createChewieController() {
-    final subtitles = [
 
-    ];
 
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
       autoPlay: true,
-      looping: false,
+      looping: true,
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
-   //  subtitle: Subtitles(subtitles),
+
 
       //  hideControlsOnInitialize: true,
       showControlsOnInitialize: false,
