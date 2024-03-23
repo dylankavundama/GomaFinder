@@ -6,147 +6,107 @@ import 'package:path/path.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-
-class Task {
-  final int id;
-  final String title;
-  late final bool completed;
-  final DateTime dueDate; // Ajout de la date prévue pour la tâche
-
-  Task({
-    required this.id,
-    required this.title,
-    required this.completed,
-    required this.dueDate,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'completed': completed ? 1 : 0,
-      'dueDate': dueDate
-          .millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
-    };
-  }
-
-  factory Task.fromMap(Map<String, dynamic> map) {
-    return Task(
-      id: map['id'],
-      title: map['title'],
-      completed: map['completed'] == 1,
-      dueDate: DateTime.fromMillisecondsSinceEpoch(
-          map['dueDate']), // Récupération de la date à partir des millisecondes
-    );
-  }
-}
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:upato/m.dart';
 
 class TaskListPage extends StatefulWidget {
   @override
   _TaskListPageState createState() => _TaskListPageState();
 }
 
+
+
 class _TaskListPageState extends State<TaskListPage> {
-  late Future<Database> _database;
+
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _initDatabase();
+  //   _startTimer();
+  // }
+
+  // @override
+  // void dispose() {
+  //   _timer.cancel();
+  //   super.dispose();
+  // }
+
+
+
+  Future<void> _initDatabase() async {
+    // Initialisation de la base de données
+  }
+
+  Future<void> _refreshTasks() async {
+    // Actualisation des tâches
+  }
+
+  Future<void> _addTask(String title, DateTime dueDate) async {
+    // Ajout d'une tâche
+  }
+
+  Future<void> _updateTask(Task task) async {
+    // Mise à jour d'une tâche
+  }
+
+  Future<void> _scheduleNotification(String title, DateTime dueDate) async {
+    // Planification d'une notification
+  }
+
+  // void _updateMinutesRemaining() {
+  //   final now = DateTime.now();
+  //   final closestTask = _tasks
+  //       .where((task) => task.dueDate.isAfter(now))
+  //       .reduce((a, b) => a.dueDate.difference(now) < b.dueDate.difference(now) ? a : b);
+  //   final difference = closestTask.dueDate.difference(now);
+  //   setState(() {
+  //     _minutesRemaining = difference.inMinutes;
+  //   });
+  // }
+
+
+late Future<Database> _database;
   TextEditingController _textEditingController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
   List<Task> _tasks = [];
+  late Timer _timer;
+  int _minutesRemaining = 0;
 
   @override
   void initState() {
     super.initState();
     _initDatabase();
+    _startTimer();
   }
 
-  Future<void> _initDatabase() async {
-    _database = openDatabase(
-      join(await getDatabasesPath(), 'task_database.db'),
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE tasks(id INTEGER PRIMARY KEY, title TEXT, completed INTEGER, dueDate INTEGER)',
-        );
-      },
-      version: 1,
-    );
-    _refreshTasks();
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
-  Future<void> _refreshTasks() async {
-    final Database db = await _database;
-    final List<Map<String, dynamic>> maps = await db.query('tasks');
-
-    setState(() {
-      _tasks = List.generate(
-        maps.length,
-        (i) {
-          return Task(
-              id: maps[i]['id'],
-              title: maps[i]['title'],
-              completed: maps[i]['completed'] == 1,
-              dueDate: DateTime.fromMillisecondsSinceEpoch(maps[i]['dueDate']));
-        },
-      );
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        _updateMinutesRemaining();
+      });
     });
   }
 
-  Future<void> _addTask(String title, DateTime dueDate) async {
-    final Database db = await _database;
-    await db.insert(
-      'tasks',
-      {
-        'title': title,
-        'completed': 0,
-        'dueDate': dueDate
-            .millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
-      },
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-
-    // Schedule a notification for the due date of the task
-    await _scheduleNotification(title, dueDate);
-
-    _refreshTasks();
+  void _updateMinutesRemaining() {
+    final now = DateTime.now();
+    final closestTask = _tasks
+        .where((task) => task.dueDate.isAfter(now))
+        .reduce((a, b) => a.dueDate.difference(now) < b.dueDate.difference(now) ? a : b);
+    final difference = closestTask.dueDate.difference(now);
+    final totalMinutes = difference.inMinutes;
+    setState(() {
+      _minutesRemaining = totalMinutes;
+    });
   }
-
-  Future<void> _scheduleNotification(String title, DateTime dueDate) async {
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
-
-    // Create a notification details
-    final AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      'channel_id', // Change to your desired channel id
-      'Channel Name', // Change to your desired channel name
-      'Channel Description', // Change to your desired channel description
-    );
-    final NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
-
-    // Schedule the notification
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      0, // Change to a unique id for the notification
-      'Task Reminder', // Notification title
-      'Task "$title" is due!', // Notification body
-      tz.TZDateTime.from(dueDate, tz.local), // Scheduled date and time
-      platformChannelSpecifics,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
-    );
-
-     // Jouer le son de la notification
-  await _playNotificationSound();
-  }
-Future<void> _playNotificationSound() async {
-  AudioCache audioCache = AudioCache();
-  const notificationSoundPath ="assets/audios/Ndeke.mp3"; // Chemin vers votre fichier audio
-
-  // Jouer le son
-  audioCache.play(notificationSoundPath);
-}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,20 +115,28 @@ Future<void> _playNotificationSound() async {
       ),
       body: Column(
         children: <Widget>[
+
+  
           Expanded(
             child: ListView.builder(
               itemCount: _tasks.length,
               itemBuilder: (context, index) {
                 final task = _tasks[index];
                 return ListTile(
+
+                  
                   title: Text(task.title),
-                  subtitle: Text("Due: ${task.dueDate}"),
+                  subtitle:             Text(
+            '$_minutesRemaining minutes remaining',
+            style: TextStyle(fontSize: 18,
+            
+            color: Colors.amber),
+          ),
                   trailing: Checkbox(
                     value: task.completed,
                     onChanged: (value) {
                       setState(() {
                         task.completed = value!;
-                        // Update the task completion status in the database
                         _updateTask(task);
                       });
                     },
@@ -244,21 +212,21 @@ Future<void> _playNotificationSound() async {
                   },
                   child: Text("Add Task"),
                 ),
+                Text("$_minutesRemaining minutes remaining"),
               ],
             ),
           ),
         ],
       ),
     );
+
+    
   }
 
-  Future<void> _updateTask(Task task) async {
-    final db = await _database;
-    await db.update(
-      'tasks',
-      task.toMap(),
-      where: 'id = ?',
-      whereArgs: [task.id],
-    );
-  }
+  
 }
+
+
+
+  
+
