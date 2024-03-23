@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage>
                 labelColor: Colors.black,
                 controller: _tabController,
                 isScrollable: true,
-                tabs: [
+                tabs: const [
                   Tab(text: 'Tous'),
                   Tab(text: 'Ecole'),
                   Tab(text: 'Bureau'),
@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage>
         },
         body: TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
             Entreprise_Page(),
             Ecole_Page(),
             Bureau_Page(),
@@ -242,7 +242,7 @@ class _Floating_WidgetState extends State<Floating_Widget> {
       backgroundColor: CouleurPrincipale,
       foregroundColor: Colors.white,
       elevation: 8.0,
-      shape: CircleBorder(),
+      shape: const CircleBorder(),
       children: [
         SpeedDialChild(
           child: Icon(Icons.keyboard_voice),
@@ -280,7 +280,7 @@ class _Floating_WidgetState extends State<Floating_Widget> {
           child: Icon(Icons.camera),
           backgroundColor: Colors.teal,
           label: 'Photographe',
-          labelStyle: TextStyle(fontSize: 18.0),
+          labelStyle: const TextStyle(fontSize: 18.0),
           onTap: () => print('SECOND CHILD'),
           onLongPress: () => print('SECOND CHILD LONG PRESS'),
         ),
