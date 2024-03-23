@@ -1,108 +1,91 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:upato/NavBarPage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
-import 'package:upato/Screen/podecast/live_radio/radio.dart';
-import 'package:upato/detailpage.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/services.dart';
-import 'package:upato/Util/style.dart';
-import 'Screen/Tv/Tv_Home.dart';
-import 'onboarding_screen.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 
-void main() async {
-  
-  const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'channel_id', // Change to your desired channel id
-  'Channel Name', // Change to your desired channel name
-  'Channel Description', // Change to your desired channel description
-  importance: Importance.high,
-);
+void main() {
+  runApp(MyApp());
+}
 
-  WidgetsFlutterBinding.ensureInitialized();
+class VideoItem {
+  final String title;
+  final String videoUrl;
 
-  // Initialize timezone data
-  tz.initializeTimeZones();
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-  final InitializationSettings initializationSettings =
-      InitializationSettings(android: initializationSettingsAndroid);
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
-  // Demander les autorisations de notification
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
-  WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
-  AssetsAudioPlayer.setupNotificationsOpenAction((notification) {
-    return true;
-  });
-
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await Future.delayed(Duration(seconds: 1));
-  FlutterNativeSplash.remove();
-  await Supabase.initialize(
-      url: 'https://vedjwvecqlobnryactos.supabase.co',
-      anonKey:
-         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlZGp3dmVjcWxvYm5yeWFjdG9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTUyODI2OTUsImV4cCI6MjAxMDg1ODY5NX0.77wPATiKNzIXRdP8U3xsc7l5kYn-qs60Y0QZE7IHTkY');
-    OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
-
-  OneSignal.shared.setNotificationWillShowInForegroundHandler(
-      (OSNotificationReceivedEvent event) {});
-  OneSignal.shared
-      .promptUserForPushNotificationPermission()
-      .then((accepted) {});
-    SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.manual,
-    overlays: [],
-  );
-
-  //       SystemChrome.setSystemUIOverlayStyle(
-  //   SystemUiOverlayStyle(
-  //     statusBarColor: Colors.green,
-  //     statusBarBrightness: Brightness.light,
-  //   ),
-  // );
-  runApp(const MyApp());
+  VideoItem(this.title, this.videoUrl);
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final List<VideoItem> videos = [
+    VideoItem('Vidéo 1', 'https://stream.ecable.tv/afrobeats/index.m3u8'),
+    VideoItem('Vidéo 2', 'https://live-hls-web-aje.getaj.net/AJE/01.m3u8'),
+    VideoItem('Vidéo 3', 'https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/dmotion/py/eqpe/equipe.m3u8'),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top]);
     return MaterialApp(
-      theme: ThemeData(
-         primarySwatch: Colors.green,
-          primaryColor: Colors.green,
-          buttonColor: CouleurPrincipale,
-          fixTextFieldOutlineLabel: true,
-          // Primary color for the app
-        
-          accentColor: CouleurPrincipale, // Accent color for the app
-          useMaterial3: false),
-      debugShowCheckedModeBanner: false,
-      // home: Actualite_Page(),
-//home: Event_Home_Page(),
+      title: 'Video Player',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Liste des vidéos'),
+        ),
+        body: ListView.builder(
+          itemCount: videos.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => VideoPlayerScreen(videoUrl: videos[index].videoUrl),
+                  ),
+                );
+              },
+              child: ListTile(
+                title: Text(videos[index].title),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
 
-    
-    home:     Tv_Home(),
-    //  home: Home_Radio(),
+class VideoPlayerScreen extends StatefulWidget {
+  final String videoUrl;
+
+  VideoPlayerScreen({required this.videoUrl});
+
+  @override
+  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+}
+
+class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  late IjkMediaController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = IjkMediaController();
+    controller.setNetworkDataSource(widget.videoUrl, autoPlay: true);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Lecture de la vidéo'),
+      ),
+      body: Container(
+        child: IjkPlayer(
+          mediaController: controller,
+        ),
+      ),
     );
   }
 }
