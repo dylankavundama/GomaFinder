@@ -7,6 +7,7 @@ import 'package:upato/Util/style.dart';
 
 import 'Local_bloc.dart';
 
+// ignore: camel_case_types
 class Tv_Home extends StatefulWidget {
   const Tv_Home({Key? key}) : super(key: key);
   @override
@@ -32,7 +33,7 @@ class _Tv_HomeState extends State<Tv_Home> {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-    appBar: AppBar(
+      appBar: AppBar(
         iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
         title: Row(
@@ -67,7 +68,12 @@ class _Tv_HomeState extends State<Tv_Home> {
 
               if (state is BlocStateLoaded) {
                 if (state.data == null || state.data.isEmpty) {
-                  return const Text('');
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 199.0),
+                    child: Center(
+                        child: CircularProgressIndicator(
+                            color: CouleurPrincipale)),
+                  );
                 } else {
                   return SizedBox(
                     height: screenHeight,
@@ -99,14 +105,16 @@ class _Tv_HomeState extends State<Tv_Home> {
                   );
                 }
               }
-              return const Text('');
+              return Center(
+                child: Text('Erreur survenu', style: TitreStyle),
+              );
             }),
       ),
     );
   }
 }
-abstract class BlocEvent {}
 
+abstract class BlocEvent {}
 
 class BlocEventFetch extends BlocEvent {
   final String? data;
@@ -119,5 +127,3 @@ class BlocEventFetch extends BlocEvent {
   @override
   String toString() => 'BlocEventFetch';
 }
-
-
