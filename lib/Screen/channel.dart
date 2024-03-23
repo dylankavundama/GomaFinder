@@ -16,6 +16,11 @@ class VideoItem {
 
 class Channel extends StatelessWidget {
   final List<VideoItem> videos = [
+
+    VideoItem('','http://cdn.raino.xyz/hls/stream2.m3u8'),
+VideoItem('EDGEsport','https://edgesports-sportstribal.amagi.tv/playlist.m3u8'),
+
+    VideoItem('Nasa TV','https://ntv1.akamaized.net/hls/live/2014075/NASA-NTV1-HLS/master_2000.m3u8'),
     VideoItem(
       'Afrobeats',
       'https://stream.ecable.tv/afrobeats/index.m3u8',
@@ -93,8 +98,8 @@ class Channel extends StatelessWidget {
         'https://dmitwlvvll.cdn.mangomolo.com/dubaisportshd5/smil:dubaisportshd5.smil/index.m3u8'),
     VideoItem('Dubai One',
         'https://dminnvll.cdn.mangomolo.com/dubaione/smil:dubaione.stream.smil/playlist.m3u8'),
-    VideoItem(
-        '', 'https://svs.itworkscdn.net/smc4sportslive/smc4.smil/playlist.m3u8')
+    VideoItem('Sharjah Sport',
+        'https://svs.itworkscdn.net/smc4sportslive/smc4.smil/playlist.m3u8')
   ];
 
   Channel({super.key});
