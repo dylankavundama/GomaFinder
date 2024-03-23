@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
@@ -29,8 +29,8 @@ class _LocalLectureState extends State<LocalLecture> {
   void dispose() {
     _videoPlayerController1.dispose();
     _chewieController?.dispose();
-    // Déverrouiller l'orientation après avoir quitté l'écran de lecture
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    //  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.dispose();
   }
 
@@ -42,11 +42,11 @@ class _LocalLectureState extends State<LocalLecture> {
       _videoPlayerController1.initialize(),
     ]);
     _createChewieController();
-    // Verrouiller l'orientation en mode paysage lors de la lecture de la vidéo
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.landscapeLeft,
+    //   DeviceOrientation.landscapeRight,
+    // ]);
     setState(() {});
   }
 
@@ -69,7 +69,7 @@ class _LocalLectureState extends State<LocalLecture> {
         index: 0,
         start: const Duration(seconds: 10),
         end: const Duration(seconds: 20),
-       text: '',
+        text: '',
       ),
     ];
 
@@ -91,11 +91,8 @@ class _LocalLectureState extends State<LocalLecture> {
                 style: const TextStyle(color: Colors.black),
               ),
       ),
-    //  hideControlsOnInitialize: true,
-
-    fullScreenByDefault: true,
+      fullScreenByDefault: true,
       showControlsOnInitialize: false,
-
       isLive: true,
       allowFullScreen: true,
     );
@@ -103,6 +100,7 @@ class _LocalLectureState extends State<LocalLecture> {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       backgroundColor: Colors.grey[900],
       body: Center(
