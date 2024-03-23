@@ -68,8 +68,12 @@ class Channel extends StatelessWidget {
         'TrueSport6', 'https://edge1.laotv.la/live/TrueSport6/index.m3u8'),
     VideoItem('TNT Sport 1',
         'http://89.187.167.93:80/live.ts?channelId=152&deviceUser=alex1234&devicePass=alex1234&uid=2189'),
-    VideoItem('',
-        'http://161.0.157.9/PLTV/88888888/224/3221226843/index.m3u8?fluxustv.m3u8'),
+    VideoItem('nrjaudio',
+        'https://cherie25.nrjaudio.fm/hls/live/2038375/c25/FHD.m3u8'),
+    VideoItem('Tv5monde',
+        'https://ott.tv5monde.com/Content/HLS/Live/channel(info)/variant.m3u8'),
+    VideoItem('Sportsgrid', 'https://sportsgrid-plex.amagi.tv/playlist.m3u8'),
+    VideoItem('', 'http://livetv.ktv.zone/3/play.m3u')
   ];
 
   Channel({super.key});
