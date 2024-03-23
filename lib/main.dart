@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -111,21 +112,52 @@ class _TaskListPageState extends State<TaskListPage> {
     });
   }
 
-  Future<void> _addTask(String title, DateTime dueDate) async {
-    final Database db = await _database;
-    await db.insert(
-      'tasks',
-      {
-        'title': title,
-        'completed': 0,
-        'dueDate': dueDate
-            .millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
-      },
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
-    _refreshTasks();
-  }
+Future<void> _addTask(String title, DateTime dueDate) async {
+  final Database db = await _database;
+  await db.insert(
+    'tasks',
+    {
+      'title': title,
+      'completed': 0,
+      'dueDate': dueDate
+          .millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
+    },
+    conflictAlgorithm: ConflictAlgorithm.replace,
+  );
 
+  // Schedule a notification for the due date of the task
+  await _scheduleNotification(title, dueDate);
+
+  _refreshTasks();
+}
+Future<void> _scheduleNotification(String title, DateTime dueDate) async {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  // Create a notification details
+  final AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails(
+        
+    'channel_id', // Change to your desired channel id
+    'Channel Name', // Change to your desired channel name
+    'Channel Description', // Change to your desired channel description
+  );
+  final NotificationDetails platformChannelSpecifics =
+      NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  // Schedule the notification
+  await flutterLocalNotificationsPlugin.zonedSchedule(
+    0, // Change to a unique id for the notification
+    'Task Reminder', // Notification title
+    'Task "$title" is due!', // Notification body
+    tz.TZDateTime.from(dueDate, tz.local), // Scheduled date and time
+    platformChannelSpecifics,
+    androidAllowWhileIdle: true,
+    uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime,
+    matchDateTimeComponents: DateTimeComponents.time,
+  );
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
