@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upato/Screen/Podcast_Page.dart';
+import 'package:upato/Screen/Tv/Tv_Home.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/event/event.dart';
 import 'package:upato/style.dart';
@@ -51,6 +52,13 @@ class _DrawersState extends State<Drawers> {
         ),
         Card(
           child: ListTile(
+                        onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>  const Tv_Home(),
+                ),
+              );
+            },
             title: Text(
               'Live Tv',
               style: TitreStyle,
@@ -63,7 +71,7 @@ class _DrawersState extends State<Drawers> {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) =>  Podcast(),
+                  builder: (context) =>  const Podcast(),
                 ),
               );
             },
