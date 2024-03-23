@@ -5,6 +5,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/Screen/podecast/live_radio/PlayingControls.dart';
 import 'package:upato/Screen/podecast/live_radio/SongsSelector.dart';
+import 'package:upato/style.dart';
 
 class HomeRadio extends StatefulWidget {
   @override
@@ -106,6 +107,21 @@ class _HomeRadioState extends State<HomeRadio> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: CouleurPrincipale),
+          backgroundColor: Colors.white,
+          title: Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 0),
+              ),
+              Text(
+                'Radio/Music',
+                style: DescStyle,
+              ),
+            ],
+          ),
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(

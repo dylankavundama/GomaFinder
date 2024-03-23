@@ -58,8 +58,8 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Evénement", style: TitreStyle),
-        centerTitle: true,
+        title: Text("Evénement", style: DescStyle),
+     
         backgroundColor: Colors.white,
       ),
       body: 
