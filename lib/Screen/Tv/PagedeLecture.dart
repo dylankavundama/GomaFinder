@@ -51,7 +51,7 @@ class _LocalLectureState extends State<LocalLecture> {
   }
 
   void _createChewieController() {
-
+    
 
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
@@ -59,10 +59,24 @@ class _LocalLectureState extends State<LocalLecture> {
       looping: true,
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
+      
+      subtitleBuilder: (context, dynamic subtitle) => Container(
+        padding: const EdgeInsets.all(10.0),
+        child: subtitle is InlineSpan
+            ? RichText(
+                text: subtitle,
+              )
+            : Text(
+                subtitle.toString(),
+                style: const TextStyle(color: Colors.black),
+              ),
+      ),
+    //  hideControlsOnInitialize: true,
 
-
-      //  hideControlsOnInitialize: true,
+    fullScreenByDefault: true,
       showControlsOnInitialize: false,
+
+      isLive: true,
       allowFullScreen: true,
     );
   }

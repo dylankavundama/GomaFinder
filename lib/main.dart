@@ -51,6 +51,7 @@ void main() async {
   //     statusBarBrightness: Brightness.light,
   //   ),
   // );
+       SystemChrome.setEnabledSystemUIOverlays([]);
   runApp(const MyApp());
 }
 
@@ -59,8 +60,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.top]);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    //     overlays: [SystemUiOverlay.top]);
+
+     SystemChrome.setEnabledSystemUIOverlays([]);
     return MaterialApp(
       theme: ThemeData(
           primaryColor: Colors.green,
@@ -72,7 +75,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: Actualite_Page(),
 //home: Event_Home_Page(),
-      home: Channel(),
+      home:  Channel(),
       //  home: Home_Radio(),
     );
   }
