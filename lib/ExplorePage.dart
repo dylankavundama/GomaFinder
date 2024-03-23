@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upato/Screen/Podcast_Page.dart';
 import 'package:upato/Screen/Tv/Tv_Home.dart';
+import 'package:upato/Screen/podecast/live_radio/Home_Radio.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/style.dart';
 
@@ -59,7 +60,7 @@ class ExplorePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Podcast(),
+                    builder: (context) => HomeRadio(),
                   ),
                 );
               } else if (items[index]['title'] == 'Stock') {
