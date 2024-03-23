@@ -114,8 +114,8 @@ class _HomeRadioState extends State<HomeRadio> {
   bool _isLoaded = false;
 
   final String _adUnitId = Platform.isAndroid
-      ? 'ca-app-pub-7329797350611067/7630097138'
-      : 'ca-app-pub-7329797350611067/7630097138';
+      ? 'ca-app-pub-7329797350611067/5003791578'
+      : 'ca-app-pub-7329797350611067/5003791578';
 
   @override
   void didChangeDependencies() {
