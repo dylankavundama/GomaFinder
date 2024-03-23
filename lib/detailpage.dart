@@ -25,6 +25,7 @@ class DetailPage extends StatefulWidget {
   String long;
   String site;
   @override
+  // ignore: library_private_types_in_public_api
   _DetailPageState createState() => _DetailPageState();
 }
 
@@ -104,7 +105,7 @@ class _DetailPageState extends State<DetailPage> {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(4.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -262,7 +263,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                         ],
                       ),
-                      Text("Localisation",
+                      const Text("Localisation",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 18)),
                       const SizedBox(
@@ -332,7 +333,7 @@ class _DetailPageState extends State<DetailPage> {
                           'http://www.google.com/maps/search/?api=1&query=$lat,$long';
                       launch(url);
                     },
-                    child: Text(
+                    child: const Text(
                       "GPS",
                       style: TextStyle(
                           fontSize: 18,
@@ -356,7 +357,7 @@ class CustomListTile extends StatelessWidget {
   final String trailingText;
   final VoidCallback onTap;
 
-  CustomListTile({
+  const CustomListTile({
     required this.leadingIcon,
     required this.titleText,
     required this.trailingText,

@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage>
   final String _adUnitIdd = Platform.isAndroid
       ? 'ca-app-pub-7329797350611067/7003775471'
       : 'ca-app-pub-7329797350611067/7003775471';
+      
 
   void _startNewGame() {
     setState(() => _counter = _gameLength);
