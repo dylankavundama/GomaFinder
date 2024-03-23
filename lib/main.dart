@@ -72,8 +72,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: Actualite_Page(),
 //home: Event_Home_Page(),
-    home:     Channel(),
-    //  home: Home_Radio(),
+      home: Channel(),
+      //  home: Home_Radio(),
     );
   }
 }

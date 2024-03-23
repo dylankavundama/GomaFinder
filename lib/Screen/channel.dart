@@ -42,9 +42,13 @@ class Channel extends StatelessWidget {
               ),
               Text(
                 'Televison',
-                style: DescStyle,
+                style: TitreStyle,
               ),
+
+           
             ],
+
+            
           ),
         ),
         body: ListView.builder(
