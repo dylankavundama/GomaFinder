@@ -84,9 +84,7 @@ class _HomePageState extends State<HomePage>
 
           _interstitialAd = ad;
         },
-        onAdFailedToLoad: (LoadAdError error) {
-          print('InterstitialAd failed to load: $error');
-        },
+        onAdFailedToLoad: (LoadAdError error) {},
       ),
     );
   }
@@ -173,7 +171,7 @@ class _HomePageState extends State<HomePage>
               floating: true,
               pinned: true,
               expandedHeight: 111.0,
-              flexibleSpace: FlexibleSpaceBar(
+              flexibleSpace: const FlexibleSpaceBar(
                   //   background: Image.network(
                   //     "",
                   //  //  "https://images.pexels.com/photos/1670045/pexels-photo-1670045.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -193,7 +191,7 @@ class _HomePageState extends State<HomePage>
             Entreprise_Page(),
             Ecole_Page(),
             Bureau_Page(),
-              Salle_Page(),
+            Salle_Page(),
             Resto_Page(),
             Commerce_Page(),
             Hotel_Page(),
@@ -269,7 +267,7 @@ class _Floating_WidgetState extends State<Floating_Widget> {
           onLongPress: () => print('THIRD CHILD LONG PRESS'),
         ),
         SpeedDialChild(
-          child: Icon(Icons.handyman),
+          child: const Icon(Icons.handyman),
           backgroundColor: Colors.amber,
           label: "Main d'oeuvre",
           labelStyle: TextStyle(fontSize: 18.0),
@@ -277,7 +275,7 @@ class _Floating_WidgetState extends State<Floating_Widget> {
           onLongPress: () => print('THIRD CHILD LONG PRESS'),
         ),
         SpeedDialChild(
-          child: Icon(Icons.camera),
+          child: const Icon(Icons.camera),
           backgroundColor: Colors.teal,
           label: 'Photographe',
           labelStyle: const TextStyle(fontSize: 18.0),
