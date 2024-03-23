@@ -51,7 +51,27 @@ class _LocalLectureState extends State<LocalLecture> {
   }
 
   void _createChewieController() {
-    
+    final subtitles = [
+      Subtitle(
+        index: 0,
+        start: Duration.zero,
+        end: const Duration(seconds: 10),
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: widget.titre,
+              style: const TextStyle(color: Colors.white, fontSize: 22),
+            ),
+          ],
+        ),
+      ),
+      Subtitle(
+        index: 0,
+        start: const Duration(seconds: 10),
+        end: const Duration(seconds: 20),
+       text: '',
+      ),
+    ];
 
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
@@ -59,7 +79,7 @@ class _LocalLectureState extends State<LocalLecture> {
       looping: true,
       progressIndicatorDelay:
           bufferDelay != null ? Duration(milliseconds: bufferDelay!) : null,
-      
+      subtitle: Subtitles(subtitles),
       subtitleBuilder: (context, dynamic subtitle) => Container(
         padding: const EdgeInsets.all(10.0),
         child: subtitle is InlineSpan
