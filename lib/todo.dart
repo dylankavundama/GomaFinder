@@ -15,11 +15,7 @@ class TaskListPage extends StatefulWidget {
   _TaskListPageState createState() => _TaskListPageState();
 }
 
-
-
 class _TaskListPageState extends State<TaskListPage> {
-
-
   // @override
   // void initState() {
   //   super.initState();
@@ -32,8 +28,6 @@ class _TaskListPageState extends State<TaskListPage> {
   //   _timer.cancel();
   //   super.dispose();
   // }
-
-
 
   Future<void> _initDatabase() async {
     // Initialisation de la base de données
@@ -66,8 +60,7 @@ class _TaskListPageState extends State<TaskListPage> {
   //   });
   // }
 
-
-late Future<Database> _database;
+  late Future<Database> _database;
   TextEditingController _textEditingController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
@@ -100,13 +93,23 @@ late Future<Database> _database;
     final now = DateTime.now();
     final closestTask = _tasks
         .where((task) => task.dueDate.isAfter(now))
-        .reduce((a, b) => a.dueDate.difference(now) < b.dueDate.difference(now) ? a : b);
+        .reduce((a, b) =>
+            a.dueDate.difference(now) < b.dueDate.difference(now) ? a : b);
     final difference = closestTask.dueDate.difference(now);
     final totalMinutes = difference.inMinutes;
     setState(() {
       _minutesRemaining = totalMinutes;
     });
   }
+    Future<void> _deleteTask(int taskId) async {
+      final db = await _database;
+      await db.delete(
+        'tasks',
+        where: 'id = ?',
+        whereArgs: [taskId],
+      );
+      _refreshTasks(); // Rafraîchir la liste des tâches après la suppression
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,33 +118,53 @@ late Future<Database> _database;
       ),
       body: Column(
         children: <Widget>[
-
-  
           Expanded(
             child: ListView.builder(
               itemCount: _tasks.length,
               itemBuilder: (context, index) {
                 final task = _tasks[index];
-                return ListTile(
+                // return ListTile(
+                //   title: Text(task.title),
+                //   subtitle: Text(
+                //     '$_minutesRemaining minutes remaining',
+                //     style: TextStyle(fontSize: 18, color: Colors.amber),
+                //   ),
+                //   trailing: Checkbox(
+                //     value: task.completed,
+                //     onChanged: (value) {
+                //       setState(() {
+                //         task.completed = value!;
+                //         _updateTask(task);
+                //       });
+                //     },
+                //   ),
+                // );
 
-                  
-                  title: Text(task.title),
-                  subtitle:             Text(
-            '$_minutesRemaining minutes remaining',
-            style: TextStyle(fontSize: 18,
-            
-            color: Colors.amber),
+                return ListTile(
+      title: Text(task.title),
+      subtitle: Text("Due: ${task.dueDate}"),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              _deleteTask(task.id);
+            },
           ),
-                  trailing: Checkbox(
-                    value: task.completed,
-                    onChanged: (value) {
-                      setState(() {
-                        task.completed = value!;
-                        _updateTask(task);
-                      });
-                    },
-                  ),
-                );
+          Checkbox(
+            value: task.completed,
+            onChanged: (value) {
+              setState(() {
+                task.completed = value!;
+                // Update the task completion status in the database
+                _updateTask(task);
+              });
+            },
+          ),
+        ],
+      ),
+    );
               },
             ),
           ),
@@ -220,13 +243,6 @@ late Future<Database> _database;
       ),
     );
 
-    
+
   }
-
-  
 }
-
-
-
-  
-
