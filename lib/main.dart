@@ -88,15 +88,19 @@ class MyApp extends StatelessWidget {
         overlays: [SystemUiOverlay.top]);
     return MaterialApp(
       theme: ThemeData(
+         primarySwatch: Colors.green,
           primaryColor: Colors.green,
           buttonColor: CouleurPrincipale,
           fixTextFieldOutlineLabel: true,
           // Primary color for the app
+        
           accentColor: CouleurPrincipale, // Accent color for the app
           useMaterial3: false),
       debugShowCheckedModeBanner: false,
       // home: Actualite_Page(),
 //home: Event_Home_Page(),
+
+    
     home:     OnboardingScreen(),
     //  home: Home_Radio(),
     );

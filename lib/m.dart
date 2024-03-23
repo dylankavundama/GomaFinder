@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -170,7 +171,8 @@ class _TaskListPageState extends State<TaskListPage> {
       for (final task in _tasks) {
         final difference = task.dueDate.difference(now);
         final minutes = difference.inMinutes;
-        if (minutes > 0 && (_minutesRemaining == 0 || minutes < _minutesRemaining)) {
+        if (minutes > 0 &&
+            (_minutesRemaining == 0 || minutes < _minutesRemaining)) {
           _minutesRemaining = minutes;
         }
       }
@@ -187,7 +189,56 @@ class _TaskListPageState extends State<TaskListPage> {
       }
     });
   }
-  Future<void> _deleteTask(int taskId) async {
+
+  void _deleteTask(int taskId) async {
+    _confirmDeleteTask(taskId); // Show confirmation dialog
+  }
+
+  Future<void> _confirmDeleteTask(int taskId) async {
+    final BuildContext context =
+        this.context; // Récupérer explicitement le contexte
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible:
+          false, // L'utilisateur doit appuyer sur un bouton pour fermer la boîte de dialogue
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Supprimer la tâche'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                const Text('Êtes-vous sûr de vouloir supprimer cette tâche ?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Cancel',
+                style: SousTStyle,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              child: Text('Supprimer', style: SousTStyle),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed == true) {
+      await _deleteTaskConfirmed(taskId);
+    }
+  }
+
+  Future<void> _deleteTaskConfirmed(int taskId) async {
     final db = await _database;
     await db.delete(
       'tasks',
@@ -196,6 +247,13 @@ class _TaskListPageState extends State<TaskListPage> {
     );
     _refreshTasks(); // Rafraîchir la liste des tâches après la suppression
   }
+
+  String _formatDueDate(DateTime dueDate) {
+    // Your formatting logic here
+    // For example:
+    return dueDate.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,15 +280,19 @@ class _TaskListPageState extends State<TaskListPage> {
               itemBuilder: (context, index) {
                 final task = _tasks[index];
                 return ListTile(
-              
+                  leading: Icon(
+                    Icons.task_alt_outlined,
+                    color: CouleurPrincipale,
+                  ),
+
                   title: Text(task.title),
-                //  subtitle: Text("Due: ${_formatDueDate(task.dueDate)}"), // Format the due date
+                  subtitle: Text(
+                      "Due: ${_formatDueDate(task.dueDate)}"), // Format the due date
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
                       _deleteTask(task.id);
                     },
-                  
                   ),
                 );
               },
@@ -242,15 +304,15 @@ class _TaskListPageState extends State<TaskListPage> {
               children: [
                 TextField(
                   controller: _textEditingController,
-                  decoration: InputDecoration(
-                    labelText: 'Enter task',
+                  decoration: const InputDecoration(
+                    labelText: "Entrer l'intitulé de la tache",
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Select date:"),
+                    const Text("Select date:"),
                     TextButton(
                       onPressed: () async {
                         final selectedDate = await showDatePicker(
@@ -288,7 +350,9 @@ class _TaskListPageState extends State<TaskListPage> {
                   ],
                 ),
                 ElevatedButton(
-                  style:ButtonStyle(backgroundColor: MaterialStatePropertyAll(CouleurPrincipale)),
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(CouleurPrincipale)),
                   onPressed: () {
                     if (_textEditingController.text.isNotEmpty) {
                       final dueDateTime = DateTime(
@@ -302,7 +366,7 @@ class _TaskListPageState extends State<TaskListPage> {
                       _textEditingController.clear();
                     }
                   },
-                  child: Text("Add Task"),
+                  child: Text("Ajouter la tâche ?"),
                 ),
               ],
             ),
