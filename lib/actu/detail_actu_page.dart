@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share/share.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 
 class DetailPostPage extends StatefulWidget {
   const DetailPostPage(

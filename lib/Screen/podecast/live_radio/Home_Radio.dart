@@ -5,7 +5,7 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/Screen/podecast/live_radio/PlayingControls.dart';
 import 'package:upato/Screen/podecast/live_radio/SongsSelector.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 
 class HomeRadio extends StatefulWidget {
   @override

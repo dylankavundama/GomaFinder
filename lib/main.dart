@@ -13,7 +13,7 @@ import 'package:upato/Screen/podecast/live_radio/radio.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 import 'Screen/Tv/Tv_Home.dart';
 import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -65,10 +65,10 @@ void main() async {
   OneSignal.shared
       .promptUserForPushNotificationPermission()
       .then((accepted) {});
-  //   SystemChrome.setEnabledSystemUIMode(
-  //   SystemUiMode.manual,
-  //   overlays: [],
-  // );
+    SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: [],
+  );
 
   //       SystemChrome.setSystemUIOverlayStyle(
   //   SystemUiOverlayStyle(

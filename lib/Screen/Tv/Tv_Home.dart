@@ -4,7 +4,7 @@ import 'package:upato/Screen/Tv/LocalWidget.dart';
 import 'package:upato/Screen/Tv/PagedeLecture.dart';
 import 'package:upato/bloc/bloc_event.dart';
 import 'package:upato/bloc/block_state.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 
 import 'Local_bloc.dart';
 

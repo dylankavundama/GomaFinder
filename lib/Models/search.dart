@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 
 // ignore: camel_case_types
 class Search_Page extends StatefulWidget {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:upato/Screen/Tv/Tv_Home.dart';
 import 'package:upato/Screen/podecast/live_radio/Home_Radio.dart';
 import 'package:upato/actu/actualiter.dart';
-import 'package:upato/m.dart';
-import 'package:upato/style.dart';
+import 'package:upato/bloc_note.dart';
+import 'package:upato/Util/style.dart';
 
 class ExplorePage extends StatelessWidget {
   // Liste des éléments à afficher dans la GridView
@@ -31,6 +31,7 @@ class ExplorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
     appBar: AppBar(
         iconTheme: IconThemeData(color: CouleurPrincipale),

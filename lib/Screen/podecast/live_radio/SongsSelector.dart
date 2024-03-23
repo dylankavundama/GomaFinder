@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 
 class SongsSelector extends StatelessWidget {
   final Playing? playing;

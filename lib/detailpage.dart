@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -86,6 +86,8 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: CouleurPrincipale),
@@ -316,7 +318,7 @@ class _DetailPageState extends State<DetailPage> {
                   decoration: BoxDecoration(
                     color: CouleurPrincipale,
                     borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.grey,
                         offset: Offset(0.0, 1.0),

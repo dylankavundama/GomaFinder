@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 import 'package:http/http.dart' as http;
 
 class Banque_Page extends StatefulWidget {

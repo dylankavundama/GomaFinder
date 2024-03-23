@@ -1,4 +1,4 @@
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 import 'package:flutter/material.dart';
 
 class Widget_UI extends StatelessWidget {

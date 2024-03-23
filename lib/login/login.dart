@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upato/login/authServices.dart';
 import 'package:upato/profil/insert_data.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 
 class LoginHome extends StatefulWidget {
   const LoginHome({Key? key}) : super(key: key);

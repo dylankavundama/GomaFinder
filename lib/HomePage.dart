@@ -21,7 +21,7 @@ import 'package:upato/Models/resto.dart';
 import 'package:upato/Models/salle.dart';
 import 'package:upato/Models/tech.dart';
 import 'package:upato/Models/voyage.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 import 'package:upato/util/drawers.dart';
 
 class HomePage extends StatefulWidget {
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
+      const SystemUiOverlayStyle(
         statusBarColor: Colors.green,
         statusBarBrightness: Brightness.light,
       ),

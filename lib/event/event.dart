@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:upato/actu/detail_actu_page.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 
 class Event_Home_Page extends StatefulWidget {
   const Event_Home_Page({Key? key}) : super(key: key);
