@@ -14,8 +14,8 @@ class ExplorePage extends StatelessWidget {
           'https://static.vecteezy.com/system/resources/thumbnails/010/160/834/small/music-icon-sign-symbol-design-free-png.png'
     },
     {
-      'title': 'Podcast',
-      'image': 'https://cdn-icons-png.freepik.com/512/4029/4029013.png'
+      'title': 'Bloc Note',
+      'image': 'https://www.shutterstock.com/image-vector/edit-file-icon-sign-vector-600nw-1665705262.jpg'
     },
     {
       'title': 'Television',
@@ -63,7 +63,7 @@ class ExplorePage extends StatelessWidget {
                     builder: (context) => HomeRadio(),
                   ),
                 );
-              } else if (items[index]['title'] == 'Podcast') {
+              } else if (items[index]['title'] == 'Bloc Note') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(

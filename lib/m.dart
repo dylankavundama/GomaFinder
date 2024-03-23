@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:upato/style.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -199,7 +200,19 @@ class _TaskListPageState extends State<TaskListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Task List'),
+        iconTheme: IconThemeData(color: CouleurPrincipale),
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'Bloc Note',
+              style: DescStyle,
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: <Widget>[
