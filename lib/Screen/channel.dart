@@ -24,6 +24,8 @@ class Channel extends StatelessWidget {
         ''),
   ];
 
+   Channel({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -80,7 +82,7 @@ class VideoPlayerScreen extends StatefulWidget {
   final int initialIndex;
 
   const VideoPlayerScreen(
-      {required this.videoItems, required this.initialIndex});
+      {super.key, required this.videoItems, required this.initialIndex});
 
   @override
   // ignore: library_private_types_in_public_api
