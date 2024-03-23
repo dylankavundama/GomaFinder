@@ -36,7 +36,7 @@ class Channel extends StatelessWidget {
         'https://nrj12.nrjaudio.fm/hls/live/2038374/nrj_12/master.m3u8'),
     VideoItem('Rakuten-films-francais',
         'https://rakuten-films-francais-1-eu.rakuten.wurl.tv/playlist.m3u8'),
-    VideoItem('bBlackafrica',
+    VideoItem('BBlackafrica',
         'http://livevideo.vedge.infomaniak.com/livecast/ik:bblackafrica/manifest.m3u8'),
     VideoItem('Rakuten-actionmovies',
         'https://rakuten-actionmovies-1-eu.rakuten.wurl.tv/playlist.m3u8'),
@@ -73,7 +73,20 @@ class Channel extends StatelessWidget {
     VideoItem('Tv5monde',
         'https://ott.tv5monde.com/Content/HLS/Live/channel(info)/variant.m3u8'),
     VideoItem('Sportsgrid', 'https://sportsgrid-plex.amagi.tv/playlist.m3u8'),
-    VideoItem('', 'http://livetv.ktv.zone/3/play.m3u')
+    VideoItem('RT', 'https://rt-fra.rttv.com/dvr/rtfrance/playlist.m3u8'),
+    VideoItem('BBlack Classik',
+        'http://livevideo.vedge.infomaniak.com/livecast/ik:bblackclassik/manifest.m3u8'),
+    VideoItem('Bip Tv', 'https://biptv.tv/live/biptvstream_orig/index.m3u8'),
+    VideoItem('',
+        'https://raw.githubusercontent.com/ipstreet312/freeiptv/master/ressources/dmotion/py/eqpe/equipe.m3u8'),
+    VideoItem('', 'https://srv.webtvmanager.fr:3697/stream/play.m3u8'),
+    VideoItem(
+        'ilTv', 'https://live.creacast.com/iltv/smil:iltv.smil/playlist.m3u8'),
+    VideoItem('KTO',
+        'https://live-kto.akamaized.net/hls/live/2033284/KTO/master.m3u8'),
+    VideoItem('KSA Sports 1', 'https://edge.taghtia.com/sa/9.m3u8'),
+    VideoItem('KSA Sports 2', 'https://edge.taghtia.com/sa/10.m3u8'),
+    VideoItem('', 'https://edge.taghtia.com/sa/16.m3u8')
   ];
 
   Channel({super.key});
