@@ -22,14 +22,14 @@ class SongsSelector extends StatelessWidget {
 
     return item.metas.image?.type == ImageType.network
         ? CircleAvatar(
-          radius: 30,
-          child: Image.network(
+            radius: 30,
+            child: Image.network(
               item.metas.image!.path,
               height: 40,
               width: 40,
               fit: BoxFit.cover,
             ),
-        )
+          )
         : Image.asset(
             item.metas.image!.path,
             height: 40,
@@ -49,9 +49,9 @@ class SongsSelector extends StatelessWidget {
             onPressed: () {
               onPlaylistSelected(audios);
             },
-            child: const Text(
+            child: Text(
               'Playlist',
-              style: TextStyle(color: Colors.black),
+              style: TitreStyle,
             ),
           ),
         ),
@@ -69,12 +69,12 @@ class SongsSelector extends StatelessWidget {
                 color: isPlaying ? CouleurPrincipale : Colors.black,
                 margin: const EdgeInsets.all(4),
                 child: ListTile(
-               leading: Material(
-                        color: Colors.black,
-                        shape: const CircleBorder(),
-                        clipBehavior: Clip.antiAlias,
-                        child: _image(item),
-                      ),
+                  leading: Material(
+                    color: Colors.black,
+                    shape: const CircleBorder(),
+                    clipBehavior: Clip.antiAlias,
+                    child: _image(item),
+                  ),
                   title: Text(
                     item.metas.title.toString(),
                     style: TextStyle(

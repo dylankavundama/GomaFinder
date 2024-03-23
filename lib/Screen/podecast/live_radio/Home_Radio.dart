@@ -52,7 +52,7 @@ class _HomeRadioState extends State<HomeRadio> {
     _assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
     // Autres initialisations...
     openPlayer();
-    _startNewGame();
+
     super.initState();
     _assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
 
@@ -64,17 +64,13 @@ class _HomeRadioState extends State<HomeRadio> {
     }));
 
     openPlayer();
-
-    _startNewGame();
   }
 
   @override
   void dispose() {
+    _bannerAd?.dispose();
     _assetsAudioPlayer.dispose();
     print('dispose');
-    _rewardedAd?.dispose();
-
-    _bannerAd?.dispose();
 
     super.dispose();
   }
@@ -83,21 +79,6 @@ class _HomeRadioState extends State<HomeRadio> {
     return source.firstWhere((element) => element.path == fromPath);
   }
 
-  RewardedAd? _rewardedAd;
-
-  final String _adUnitId = Platform.isAndroid
-      ? 'ca-app-pub-7329797350611067/5705877032'
-      : 'ca-app-pub-7329797350611067/5705877032';
-
-  void _startNewGame() {
-    _loadAd();
-  }
-
-  BannerAd? _bannerAd;
-
-  final String _adUnitIdd = Platform.isAndroid
-      ? 'ca-app-pub-7329797350611067/5003791578'
-      : 'ca-app-pub-7329797350611067/5003791578';
   bool _isLoading = true; // Variable pour suivre l'état de chargement
 
   @override
@@ -124,6 +105,53 @@ class _HomeRadioState extends State<HomeRadio> {
     setState(() {
       _isLoading = false;
     });
+  }
+
+  ///
+  //banniere actu
+  BannerAd? _bannerAd;
+
+  bool _isLoaded = false;
+
+  final String _adUnitId = Platform.isAndroid
+      ? 'ca-app-pub-7329797350611067/7630097138'
+      : 'ca-app-pub-7329797350611067/7630097138';
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _isLoaded = false;
+    _loadAd();
+  }
+
+  void _loadAd() async {
+    final size = await AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+        MediaQuery.of(context).size.width.truncate());
+
+    if (size == null) {
+      return;
+    }
+
+    BannerAd(
+      adUnitId: _adUnitId,
+      request: const AdRequest(),
+      size: size,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _bannerAd = ad as BannerAd;
+            _isLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          ad.dispose();
+        },
+        onAdOpened: (Ad ad) {},
+        onAdClosed: (Ad ad) {},
+        onAdImpression: (Ad ad) {},
+      ),
+    ).load();
   }
 
   @override
@@ -160,10 +188,12 @@ class _HomeRadioState extends State<HomeRadio> {
                   // ),
 
                   if (_isLoading)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 1111),
-                      child: CircularProgressIndicator(
-                        color: CouleurPrincipale,
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 111),
+                        child: CircularProgressIndicator(
+                          color: CouleurPrincipale,
+                        ),
                       ),
                     ),
                   Stack(
@@ -244,7 +274,7 @@ class _HomeRadioState extends State<HomeRadio> {
                                 children: [
                                   Stack(
                                     children: [
-                                      if (_bannerAd != null)
+                                      if (_bannerAd != null && _isLoaded)
                                         Align(
                                           alignment: Alignment.bottomCenter,
                                           child: SafeArea(
@@ -312,54 +342,5 @@ class _HomeRadioState extends State<HomeRadio> {
         ),
       ),
     );
-  }
-
-  void _loadAd() {
-    BannerAd(
-      adUnitId: _adUnitIdd,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {
-            _bannerAd = ad as BannerAd;
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          ad.dispose();
-        },
-        onAdOpened: (Ad ad) {},
-        onAdClosed: (Ad ad) {},
-        onAdImpression: (Ad ad) {},
-      ),
-    ).load();
-    setState(() {
-      RewardedAd.load(
-          adUnitId: _adUnitId,
-          request: const AdRequest(),
-          rewardedAdLoadCallback: RewardedAdLoadCallback(onAdLoaded: (ad) {
-            ad.fullScreenContentCallback = FullScreenContentCallback(
-                // Called when the ad showed the full screen content.
-                onAdShowedFullScreenContent: (ad) {},
-                // Called when an impression occurs on the ad.
-                onAdImpression: (ad) {},
-                // Called when the ad failed to show full screen content.
-                onAdFailedToShowFullScreenContent: (ad, err) {
-                  ad.dispose();
-                },
-                // Called when the ad dismissed full screen content.
-                onAdDismissedFullScreenContent: (ad) {
-                  ad.dispose();
-                },
-                // Called when a click is recorded for an ad.
-                onAdClicked: (ad) {});
-
-            // Keep a reference to the ad so you can show it later.
-            _rewardedAd = ad;
-          }, onAdFailedToLoad: (LoadAdError error) {
-            // ignore: avoid_print
-            print('RewardedAd failed to load: $error');
-          }));
-    });
   }
 }

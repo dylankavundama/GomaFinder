@@ -12,21 +12,21 @@ class ExplorePage extends StatelessWidget {
     {
       'title': 'Music',
       'image':
-          'https://static.vecteezy.com/system/resources/thumbnails/010/160/834/small/music-icon-sign-symbol-design-free-png.png'
+          'assets/a.webp'
     },
     {
       'title': 'Bloc Note',
-      'image': 'https://www.shutterstock.com/image-vector/edit-file-icon-sign-vector-600nw-1665705262.jpg'
+      'image': 'assets/b.webp'
     },
     {
       'title': 'Television',
       'image':
-          'https://static-00.iconduck.com/assets.00/television-icon-2048x2048-q495yz4y.png'
+          'assets/c.png'
     },
     {
       'title': 'Actu',
       'image':
-          'https://as2.ftcdn.net/v2/jpg/02/58/28/13/1000_F_258281322_auDRI2dzo7xOwmJpSJhNsoTOoDqt7YpX.jpg'
+          'assets/d.png'
     },
   ];
 
@@ -102,7 +102,7 @@ class ExplorePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.network(
+                  Image.asset(
                     items[index]['image'],
                     width: 50,
                     height: 50,
