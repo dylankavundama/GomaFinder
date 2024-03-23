@@ -92,22 +92,13 @@ class _DetailPageState extends State<DetailPage> {
         backgroundColor: Colors.white,
         title: Row(
           children: [
-            Text(
-              'U',
-              style: TextStyle(color: CouleurPrincipale),
-            ),
             const Padding(
               padding: EdgeInsets.only(right: 0),
             ),
-            const Text(
-              'PATO',
-              style: TextStyle(color: Colors.black),
+            Text(
+              'Description',
+              style: DescStyle,
             ),
-            const Icon(
-              Icons.location_on_outlined,
-              color: Colors.black,
-              size: 18,
-            )
           ],
         ),
       ),
@@ -274,7 +265,7 @@ class _DetailPageState extends State<DetailPage> {
                       Text("Localisation",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 18)),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Tooltip(
@@ -292,7 +283,7 @@ class _DetailPageState extends State<DetailPage> {
                             height: 200,
                             width: MediaQuery.of(context).size.width - 60,
                             decoration: BoxDecoration(color: Colors.green),
-                            child: Image(
+                            child: const Image(
                                 image: AssetImage("assets/newark.png"),
                                 fit: BoxFit.cover),
                           ),
