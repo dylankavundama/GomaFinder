@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upato/Screen/Tv/LocalWidget.dart';
 import 'package:upato/Screen/Tv/PagedeLecture.dart';
-import 'package:upato/bloc/bloc_event.dart';
-import 'package:upato/bloc/block_state.dart';
+import 'package:upato/Util/block_state.dart';
 import 'package:upato/Util/style.dart';
 
 import 'Local_bloc.dart';
@@ -106,3 +105,19 @@ class _Tv_HomeState extends State<Tv_Home> {
     );
   }
 }
+abstract class BlocEvent {}
+
+
+class BlocEventFetch extends BlocEvent {
+  final String? data;
+  final String? dateDebut;
+  final String? dateFin;
+  final String? search;
+  final int? limit;
+  BlocEventFetch(
+      {this.data, this.dateDebut, this.dateFin, this.search, this.limit});
+  @override
+  String toString() => 'BlocEventFetch';
+}
+
+

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
-import 'package:upato/style.dart';
+import 'package:upato/Util/style.dart';
 import 'package:http/http.dart' as http;
 
 class Bureau_Page extends StatefulWidget {

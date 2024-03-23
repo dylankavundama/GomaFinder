@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:upato/bloc/block_state.dart';
+import 'package:upato/Screen/Tv/Tv_Home.dart';
+import 'package:upato/Util/block_state.dart';
 import 'dart:core';
-
-import '../../bloc/bloc_event.dart';
 
 class BlocSearchLocal extends BlocEvent {
   final String? search;
@@ -23,7 +21,7 @@ class LocalBloc extends Bloc<BlocEvent, BlocState> {
     emit(BlocStateLoading());
     try {
       final data = await Supabase.instance.client
-          .from('cktvInedit')
+          .from('iptv')
           .select()
           .order('id', ascending: false);
       ;
@@ -63,8 +61,8 @@ class LocalVideo {
 LocalVideo _$VideoFromJson(Map<String, dynamic> json) {
   return LocalVideo(
     id: json['id'] as int,
-    imgLocal: json['image'] as String,
-    titreLocal: json['titre'] as String,
-    videoLocal: json['video'] as String,
+    imgLocal: json['img'] as String,
+    titreLocal: json['nom'] as String,
+    videoLocal: json['link'] as String,
   );
 }

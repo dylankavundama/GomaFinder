@@ -55,9 +55,9 @@ void main() async {
   await Future.delayed(Duration(seconds: 1));
   FlutterNativeSplash.remove();
   await Supabase.initialize(
-      url: 'https://rggeeykubskxurwxclwl.supabase.co',
+      url: 'https://vedjwvecqlobnryactos.supabase.co',
       anonKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnZ2VleWt1YnNreHVyd3hjbHdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg4NzQ4NzIsImV4cCI6MjAxNDQ1MDg3Mn0.G9wWmL6bFPFFrO3tTvYtRjqwrNkr26RVWGskSxSAHx4');
+         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlZGp3dmVjcWxvYm5yeWFjdG9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTUyODI2OTUsImV4cCI6MjAxMDg1ODY5NX0.77wPATiKNzIXRdP8U3xsc7l5kYn-qs60Y0QZE7IHTkY');
     OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
 
   OneSignal.shared.setNotificationWillShowInForegroundHandler(
