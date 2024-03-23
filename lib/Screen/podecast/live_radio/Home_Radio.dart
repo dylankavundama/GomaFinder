@@ -50,6 +50,11 @@ class _HomeRadioState extends State<HomeRadio> {
   void initState() {
     super.initState();
     _assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+    // Autres initialisations...
+    openPlayer();
+    _startNewGame();
+    super.initState();
+    _assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
 
     _subscriptions.add(_assetsAudioPlayer.playlistAudioFinished.listen((data) {
       print('playlistAudioFinished : $data');
@@ -61,14 +66,6 @@ class _HomeRadioState extends State<HomeRadio> {
     openPlayer();
 
     _startNewGame();
-  }
-
-  void openPlayer() async {
-    await _assetsAudioPlayer.open(
-      Playlist(audios: audios, startIndex: 0),
-      showNotification: true,
-      autoStart: false,
-    );
   }
 
   @override
@@ -101,6 +98,33 @@ class _HomeRadioState extends State<HomeRadio> {
   final String _adUnitIdd = Platform.isAndroid
       ? 'ca-app-pub-7329797350611067/5003791578'
       : 'ca-app-pub-7329797350611067/5003791578';
+  bool _isLoading = true; // Variable pour suivre l'état de chargement
+
+  @override
+
+  // Fonction pour gérer le chargement des données
+  void openPlayer() async {
+    await _assetsAudioPlayer.open(
+      Playlist(audios: audios, startIndex: 0),
+      showNotification: true,
+      autoStart: false,
+    );
+    // Afficher le loader
+    setState(() {
+      _isLoading = true;
+    });
+
+    await _assetsAudioPlayer.open(
+      Playlist(audios: audios, startIndex: 0),
+      showNotification: true,
+      autoStart: false,
+    );
+
+    // Masquer le loader une fois le chargement terminé
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +158,14 @@ class _HomeRadioState extends State<HomeRadio> {
                   // const SizedBox(
                   //   height: 20,
                   // ),
+
+                  if (_isLoading)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 1111),
+                      child: CircularProgressIndicator(
+                        color: CouleurPrincipale,
+                      ),
+                    ),
                   Stack(
                     fit: StackFit.passthrough,
                     children: <Widget>[
