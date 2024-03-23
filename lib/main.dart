@@ -3,6 +3,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:upato/NavBarPage.dart';
+import 'package:upato/Screen/channel.dart';
 import 'package:upato/Screen/podecast/live_radio/radio.dart';
 import 'package:upato/detailpage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: Actualite_Page(),
 //home: Event_Home_Page(),
-    home:     OnboardingScreen(),
+    home:     Channel(),
     //  home: Home_Radio(),
     );
   }

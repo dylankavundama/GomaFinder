@@ -1,7 +1,7 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
+import 'package:chewie/chewie.dart';
 
 class LocalLecture extends StatefulWidget {
   const LocalLecture({required this.video, required this.titre, Key? key})
@@ -29,25 +29,25 @@ class _LocalLectureState extends State<LocalLecture> {
   void dispose() {
     _videoPlayerController1.dispose();
     _chewieController?.dispose();
-    super.dispose();
-        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // Déverrouiller l'orientation après avoir quitté l'écran de lecture
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     super.dispose();
   }
 
   Future<void> initializePlayer() async {
     String url = widget.video;
-    _videoPlayerController1 = VideoPlayerController.networkUrl(Uri.parse(url));
+    _videoPlayerController1 = VideoPlayerController.network(url);
 
     await Future.wait([
       _videoPlayerController1.initialize(),
     ]);
     _createChewieController();
-    setState(() {});
-
-        SystemChrome.setPreferredOrientations([
+    // Verrouiller l'orientation en mode paysage lors de la lecture de la vidéo
+    SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    setState(() {});
   }
 
   void _createChewieController() {
@@ -91,7 +91,9 @@ class _LocalLectureState extends State<LocalLecture> {
                 style: const TextStyle(color: Colors.black),
               ),
       ),
-      hideControlsTimer: const Duration(seconds: 1),
+    //  hideControlsOnInitialize: true,
+      showControlsOnInitialize: false,
+      allowFullScreen: true,
     );
   }
 
@@ -118,7 +120,7 @@ class _LocalLectureState extends State<LocalLecture> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Text('Chargemet'),
+                  Text('Chargement'),
                 ],
               ),
       ),
