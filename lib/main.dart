@@ -1,11 +1,36 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:upato/NavBarPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:upato/Screen/podecast/live_radio/radio.dart';
+import 'package:upato/detailpage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
+import 'package:upato/style.dart';
+import 'Screen/Tv/Tv_Home.dart';
+import 'onboarding_screen.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
+  
+  const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  'channel_id', // Change to your desired channel id
+  'Channel Name', // Change to your desired channel name
+  'Channel Description', // Change to your desired channel description
+  importance: Importance.high,
+);
+
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize timezone data
+  tz.initializeTimeZones();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   const AndroidInitializationSettings initializationSettingsAndroid =
@@ -13,263 +38,67 @@ void main() async {
   final InitializationSettings initializationSettings =
       InitializationSettings(android: initializationSettingsAndroid);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  runApp(MyApp());
-}
 
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Task List',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: TaskListPage(),
-    );
-  }
-}
-
-class Task {
-  final int id;
-  final String title;
-  late final bool completed;
-  final DateTime dueDate; // Ajout de la date prévue pour la tâche
-
-  Task({
-    required this.id,
-    required this.title,
-    required this.completed,
-    required this.dueDate,
+  // Demander les autorisations de notification
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  AssetsAudioPlayer.setupNotificationsOpenAction((notification) {
+    return true;
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'completed': completed ? 1 : 0,
-      'dueDate': dueDate.millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
-    };
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await Future.delayed(Duration(seconds: 1));
+  FlutterNativeSplash.remove();
+  await Supabase.initialize(
+      url: 'https://rggeeykubskxurwxclwl.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnZ2VleWt1YnNreHVyd3hjbHdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTg4NzQ4NzIsImV4cCI6MjAxNDQ1MDg3Mn0.G9wWmL6bFPFFrO3tTvYtRjqwrNkr26RVWGskSxSAHx4');
+    OneSignal.shared.setAppId("955d05bf-3ef9-4287-8e23-9bc3e68cb057");
 
-  factory Task.fromMap(Map<String, dynamic> map) {
-    return Task(
-      id: map['id'],
-      title: map['title'],
-      completed: map['completed'] == 1,
-      dueDate: DateTime.fromMillisecondsSinceEpoch(
-          map['dueDate']), // Récupération de la date à partir des millisecondes
-    );
-  }
+  OneSignal.shared.setNotificationWillShowInForegroundHandler(
+      (OSNotificationReceivedEvent event) {});
+  OneSignal.shared
+      .promptUserForPushNotificationPermission()
+      .then((accepted) {});
+  //   SystemChrome.setEnabledSystemUIMode(
+  //   SystemUiMode.manual,
+  //   overlays: [],
+  // );
+
+  //       SystemChrome.setSystemUIOverlayStyle(
+  //   SystemUiOverlayStyle(
+  //     statusBarColor: Colors.green,
+  //     statusBarBrightness: Brightness.light,
+  //   ),
+  // );
+  runApp(const MyApp());
 }
 
-class TaskListPage extends StatefulWidget {
-  @override
-  _TaskListPageState createState() => _TaskListPageState();
-}
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-class _TaskListPageState extends State<TaskListPage> {
-  late Future<Database> _database;
-  TextEditingController _textEditingController = TextEditingController();
-  DateTime _selectedDate = DateTime.now();
-  TimeOfDay _selectedTime = TimeOfDay.now();
-  List<Task> _tasks = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _initDatabase();
-  }
-
-  Future<void> _initDatabase() async {
-    _database = openDatabase(
-      join(await getDatabasesPath(), 'task_database.db'),
-      onCreate: (db, version) {
-        return db.execute(
-          'CREATE TABLE tasks(id INTEGER PRIMARY KEY, title TEXT, completed INTEGER, dueDate INTEGER)',
-        );
-      },
-      version: 1,
-    );
-    _refreshTasks();
-  }
-
-  Future<void> _refreshTasks() async {
-    final Database db = await _database;
-    final List<Map<String, dynamic>> maps = await db.query('tasks');
-
-    setState(() {
-      _tasks = List.generate(
-        maps.length,
-        (i) {
-          return Task(
-              id: maps[i]['id'],
-              title: maps[i]['title'],
-              completed: maps[i]['completed'] == 1,
-              dueDate: DateTime.fromMillisecondsSinceEpoch(maps[i]['dueDate']));
-        },
-      );
-    });
-  }
-
-Future<void> _addTask(String title, DateTime dueDate) async {
-  final Database db = await _database;
-  await db.insert(
-    'tasks',
-    {
-      'title': title,
-      'completed': 0,
-      'dueDate': dueDate
-          .millisecondsSinceEpoch, // Enregistrement de la date prévue en millisecondes
-    },
-    conflictAlgorithm: ConflictAlgorithm.replace,
-  );
-
-  // Schedule a notification for the due date of the task
-  await _scheduleNotification(title, dueDate);
-
-  _refreshTasks();
-}
-Future<void> _scheduleNotification(String title, DateTime dueDate) async {
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
-  // Create a notification details
-  final AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
-        
-    'channel_id', // Change to your desired channel id
-    'Channel Name', // Change to your desired channel name
-    'Channel Description', // Change to your desired channel description
-  );
-  final NotificationDetails platformChannelSpecifics =
-      NotificationDetails(android: androidPlatformChannelSpecifics);
-
-  // Schedule the notification
-  await flutterLocalNotificationsPlugin.zonedSchedule(
-    0, // Change to a unique id for the notification
-    'Task Reminder', // Notification title
-    'Task "$title" is due!', // Notification body
-    tz.TZDateTime.from(dueDate, tz.local), // Scheduled date and time
-    platformChannelSpecifics,
-    androidAllowWhileIdle: true,
-    uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime,
-    matchDateTimeComponents: DateTimeComponents.time,
-  );
-}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Task List'),
-      ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              itemCount: _tasks.length,
-              itemBuilder: (context, index) {
-                final task = _tasks[index];
-                return ListTile(
-                  title: Text(task.title),
-                  subtitle: Text("Due: ${task.dueDate}"),
-                  trailing: Checkbox(
-                    value: task.completed,
-                    onChanged: (value) {
-                      setState(() {
-                        task.completed = value!;
-                        // Update the task completion status in the database
-                        _updateTask(task);
-                      });
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                TextField(
-                  controller: _textEditingController,
-                  decoration: InputDecoration(
-                    labelText: 'Enter task',
-                  ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Select date:"),
-                    TextButton(
-                      onPressed: () async {
-                        final selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: _selectedDate,
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2100),
-                        );
-                        if (selectedDate != null) {
-                          setState(() {
-                            _selectedDate = selectedDate;
-                          });
-                        }
-                      },
-                      child: Text(
-                        "${_selectedDate.toLocal()}".split(' ')[0],
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        final selectedTime = await showTimePicker(
-                          context: context,
-                          initialTime: _selectedTime,
-                        );
-                        if (selectedTime != null) {
-                          setState(() {
-                            _selectedTime = selectedTime;
-                          });
-                        }
-                      },
-                      child: Text(
-                        "${_selectedTime.hour}:${_selectedTime.minute}",
-                      ),
-                    ),
-                  ],
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_textEditingController.text.isNotEmpty) {
-                      final dueDateTime = DateTime(
-                        _selectedDate.year,
-                        _selectedDate.month,
-                        _selectedDate.day,
-                        _selectedTime.hour,
-                        _selectedTime.minute,
-                      );
-                      _addTask(_textEditingController.text, dueDateTime);
-                      _textEditingController.clear();
-                    }
-                  },
-                  child: Text("Add Task"),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _updateTask(Task task) async {
-    final db = await _database;
-    await db.update(
-      'tasks',
-      task.toMap(),
-      where: 'id = ?',
-      whereArgs: [task.id],
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top]);
+    return MaterialApp(
+      theme: ThemeData(
+          primaryColor: Colors.green,
+          buttonColor: CouleurPrincipale,
+          fixTextFieldOutlineLabel: true,
+          // Primary color for the app
+          accentColor: CouleurPrincipale, // Accent color for the app
+          useMaterial3: false),
+      debugShowCheckedModeBanner: false,
+      // home: Actualite_Page(),
+//home: Event_Home_Page(),
+    home:     OnboardingScreen(),
+    //  home: Home_Radio(),
     );
   }
 }
