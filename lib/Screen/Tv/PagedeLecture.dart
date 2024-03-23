@@ -1,5 +1,6 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 class LocalLecture extends StatefulWidget {
@@ -29,6 +30,8 @@ class _LocalLectureState extends State<LocalLecture> {
     _videoPlayerController1.dispose();
     _chewieController?.dispose();
     super.dispose();
+        SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    super.dispose();
   }
 
   Future<void> initializePlayer() async {
@@ -40,6 +43,11 @@ class _LocalLectureState extends State<LocalLecture> {
     ]);
     _createChewieController();
     setState(() {});
+
+        SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
   }
 
   void _createChewieController() {

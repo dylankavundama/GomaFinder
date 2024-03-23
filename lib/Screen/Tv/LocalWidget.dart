@@ -20,19 +20,17 @@ class LocalWdget extends StatelessWidget {
       padding: const EdgeInsets.all(6.0),
       child: Card(
         child: ListTile(
-          subtitle:Text(
-          
+          subtitle: Text(
             titreLocal,
             style: GoogleFonts.abel(fontSize: 18),
-
             maxLines: 1,
-          ), 
+          ),
           leading: CircleAvatar(
             backgroundImage: NetworkImage(imageLocal),
             radius: 25,
           ),
           title: Text(
-      'la chaine des devirtissement footable music ',
+            'la chaine des devirtissement footable music ',
             style: GoogleFonts.aBeeZee(fontSize: 16),
           ),
           trailing: Icon(Icons.play_circle, color: CouleurPrincipale),

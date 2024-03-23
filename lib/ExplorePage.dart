@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upato/Screen/Tv/Tv_Home.dart';
+import 'package:upato/Screen/channel.dart';
 import 'package:upato/Screen/podecast/live_radio/Home_Radio.dart';
 import 'package:upato/actu/actualiter.dart';
 import 'package:upato/bloc_note.dart';
@@ -75,7 +76,7 @@ class ExplorePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Tv_Home(),
+                    builder: (context) => Channel(),
                   ),
                 );
               } else if (items[index]['title'] == 'Actu') {
