@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:upato/Models/search.dart';
 import 'package:upato/login/login.dart';
 
-
 class NavBarPage extends StatefulWidget {
   const NavBarPage({super.key});
   @override
@@ -18,8 +17,8 @@ class _NavBarPageState extends State<NavBarPage> {
   List<Widget> screen = [
     HomePage(),
     Search_Page(),
-    
-   ExplorePage(),
+
+    ExplorePage(),
     // Podcast(),
     // Viewdata(),
     LoginHome(),

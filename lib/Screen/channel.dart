@@ -3,15 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:upato/Screen/Tv/PagedeLecture.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
-
 import '../Util/style.dart';
 
 class VideoItem {
   final String title;
   final String videoUrl;
-
   final String img;
-
   VideoItem(this.title, this.videoUrl, this.img);
 }
 
@@ -44,11 +41,7 @@ class Channel extends StatelessWidget {
                 'Televison',
                 style: TitreStyle,
               ),
-
-           
             ],
-
-            
           ),
         ),
         body: ListView.builder(
@@ -72,11 +65,7 @@ class Channel extends StatelessWidget {
                   );
                 },
                 trailing: Icon(Icons.play_circle, color: CouleurPrincipale),
-                leading: CircleAvatar(
-                  backgroundColor: CouleurPrincipale,
-                  backgroundImage: NetworkImage(videos[index].img),
-                  radius: 25,
-                ),
+                leading: Image.asset("assets/tv.png"),
               ),
             );
           },
@@ -90,9 +79,11 @@ class VideoPlayerScreen extends StatefulWidget {
   final List<VideoItem> videoItems;
   final int initialIndex;
 
-  VideoPlayerScreen({required this.videoItems, required this.initialIndex});
+  const VideoPlayerScreen(
+      {required this.videoItems, required this.initialIndex});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
 
@@ -105,6 +96,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     _currentIndex = widget.initialIndex;
+    // ignore: deprecated_member_use
     _videoPlayerController = VideoPlayerController.network(
         widget.videoItems[_currentIndex].videoUrl);
     _chewieController = ChewieController(
@@ -118,15 +110,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lecture de la vidéo'),
+        title: const Text('Lecture de la vidéo'),
       ),
       body: Column(
         children: [
           Chewie(controller: _chewieController),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             widget.videoItems[_currentIndex].title,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ],
       ),
