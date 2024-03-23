@@ -86,7 +86,15 @@ class Channel extends StatelessWidget {
         'https://live-kto.akamaized.net/hls/live/2033284/KTO/master.m3u8'),
     VideoItem('KSA Sports 1', 'https://edge.taghtia.com/sa/9.m3u8'),
     VideoItem('KSA Sports 2', 'https://edge.taghtia.com/sa/10.m3u8'),
-    VideoItem('', 'https://edge.taghtia.com/sa/16.m3u8')
+    VideoItem('KSA Sports 3', 'https://edge.taghtia.com/sa/16.m3u8'),
+    VideoItem('Dubai Sports 2',
+        'https://dmitwlvvll.cdn.mangomolo.com/dubaisportshd/smil:dubaisportshd.smil/index.m3u8'),
+    VideoItem('Dubai Sports 3',
+        'https://dmitwlvvll.cdn.mangomolo.com/dubaisportshd5/smil:dubaisportshd5.smil/index.m3u8'),
+    VideoItem('Dubai One',
+        'https://dminnvll.cdn.mangomolo.com/dubaione/smil:dubaione.stream.smil/playlist.m3u8'),
+    VideoItem(
+        '', 'https://svs.itworkscdn.net/smc4sportslive/smc4.smil/playlist.m3u8')
   ];
 
   Channel({super.key});
