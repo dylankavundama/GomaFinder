@@ -38,18 +38,14 @@ void main() async {
   // OneSignal.shared
   //     .promptUserForPushNotificationPermission()
   //     .then((accepted) {});
-  //   SystemChrome.setEnabledSystemUIMode(
-  //   SystemUiMode.manual,
-  //   overlays: [],
-  // );
 
-  //       SystemChrome.setSystemUIOverlayStyle(
-  //   SystemUiOverlayStyle(
-  //     statusBarColor: Colors.green,
-  //     statusBarBrightness: Brightness.light,
-  //   ),
-  // );
-  SystemChrome.setEnabledSystemUIOverlays([]);
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: Colors.green,
+      statusBarBrightness: Brightness.light,
+    ),
+  );
+
   runApp(const MyApp());
 }
 
@@ -58,10 +54,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-    //     overlays: [SystemUiOverlay.top]);
-
     SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.green, // Définir la couleur de la barre d'état
+    ));
     return MaterialApp(
       theme: ThemeData(
           primaryColor: Colors.green,

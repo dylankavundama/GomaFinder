@@ -155,7 +155,9 @@ class _Search_PageState extends State<Search_Page> {
                   },
                 ),
               )
-            : Image.asset('assets/find.webp')
+            : Container(
+                height: MediaQuery.of(context).size.height * 0.30,
+                child: Image.asset('assets/images/image1.png'))
       ],
     );
   }

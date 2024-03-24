@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     _tabController = TabController(length: 18, vsync: this);
     super.initState();
-
     _startNewGame();
   }
 
@@ -56,7 +55,6 @@ class _HomePageState extends State<HomePage>
   final String _adUnitIdd = Platform.isAndroid
       ? 'ca-app-pub-7329797350611067/7003775471'
       : 'ca-app-pub-7329797350611067/7003775471';
-      
 
   void _startNewGame() {
     setState(() => _counter = _gameLength);
@@ -91,7 +89,7 @@ class _HomePageState extends State<HomePage>
   }
 
   void _starTimer() {
-    Timer.periodic(const Duration(seconds: 60), (timer) {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
       setState(() => _counter--);
 
       if (_counter == 0) {
@@ -109,7 +107,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.green,

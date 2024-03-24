@@ -18,13 +18,11 @@ class _NavBarPageState extends State<NavBarPage> {
   List<Widget> screen = [
     HomePage(),
     Search_Page(),
-
+    const FavoritesPage(),
     ExplorePage(),
     // Podcast(),
     // Viewdata(),
-    LoginHome(),
-
-    FavoritesPage()
+    const LoginHome(),
   ];
 
   @override
@@ -61,16 +59,16 @@ class _NavBarPageState extends State<NavBarPage> {
               label: 'Recherche',
             ),
             NavigationDestination(
+              selectedIcon: Icon(Icons.favorite_border),
+              icon: Icon(Icons.favorite_outlined),
+              //    label: 'Compte',
+
+              label: 'Favories',
+            ),
+            NavigationDestination(
               icon: Icon(Icons.design_services),
               selectedIcon: Icon(Icons.explore),
               label: 'Explore',
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.person_3),
-              icon: Icon(Icons.person),
-              //    label: 'Compte',
-
-              label: 'Moi',
             ),
             NavigationDestination(
               selectedIcon: Icon(Icons.person_3),
