@@ -106,8 +106,8 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                     (index) {
                       double distance = _calculateDistance(
                           post[index]['lat'], post[index]['log']);
-                      // Filtrer les entreprises qui se trouvent à moins de 5000 mètres
-                      if (distance <= 5000) {
+                      // Filtrer les entreprises qui se trouvent à moins de 1000 mètres
+                      if (distance <= 1000) {
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(

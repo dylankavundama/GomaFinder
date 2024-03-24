@@ -234,7 +234,7 @@ class _Inset_DataState extends State<Inset_Data> {
                   padding: const EdgeInsets.only(top: 6),
                   child: Stack(
                     children: [
-                      TextField(
+                      const TextField(
                         decoration: InputDecoration(
                           prefixIcon: Icon(LineIcons.list),
                           border: OutlineInputBorder(

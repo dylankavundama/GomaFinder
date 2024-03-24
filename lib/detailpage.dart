@@ -136,6 +136,46 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          PopupMenuButton<String>(
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'Signaler',
+                child: Text('Signaler'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'Partager',
+                child: Text('Partager'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'Liker',
+                child: Text('Liker'),
+              ),
+            ],
+            onSelected: (String value) {
+              switch (value) {
+                case 'Signaler':
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => Option1Page()),
+                  // );
+                  break;
+                case 'Partager':
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => Option2Page()),
+                  // );
+                  break;
+                case 'Liker':
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => Option3Page()),
+                  // );
+                  break;
+              }
+            },
+          ),
+        ],
         iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
         title: Row(
