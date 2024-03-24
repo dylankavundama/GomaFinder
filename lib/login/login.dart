@@ -102,7 +102,7 @@ class _LoginHomeState extends State<LoginHome> {
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.all(25.0),
+                      padding: const EdgeInsets.all(20.0),
                       child: GestureDetector(
                         onTap: () => signIn(context),
                         child: Container(

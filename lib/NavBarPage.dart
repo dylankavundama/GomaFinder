@@ -53,8 +53,8 @@ class _NavBarPageState extends State<NavBarPage> {
               label: 'Acceuil',
             ),
             NavigationDestination(
-              icon: Icon(Icons.search),
-              selectedIcon: Icon(Icons.youtube_searched_for_rounded),
+              icon: Icon(Icons.youtube_searched_for_rounded),
+              selectedIcon: Icon(Icons.search_outlined),
               label: 'Recherche',
             ),
             NavigationDestination(
