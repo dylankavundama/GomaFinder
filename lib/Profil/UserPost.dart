@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:upato/Profil/insert_data.dart';
 import 'package:upato/login/authServices.dart';
 import 'package:upato/style.dart';
 import '../NavBarPage.dart';
@@ -70,7 +71,7 @@ class _UserPostState extends State<UserPost> {
 
   @override
   Widget build(BuildContext context) {
-        SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.green,
@@ -79,6 +80,17 @@ class _UserPostState extends State<UserPost> {
     );
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+         Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => NavBarPage(),
+                ),
+                (Route<dynamic> route) => false,
+              );
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -249,7 +261,16 @@ class _UserPostState extends State<UserPost> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {},child: Icon(Icons.add_business_outlined),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const Inset_Data(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add_business_outlined),
+      ),
     );
   }
 }

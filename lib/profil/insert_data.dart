@@ -190,20 +190,21 @@ class _Inset_DataState extends State<Inset_Data> {
     // );
     return Scaffold(
       appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: CouleurPrincipale,
-          title: Text(
-            ' ${user?.displayName ?? "Non défini"}',
-            style: TextStyle(fontSize: 15),
-          ),
-          actions: [
-            CircleAvatar(
-              backgroundImage: user?.photoURL != null
-                  ? NetworkImage(user!.photoURL!) as ImageProvider<Object>?
-                  : AssetImage('assets/default_avatar.png'),
-              radius: 22,
-            ),
-          ]),
+        centerTitle: true,
+        backgroundColor: CouleurPrincipale,
+        title: Text(
+          ' ${user?.displayName ?? "Non défini"}',
+          style: TextStyle(fontSize: 15),
+        ),
+        // actions: [
+        //   CircleAvatar(
+        //     backgroundImage: user?.photoURL != null
+        //         ? NetworkImage(user!.photoURL!) as ImageProvider<Object>?
+        //         : AssetImage('assets/default_avatar.png'),
+        //     radius: 22,
+        //   ),
+        // ]
+      ),
       body: SingleChildScrollView(
         child: Material(
           clipBehavior: Clip.antiAlias,
@@ -230,7 +231,6 @@ class _Inset_DataState extends State<Inset_Data> {
                     ),
                   ),
                 ),
-            
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
                   child: Stack(
@@ -492,7 +492,7 @@ class _Inset_DataState extends State<Inset_Data> {
                         FirebaseAuth.instance.currentUser?.displayName ?? '',
                       ).then((value) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => NavBarPage()));
+                            builder: (context) => const NavBarPage()));
                       }).whenComplete(() {
                         setState(() {
                           _isLoading = false;
