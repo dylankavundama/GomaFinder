@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:upato/Profil/UserPost.dart';
 import 'package:upato/login/authServices.dart';
 import 'package:upato/profil/insert_data.dart';
@@ -27,8 +28,11 @@ class _LoginHomeState extends State<LoginHome> {
 
     if (isLoggedIn) {
       // Si l'utilisateur est déjà connecté, naviguez vers la page de profil
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const UserPost(),),);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const UserPost(),
+        ),
+      );
     } else {
       // Sinon, l'utilisateur doit se connecter
       setState(() {
@@ -65,59 +69,79 @@ class _LoginHomeState extends State<LoginHome> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.04,
+              // const Padding(
+              //   padding: EdgeInsets.only(top: 55),
+              // ),
+              Image.asset(
+                'assets/login.png',
               ),
-              Padding(
-                padding: const EdgeInsets.all(25.0),
+              Center(
                 child: Text(
-                  '',
-                  style: Theme.of(context).textTheme.headline4?.copyWith(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  'Attirer plus des prospects à rejoindre\n                 votre entreprise ',
+                  style: TitreStyle,
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
-              ),
-              const Center(
-                child: Text(
-                  " ",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
+
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Center(
+                  child: Text(
+                    'Désormais il sera plus facile de trouver votre entreprise  ',
+                    style: DescStyle,
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 55),
-              ),
-              Image.asset(
-                'assets/images/image3.png',
-                height: 280.0,
-                width: MediaQuery.of(context).size.width,
-              ),
               _inLoginProcess
-                  ? const Center(child: CircularProgressIndicator())
-                  : ElevatedButton.icon(
-                      onPressed: () => signIn(context),
-                      icon: Image.asset(
-                        'assets/g.png', // Remplacez par votre propre icône de Google
-                        height: 24.0,
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: CouleurPrincipale,
                       ),
-                      label: const Text('Veuillez vous identifier'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        onPrimary: Colors.black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                    )
+                  : GestureDetector(
+                      onTap: () => signIn(context),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color:
+                              CouleurPrincipale, // Couleur de fond ajoutée ici
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.width * 0.1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/g.png', // Remplacez par votre propre icône de Google
+                              height: 24.0,
+                            ),
+                            Text(
+                              'Veuillez vous identifier',
+                              style: GoogleFonts.abel(
+                                fontSize: 24,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
+
+              // ElevatedButton.icon(
+              //     onPressed: () => signIn(context),
+              //     icon:
+              //     label: Card(
+              //       child:
+              //     ),
+              //     style: ElevatedButton.styleFrom(
+              //       primary: CouleurPrincipale,
+              //       onPrimary: Colors.black,
+
+              //     ),
+              //   ),
             ],
           ),
         ),
