@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:upato/login/authServices.dart';
 import 'package:upato/style.dart';
@@ -69,6 +70,13 @@ class _UserPostState extends State<UserPost> {
 
   @override
   Widget build(BuildContext context) {
+        SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.green,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -112,14 +120,14 @@ class _UserPostState extends State<UserPost> {
                   ),
                   Text(
                     'Mail: ${mail ?? ''}',
-                    style: TitreStyle,
+                    style: DescStyle,
                   ),
                 ],
               ),
             ),
             Divider(
-              color: CouleurPrincipale,
-            ),
+                //: CouleurPrincipale,
+                ),
             Center(
               child: Text(
                 'Mes entreprises',
@@ -133,11 +141,22 @@ class _UserPostState extends State<UserPost> {
                     ),
                   )
                 : post.isEmpty
-                    ? Center(
-                        child: Image.asset(
-                          'assets/error.png',
-                          width: 200,
-                          height: 200,
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 111),
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Image.asset(
+                                'assets/error.png',
+                                width: 200,
+                                height: 200,
+                              ),
+                            ),
+                            Text(
+                              "Aucune entreprise trouvée",
+                              style: SousTStyle,
+                            )
+                          ],
                         ),
                       )
                     : Column(
@@ -184,13 +203,13 @@ class _UserPostState extends State<UserPost> {
                                         style: TitreStyle,
                                       ),
                                     ),
-                   
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(0.0),
                                       child: Image.network(
                                         "http://$Adress_IP/goma/entreprise/" +
                                             post[index]["image1"],
-                                        width: MediaQuery.of(context).size.width,
+                                        width:
+                                            MediaQuery.of(context).size.width,
                                         height:
                                             MediaQuery.of(context).size.height *
                                                 0.2,
@@ -201,17 +220,13 @@ class _UserPostState extends State<UserPost> {
                                       children: [
                                         TextButton(
                                           onPressed: () {},
-                                          child: Text(
-                                            "Supprimer",
-                                            style: DescStyle
-                                          ),
+                                          child: Text("Supprimer",
+                                              style: DescStyle),
                                         ),
                                         TextButton(
                                           onPressed: () {},
-                                          child: Text(
-                                            "Modifier",
-                                            style: DescStyle
-                                          ),
+                                          child: Text("Modifier",
+                                              style: DescStyle),
                                         ),
                                         TextButton.icon(
                                           onPressed: () {},
@@ -219,10 +234,8 @@ class _UserPostState extends State<UserPost> {
                                             Icons.share_outlined,
                                             color: CouleurPrincipale,
                                           ),
-                                          label: Text(
-                                            "Partager",
-                                            style: DescStyle
-                                          ),
+                                          label: Text("Partager",
+                                              style: DescStyle),
                                         )
                                       ],
                                     ),
@@ -236,6 +249,7 @@ class _UserPostState extends State<UserPost> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {},child: Icon(Icons.add_business_outlined),),
     );
   }
 }
