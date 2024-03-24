@@ -31,9 +31,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     bool onboardingCompleted = prefs.getBool('onboardingCompleted') ?? false;
     if (onboardingCompleted) {
       // Si l'onboarding est déjà terminé, naviguez vers la page suivante
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => NavBarPage()),
+        MaterialPageRoute(builder: (context) => const NavBarPage()),
       );
     }
   }
@@ -154,10 +155,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     builder: (context) => NavBarPage()),
                               );
                             },
-                            child: const Text(
-                              "START",
-                              style: TextStyle(color: Colors.white),
-                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.black,
                               shape: RoundedRectangleBorder(
@@ -171,6 +168,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               textStyle:
                                   TextStyle(fontSize: (width <= 550) ? 13 : 17),
                             ),
+                            child: const Text(
+                              "START",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         )
                       : Padding(
@@ -182,16 +183,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 onPressed: () {
                                   _controller.jumpToPage(2);
                                 },
-                                child: const Text(
-                                  "SKIP",
-                                  style: TextStyle(color: Colors.black),
-                                ),
                                 style: TextButton.styleFrom(
                                   elevation: 0,
                                   textStyle: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: (width <= 550) ? 13 : 17,
                                   ),
+                                ),
+                                child: const Text(
+                                  "SKIP",
+                                  style: TextStyle(color: Colors.black),
                                 ),
                               ),
                               ElevatedButton(
@@ -201,10 +202,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     curve: Curves.easeIn,
                                   );
                                 },
-                                child: const Text(
-                                  "NEXT",
-                                  style: TextStyle(color: Colors.white),
-                                ),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.black,
                                   shape: RoundedRectangleBorder(
@@ -218,6 +215,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                           horizontal: 30, vertical: 25),
                                   textStyle: TextStyle(
                                       fontSize: (width <= 550) ? 13 : 17),
+                                ),
+                                child: const Text(
+                                  "NEXT",
+                                  style: TextStyle(color: Colors.white),
                                 ),
                               ),
                             ],
