@@ -69,14 +69,15 @@ class _LoginHomeState extends State<LoginHome> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // const Padding(
               //   padding: EdgeInsets.only(top: 55),
               // ),
               Image.asset(
-                'assets/login.png',
+                height: MediaQuery.of(context).size.height * 0.4,
+                'assets/lg.png',
               ),
               Center(
                 child: Text(
@@ -86,7 +87,7 @@ class _LoginHomeState extends State<LoginHome> {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
                     'Désormais il sera plus facile de trouver votre entreprise  ',
@@ -100,32 +101,38 @@ class _LoginHomeState extends State<LoginHome> {
                         color: CouleurPrincipale,
                       ),
                     )
-                  : GestureDetector(
-                      onTap: () => signIn(context),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color:
-                              CouleurPrincipale, // Couleur de fond ajoutée ici
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: MediaQuery.of(context).size.width * 0.1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/g.png', // Remplacez par votre propre icône de Google
-                              height: 24.0,
-                            ),
-                            Text(
-                              'Veuillez vous identifier',
-                              style: GoogleFonts.abel(
-                                fontSize: 24,
-                                color: Colors.white,
+                  : Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: GestureDetector(
+                        onTap: () => signIn(context),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color:
+                                CouleurPrincipale, // Couleur de fond ajoutée ici
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery.of(context).size.height * 0.053,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/g.png', // Remplacez par votre propre icône de Google
+                                height: 24.0,
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Google',
+                                  style: GoogleFonts.abel(
+                                      fontSize: 24,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -142,6 +149,27 @@ class _LoginHomeState extends State<LoginHome> {
 
               //     ),
               //   ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 130),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'En poursuivant, vous acceptez nos ',
+                      style:
+                          GoogleFonts.abel(fontSize: 15, color: Colors.black),
+                    ),
+                    Text(
+                      "conditions d’utilisation et notre politique de confidentialité ",
+                      style: GoogleFonts.abel(
+                        fontSize: 15,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
