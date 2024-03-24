@@ -68,6 +68,11 @@ class _UserPostState extends State<UserPost> {
     fetchPosts();
     fetchUserData();
   }
+@override
+void dispose() {
+  // Annuler ou fermer les abonnements, les contrôleurs, etc.
+  super.dispose();
+}
 
   @override
   Widget build(BuildContext context) {
