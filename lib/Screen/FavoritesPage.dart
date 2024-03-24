@@ -7,6 +7,8 @@ import 'dart:convert';
 import '../Util/style.dart';
 
 class FavoritesPage extends StatefulWidget {
+  const FavoritesPage({super.key});
+
   @override
   _FavoritesPageState createState() => _FavoritesPageState();
 }
@@ -56,8 +58,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
               itemCount: favorites.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-
-                                 onTap: () {
+                  onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
@@ -115,10 +116,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(0.0),
                               child: Image.network(
+                                // ignore: prefer_interpolation_to_compose_strings
                                 "http://$Adress_IP/goma/entreprise/" +
                                     (favorites[index]['image1'] ?? ''),
                                 width: MediaQuery.of(context).size.width,
-                                height: MediaQuery.of(context).size.height * 0.2,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -141,7 +144,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                                       style: TitreStyle,
                                     ),
                                     onPressed: () {}),
-                
+
                                 TextButton.icon(
                                     icon: Icon(
                                       Icons.share_outlined,
