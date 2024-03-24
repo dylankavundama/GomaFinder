@@ -142,6 +142,7 @@ class _Search_PageState extends State<Search_Page> {
                               desc: filteredPost[index]['detail'],
                               image1: filteredPost[index]['image1'],
                               image2: filteredPost[index]['image2'],
+                                        auteur: filteredPost[index]['auteur'],
                             );
                           }),
                         );

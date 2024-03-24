@@ -79,6 +79,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                               ? favorites[index]['long'].toString()
                               : '0.0',
                           titre: favorites[index]['nom'] ?? '',
+                                  auteur: favorites[index]['auteur'] ?? '',
                           site: favorites[index]['site'] ?? '',
                           tel: favorites[index]['tel'] ?? '',
                           desc: favorites[index]['detail'] ?? '',

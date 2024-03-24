@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upato/Profil/UserPost.dart';
 import 'package:upato/login/authServices.dart';
 import 'package:upato/profil/insert_data.dart';
 import 'package:upato/Util/style.dart';
@@ -27,7 +28,7 @@ class _LoginHomeState extends State<LoginHome> {
     if (isLoggedIn) {
       // Si l'utilisateur est déjà connecté, naviguez vers la page de profil
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Inset_Data()));
+          .push(MaterialPageRoute(builder: (context) => const UserPost(),),);
     } else {
       // Sinon, l'utilisateur doit se connecter
       setState(() {

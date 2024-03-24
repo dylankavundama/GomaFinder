@@ -88,8 +88,8 @@ fetchPosts() async {
                           tel: post[index]['tel'],
                           desc: post[index]['detail'],
                           image1: post[index]['image1'],
-                          image2: post[index]['image2'],
-                        );
+                              image2: post[index]['image2'],
+     auteur: post[index]['auteur'],                    );
                       }),
                     );
                   },

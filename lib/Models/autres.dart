@@ -41,8 +41,6 @@ class _Autres_PageState extends State<Autres_Page> {
     fetchPosts();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     // SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
@@ -86,6 +84,7 @@ class _Autres_PageState extends State<Autres_Page> {
                               desc: post[index]['detail'],
                               image1: post[index]['image1'],
                               image2: post[index]['image2'],
+                              auteur: post[index]['auteur'],
                             );
                           }),
                         );

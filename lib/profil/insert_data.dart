@@ -58,7 +58,7 @@ class _Inset_DataState extends State<Inset_Data> {
     }
   }
 
-  Future<void> savadatas(Entreprise Entreprise) async {
+  Future<void> savadatas(Entreprise entreprise, String email) async {
     if (nom.text.isEmpty ||
         detail.text.isEmpty ||
         tel.text.isEmpty ||
@@ -66,8 +66,8 @@ class _Inset_DataState extends State<Inset_Data> {
         log.text.isNotEmpty ||
         latt.text.isNotEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Vous avez un champs vide'),
+        const SnackBar(
+          content: Text('Vous avez un champ vide'),
           duration: Duration(seconds: 3),
         ),
       );
@@ -76,7 +76,6 @@ class _Inset_DataState extends State<Inset_Data> {
     try {
       var url = "http://$Adress_IP/goma/entreprise/add-Entreprise.php";
       Uri ulr = Uri.parse(url);
-      debugPrint("############################################");
       var request = http.MultipartRequest('POST', ulr);
       request.fields['nom'] = nom.text;
       request.fields['cat'] = idenseu;
@@ -85,6 +84,7 @@ class _Inset_DataState extends State<Inset_Data> {
       request.fields['tel'] = tel.text;
       request.fields['log'] = log.text = long;
       request.fields['lat'] = latt.text = lat;
+      request.fields['auteur'] = email; // Insert email here
       request.files.add(http.MultipartFile.fromBytes(
           'image1', File(_image!.path).readAsBytesSync(),
           filename: _image!.path));
@@ -93,12 +93,12 @@ class _Inset_DataState extends State<Inset_Data> {
           'image2', File(_image2!.path).readAsBytesSync(),
           filename: _image2!.path));
       var res = await request.send();
-      var reponse = await http.Response.fromStream(res);
+      var response = await http.Response.fromStream(res);
 
-      if (reponse.statusCode == 200) {
-        showToast(msg: "Succes!");
+      if (response.statusCode == 200) {
+        showToast(msg: "Succès !");
       } else {
-        showToast(msg: "Probleme d'insertion!");
+        showToast(msg: "Problème d'insertion !");
       }
     } catch (e) {
       showToast(msg: 'Erreur survenue');
@@ -230,6 +230,7 @@ class _Inset_DataState extends State<Inset_Data> {
                     ),
                   ),
                 ),
+            
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
                   child: Stack(
@@ -480,13 +481,16 @@ class _Inset_DataState extends State<Inset_Data> {
                       setState(() {
                         _isLoading = true;
                       });
-                      savadatas(Entreprise(
-                        nom: idenseu.trim(),
-                        detail: detail.text.trim(),
-                        site: site.text.trim(),
-                        lat: lat,
-                        log: long,
-                      )).then((value) {
+                      savadatas(
+                        Entreprise(
+                          nom: idenseu.trim(),
+                          detail: detail.text.trim(),
+                          site: site.text.trim(),
+                          lat: lat,
+                          log: long,
+                        ),
+                        FirebaseAuth.instance.currentUser?.displayName ?? '',
+                      ).then((value) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => NavBarPage()));
                       }).whenComplete(() {

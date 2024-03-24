@@ -17,6 +17,7 @@ class DetailPage extends StatefulWidget {
       required this.site,
       required this.lat,
       required this.long,
+      required this.auteur,
       super.key});
   String image1;
   String image2;
@@ -26,6 +27,8 @@ class DetailPage extends StatefulWidget {
   String lat;
   String long;
   String site;
+
+  String auteur;
   @override
   // ignore: library_private_types_in_public_api
   _DetailPageState createState() => _DetailPageState();
@@ -334,6 +337,17 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                       const SizedBox(
                         height: 8,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Auteur : ${widget.auteur}",
+                              style: DescStyle,
+                            ),
+                          ],
+                        ),
                       ),
                       Stack(
                         children: [

@@ -43,8 +43,6 @@ class _Salle_PageState extends State<Salle_Page> {
 
   @override
   Widget build(BuildContext context) {
- 
-
     return _isLoading
         ? Center(
             child: CircularProgressIndicator(
@@ -87,6 +85,7 @@ class _Salle_PageState extends State<Salle_Page> {
                                   desc: post[index]['detail'],
                                   image1: post[index]['image1'],
                                   image2: post[index]['image2'],
+                                  auteur: post[index]['auteur'],
                                 );
                               }),
                             );
