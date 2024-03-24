@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
 import 'package:upato/style.dart';

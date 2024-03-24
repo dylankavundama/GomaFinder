@@ -14,9 +14,39 @@ import 'package:upato/Screen/podecast/live_radio/Home_Radio.dart';
 import 'package:upato/profil/insert_data.dart';
 import 'package:upato/profil/list_insert.dart';
 import 'package:upato/style.dart';
-import 'Screen/Tv/Tv_Home.dart';
 import 'onboarding_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+
+class Gda extends StatefulWidget {
+  const Gda({super.key});
+
+  @override
+  State<Gda> createState() => _GdaState();
+}
+
+class _GdaState extends State<Gda> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(children: [
+        Row(
+          children: [
+            ListTile(
+              title: Text('Test',
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                  maxLines: 3),
+              leading: Text(
+                'g',
+                style: TitreStyle,
+              ),
+            )
+          ],
+        )
+      ]),
+    );
+  }
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -413,7 +413,7 @@ class _DetailPageState extends State<DetailPage> {
                             String long = widget.long;
                             String url =
                                 'http://www.google.com/maps/search/?api=1&query=$lat,$long';
-                            launch(url);
+                            launch(url);  
                           },
                 child: Container(
                   alignment: Alignment.center,
