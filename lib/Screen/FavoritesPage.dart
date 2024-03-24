@@ -57,16 +57,33 @@ class _FavoritesPageState extends State<FavoritesPage> {
           : ListView.builder(
               itemCount: favorites.length,
               itemBuilder: (context, index) {
-                return ListTile(
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black12,
+                        style: BorderStyle.solid,
+                      ),
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            favorites[index]["nom"],
+                            maxLines: 1,
+                            textAlign: TextAlign.start,
+                            style: TitreStyle,
+                          ),
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(0.0),
+                          child: GestureDetector(
 
-                  leading: CircleAvatar(
-                    radius: 25,
-                      backgroundImage: NetworkImage(
-                    "http://$Adress_IP/goma/entreprise/" +
-                        (favorites[index]['image1'] ?? ''),
-                  )),
-                  title: Text(favorites[index]['nom'] ?? ''),
-                  onTap: () {
+                                              onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
@@ -89,7 +106,41 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       }),
                     );
                   },
+                            child: Image.network(
+                              // ignore: prefer_interpolation_to_compose_strings
+                              "http://$Adress_IP/goma/entreprise/" +
+                                  favorites[index]["image1"],
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            TextButton(
+                              onPressed: () {},
+                              child: Text("Supprimer", style: DescStyle),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text("Modifier", style: DescStyle),
+                            ),
+                            TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.share_outlined,
+                                color: CouleurPrincipale,
+                              ),
+                              label: Text("Partager", style: DescStyle),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 );
+              
               },
             ),
     );
