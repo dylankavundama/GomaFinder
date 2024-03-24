@@ -364,9 +364,8 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                         ],
                       ),
-                      const Text("Localisation",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 18)),
+                       Text("Localisation",
+                          style: TitreStyle),
                       const SizedBox(
                         height: 8,
                       ),
@@ -409,7 +408,13 @@ class _DetailPageState extends State<DetailPage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: InkWell(
-                onTap: () {},
+                          onTap: () {
+                            String lat = widget.lat;
+                            String long = widget.long;
+                            String url =
+                                'http://www.google.com/maps/search/?api=1&query=$lat,$long';
+                            launch(url);
+                          },
                 child: Container(
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(bottom: 6.0),
@@ -426,21 +431,12 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ],
                   ),
-                  child: GestureDetector(
-                    onTap: () {
-                      String lat = widget.lat;
-                      String long = widget.long;
-                      String url =
-                          'http://www.google.com/maps/search/?api=1&query=$lat,$long';
-                      launch(url);
-                    },
-                    child: const Text(
-                      "GPS",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    ),
+                  child: const Text(
+                    "GPS",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
                   ),
                 ),
               ),
