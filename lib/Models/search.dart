@@ -102,27 +102,37 @@ class _Search_PageState extends State<Search_Page> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(22.0),
-          child: TextField(
-            autofocus: true,
-            cursorColor: CouleurPrincipale,
-            controller: searchController,
-            onChanged: filterSearchResults,
-            decoration: InputDecoration(
-              labelText: "Rechercher",
-              hintText: "Rechercher",
-              prefixIcon: const Icon(Icons.search),
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(4.0),
+            padding: const EdgeInsets.all(22.0),
+            child: TextField(
+              autofocus: true,
+              cursorColor: CouleurPrincipale,
+              controller: searchController,
+              onChanged: filterSearchResults,
+              decoration: InputDecoration(
+                labelText: "Rechercher",
+                hintText: "Rechercher",
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: Colors.greenAccent,
                 ),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(4.0),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color:
+                          CouleurPrincipale), // Couleur de la bordure en rouge
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(4.0),
+                  ),
+                ),
+                // Modification de la couleur du texte
+                labelStyle: TextStyle(color: CouleurPrincipale),
+                hintStyle: const TextStyle(color: Colors.black),
               ),
-              // Modification de la couleur du texte
-              labelStyle: TextStyle(color: CouleurPrincipale),
-              hintStyle: const TextStyle(color: Colors.black),
-            ),
-          ),
-        ),
+            )),
         searchController.text.isNotEmpty
             ? Expanded(
                 child: ListView.builder(
@@ -142,7 +152,7 @@ class _Search_PageState extends State<Search_Page> {
                               desc: filteredPost[index]['detail'],
                               image1: filteredPost[index]['image1'],
                               image2: filteredPost[index]['image2'],
-                                        auteur: filteredPost[index]['auteur'],
+                              auteur: filteredPost[index]['auteur'],
                             );
                           }),
                         );

@@ -55,6 +55,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   'Vous n\'avez pas encore ajouté d\'entreprises aux favoris.'),
             )
           : RefreshIndicator(
+             color: CouleurPrincipale,
               onRefresh: () async {
                 // Refresh the list when the user pulls down the screen
                 await fetchFavorites();
