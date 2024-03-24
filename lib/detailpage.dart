@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upato/Util/style.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -83,6 +85,51 @@ class _DetailPageState extends State<DetailPage> {
     _bannerAd?.dispose();
 
     super.dispose();
+  }
+
+  bool isFavorite = false;
+
+  // Function to toggle favorite status
+  void toggleFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> favorites = prefs.getStringList('favorites') ?? [];
+    String currentData = jsonEncode({
+      'nom': widget.titre,
+      'detail': widget.desc,
+      'image1': widget.image1,
+      // Add more data if needed
+    });
+
+    setState(() {
+      if (isFavorite) {
+        favorites.remove(currentData);
+      } else {
+        favorites.add(currentData);
+      }
+      prefs.setStringList('favorites', favorites);
+      isFavorite = !isFavorite;
+    });
+  }
+
+  // Function to check if current item is favorite
+  void checkFavorite() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> favorites = prefs.getStringList('favorites') ?? [];
+    String currentData = jsonEncode({
+      'nom': widget.titre,
+      'detail': widget.desc,
+      'image1': widget.image1,
+      // Add more data if needed
+    });
+    setState(() {
+      isFavorite = favorites.contains(currentData);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkFavorite();
   }
 
   @override
@@ -194,6 +241,18 @@ class _DetailPageState extends State<DetailPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              SizedBox(height: 20),
+                              Center(
+                                child: IconButton(
+                                  icon: Icon(
+                                    isFavorite
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: isFavorite ? Colors.red : null,
+                                  ),
+                                  onPressed: toggleFavorite,
+                                ),
+                              ),
                               Text(widget.titre, style: TitreStyle),
                             ],
                           ),

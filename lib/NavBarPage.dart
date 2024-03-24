@@ -1,6 +1,7 @@
 import 'package:upato/ExplorePage.dart';
 import 'package:upato/HomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:upato/Screen/FavoritesPage.dart';
 import 'package:upato/Models/search.dart';
 import 'package:upato/login/login.dart';
 
@@ -22,6 +23,8 @@ class _NavBarPageState extends State<NavBarPage> {
     // Podcast(),
     // Viewdata(),
     LoginHome(),
+
+    FavoritesPage()
   ];
 
   @override
@@ -61,6 +64,13 @@ class _NavBarPageState extends State<NavBarPage> {
               icon: Icon(Icons.design_services),
               selectedIcon: Icon(Icons.explore),
               label: 'Explore',
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.person_3),
+              icon: Icon(Icons.person),
+              //    label: 'Compte',
+
+              label: 'Moi',
             ),
             NavigationDestination(
               selectedIcon: Icon(Icons.person_3),
