@@ -3,7 +3,6 @@ import 'package:upato/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:upato/Screen/FavoritesPage.dart';
 import 'package:upato/Models/search.dart';
-import 'package:upato/Profil/UserPost.dart';
 
 import 'package:upato/login/login.dart';
 

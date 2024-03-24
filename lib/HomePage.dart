@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    _tabController = TabController(length: 18, vsync: this);
+    _tabController = TabController(length: 16, vsync: this);
     super.initState();
     _startNewGame();
   }
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage>
       ),
     );
     return Scaffold(
-      drawer: Container(
+      drawer: SizedBox(
           width: MediaQuery.of(context).size.width * 0.6, child: Drawers()),
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -203,12 +203,12 @@ class _HomePageState extends State<HomePage>
             Media_Page(),
             Eglise_Page(),
             Autres_Page(),
-            Center(child: Text('Content of Tab 1')),
+  
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Floating_Widget(),
+      floatingActionButton: const Floating_Widget(),
     );
   }
 }

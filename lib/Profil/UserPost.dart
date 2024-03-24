@@ -105,7 +105,7 @@ void dispose() {
                 );
               });
             },
-            icon: const Icon(Icons.logout_outlined),
+            icon: const Icon(Icons.logout_outlined,color: Colors.redAccent,),
           )
         ],
         iconTheme: IconThemeData(color: CouleurPrincipale),
