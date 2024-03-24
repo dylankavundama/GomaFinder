@@ -6,9 +6,10 @@ import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
 import 'package:upato/Util/style.dart';
 import 'package:http/http.dart' as http;
+import 'package:geolocator/geolocator.dart'; // Ajout de la bibliothèque de géolocalisation
 
 class Entreprise_Page extends StatefulWidget {
-  const Entreprise_Page({super.key});
+  const Entreprise_Page({Key? key});
 
   @override
   State<Entreprise_Page> createState() => _Entreprise_PageState();
@@ -17,6 +18,7 @@ class Entreprise_Page extends StatefulWidget {
 class _Entreprise_PageState extends State<Entreprise_Page> {
   List<dynamic> post = [];
   bool _isLoading = false;
+  Position? _currentPosition; // Position actuelle
 
   fetchPosts() async {
     setState(() {
@@ -52,12 +54,35 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
   void initState() {
     super.initState();
     fetchPosts();
+    _getCurrentLocation(); // Obtenir la position actuelle lors de l'initialisation
+  }
+
+  // Méthode pour obtenir la position actuelle
+  void _getCurrentLocation() async {
+    final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      _currentPosition = position;
+    });
+  }
+
+  // Méthode pour calculer la distance entre deux coordonnées géographiques
+  double _calculateDistance(String latString, String longString) {
+    if (_currentPosition != null) {
+      double lat =
+          double.tryParse(latString) ?? 0.0; // Convertit la latitude en double
+      double long = double.tryParse(longString) ??
+          0.0; // Convertit la longitude en double
+      double distanceInMeters = Geolocator.distanceBetween(
+          _currentPosition!.latitude, _currentPosition!.longitude, lat, long);
+      return distanceInMeters;
+    }
+    return double
+        .infinity; // Retourne une distance infinie si la position actuelle n'est pas disponible
   }
 
   @override
   Widget build(BuildContext context) {
- 
-
     return _isLoading
         ? Center(
             child: CircularProgressIndicator(
@@ -78,30 +103,39 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(
                     post.length,
-                    (index) => GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return DetailPage(
-                              lat: post[index]['lat'],
-                              long: post[index]['log'],
-                              titre: post[index]['nom'],
-                              site: post[index]['site'],
-                              tel: post[index]['tel'],
-                              desc: post[index]['detail'],
-                              image1: post[index]['image1'],
-                              image2: post[index]['image2'],
+                    (index) {
+                      double distance = _calculateDistance(
+                          post[index]['lat'], post[index]['log']);
+                      // Filtrer les entreprises qui se trouvent à moins de 5000 mètres
+                      if (distance <= 5000) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return DetailPage(
+                                  lat: post[index]['lat'],
+                                  long: post[index]['log'],
+                                  titre: post[index]['nom'],
+                                  site: post[index]['site'],
+                                  tel: post[index]['tel'],
+                                  desc: post[index]['detail'],
+                                  image1: post[index]['image1'],
+                                  image2: post[index]['image2'],
+                                );
+                              }),
                             );
-                          }),
+                          },
+                          child: Widget_UI(
+                            desc: post[index]['detail'],
+                            titre: post[index]['nom'],
+                            image: post[index]['image1'],
+                          ),
                         );
-                      },
-                      child: Widget_UI(
-                        desc: post[index]['detail'],
-                        titre: post[index]['nom'],
-                        image: post[index]['image1'],
-                      ),
-                    ),
+                      } else {
+                        return Container(); // Retourne un conteneur vide si l'entreprise est à plus de 100 mètres
+                      }
+                    },
                   ),
                 ),
               );
