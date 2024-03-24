@@ -32,7 +32,7 @@ class _GdaState extends State<Gda> {
         Row(
           children: [
             ListTile(
-              title: Text('Test',
+              title: const Text('Test',
                   style:
                       TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                   maxLines: 3),
