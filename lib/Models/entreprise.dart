@@ -7,7 +7,7 @@ import 'package:upato/detailpage.dart';
 import 'package:upato/Util/style.dart';
 
 class Entreprise_Page extends StatefulWidget {
-  const Entreprise_Page({super.key});
+  const Entreprise_Page({Key? key}) : super(key: key);
 
   @override
   State<Entreprise_Page> createState() => _Entreprise_PageState();
@@ -17,6 +17,7 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
   List<dynamic> post = [];
   bool _isLoading = false;
   Position? _currentPosition;
+  double _distanceFilter = 10000; // Default filter distance
 
   fetchPosts() async {
     setState(() {
@@ -74,11 +75,29 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    post.length,
-                    (index) {
-                      double lat = double.parse(post[index]['lat']);
-                      double log = double.parse(post[index]['log']);
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Distance Filter (meters):"),
+                        SizedBox(width: 10),
+                        Container(
+                          width: 100,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {
+                                _distanceFilter = double.parse(value);
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    ...post.map((company) {
+                      double lat = double.parse(company['lat']);
+                      double log = double.parse(company['log']);
                       // Check if _currentPosition is not null before accessing its properties
                       if (_currentPosition != null) {
                         // Calculate distance between current position and company's position
@@ -88,41 +107,41 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                             lat,
                             log);
 
-                        // Display only companies within 10 meters
-                        if (distanceInMeters <= 100) {
+                        // Display only companies within the specified distance
+                        if (distanceInMeters <= _distanceFilter) {
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) {
                                   return DetailPage(
-                                    lat: post[index]['lat'],
-                                    long: post[index]['log'],
-                                    titre: post[index]['nom'],
-                                    site: post[index]['site'],
-                                    tel: post[index]['tel'],
-                                    desc: post[index]['detail'],
-                                    image1: post[index]['image1'],
-                                    image2: post[index]['image2'],
-                                    auteur: post[index]['auteur'],
+                                    lat: company['lat'],
+                                    long: company['log'],
+                                    titre: company['nom'],
+                                    site: company['site'],
+                                    tel: company['tel'],
+                                    desc: company['detail'],
+                                    image1: company['image1'],
+                                    image2: company['image2'],
+                                    auteur: company['auteur'],
                                   );
                                 }),
                               );
                             },
                             child: Widget_UI(
-                              desc: post[index]['detail'],
-                              titre: post[index]['nom'],
-                              image: post[index]['image1'],
+                              desc: company['detail'],
+                              titre: company['nom'],
+                              image: company['image1'],
                             ),
                           );
                         } else {
-                          return SizedBox(); // Company is not within 10 meters, so don't display it
+                          return SizedBox(); // Company is not within the specified distance, so don't display it
                         }
                       } else {
                         return SizedBox();
                       }
-                    },
-                  ),
+                    }).toList(),
+                  ],
                 ),
               );
   }
