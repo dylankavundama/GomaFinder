@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
+import 'package:upato/login/authServices.dart';
 import 'package:upato/style.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../NavBarPage.dart';
 
 class UserPost extends StatefulWidget {
   const UserPost({Key? key}) : super(key: key);
@@ -61,6 +64,33 @@ class _UserPostState extends State<UserPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              AuthService().signOut().then((_) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => NavBarPage()),
+                );
+              });
+            },
+            icon: const Icon(Icons.logout_outlined),
+          )
+        ],
+        iconTheme: IconThemeData(color: CouleurPrincipale),
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(right: 0),
+            ),
+            Text(
+              'Mon Espace',
+              style: TitreStyle,
+            ),
+          ],
+        ),
+      ),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(
@@ -110,7 +140,7 @@ class _UserPostState extends State<UserPost> {
                   ),
                 ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_business),
+        child: const Icon(Icons.add_business),
         onPressed: () {},
       ),
     );
