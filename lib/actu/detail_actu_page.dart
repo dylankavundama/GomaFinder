@@ -114,6 +114,7 @@ class _DetailPostPageState extends State<DetailPostPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+          iconTheme: IconThemeData(color: CouleurPrincipale),
           actions: [
             IconButton(
               icon: Icon(Icons.share, color: CouleurPrincipale),
@@ -132,8 +133,9 @@ class _DetailPostPageState extends State<DetailPostPage> {
             "Detail Page",
             style: TitreStyle,
           ),
-          centerTitle: true,
+          // centerTitle: true,
           backgroundColor: Colors.white),
+
       // appBar: AppBar(
       // leading: IconButton(
       //   icon: const Icon(Icons.share),

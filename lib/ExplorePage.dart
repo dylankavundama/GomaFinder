@@ -87,13 +87,7 @@ class ExplorePage extends StatelessWidget {
                   ),
                 );
               } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        DetailsPage(item: items[index]['title']),
-                  ),
-                );
+  
               }
 
               //
@@ -117,27 +111,6 @@ class ExplorePage extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class DetailsPage extends StatelessWidget {
-  final String item;
-
-  DetailsPage({required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Item Details'),
-      ),
-      body: Center(
-        child: Text(
-          item,
-          style: TextStyle(fontSize: 24.0),
-        ),
       ),
     );
   }

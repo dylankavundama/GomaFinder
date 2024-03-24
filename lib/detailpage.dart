@@ -174,8 +174,7 @@ class _DetailPageState extends State<DetailPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                          "http://$Adress_IP/goma/entreprise/" +
-                                              widget.image1,
+                                          "http://$Adress_IP/goma/entreprise/${widget.image1}",
                                         ),
                                         fit: BoxFit.cover,
                                       ),
@@ -185,11 +184,10 @@ class _DetailPageState extends State<DetailPage> {
                               },
                             );
                           },
-                          child: Container(
+                          child: SizedBox(
                             height: 300,
                             child: Image.network(
-                              "http://$Adress_IP/goma/entreprise/" +
-                                  widget.image1,
+                              "http://$Adress_IP/goma/entreprise/${widget.image1}",
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -206,8 +204,7 @@ class _DetailPageState extends State<DetailPage> {
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            "http://$Adress_IP/goma/entreprise/" +
-                                                widget.image2),
+                                            "http://$Adress_IP/goma/entreprise/${widget.image2}"),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -236,27 +233,18 @@ class _DetailPageState extends State<DetailPage> {
                     padding: const EdgeInsets.only(top: 10.0, bottom: 5.0),
                     child: Row(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(height: 20),
-                              Center(
-                                child: IconButton(
-                                  icon: Icon(
-                                    isFavorite
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    color: isFavorite ? Colors.red : null,
-                                  ),
-                                  onPressed: toggleFavorite,
-                                ),
-                              ),
-                              Text(widget.titre, style: TitreStyle),
-                            ],
+                        Center(
+                          child: IconButton(
+                            icon: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: isFavorite ? Colors.red : null,
+                            ),
+                            onPressed: toggleFavorite,
                           ),
                         ),
+                        Text(widget.titre, style: TitreStyle),
                       ],
                     ),
                   ),
