@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:upato/Models/autres.dart';
 import 'package:upato/Models/banque.dart';
@@ -38,6 +39,7 @@ class _HomePageState extends State<HomePage>
     _tabController = TabController(length: 16, vsync: this);
     super.initState();
     _startNewGame();
+    _getCurrentLocation();
   }
 
   @override
@@ -103,6 +105,25 @@ class _HomePageState extends State<HomePage>
     setState(() {
       _interstitialAd?.show();
     });
+  }
+
+  Future<Position> _getCurrentLocation() async {
+    bool serviceEnamblev = await Geolocator.isLocationServiceEnabled();
+
+    if (!serviceEnamblev) {
+      return Future.error('are disabel ');
+    }
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('erro permissio');
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('erro permission denied fprever');
+    }
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
@@ -203,7 +224,6 @@ class _HomePageState extends State<HomePage>
             Media_Page(),
             Eglise_Page(),
             Autres_Page(),
-  
           ],
         ),
       ),

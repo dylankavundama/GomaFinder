@@ -25,7 +25,7 @@ void main() async {
     return true;
   });
   await Firebase.initializeApp();
-  await Future.delayed(Duration(seconds: 1));
+  await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
   await Supabase.initialize(
       url: 'https://rggeeykubskxurwxclwl.supabase.co',
