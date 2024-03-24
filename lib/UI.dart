@@ -22,7 +22,7 @@ class Widget_UI extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(
+        side: const BorderSide(
           color: Colors.white10, // Specify your desired border color here.
           width: 2.0,
         ),
@@ -38,7 +38,7 @@ class Widget_UI extends StatelessWidget {
               "http://$Adress_IP/goma/entreprise/" + image,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
-                return Center(
+                return const Center(
                   child: Text(
                     'Erreur de chargement de l\'image',
                     style: TextStyle(color: Colors.red),

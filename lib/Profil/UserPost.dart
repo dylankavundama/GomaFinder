@@ -1,14 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:upato/UI.dart';
-import 'package:upato/detailpage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
 import 'package:upato/login/authServices.dart';
 import 'package:upato/style.dart';
-import 'package:http/http.dart' as http;
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '../NavBarPage.dart';
+import '../detailpage.dart';
 
 class UserPost extends StatefulWidget {
   const UserPost({Key? key}) : super(key: key);
@@ -20,31 +17,28 @@ class UserPost extends StatefulWidget {
 class _UserPostState extends State<UserPost> {
   List<dynamic> post = [];
   bool _isLoading = false;
+  String? userName;
+  String? userPhotoUrl;
+  String? mail;
 
   fetchPosts() async {
     setState(() {
       _isLoading = true;
     });
 
-    // Get current user
     User? user = FirebaseAuth.instance.currentUser;
 
-    // Check if user is logged in
     if (user != null) {
       var url = 'http://$Adress_IP/goma/entreprise.php';
       final uri = Uri.parse(url);
-      final reponse = await http.get(uri);
-      final List resultat = jsonDecode(reponse.body);
+      final response = await http.get(uri);
+      final List<dynamic> result = jsonDecode(response.body);
 
-      // Filter the posts based on current user's ID
-      post = resultat
+      post = result
           .where((entreprise) => entreprise['auteur'] == user.displayName)
           .toList();
 
-      post.sort(
-        (a, b) => b["id"].compareTo(a["id"]),
-      );
-      debugPrint(resultat.toString());
+      post.sort((a, b) => b["id"].compareTo(a["id"]));
     } else {
       // Handle if user is not logged in
       // For example, navigate to login screen
@@ -55,10 +49,22 @@ class _UserPostState extends State<UserPost> {
     });
   }
 
+  fetchUserData() {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      setState(() {
+        userName = user.displayName;
+        userPhotoUrl = user.photoURL;
+        mail = user.email;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     fetchPosts();
+    fetchUserData();
   }
 
   @override
@@ -79,69 +85,156 @@ class _UserPostState extends State<UserPost> {
         ],
         iconTheme: IconThemeData(color: CouleurPrincipale),
         backgroundColor: Colors.white,
-        title: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 0),
-            ),
-            Text(
-              'Mon Espace',
-              style: TitreStyle,
-            ),
-          ],
+        title: Text(
+          'Mon Espace',
+          style: TitreStyle,
         ),
       ),
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: CouleurPrincipale,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                radius: 33,
+                backgroundImage: NetworkImage(userPhotoUrl ?? ''),
               ),
-            )
-          : post.isEmpty
-              ? Center(
-                  child: Image.asset(
-                    'assets/error.png', // Chemin de votre image
-                    width: 200,
-                    height: 200,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Nom: ${userName ?? ''}',
+                    style: TitreStyle,
                   ),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      post.length,
-                      (index) => GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return DetailPage(
-                                lat: post[index]['lat'],
-                                long: post[index]['log'],
-                                titre: post[index]['nom'],
-                                site: post[index]['site'],
-                                tel: post[index]['tel'],
-                                desc: post[index]['detail'],
-                                image1: post[index]['image1'],
-                                image2: post[index]['image2'],
-                                auteur: post[index]['auteur'],
+                  Text(
+                    'Mail: ${mail ?? ''}',
+                    style: TitreStyle,
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: CouleurPrincipale,
+            ),
+            Center(
+              child: Text(
+                'Mes entreprises',
+                style: TitreStyle,
+              ),
+            ),
+            _isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: CouleurPrincipale,
+                    ),
+                  )
+                : post.isEmpty
+                    ? Center(
+                        child: Image.asset(
+                          'assets/error.png',
+                          width: 200,
+                          height: 200,
+                        ),
+                      )
+                    : Column(
+                        children: List.generate(
+                          post.length,
+                          (index) => GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return DetailPage(
+                                    lat: post[index]['lat'],
+                                    long: post[index]['log'],
+                                    titre: post[index]['nom'],
+                                    site: post[index]['site'],
+                                    tel: post[index]['tel'],
+                                    desc: post[index]['detail'],
+                                    image1: post[index]['image1'],
+                                    image2: post[index]['image2'],
+                                    auteur: post[index]['auteur'],
+                                  );
+                                }),
                               );
-                            }),
-                          );
-                        },
-                        child: Widget_UI(
-                          desc: post[index]['detail'],
-                          titre: post[index]['nom'],
-                          image: post[index]['image1'],
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    style: BorderStyle.solid,
+                                  ),
+                                  borderRadius: BorderRadius.circular(6.0),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        post[index]["nom"],
+                                        maxLines: 1,
+                                        textAlign: TextAlign.start,
+                                        style: TitreStyle,
+                                      ),
+                                    ),
+                   
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(0.0),
+                                      child: Image.network(
+                                        "http://$Adress_IP/goma/entreprise/" +
+                                            post[index]["image1"],
+                                        width: MediaQuery.of(context).size.width,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.2,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            "Supprimer",
+                                            style: DescStyle
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            "Modifier",
+                                            style: DescStyle
+                                          ),
+                                        ),
+                                        TextButton.icon(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.share_outlined,
+                                            color: CouleurPrincipale,
+                                          ),
+                                          label: Text(
+                                            "Partager",
+                                            style: DescStyle
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add_business),
-        onPressed: () {},
+          ],
+        ),
       ),
     );
   }

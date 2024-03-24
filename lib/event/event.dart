@@ -57,23 +57,13 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: CouleurPrincipale),
-          backgroundColor: Colors.white,
-          title: Row(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 0),
-              ),
-              Text(
-                'Evénement',
-                style: TitreStyle,
-              ),
-            ],
-          ),
-        ),
+      appBar: AppBar(
+        title: Text("Evénement", style: DescStyle),
+     
+        backgroundColor: Colors.white,
+      ),
       body: 
-    
+      
        _isLoading
         ? Center(
             child: CircularProgressIndicator(
@@ -90,18 +80,18 @@ class _Event_Home_PageState extends State<Event_Home_Page> {
             itemCount: userdata.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                // onTap: () {
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) {
-                //       return DetailPostPage(
-                //         titre: userdata[index]['nom'],
-                //         img: userdata[index]['image1'],
-                //         description: userdata[index]['detail'],
-                //       );
-                //     }),
-                //   );
-                // },
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return DetailPostPage(
+                        titre: userdata[index]['nom'],
+                        img: userdata[index]['image1'],
+                        description: userdata[index]['detail'],
+                      );
+                    }),
+                  );
+                },
 
                 child: Padding(
                   padding: const EdgeInsets.all(6.0),
