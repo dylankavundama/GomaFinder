@@ -1,7 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:upato/UI.dart';
 import 'package:upato/detailpage.dart';
 import 'package:upato/Util/style.dart';
@@ -19,6 +20,23 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
   Position? _currentPosition;
   double _distanceFilter = 10000; // Default filter distance
 
+  // Fonction pour récupérer les données depuis le cache
+  Future<void> _fetchCachedData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('cachedData');
+    if (cachedData != null) {
+      setState(() {
+        post = jsonDecode(cachedData);
+      });
+    }
+  }
+
+  // Fonction pour sauvegarder les données en cache
+  Future<void> _cacheData(List<dynamic> data) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('cachedData', jsonEncode(data));
+  }
+
   fetchPosts() async {
     setState(() {
       _isLoading = true;
@@ -34,12 +52,14 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
         post = resultat;
         _isLoading = false;
       });
+      // Sauvegarder les données en cache
+      await _cacheData(resultat);
     } else {
       throw Exception('Failed to load data');
     }
   }
 
-  // Function to get current position
+  // Fonction pour récupérer la position actuelle
   void _getCurrentLocation() async {
     final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -51,6 +71,7 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
   @override
   void initState() {
     super.initState();
+    _fetchCachedData(); // Charger les données en cache au démarrage de l'application
     fetchPosts();
     _getCurrentLocation();
   }
@@ -72,8 +93,7 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                 ),
               )
             : RefreshIndicator(
-                onRefresh: () =>
-                    _refresh(), // Fonction à appeler lors du rafraîchissement
+                onRefresh: () => _refresh(),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -101,16 +121,13 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                       ...post.map((company) {
                         double lat = double.parse(company['lat']);
                         double log = double.parse(company['log']);
-                        // Check if _currentPosition is not null before accessing its properties
                         if (_currentPosition != null) {
-                          // Calculate distance between current position and company's position
                           double distanceInMeters = Geolocator.distanceBetween(
                               _currentPosition!.latitude,
                               _currentPosition!.longitude,
                               lat,
                               log);
 
-                          // Display only companies within the specified distance
                           if (distanceInMeters <= _distanceFilter) {
                             return GestureDetector(
                               onTap: () {
@@ -138,7 +155,7 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
                               ),
                             );
                           } else {
-                            return SizedBox(); // Company is not within the specified distance, so don't display it
+                            return SizedBox();
                           }
                         } else {
                           return SizedBox();
@@ -150,7 +167,6 @@ class _Entreprise_PageState extends State<Entreprise_Page> {
               );
   }
 
-// Fonction de rafraîchissement
   Future<void> _refresh() async {
     await fetchPosts();
     _getCurrentLocation();
