@@ -230,7 +230,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: SizedBox(
                             height: 300,
                             child: Image.network(
-                              "http://$Adress_IP/goma/entreprise/${widget.image1}",
+                              "http://$Adress_IP/goma/entreprise/${widget.image2}",
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -364,8 +364,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                         ],
                       ),
-                       Text("Localisation",
-                          style: TitreStyle),
+                      Text("Localisation", style: TitreStyle),
                       const SizedBox(
                         height: 8,
                       ),
@@ -408,13 +407,13 @@ class _DetailPageState extends State<DetailPage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: InkWell(
-                          onTap: () {
-                            String lat = widget.lat;
-                            String long = widget.long;
-                            String url =
-                                'http://www.google.com/maps/search/?api=1&query=$lat,$long';
-                            launch(url);  
-                          },
+                onTap: () {
+                  String lat = widget.lat;
+                  String long = widget.long;
+                  String url =
+                      'http://www.google.com/maps/search/?api=1&query=$lat,$long';
+                  launch(url);
+                },
                 child: Container(
                   alignment: Alignment.center,
                   margin: const EdgeInsets.only(bottom: 6.0),

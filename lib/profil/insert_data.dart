@@ -28,12 +28,58 @@ class _Inset_DataState extends State<Inset_Data> {
   TextEditingController site = TextEditingController();
   TextEditingController log = TextEditingController();
   TextEditingController latt = TextEditingController();
+
   @override
   void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      // Afficher le message pop-up après le rendu initial de la page
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            iconColor: CouleurPrincipale,
+            title: const Text("Instructions pour ajouter des données"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                    "1. Ouvrez la page d'enregistrement d'une entreprise dans votre application."),
+                Text(
+                    "2. Remplissez tous les champs nécessaires avec les informations de l'entreprise que vous souhaitez enregistrer."),
+                Text(
+                    "3. Sélectionnez la catégorie de votre entreprise dans le menu déroulant."),
+                Text(
+                    "4. Cliquez sur le bouton \"Récupérer ma position\" pour obtenir votre position actuelle (C’est a dire les données GPS de  l'entreprise)."),
+                Text(
+                    "5. Sélectionnez deux images de l'entreprise en cliquant sur le bouton \"la photo1\" ou \"la photo2\"(De bonne qualité)."),
+                Text(
+                    "6. Assurez-vous que tous les champs sont remplis correctement avant de continuer."),
+                Text(
+                    "7. Cliquez sur le bouton \"Enregistrer\" pour soumettre les données."),
+                Text("8. Attendez la confirmation de l'enregistrement."),
+                Text(
+                    "9. Une fois l'enregistrement réussi, vous serez redirigé vers la page principale de l'application."),
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("OK"),
+              ),
+            ],
+          );
+        },
+      );
+    });
     getrecord();
     super.initState();
   }
 
+  @override
   void dispose() {
     super.dispose();
   }
@@ -367,7 +413,7 @@ class _Inset_DataState extends State<Inset_Data> {
                       _liveLocation();
                     },
                     child: Text(
-                      "Récupérer votre position",
+                      "Récupérer ma position",
                       style: TitreStyleWhite,
                     ),
                   ),

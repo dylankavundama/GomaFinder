@@ -62,17 +62,17 @@ class _UserPostState extends State<UserPost> {
     }
   }
 
+  Future<void> _refresh() async {
+    fetchPosts();
+    fetchUserData();
+  }
+
   @override
   void initState() {
     super.initState();
     fetchPosts();
     fetchUserData();
   }
-@override
-void dispose() {
-  // Annuler ou fermer les abonnements, les contrôleurs, etc.
-  super.dispose();
-}
 
   @override
   Widget build(BuildContext context) {
@@ -87,12 +87,12 @@ void dispose() {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-         Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => NavBarPage(),
-                ),
-                (Route<dynamic> route) => false,
-              );
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => NavBarPage(),
+              ),
+              (Route<dynamic> route) => false,
+            );
           },
           icon: const Icon(Icons.arrow_back),
         ),
@@ -105,7 +105,10 @@ void dispose() {
                 );
               });
             },
-            icon: const Icon(Icons.logout_outlined,color: Colors.redAccent,),
+            icon: const Icon(
+              Icons.logout_outlined,
+              color: Colors.redAccent,
+            ),
           )
         ],
         iconTheme: IconThemeData(color: CouleurPrincipale),
@@ -115,155 +118,163 @@ void dispose() {
           style: TitreStyle,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                radius: 33,
-                backgroundImage: NetworkImage(userPhotoUrl ?? ''),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Nom: ${userName ?? ''}',
-                    style: TitreStyle,
-                  ),
-                  Text(
-                    'Mail: ${mail ?? ''}',
-                    style: DescStyle,
-                  ),
-                ],
-              ),
-            ),
-            Divider(
-                //: CouleurPrincipale,
+      body: RefreshIndicator(
+        color: CouleurPrincipale,
+        onRefresh: _refresh,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  radius: 33,
+                  backgroundImage: NetworkImage(userPhotoUrl ?? ''),
                 ),
-            Center(
-              child: Text(
-                'Mes entreprises',
-                style: TitreStyle,
               ),
-            ),
-            _isLoading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: CouleurPrincipale,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nom: ${userName ?? ''}',
+                      style: TitreStyle,
                     ),
-                  )
-                : post.isEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.only(top: 111),
-                        child: Column(
-                          children: [
-                            Center(
-                              child: Image.asset(
-                                'assets/error.png',
-                                width: 200,
-                                height: 200,
-                              ),
-                            ),
-                            Text(
-                              "Aucune entreprise trouvée",
-                              style: SousTStyle,
-                            )
-                          ],
+                    Text(
+                      'Mail: ${mail ?? ''}',
+                      style: DescStyle,
+                    ),
+                  ],
+                ),
+              ),
+              Divider(),
+              Center(
+                child: Text(
+                  'Mes entreprises',
+                  style: TitreStyle,
+                ),
+              ),
+              _isLoading
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 100),
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: CouleurPrincipale,
                         ),
-                      )
-                    : Column(
-                        children: List.generate(
-                          post.length,
-                          (index) => GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) {
-                                  return DetailPage(
-                                    lat: post[index]['lat'],
-                                    long: post[index]['log'],
-                                    titre: post[index]['nom'],
-                                    site: post[index]['site'],
-                                    tel: post[index]['tel'],
-                                    desc: post[index]['detail'],
-                                    image1: post[index]['image1'],
-                                    image2: post[index]['image2'],
-                                    auteur: post[index]['auteur'],
-                                  );
-                                }),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    style: BorderStyle.solid,
-                                  ),
-                                  borderRadius: BorderRadius.circular(6.0),
+                      ),
+                    )
+                  : post.isEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: 111),
+                          child: Column(
+                            children: [
+                              Center(
+                                child: Image.asset(
+                                  'assets/error.png',
+                                  width: 200,
+                                  height: 200,
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        post[index]["nom"],
-                                        maxLines: 1,
-                                        textAlign: TextAlign.start,
-                                        style: TitreStyle,
-                                      ),
+                              ),
+                              Text(
+                                "Aucune entreprise trouvée",
+                                style: SousTStyle,
+                              )
+                            ],
+                          ),
+                        )
+                      : Column(
+                          children: List.generate(
+                            post.length,
+                            (index) => GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return DetailPage(
+                                      lat: post[index]['lat'],
+                                      long: post[index]['log'],
+                                      titre: post[index]['nom'],
+                                      site: post[index]['site'],
+                                      tel: post[index]['tel'],
+                                      desc: post[index]['detail'],
+                                      image1: post[index]['image1'],
+                                      image2: post[index]['image2'],
+                                      auteur: post[index]['auteur'],
+                                    );
+                                  }),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.black12,
+                                      style: BorderStyle.solid,
                                     ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(0.0),
-                                      child: Image.network(
-                                        "http://$Adress_IP/goma/entreprise/" +
-                                            post[index]["image1"],
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.2,
-                                        fit: BoxFit.cover,
+                                    borderRadius: BorderRadius.circular(6.0),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          post[index]["nom"],
+                                          maxLines: 1,
+                                          textAlign: TextAlign.start,
+                                          style: TitreStyle,
+                                        ),
                                       ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {},
-                                          child: Text("Supprimer",
-                                              style: DescStyle),
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(0.0),
+                                        child: Image.network(
+                                          "http://$Adress_IP/goma/entreprise/" +
+                                              post[index]["image1"],
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.2,
+                                          fit: BoxFit.cover,
                                         ),
-                                        TextButton(
-                                          onPressed: () {},
-                                          child: Text("Modifier",
-                                              style: DescStyle),
-                                        ),
-                                        TextButton.icon(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.share_outlined,
-                                            color: CouleurPrincipale,
+                                      ),
+                                      Row(
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: Text("Supprimer",
+                                                style: DescStyle),
                                           ),
-                                          label: Text("Partager",
-                                              style: DescStyle),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                          TextButton(
+                                            onPressed: () {},
+                                            child: Text("Modifier",
+                                                style: DescStyle),
+                                          ),
+                                          TextButton.icon(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.share_outlined,
+                                              color: CouleurPrincipale,
+                                            ),
+                                            label: Text("Partager",
+                                                style: DescStyle),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
