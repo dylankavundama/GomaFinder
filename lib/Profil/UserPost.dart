@@ -177,7 +177,7 @@ class _UserPostState extends State<UserPost> {
                                 ),
                               ),
                               Text(
-                                "Aucune entreprise trouvée",
+                                "Aucune entreprise n'estenregistrée",
                                 style: SousTStyle,
                               )
                             ],

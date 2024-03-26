@@ -100,6 +100,7 @@ class _DetailPageState extends State<DetailPage> {
       'nom': widget.titre,
       'detail': widget.desc,
       'image1': widget.image1,
+      'image2': widget.image2,
       // Add more data if needed
     });
 
@@ -122,6 +123,7 @@ class _DetailPageState extends State<DetailPage> {
       'nom': widget.titre,
       'detail': widget.desc,
       'image1': widget.image1,
+      'image2': widget.image2,
       // Add more data if needed
     });
     setState(() {
@@ -230,7 +232,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: SizedBox(
                             height: 300,
                             child: Image.network(
-                              "http://$Adress_IP/goma/entreprise/${widget.image2}",
+                              "http://$Adress_IP/goma/entreprise/${widget.image1}",
                               fit: BoxFit.cover,
                             ),
                           ),
