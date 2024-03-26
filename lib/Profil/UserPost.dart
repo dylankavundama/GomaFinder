@@ -128,6 +128,7 @@ class _UserPostState extends State<UserPost> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CircleAvatar(
+                  backgroundColor: CouleurPrincipale,
                   radius: 33,
                   backgroundImage: NetworkImage(userPhotoUrl ?? ''),
                 ),
