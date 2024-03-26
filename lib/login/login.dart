@@ -87,7 +87,7 @@ class _LoginHomeState extends State<LoginHome> {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(6.0),
                 child: Center(
                   child: Text(
                     'Désormais il sera plus facile de trouver votre entreprise  ',
@@ -102,7 +102,7 @@ class _LoginHomeState extends State<LoginHome> {
                       ),
                     )
                   : Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(18.0),
                       child: GestureDetector(
                         onTap: () => signIn(context),
                         child: Container(
@@ -126,7 +126,7 @@ class _LoginHomeState extends State<LoginHome> {
                                 child: Text(
                                   'Google',
                                   style: GoogleFonts.abel(
-                                      fontSize: 24,
+                                      fontSize: 23,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -151,7 +151,7 @@ class _LoginHomeState extends State<LoginHome> {
               //   ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 130),
+                padding: const EdgeInsets.only(top: 119),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
