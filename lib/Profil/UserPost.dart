@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:upato/Profil/insert_data.dart';
+import 'package:upato/Profil/update_data.dart';
 import 'package:upato/login/authServices.dart';
 import 'package:upato/style.dart';
 import '../NavBarPage.dart';
@@ -267,38 +268,62 @@ class _UserPostState extends State<UserPost> {
                                       Row(
                                         children: [
                                           TextButton(
-                                   onPressed: () {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text("Confirmation"),
-        content: Text("Voulez-vous vraiment supprimer cette entreprise ?"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Ferme le dialog
-              delrecord(post[index]["id"]); // Supprime l'enregistrement
-            },
-            child: Text("Oui",style: SousTStyle,),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Ferme le dialog
-            },
-            child: Text("Non",style: DescStyle,),
-          ),
-        ],
-      );
-    },
-  );
-},
-
+                                            onPressed: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text("Confirmation"),
+                                                    content: Text(
+                                                        "Voulez-vous vraiment supprimer cette entreprise ?"),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop(); // Ferme le dialog
+                                                          delrecord(post[index][
+                                                              "id"]); // Supprime l'enregistrement
+                                                        },
+                                                        child: Text(
+                                                          "Oui",
+                                                          style: SousTStyle,
+                                                        ),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop(); // Ferme le dialog
+                                                        },
+                                                        child: Text(
+                                                          "Non",
+                                                          style: DescStyle,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
                                             child: Text("Supprimer",
                                                 style: DescStyle),
                                           ),
                                           TextButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Update_Data(
+                                                              post[index]
+                                                                  ["nom"],
+                                                              userdata[index]
+                                                                  ["matricule"],
+                                                              userdata[index]
+                                                                  ["dateN"],
+                                                              userdata[index]
+                                                                  ["id"])));
+                                            },
                                             child: Text("Modifier",
                                                 style: DescStyle),
                                           ),
