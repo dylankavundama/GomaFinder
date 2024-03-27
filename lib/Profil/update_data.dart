@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:upato/Profil/UserPost.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class Update_Data extends StatefulWidget {
@@ -89,7 +90,7 @@ class _Update_DataState extends State<Update_Data> {
                 color: const Color.fromARGB(199, 3, 204, 244),
                 onPressed: () {
                   update();
-     Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage()));
+     Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserPost()));
                 },
                 child: const Text("Confirmer"),
               ),

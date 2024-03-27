@@ -317,11 +317,11 @@ class _UserPostState extends State<UserPost> {
                                                           Update_Data(
                                                               post[index]
                                                                   ["nom"],
-                                                              userdata[index]
+                                                              post[index]
                                                                   ["matricule"],
-                                                              userdata[index]
+                                                              post[index]
                                                                   ["dateN"],
-                                                              userdata[index]
+                                                              post[index]
                                                                   ["id"])));
                                             },
                                             child: Text("Modifier",
