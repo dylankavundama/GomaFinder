@@ -74,6 +74,25 @@ class _UserPostState extends State<UserPost> {
     fetchUserData();
   }
 
+//delete
+
+  Future<void> delrecord(String id) async {
+    try {
+      var url = "http://$Adress_IP/goma/entreprise/delete.php";
+      var result = await http.post(Uri.parse(url), body: {"id": id});
+      var reponse = jsonDecode(result.body);
+      if (reponse["Success"] == "True") {
+        debugPrint("record deleted");
+        fetchUserData();
+      } else {
+        debugPrint("Erreur de suppression");
+        fetchUserData();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
@@ -233,6 +252,7 @@ class _UserPostState extends State<UserPost> {
                                         borderRadius:
                                             BorderRadius.circular(0.0),
                                         child: Image.network(
+                                          // ignore: prefer_interpolation_to_compose_strings
                                           "http://$Adress_IP/goma/entreprise/" +
                                               post[index]["image1"],
                                           width:
@@ -247,7 +267,33 @@ class _UserPostState extends State<UserPost> {
                                       Row(
                                         children: [
                                           TextButton(
-                                            onPressed: () {},
+                                   onPressed: () {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Confirmation"),
+        content: Text("Voulez-vous vraiment supprimer cette entreprise ?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Ferme le dialog
+              delrecord(post[index]["id"]); // Supprime l'enregistrement
+            },
+            child: Text("Oui",style: SousTStyle,),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Ferme le dialog
+            },
+            child: Text("Non",style: DescStyle,),
+          ),
+        ],
+      );
+    },
+  );
+},
+
                                             child: Text("Supprimer",
                                                 style: DescStyle),
                                           ),
