@@ -3,14 +3,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:upato/Profil/UserPost.dart';
+import 'package:upato/Util/style.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class Update_Data extends StatefulWidget {
   String id;
   String nom;
-  String matricule;
-  String dateN;
-  Update_Data(this.nom, this.matricule, this.dateN, this.id, {super.key});
+  String detail;
+  String site;
+  String tel;
+
+  Update_Data(this.tel, this.nom, this.detail, this.site, this.id, {super.key});
 
   @override
   State<Update_Data> createState() => _Update_DataState();
@@ -19,18 +22,19 @@ class Update_Data extends StatefulWidget {
 // ignore: camel_case_types
 class _Update_DataState extends State<Update_Data> {
   String mat = "";
-  TextEditingController txtnom = TextEditingController();
-  TextEditingController matricule = TextEditingController();
-  TextEditingController dateN = TextEditingController();
+  TextEditingController nom = TextEditingController();
+  TextEditingController detail = TextEditingController();
+  TextEditingController site = TextEditingController();
+  TextEditingController tel = TextEditingController();
 
   Future<void> update() async {
     try {
-      var url = "http://192.168.1.190/payment_teacher/update.php";
+      var url = "http://$Adress_IP/goma/entreprise/update.php";
 
       var res = await http.post(Uri.parse(url), body: {
-        "nom": txtnom.text,
-        "matricule": matricule.text,
-        "dateN": dateN.text,
+        "nom": nom.text,
+        "detail": detail.text,
+        "site": site.text,
         "id": widget.id
       });
       debugPrint(widget.id);
@@ -48,9 +52,9 @@ class _Update_DataState extends State<Update_Data> {
 
   @override
   void initState() {
-    matricule.text = widget.matricule;
-    dateN.text = widget.dateN;
-    txtnom.text = widget.nom;
+    detail.text = widget.detail;
+    site.text = widget.site;
+    nom.text = widget.nom;
     mat = widget.id;
     super.initState();
   }
@@ -67,19 +71,23 @@ class _Update_DataState extends State<Update_Data> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextField(
-              controller: txtnom,
+              controller: nom,
               decoration: const InputDecoration(hintText: "", labelText: "Nom"),
             ),
             TextField(
-              controller: matricule,
+              controller: detail,
               decoration:
-                  const InputDecoration(hintText: "", labelText: "Matricule"),
+                  const InputDecoration(hintText: "", labelText: "detail"),
             ),
             TextField(
-              onTap: () => _selectDate(context),
-              controller: dateN,
-              decoration: const InputDecoration(
-                  hintText: "Votre dateN", labelText: "dateN"),
+              controller: tel,
+              decoration:
+                  const InputDecoration(hintText: "", labelText: "detail"),
+            ),
+            TextField(
+              controller: site,
+              decoration:
+                  const InputDecoration(hintText: "", labelText: "detail"),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 16),
@@ -90,7 +98,8 @@ class _Update_DataState extends State<Update_Data> {
                 color: const Color.fromARGB(199, 3, 204, 244),
                 onPressed: () {
                   update();
-     Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserPost()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => UserPost()));
                 },
                 child: const Text("Confirmer"),
               ),
@@ -101,17 +110,4 @@ class _Update_DataState extends State<Update_Data> {
     );
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null && picked != DateTime.now()) {
-      setState(() {
-        dateN.text = picked.toString().substring(0, 10);
-      });
-    }
-  }
 }
