@@ -311,18 +311,16 @@ class _UserPostState extends State<UserPost> {
                                           TextButton(
                                             onPressed: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Update_Data(
-                                                              post[index]
-                                                                  ["nom"],
-                                                              post[index]
-                                                                  ["matricule"],
-                                                              post[index]
-                                                                  ["dateN"],
-                                                              post[index]
-                                                                  ["id"])));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Update_Data(
+                                                          post[index]["nom"],
+                                                          post[index]["detail"],
+                                                          post[index]["tel"],
+                                                          post[index]["id"]),
+                                                ),
+                                              );
                                             },
                                             child: Text("Modifier",
                                                 style: DescStyle),
