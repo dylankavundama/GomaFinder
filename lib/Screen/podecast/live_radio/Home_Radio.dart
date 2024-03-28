@@ -48,7 +48,7 @@ class _HomeRadioState extends State<HomeRadio> {
 
   @override
   void initState() {
-    super.initState();
+    _startNewGame();
     _assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
     // Autres initialisations...
     openPlayer();
@@ -71,6 +71,8 @@ class _HomeRadioState extends State<HomeRadio> {
     _bannerAd?.dispose();
     _assetsAudioPlayer.dispose();
     print('dispose');
+
+    _interstitialAd?.dispose();
 
     super.dispose();
   }
@@ -155,6 +157,64 @@ class _HomeRadioState extends State<HomeRadio> {
   }
 
   @override
+  InterstitialAd? _interstitialAd;
+  final _gameLength = 5;
+  late var _counter = _gameLength;
+
+  final String _adUnitIdd = Platform.isAndroid
+      ? 'ca-app-pub-7329797350611067/7003775471'
+      : 'ca-app-pub-7329797350611067/7003775471';
+
+  void _startNewGame() {
+    setState(() => _counter = _gameLength);
+
+    _loadAdd();
+    _starTimer();
+  }
+
+  void _loadAdd() {
+    InterstitialAd.load(
+      adUnitId: _adUnitIdd,
+      request: const AdRequest(),
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdShowedFullScreenContent: (ad) {},
+            onAdImpression: (ad) {},
+            onAdFailedToShowFullScreenContent: (ad, err) {
+              ad.dispose();
+            },
+            onAdDismissedFullScreenContent: (ad) {
+              ad.dispose();
+            },
+            onAdClicked: (ad) {},
+          );
+
+          _interstitialAd = ad;
+        },
+        onAdFailedToLoad: (LoadAdError error) {},
+      ),
+    );
+  }
+
+  void _starTimer() {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      setState(() => _counter--);
+
+      if (_counter == 0) {
+        _interstitialAd?.show();
+        timer.cancel();
+      }
+    });
+  }
+
+  void go() {
+    setState(() {
+      _interstitialAd?.show();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -183,8 +243,6 @@ class _HomeRadioState extends State<HomeRadio> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-            
-
                   if (_isLoading)
                     Center(
                       child: Padding(
@@ -232,7 +290,6 @@ class _HomeRadioState extends State<HomeRadio> {
                       ),
                     ],
                   ),
-
                   _assetsAudioPlayer.builderCurrent(
                     builder: (context, Playing? playing) {
                       return Column(
