@@ -5,7 +5,13 @@ import 'package:line_icons/line_icons.dart';
 // import 'package:entreprise/Entreprise/AjouterEntreprise.dart';
 // import 'package:entreprise/Entreprise/UpdateEntreprise.dart';
 
-import 'package:flutter/services.dart' show Uint8List, rootBundle;
+import 'package:flutter/services.dart'
+    show
+        SystemChrome,
+        SystemUiOverlay,
+        SystemUiOverlayStyle,
+        Uint8List,
+        rootBundle;
 import 'package:upato/profil/insert_data.dart';
 import 'package:upato/style.dart';
 
@@ -85,6 +91,13 @@ class _List_DataState extends State<List_Data> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.green,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
     final ss = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(

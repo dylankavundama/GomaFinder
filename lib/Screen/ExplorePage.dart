@@ -44,7 +44,7 @@ class ExplorePage extends StatelessWidget {
             ),
             Text(
               'Explore',
-              style: DescStyle,
+              style: TitreStyle,
             ),
           ],
         ),

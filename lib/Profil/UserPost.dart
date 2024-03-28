@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:upato/Profil/insert_data.dart';
-import 'package:upato/Profil/update_data.dart';
 import 'package:upato/login/authServices.dart';
 import 'package:upato/style.dart';
 import '../NavBarPage.dart';
@@ -274,8 +273,9 @@ class _UserPostState extends State<UserPost> {
                                                 builder:
                                                     (BuildContext context) {
                                                   return AlertDialog(
-                                                    title: Text("Confirmation"),
-                                                    content: Text(
+                                                    title: const Text(
+                                                        "Confirmation"),
+                                                    content: const Text(
                                                         "Voulez-vous vraiment supprimer cette entreprise ?"),
                                                     actions: [
                                                       TextButton(
@@ -309,20 +309,7 @@ class _UserPostState extends State<UserPost> {
                                                 style: DescStyle),
                                           ),
                                           TextButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Update_Data(
-                                                          post[index]["nom"],
-                                                          post[index]["detail"],
-                                                          post[index]["tel"],
-                                                          post[index]["site"],
-                                                          post[index]["id"]),
-                                                ),
-                                              );
-                                            },
+                                            onPressed: () {},
                                             child: Text("Modifier",
                                                 style: DescStyle),
                                           ),
