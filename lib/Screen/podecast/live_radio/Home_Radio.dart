@@ -156,14 +156,13 @@ class _HomeRadioState extends State<HomeRadio> {
     ).load();
   }
 
-  @override
   InterstitialAd? _interstitialAd;
   final _gameLength = 5;
   late var _counter = _gameLength;
 
   final String _adUnitIdd = Platform.isAndroid
-      ? 'ca-app-pub-7329797350611067/7003775471'
-      : 'ca-app-pub-7329797350611067/7003775471';
+      ? 'ca-app-pub-7329797350611067/7921844089'
+      : 'ca-app-pub-7329797350611067/7921844089';
 
   void _startNewGame() {
     setState(() => _counter = _gameLength);
@@ -198,7 +197,7 @@ class _HomeRadioState extends State<HomeRadio> {
   }
 
   void _starTimer() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
+    Timer.periodic(const Duration(seconds: 100), (timer) {
       setState(() => _counter--);
 
       if (_counter == 0) {
